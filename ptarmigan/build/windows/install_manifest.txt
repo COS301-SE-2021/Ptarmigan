@@ -1,0 +1,8 @@
+C:/Users/user-pc/Documents/GitHub/Ptarmigan/ptarmigan/build/windows/runner/Debug/data/icudtl.dat
+C:/Users/user-pc/Documents/GitHub/Ptarmigan/ptarmigan/build/windows/runner/Debug/flutter_windows.dll
+C:/Users/user-pc/Documents/GitHub/Ptarmigan/ptarmigan/build/windows/runner/Debug/data/flutter_assets/AssetManifest.json
+C:/Users/user-pc/Documents/GitHub/Ptarmigan/ptarmigan/build/windows/runner/Debug/data/flutter_assets/FontManifest.json
+C:/Users/user-pc/Documents/GitHub/Ptarmigan/ptarmigan/build/windows/runner/Debug/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+C:/Users/user-pc/Documents/GitHub/Ptarmigan/ptarmigan/build/windows/runner/Debug/data/flutter_assets/kernel_blob.bin
+C:/Users/user-pc/Documents/GitHub/Ptarmigan/ptarmigan/build/windows/runner/Debug/data/flutter_assets/NOTICES
+C:/Users/user-pc/Documents/GitHub/Ptarmigan/ptarmigan/build/windows/runner/Debug/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
