@@ -17,7 +17,7 @@ def scrapet(content, since, until):
 
     # Creating a dataframe from the tweets list above
     tweets_df = pd.DataFrame(tweets_list,
-                             columns=['Tweet Id', 'Text', 'Username', 'Followers', 'Retweets', 'Likes', 'lang','date'])
+                             columns=['Tweet Id', 'Text', 'Username', 'Followers', 'Retweets', 'Likes', 'lang', 'date'])
 
     # Weight Calc
     weightList = []
@@ -26,5 +26,10 @@ def scrapet(content, since, until):
         weightList.append(1 + ((tweets_df.loc[x, 'Retweets']) * 3) + (tweets_df.loc[x, 'Likes']))
     # add list to dataframe
     tweets_df['Weight'] = weightList
-    
-    return tweets_df
+
+    #Remove unnecessary fields from table for output
+    tweets_df = tweets_df.drop(['Username', 'Followers', 'Retweets', 'Likes'], axis=1)
+
+    jsonOutput = tweets_df.to_json(orient="index")
+    parsed = json.loads(jsonOutput)
+    return json.dumps(parsed, indent=4)
