@@ -1,116 +1,187 @@
+// @dart=2.9
+// dart async library we will refer to when setting up real time updates
+import 'dart:async';
+// flutter and ui libraries
 import 'package:flutter/material.dart';
-// Amplify Flutter Packages
+// amplify packages we will need to use
 import 'package:amplify_flutter/amplify.dart';
-// import 'package:amplify_api/amplify_api.dart'; // UNCOMMENT this line once backend is deployed
 import 'package:amplify_datastore/amplify_datastore.dart';
-
-// Generated in previous step
-import 'models/ModelProvider.dart';
+// amplify configuration and models that should have been generated for you
 import 'amplifyconfiguration.dart';
+import 'models/ModelProvider.dart';
+import 'models/Todo.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'Amplified Todo',
+      home: TodosPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
+class TodosPage extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _TodosPageState createState() => _TodosPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  bool _amplifyConfigured = false;
-
+class _TodosPageState extends State<TodosPage> {
   @override
-  initState() {
+  void initState() {
+    // to be filled in a later step
     super.initState();
-    _configureAmplify();
   }
 
-  void _configureAmplify() async {
-    // Amplify.addPlugin(AmplifyAPI()); // UNCOMMENT this line once backend is deployed
-    Amplify.addPlugin(AmplifyDataStore(modelProvider: ModelProvider.instance));
+  @override
+  void dispose() {
+    // to be filled in a later step
+    super.dispose();
+  }
 
-    // Once Plugins are added, configure Amplify
-    await Amplify.configure(amplifyconfig);
-    try {
-      setState(() {
-        _amplifyConfigured = true;
-      });
-    } catch (e) {
-      print(e);
-    }
+  Future<void> _initializeApp() async {
+    // to be filled in a later step
+  }
+
+  Future<void> _configureAmplify() async {
+    // to be filled in a later step
+  }
+
+  Future<void> _fetchTodos() async {
+    // to be filled in a later step
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text('My Todo List'),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[],
+      body: Center(child: CircularProgressIndicator()),
+      // body: _isLoading
+      //     ? Center(child: CircularProgressIndicator())
+      //     : TodosList(todos: _todos),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddTodoForm()),
+          );
+        },
+        tooltip: 'Add Todo',
+        label: Row(
+          children: [Icon(Icons.add), Text('Add todo')],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+}
+
+class TodosList extends StatelessWidget {
+  final List<Todo> todos;
+
+  TodosList({this.todos});
+
+  @override
+  Widget build(BuildContext context) {
+    return todos.length >= 1
+        ? ListView(
+            padding: EdgeInsets.all(8),
+            children: todos.map((todo) => TodoItem(todo: todo)).toList())
+        : Center(child: Text('Tap button below to add a todo!'));
+  }
+}
+
+class TodoItem extends StatelessWidget {
+  final double iconSize = 24.0;
+  final Todo todo;
+
+  TodoItem({this.todo});
+
+  void _deleteTodo(BuildContext context) async {
+    // to be filled in a later step
+  }
+
+  Future<void> _toggleIsComplete() async {
+    // to be filled in a later step
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: InkWell(
+        onTap: () {
+          _toggleIsComplete();
+        },
+        onLongPress: () {
+          _deleteTodo(context);
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(todo.name,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text(todo.description ?? 'No description'),
+                ],
+              ),
+            ),
+            Icon(
+                todo.isComplete
+                    ? Icons.check_box
+                    : Icons.check_box_outline_blank,
+                size: iconSize),
+          ]),
+        ),
+      ),
+    );
+  }
+}
+
+class AddTodoForm extends StatefulWidget {
+  @override
+  _AddTodoFormState createState() => _AddTodoFormState();
+}
+
+class _AddTodoFormState extends State<AddTodoForm> {
+  final _nameController = TextEditingController();
+  final _descriptionController = TextEditingController();
+
+  Future<void> _saveTodo() async {
+    // to be filled in a later step
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Add Todo'),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextFormField(
+                  controller: _nameController,
+                  decoration: InputDecoration(filled: true, labelText: 'Name')),
+              TextFormField(
+                  controller: _descriptionController,
+                  decoration:
+                      InputDecoration(filled: true, labelText: 'Description')),
+              ElevatedButton(onPressed: _saveTodo, child: Text('Save'))
+            ],
+          ),
         ),
       ),
     );
