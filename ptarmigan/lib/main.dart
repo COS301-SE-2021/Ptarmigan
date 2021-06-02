@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+// Amplify Flutter Packages
+import 'package:amplify_flutter/amplify.dart';
+// import 'package:amplify_api/amplify_api.dart'; // UNCOMMENT this line once backend is deployed
+import 'package:amplify_datastore/amplify_datastore.dart';
+
+// Generated in previous step
+import 'models/ModelProvider.dart';
+import 'amplifyconfiguration.dart';
 
 void main() {
   runApp(MyApp());
@@ -46,17 +54,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  bool _amplifyConfigured = false;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  @override
+  initState() {
+    super.initState();
+    _configureAmplify();
+  }
+
+  void _configureAmplify() async {
+    // Amplify.addPlugin(AmplifyAPI()); // UNCOMMENT this line once backend is deployed
+    Amplify.addPlugin(AmplifyDataStore(modelProvider: ModelProvider.instance));
+
+    // Once Plugins are added, configure Amplify
+    await Amplify.configure(amplifyconfig);
+    try {
+      setState(() {
+        _amplifyConfigured = true;
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -92,22 +110,9 @@ class _MyHomePageState extends State<MyHomePage> {
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+          children: <Widget>[],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
