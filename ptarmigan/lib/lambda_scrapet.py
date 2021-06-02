@@ -3,21 +3,21 @@ import snscrape.modules.twitter as snt
 import pandas as pd
 
 
-def scrapet(content, since, until):
+def scrapet_handler(event, context):
+    content = event['content']
+
     tweets_list = []
 
-    context = f"{content} since:{since} until:{until}"
-
     # Using TwitterSearchScraper to scrape data and append tweets to list
-    for i, tweet in enumerate(snt.TwitterSearchScraper(context).get_items()):
+    for i, tweet in enumerate(snt.TwitterSearchScraper(content).get_items()):
         if i >= 25:
             break
-        tweets_list.append([tweet.id, tweet.content, tweet.user.username, tweet.user.followersCount, tweet.retweetCount,
+        tweets_list.append([tweet.content, tweet.retweetCount,
                             tweet.likeCount, tweet.lang, tweet.date])
 
     # Creating a dataframe from the tweets list above
     tweets_df = pd.DataFrame(tweets_list,
-                             columns=['Tweet Id', 'Text', 'Username', 'Followers', 'Retweets', 'Likes', 'lang', 'date'])
+                             columns=['Text', 'Retweets', 'Likes', 'lang', 'date'])
 
     # Weight Calc
     weightList = []
@@ -28,7 +28,7 @@ def scrapet(content, since, until):
     tweets_df['Weight'] = weightList
 
     #Remove unnecessary fields from table for output
-    tweets_df = tweets_df.drop(['Username', 'Followers', 'Retweets', 'Likes'], axis=1)
+    tweets_df = tweets_df.drop(['Retweets', 'Likes'], axis=1)
 
     jsonOutput = tweets_df.to_json(orient="index")
     parsed = json.loads(jsonOutput)
