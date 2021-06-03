@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from hello_world import app
+from comprehend import app
 
 
 @pytest.fixture()
@@ -10,7 +10,26 @@ def apigw_event():
     """ Generates API GW Event"""
 
     return {
-        "body": '{ "test": "body"}',
+        "body": {
+                    "0": {
+                        "Tweet Id": 1349868896208244739,
+                        "Text": "Tesla trascura le donne",
+                        "lang": "it",
+                        "Weight": 1
+                    },
+                    "1": {
+                        "Tweet Id": 1349868889430130691,
+                        "Text": "Army Of Tesla Model Y Show Up at Giga Shanghai in Preparation for Delivery + RHD Model 3 for Export $TSLA\n\nhttps://t.co/cWkj7NHXJr",
+                        "lang": "en",
+                        "Weight": 8
+                    },
+                    "2": {
+                        "Tweet Id": 1349868882362679296,
+                        "Text": "@TajuddinKamil @RajaPetra Follow PAK #JOKOWI an Examplary leader of ASEAN. After this #TESLA &amp; Founder/CEO #ElonMusk will sign Big$$$ Investment in Indonesia \ud83d\ude0d\ud83d\ude02\ud83e\udd23",
+                        "lang": "en",
+                        "Weight": 1
+                    }
+                },
         "resource": "/{proxy+}",
         "requestContext": {
             "resourceId": "123456",
