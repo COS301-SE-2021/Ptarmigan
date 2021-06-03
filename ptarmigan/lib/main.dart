@@ -86,6 +86,7 @@ class _TodosPageState extends State<TodosPage> {
     try {
       // add Amplify plugins
       //await Amplify.addPlugins([_dataStorePlugin]);
+      
       await Amplify.addPlugins([_dataStorePlugin, _apiPlugin, _authPlugin]);
       // configure Amplify
       //
