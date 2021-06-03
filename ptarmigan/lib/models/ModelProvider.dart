@@ -16,21 +16,28 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:amplify_datastore_plugin_interface/amplify_datastore_plugin_interface.dart';
+import 'Feed.dart';
 import 'Todo.dart';
 
+export 'Feed.dart';
 export 'Todo.dart';
 
 class ModelProvider implements ModelProviderInterface {
   @override
-  String version = "371efcf4920535adf75f674858b892fd";
+  String version = "5081c2e29d02edd66baab6538c1d76ea";
   @override
-  List<ModelSchema> modelSchemas = [Todo.schema];
+  List<ModelSchema> modelSchemas = [Feed.schema, Todo.schema];
   static final ModelProvider _instance = ModelProvider();
 
   static ModelProvider get instance => _instance;
 
   ModelType getModelTypeByModelName(String modelName) {
     switch (modelName) {
+      case "Feed":
+        {
+          return Feed.classType;
+        }
+        break;
       case "Todo":
         {
           return Todo.classType;

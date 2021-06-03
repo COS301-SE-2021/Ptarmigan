@@ -1,3 +1,10 @@
+type Feed @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  feedName: String
+  tags: String
+  description: String
+}
+
 type Todo @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
