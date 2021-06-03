@@ -131,9 +131,9 @@ class _TodosPageState extends State<TodosPage> {
             MaterialPageRoute(builder: (context) => AddTodoForm()),
           );
         },
-        tooltip: 'Add Todo',
+        tooltip: 'Add insight',
         label: Row(
-          children: [Icon(Icons.add), Text('Add todo')],
+          children: [Icon(Icons.add), Text('Add insight')],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
