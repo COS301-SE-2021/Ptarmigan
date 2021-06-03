@@ -117,7 +117,8 @@ class _TodosPageState extends State<TodosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Todo List'),
+        title: Text('Feeds'),
+        backgroundColor: Color(0xFFE27D21),
       ),
       //body: Center(child: CircularProgressIndicator()),
       body: _isLoading
@@ -162,20 +163,14 @@ class TodosList extends StatelessWidget {
                 controller: pageViewController,
                 scrollDirection: Axis.horizontal,
                 children: [
-                  ListView(
-                    padding: EdgeInsets.zero,
-                    scrollDirection: Axis.vertical,
-                    children: [
-                      todos.length >= 1
-                          ? ListView(
-                              padding: EdgeInsets.all(8),
-                              children: todos
-                                  .map((todo) => TodoItem(todo: todo))
-                                  .toList())
-                          : Center(
-                              child: Text('Tap button below to add a todo!'))
-                    ],
-                  ),
+                  todos.length >= 1
+                      ? ListView(
+                          padding: EdgeInsets.zero,
+                          scrollDirection: Axis.vertical,
+                          children: todos
+                              .map((todo) => TodoItem(todo: todo))
+                              .toList())
+                      : Center(child: Text('Tap button below to add a todo!')),
                   ListView(
                     padding: EdgeInsets.zero,
                     scrollDirection: Axis.vertical,
@@ -206,7 +201,7 @@ class TodosList extends StatelessWidget {
                     dotWidth: 16,
                     dotHeight: 16,
                     dotColor: Color(0xFF9E9E9E),
-                    activeDotColor: Color(0xFF3F51B5),
+                    activeDotColor: Color(0xFFE27D21),
                     paintStyle: PaintingStyle.fill,
                   ),
                 ),
@@ -330,7 +325,7 @@ class _AddTodoFormState extends State<AddTodoForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Todo'),
+        title: Text('Add Feed'),
       ),
       body: Container(
         padding: EdgeInsets.all(8.0),
