@@ -8,10 +8,11 @@ def lambda_handler(event, context):
 
     supportedLanguage = ["ar", "hi", "ko", "zh-TW", "ja", "zh", "de", "pt", "en", "it", "fr", "es"]
 
+    comprehend = boto3.client("comprehend")
+
     for item in event:
 
         if event[item]["lang"] in supportedLanguage:
-            comprehend = boto3.client("comprehend")
             response = comprehend.detect_sentiment(Text=event[item]["Text"], LanguageCode=event[item]["lang"])
             event[item]["sentiment"] = response["Sentiment"]
 
