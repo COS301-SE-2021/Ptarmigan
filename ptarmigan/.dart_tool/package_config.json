@@ -8,8 +8,20 @@
       "languageVersion": "2.7"
     },
     {
+      "name": "amplify_api",
+      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/amplify_api-0.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
       "name": "amplify_api_plugin_interface",
       "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/amplify_api_plugin_interface-0.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
+    },
+    {
+      "name": "amplify_auth_cognito",
+      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/amplify_auth_cognito-0.1.5",
       "packageUri": "lib/",
       "languageVersion": "2.7"
     },
@@ -152,6 +164,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "smooth_page_indicator",
+      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/smooth_page_indicator-0.2.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.5"
+    },
+    {
       "name": "source_span",
       "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/source_span-1.8.1",
       "packageUri": "lib/",
@@ -212,7 +230,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-06-02T09:48:44.273044Z",
+  "generated": "2021-06-03T10:03:32.158845Z",
   "generator": "pub",
   "generatorVersion": "2.13.0"
 }
