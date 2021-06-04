@@ -4,7 +4,7 @@ ProjectName - Ptarmigan
 
 Project Description -
 
-Ptarmigan is be a mobile app that will assist the user in making decisions on the stock market. It will do this by scraping tweets on Twitter and extracting pertinent information from them that will influence the stock markets. Users will be able to signup and login into Ptarmigan. The backend systems in Ptarmigan will pull information from tweets and use sentiment analysis to determine what the information that has been extracted from the tweet might mean for the stock market.
+Ptarmigan will be a mobile app that will assist the user in making decisions on the stock market. It will do this by scraping tweets on Twitter and extracting pertinent information from them that will influence the stock markets. Users will be able to signup and login into Ptarmigan. The backend systems in Ptarmigan will pull information from tweets and use sentiment analysis to determine what the information that has been extracted from the tweet might mean for the stock market.
 
 Ptarmigan’s mobile app will receive this processed data. The app will send push notifications to users to inform users of important information or events. Along with this primary feature, the user will be able to view stock market insights over specified time frames.
 
