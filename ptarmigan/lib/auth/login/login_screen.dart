@@ -1,3 +1,4 @@
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +17,15 @@ class _LoginState extends State<Login> {
 
   Future<String> _onSignup(BuildContext context, LoginData data) async {
     try {
-      final res = await Amplify.Auth.signUp(
-          username: data.name, password: data.password);
-    } catch (e) {}
-    return "hi";
+        await Amplify.Auth.signUp(
+        username: data.name,
+        password: data.password,
+        options: CognitoSignUpOptions(userAttributes: {'email': data.name,}),
+      );
+    } on AuthException catch (e) {
+      print(e);
+    }
+    return "yo";
   }
 
   @override
