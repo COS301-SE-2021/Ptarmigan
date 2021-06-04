@@ -51,17 +51,7 @@ of Pretoria. He is incredibly hard working and his leadership skills and experie
 
 
 
-# User Package
+Professional Profile of members:
 
-User management and authentication package
+Tyler Arro -  u18033882 - Github: https://github.com/TylerArro - LinkedIn: https://www.linkedin.com/in/tyler-arro-1570701a4/
 
----
-
-## User Team Members
-
-| **Team Member** | **Profiles** | **Skills/Interest**
-| :-----: | :-----: | :-----: |
-| ![Firstname Lastname](https://media-exp1.licdn.com/dms/image/C5603AQEKXy8rIaIFag/profile-displayphoto-shrink_800_800/0/1618670396033?e=1623888000&v=beta&t=2DRYPM-t2Vsh5zifPwYvyQvkpHoZJ81h0VRaopD_8uk "Alexander Schmid") <br/> Alexander Schmid <br/> u17095230 <br/> (Team Leader) | [GitHub](https://github.com/u17095230) <br/> [Profile Page](https://u17095230.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/alexander-schmid-720367151/) <br/> | Fitness, Gaming, Archery |
-| ![Firstname Lastname](https://via.placeholder.com/150 "Firstname Lastname") <br/> Tyler Arro <br/> u18033882 | [GitHub](https://github.com/TylerArro) <br/> [Profile Page](https://tylerarro.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/tyler-arro-1570701a4/) <br/> | Programming and Mahjong |
-| ![Benjamin van Staden](https://i.ibb.co/DK2d6zW/Benjaminvan-Staden3.png "Benjamin van  Staden") <br/> Benjamin van Staden <br/> u04882530 | [GitHub](https://github.com/u04882530) <br/> [Profile Page](https://u04882530.github.io/u04882530/) <br/> [LinkedIn](https://www.linkedin.com/in/benjamin-van-staden-b3711b210) <br/> | Dumb |
-===
