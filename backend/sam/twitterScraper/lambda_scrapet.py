@@ -9,11 +9,10 @@ def return_tweet_list(content):
     # ["ar", "hi", "ko", "zh-TW", "ja", "zh", "de", "pt", "en", "it", "fr", "es"]
     for i, tweet in enumerate(snscrape.modules.twitter.TwitterSearchScraper(
             content + " min_faves:100" + " lang:ar OR lang:hi OR lang:ko OR lang:zh OR lang:ja OR lang:de OR lang:pt OR lang:en OR lang:it OR lang:fr OR lang:es").get_items()):
-        if i >= 1:
+        if i >= 30:
             break
         tweets_list.append([tweet.content, tweet.retweetCount,
                             tweet.likeCount, tweet.lang, tweet.date])
-
     # Creating a dataframe from the tweets list above
     return tweets_list
 
