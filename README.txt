@@ -54,14 +54,19 @@ excited for the opportunity to work on this project.
 
 Professional Profile of members:
 
-Alexander Schmid - u17095230 - Github: https://github.com/u17095230 - LinkedIn: https://www.linkedin.com/in/alexander-schmid-720367151/
+Alexander Schmid - u17095230 - Github: https://github.com/u17095230 
+LinkedIn: https://www.linkedin.com/in/alexander-schmid-720367151/
 
-Tyler Arro -  u18033882 - Github: https://github.com/TylerArro - LinkedIn: https://www.linkedin.com/in/tyler-arro-1570701a4/
+Tyler Arro -  u18033882 - Github: https://github.com/TylerArro 
+LinkedIn: https://www.linkedin.com/in/tyler-arro-1570701a4/
 
-Benjamin van Staden -  u04882530 - Github: https://github.com/u04882530 - LinkedIn: https://www.linkedin.com/in/benjamin-van-staden-b3711b210
+Benjamin van Staden -  u04882530 - Github: https://github.com/u04882530 
+LinkedIn: https://www.linkedin.com/in/benjamin-van-staden-b3711b210
 
-Luke Bradford -  u18185208 - Github: https://github.com/u18185208 - LinkedIn: https://www.linkedin.com/in/luke-bradford-229025210/
+Luke Bradford -  u18185208 - Github: https://github.com/u18185208 
+LinkedIn: https://www.linkedin.com/in/luke-bradford-229025210/
 
-Richard Reinier Mouton -  u18136835 - Github: https://github.com/u18136835 - LinkedIn: https://www.linkedin.com/in/reinier-mouton-15833b16a
+Richard Reinier Mouton -  u18136835 - Github: https://github.com/u18136835 
+LinkedIn: https://www.linkedin.com/in/reinier-mouton-15833b16a
 
 
