@@ -33,8 +33,8 @@ https://github.com/orgs/COS301-SE-2021/teams/one-more-byte
 
 Team members - 
 
-Luke Bradford: Luke is an enthusiastic and diligent member of our team. He is experienced with a wide variety of technologies and is
-eager for the opportunity to work.
+Alexander Schmid: Alexander excels in learning new technologies due to his work in the Computer Science department of the University
+of Pretoria. He is incredibly hard working and his leadership skills and experience promotes good team dynamics and cohesion.
 
 Tyler Arro: Tyler is analytical, attention driven and goal oriented. An incredibly efficient programmer, he is adept when it comes
 to learning new technologies that can lead to a higher quality end product.
@@ -42,18 +42,26 @@ to learning new technologies that can lead to a higher quality end product.
 Benjamin van Staden: Benjamin is an excellent communicator and has excellent people skills. This makes our group more cohesive and
 efficient. He is a talented programmer and a fast learner. Along with this the fact that his bilingual may be a valuable asset to our team.
 
+Luke Bradford: Luke is an enthusiastic and diligent member of our team. He is experienced with a wide variety of technologies and is
+eager for the opportunity to work.
+
 Richard Reinier Mouton: Reinier excels when working in a team and is incredibility accommodating. He works well under pressure and
 always ensure that his work is of the highest quality. He has a deep interest in artificial intelligence and thus is incredibly 
 excited for the opportunity to work on this project.
 
-Alexander Schmid: Alexander excels in learning new technologies due to his work in the Computer Science department of the University
-of Pretoria. He is incredibly hard working and his leadership skills and experience promotes good team dynamics and cohesion.
 
 
 
 Professional Profile of members:
 
+Alexander Schmid - u17095230 - Github: https://github.com/u17095230 - LinkedIn: https://www.linkedin.com/in/alexander-schmid-720367151/
+
 Tyler Arro -  u18033882 - Github: https://github.com/TylerArro - LinkedIn: https://www.linkedin.com/in/tyler-arro-1570701a4/
 
-| ![Firstname Lastname](https://via.placeholder.com/150 "Firstname Lastname") <br/> Tyler Arro <br/> u18033882 | [GitHub](https://github.com/TylerArro) <br/> [Profile Page](https://tylerarro.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/tyler-arro-1570701a4/) <br/> | Programming and Mahjong |
+Benjamin van Staden -  u04882530 - Github: https://github.com/u04882530 - LinkedIn: https://www.linkedin.com/in/benjamin-van-staden-b3711b210
+
+Luke Bradford -  u18185208 - Github: https://github.com/u18185208 - LinkedIn: https://www.linkedin.com/in/luke-bradford-229025210/
+
+Richard Reinier Mouton -  u18136835 - Github: https://github.com/u18136835 - LinkedIn: https://www.linkedin.com/in/reinier-mouton-15833b16a
+
 
