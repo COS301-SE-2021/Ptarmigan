@@ -2,7 +2,7 @@ import json
 import snscrape.modules.twitter
 import pandas as pd
 
-
+#helper function for handler
 def return_tweet_list(content):
     tweets_list = []
     # Using TwitterSearchScraper to scrape data and append tweets to list
@@ -39,7 +39,3 @@ def scrapet_handler(event, context):
     jsonOutput = tweets_df.to_json(orient="index")
     parsed = json.loads(jsonOutput)
     return json.dumps(parsed, indent=4)
-
-#scrapeThis = '{ "content": "Bitcoin"}'
-
-#print(scrapet_handler(json.loads(scrapeThis),""))
