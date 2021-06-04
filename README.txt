@@ -14,7 +14,7 @@ The application may also inform users on new public stocks or companies that the
 
 Ptarmigan will use a design that scales automatically when there is a need to do so. There will also be a separate application created specifically for admins and moderators to use. They will be able to make adjustments to the weighting of tweets if it is determined that insight that was determined was incorrect. Inaccurate insights can be flagged by users for moderation by moderators.
 
-Demo Video - “TeamName-Demo1"
+Demo Video - OneMoreByte-Demo1 - https://drive.google.com/file/d/19hfsr9zKiIVOqLxTjXKPKyh4SKOMua2o/view?usp=sharing
 
 Functional Requirements (SRS) - https://drive.google.com/file/d/19WwLKUhMdkfEV1m4KT02yPJpnR_LRpP3/view?usp=sharing
 
