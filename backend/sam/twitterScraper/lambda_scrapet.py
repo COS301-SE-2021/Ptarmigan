@@ -9,7 +9,7 @@ def return_tweet_list(content):
     # ["ar", "hi", "ko", "zh-TW", "ja", "zh", "de", "pt", "en", "it", "fr", "es"]
     for i, tweet in enumerate(snscrape.modules.twitter.TwitterSearchScraper(
             content + " min_faves:100" + " lang:ar OR lang:hi OR lang:ko OR lang:zh OR lang:ja OR lang:de OR lang:pt OR lang:en OR lang:it OR lang:fr OR lang:es").get_items()):
-        if i >= 5:
+        if i >= 1:
             break
         tweets_list.append([tweet.content, tweet.retweetCount,
                             tweet.likeCount, tweet.lang, tweet.date])
@@ -40,6 +40,6 @@ def scrapet_handler(event, context):
     parsed = json.loads(jsonOutput)
     return json.dumps(parsed, indent=4)
 
-scrapeThis = '{ "content": "Bitcoin"}'
+#scrapeThis = '{ "content": "Bitcoin"}'
 
-print(scrapet_handler(json.loads(scrapeThis),""))
+#print(scrapet_handler(json.loads(scrapeThis),""))
