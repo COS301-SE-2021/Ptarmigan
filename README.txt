@@ -55,3 +55,5 @@ Professional Profile of members:
 
 Tyler Arro -  u18033882 - Github: https://github.com/TylerArro - LinkedIn: https://www.linkedin.com/in/tyler-arro-1570701a4/
 
+| ![Firstname Lastname](https://via.placeholder.com/150 "Firstname Lastname") <br/> Tyler Arro <br/> u18033882 | [GitHub](https://github.com/TylerArro) <br/> [Profile Page](https://tylerarro.github.io/) <br/> [LinkedIn](https://www.linkedin.com/in/tyler-arro-1570701a4/) <br/> | Programming and Mahjong |
+
