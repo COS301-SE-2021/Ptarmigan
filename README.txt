@@ -16,7 +16,7 @@ Ptarmigan will use a design that scales automatically when there is a need to do
 
 Demo Video - “TeamName-Demo1"
 
-Functional Requirements (SRS) - 
+Functional Requirements (SRS) - https://drive.google.com/file/d/19WwLKUhMdkfEV1m4KT02yPJpnR_LRpP3/view?usp=sharing
 
 GitHub Project Board - 
 https://github.com/COS301-SE-2021/Ptarmigan/projects/1?add_cards_query=is%3Aopen
