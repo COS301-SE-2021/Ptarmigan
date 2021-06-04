@@ -32,7 +32,7 @@ Benjamin van Staden: Benjamin is an excellent communicator and has excellent peo
 
 Luke Bradford: Luke is an enthusiastic and diligent member of our team. He is experienced with a wide variety of technologies and is eager for the opportunity to work.
 
-Richard Reinier Mouton: Reinier excels when working in a team and is incredibility accommodating. He works well under pressure and always ensure that his work is of the highest quality. He has a deep interest in artificial intelligence and thus is incredibly excited for the opportunity to work on this project.
+Richard Reinier Mouton: Reinier excels when working in a team and is incredibility accommodating. He works well under pressure and always ensure that his work is of the highest quality. He has a deep interest in artificial intelligence.
 
 
 
