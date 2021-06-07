@@ -2,6 +2,7 @@
 // dart async library we will refer to when setting up real time updates
 import 'dart:async';
 // flutter and ui libraries
+import 'package:amplify_auth_cognito/method_channel_auth_cognito.dart';
 import 'package:flutter/material.dart';
 // amplify packages we will need to use
 import 'package:amplify_flutter/amplify.dart';
@@ -9,6 +10,7 @@ import 'package:amplify_datastore/amplify_datastore.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 // amplify configuration and models that should have been generated for you
 import 'amplifyconfiguration.dart';
+import 'auth/login/login_screen.dart';
 import 'models/ModelProvider.dart';
 import 'models/Todo.dart';
 import 'package:amplify_api/amplify_api.dart';
@@ -24,6 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Amplified Todo',
       home: TodosPage(),
+      //home: Login(),
     );
   }
 }
@@ -35,6 +38,7 @@ class TodosPage extends StatefulWidget {
 
 class _TodosPageState extends State<TodosPage> {
   bool _isLoading;
+  bool isSignUpComplete;
   StreamSubscription _subscription;
   List<Todo> _todos;
 
@@ -82,12 +86,19 @@ class _TodosPageState extends State<TodosPage> {
     });
   }
 
+  //---------------------------------------------------------------------
+  //Beginning of signing in flow
+
   Future<void> _configureAmplify() async {
     try {
       // add Amplify plugins
       //await Amplify.addPlugins([_dataStorePlugin]);
-      
-      await Amplify.addPlugins([_dataStorePlugin, _apiPlugin, _authPlugin]);
+
+      await Amplify.addPlugins([
+        _dataStorePlugin,
+        _apiPlugin,
+        _authPlugin,
+      ]);
       // configure Amplify
       //
       // note that Amplify cannot be configured more than once!
@@ -314,7 +325,6 @@ class _AddTodoFormState extends State<AddTodoForm> {
       // to write data to DataStore, we simply pass an instance of a model to
       // Amplify.DataStore.save()
       await Amplify.DataStore.save(newTodo);
-
       // after creating a new Todo, close the form
       Navigator.of(context).pop();
     } catch (e) {
