@@ -166,7 +166,13 @@ class _TodosPageState extends State<TodosPage> {
                       padding: EdgeInsets.fromLTRB(0, 62.0, 160, 10),
                       child: ElevatedButton(
                         style: ButtonStyle(),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AddFeedForm()),
+                          );
+                        },
                         child: Text('Add Feed'),
                       ),
                     ))
@@ -394,6 +400,71 @@ class _AddTodoFormState extends State<AddTodoForm> {
                   decoration:
                       InputDecoration(filled: true, labelText: 'Description')),
               ElevatedButton(onPressed: _saveTodo, child: Text('Save'))
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class AddFeedForm extends StatefulWidget {
+  @override
+  _AddFeedFormState createState() => _AddFeedFormState();
+}
+
+class _AddFeedFormState extends State<AddFeedForm> {
+  final _nameController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _tagsController = TextEditingController();
+
+  Future<void> _saveFeed() async {
+    // get the current text field contents
+    String name = _nameController.text;
+    String description = _descriptionController.text;
+    String tags = _descriptionController.text;
+
+    // create a new Todo from the form values
+    // `isComplete` is also required, but should start false in a new Todo
+    Feed newFeed = Feed(
+        feedName: name,
+        description: description.isNotEmpty ? description : null,
+        tags: tags);
+
+    try {
+      // to write data to DataStore, we simply pass an instance of a model to
+      // Amplify.DataStore.save()
+      await Amplify.DataStore.save(newFeed);
+      // after creating a new Todo, close the form
+      Navigator.of(context).pop();
+    } catch (e) {
+      print('An error occurred while saving Feed: $e');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Add Feed'),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              TextFormField(
+                  controller: _nameController,
+                  decoration: InputDecoration(filled: true, labelText: 'Name')),
+              TextFormField(
+                  controller: _descriptionController,
+                  decoration:
+                      InputDecoration(filled: true, labelText: 'Description')),
+              TextFormField(
+                  controller: _tagsController,
+                  decoration: InputDecoration(filled: true, labelText: 'Tags')),
+              ElevatedButton(onPressed: _saveFeed, child: Text('Save'))
             ],
           ),
         ),
