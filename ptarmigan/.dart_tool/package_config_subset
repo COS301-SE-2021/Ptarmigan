@@ -58,6 +58,10 @@ async
 2.12
 file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/async-2.6.1/
 file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/async-2.6.1/lib/
+bloc
+2.12
+file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/bloc-7.0.0/
+file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/bloc-7.0.0/lib/
 boolean_selector
 2.12
 file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/boolean_selector-2.1.0/
@@ -134,6 +138,10 @@ fixnum
 2.12
 file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/fixnum-1.0.0/
 file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/fixnum-1.0.0/lib/
+flutter_bloc
+2.12
+file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flutter_bloc-7.0.1/
+file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flutter_bloc-7.0.1/lib/
 flutter_login
 2.2
 file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flutter_login-1.1.0/
