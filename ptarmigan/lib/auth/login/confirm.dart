@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,7 +8,7 @@ import 'package:flutter_login/flutter_login.dart';
 class ConfirmScreen extends StatefulWidget {
   final LoginData data;
 
-  ConfirmScreen({required this.data});
+  ConfirmScreen({this.data});
 
   @override
   _ConfirmScreenState createState() => _ConfirmScreenState();
@@ -102,7 +103,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                       ),
                       MaterialButton(
                         onPressed: () {
-                          _resendCode(context, widget.data);
+                         // _resendCode(context, widget.data);
                         },
                         child: Text(
                           'Resend code',

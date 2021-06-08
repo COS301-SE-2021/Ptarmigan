@@ -13,7 +13,7 @@ import 'package:ptarmigan/screens/dashboard.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 // amplify configuration and models that should have been generated for you
 import 'amplifyconfiguration.dart';
-import 'auth/flutter_login/login_screen.old.dart';
+import 'auth/flutter_login/login_screen.dart';
 import 'auth/login/confirm.dart';
 import 'models/ModelProvider.dart';
 import 'models/Todo.dart';

@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ptarmigan/amplifyconfiguration.dart';
 
-import 'auth/flutter_login/login_screen.old.dart';
+import 'auth/flutter_login/login_screen.dart';
 
 class EntryScreen extends StatefulWidget {
   @override
@@ -25,7 +25,8 @@ class _EntryScreenState extends State<EntryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: _amplifyconfigured ? Login() : CircularProgressIndicator(),),
+        child: _amplifyconfigured ? Login() : CircularProgressIndicator(),
+      ),
     );
   }
 

@@ -37,7 +37,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [if (_user == null) Text('Loading') else Text("Hello")],
+            children: [
+              if (_user == null)
+                Text('Loading')
+              else
+                Text(_user.username + ' : ' + _user.userId)
+            ],
           ),
         ),
       ),
