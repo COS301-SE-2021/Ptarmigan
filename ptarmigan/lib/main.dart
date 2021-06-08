@@ -7,10 +7,14 @@ import 'package:flutter/material.dart';
 // amplify packages we will need to use
 import 'package:amplify_flutter/amplify.dart';
 import 'package:amplify_datastore/amplify_datastore.dart';
+import 'package:flutter_login/flutter_login.dart';
+import 'package:ptarmigan/entry.dart';
+import 'package:ptarmigan/screens/dashboard.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 // amplify configuration and models that should have been generated for you
 import 'amplifyconfiguration.dart';
-import 'auth/login/login_screen.dart';
+import 'auth/flutter_login/login_screen.old.dart';
+import 'auth/login/confirm.dart';
 import 'models/ModelProvider.dart';
 import 'models/Todo.dart';
 import 'package:amplify_api/amplify_api.dart';
@@ -25,8 +29,26 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Amplified Todo',
-      home: TodosPage(),
+      //home: TodosPage(),
       //home: Login(),
+      //home: EntryScreen(),
+      onGenerateRoute: (settings) {
+        if (settings.name == '/confirm') {
+          return PageRouteBuilder(
+            pageBuilder: (_, __, ___) =>
+                ConfirmScreen(data: settings.arguments as LoginData),
+            transitionsBuilder: (_, __, ___, child) => child,
+          );
+        }
+        if (settings.name == '/dashboard') {
+          return PageRouteBuilder(
+            pageBuilder: (_, __, ___) =>
+                DashboardScreen(),
+            transitionsBuilder: (_, __, ___, child) => child,
+          );
+        }
+        return MaterialPageRoute(builder: (_) => EntryScreen());
+      },
     );
   }
 }
