@@ -149,6 +149,48 @@ class _TodosPageState extends State<TodosPage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.orange,
+                ),
+                child: Column(
+                  children: [
+                    Text('Feeds'),
+                    Container(
+                        child: Padding(
+                      padding: EdgeInsets.fromLTRB(0, 62.0, 160, 10),
+                      child: ElevatedButton(
+                        style: ButtonStyle(),
+                        onPressed: () {},
+                        child: Text('Add Feed'),
+                      ),
+                    ))
+                  ],
+                )),
+            ListTile(
+              title: Text('Feed 1'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Feed 2'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
