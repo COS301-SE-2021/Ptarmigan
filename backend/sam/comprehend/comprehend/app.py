@@ -1,7 +1,7 @@
 import json
 import boto3
 
-def lambda_handler(event, context):
+def comprehendTweetHandler(event, context):
     dbClient = boto3.resource("dynamodb")
 
     table = dbClient.Table('Twitter_Sentiment_Data')

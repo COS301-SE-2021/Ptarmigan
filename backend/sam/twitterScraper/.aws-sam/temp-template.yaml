@@ -1,0 +1,9 @@
+Resources:
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 300
+      MemorySize: 10240
+      Handler: app.scrapet_handler
+      CodeUri: /home/reinier/Documents/GitHub/Ptarmigan/backend/sam/twitterScraper/hello_world
+      Runtime: python3.8
