@@ -1,34 +1,34 @@
 import json
 import boto3
 
-def comprehendTweetHandler(event, context):
+def lambda_twitterComprehend(event, context):
+    print(event["content"])
+    returnObject = event
+    event = event["content"][str(event["currentIndex"])]
     dbClient = boto3.resource("dynamodb")
 
     table = dbClient.Table('Twitter_Sentiment_Data')
 
-    supportedLanguage = ["ar", "hi", "ko", "zh-TW", "ja", "zh", "de", "pt", "en", "it", "fr", "es"]
-
     comprehend = boto3.client("comprehend")
 
-    for item in event:
+    response = comprehend.detect_sentiment(Text=event["Text"], LanguageCode=event["lang"])
+    event["sentiment"] = response["Sentiment"]
 
-        if event[item]["lang"] in supportedLanguage:
-            response = comprehend.detect_sentiment(Text=event[item]["Text"], LanguageCode=event[item]["lang"])
-            event[item]["sentiment"] = response["Sentiment"]
+    # table.put_item(
+    # Item={
+    #     'Tweet_Id': str(event["Tweet Id"]),
+    #     'Text': event["Text"],
+    #     'lang': event["lang"],
+    #     'Weight': str(event["Weight"]),
+    #     'Sentiment': event["sentiment"]
+    #     })
 
-            table.put_item(
-                Item={
-                    'Tweet_Id': str(event[item]["Tweet Id"]),
-                    'Text': event[item]["Text"],
-                    'lang': event[item]["lang"],
-                    'Weight': str(event[item]["Weight"]),
-                    'Sentiment': event[item]["sentiment"]
-                })
+    returnObject["currentIndex"] = returnObject["currentIndex"] + 1
 
-        else:
-            del event[item]
+    if returnObject["currentIndex"] == returnObject["eventLength"]:
+        returnObject["done"] = "true"
 
-    return {
-        'statusCode': 200,
-        'body': event
-    }
+        # TODO: write code...
+
+    return returnObject
+
