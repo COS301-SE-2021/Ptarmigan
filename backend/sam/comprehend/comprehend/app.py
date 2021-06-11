@@ -14,14 +14,14 @@ def lambda_twitterComprehend(event, context):
     response = comprehend.detect_sentiment(Text=event["Text"], LanguageCode=event["lang"])
     event["sentiment"] = response["Sentiment"]
 
-    # table.put_item(
-    # Item={
-    #     'Tweet_Id': str(event["Tweet Id"]),
-    #     'Text': event["Text"],
-    #     'lang': event["lang"],
-    #     'Weight': str(event["Weight"]),
-    #     'Sentiment': event["sentiment"]
-    #     })
+    table.put_item(
+    Item={
+        'Tweet_Id': str(event["Tweet Id"]),
+        'Text': event["Text"],
+        'lang': event["lang"],
+        'Weight': str(event["Weight"]),
+        'Sentiment': event["sentiment"]
+        })
 
     returnObject["currentIndex"] = returnObject["currentIndex"] + 1
 
