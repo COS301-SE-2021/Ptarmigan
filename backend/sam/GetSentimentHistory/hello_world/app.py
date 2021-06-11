@@ -2,24 +2,22 @@ import json
 from pprint import pprint
 import boto3
 from botocore.exceptions import ClientError
+from boto3.dynamodb.conditions import Key
+import json
 
 # import requests
 
 
 def lambda_handler(event, context):
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('Twitter_Sentiment_Data')
-    response = table.get_item(Key = {
-        "Tweet_Id" : "999"
+    table = dynamodb.Table('Test')
+    response = table.scan(
+        FilterExpression = Key('Tweet_Id').gt(50) & Key('TimeStamp').gt(1))
 
-    })
-
-    print(response)
+    print(response["Items"])
 
     return {
         "statusCode": 200,
-        "body": json.dumps({
-            "message": "hello world",
-            # "location": ip.text.replace("\n", "")
-        }),
+        "body":response
+
     }
