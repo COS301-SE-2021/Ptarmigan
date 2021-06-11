@@ -213,7 +213,7 @@
     },
     {
       "name": "flutter_login",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_login-1.1.0",
+      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_login-1.0.15",
       "packageUri": "lib/",
       "languageVersion": "2.2"
     },
@@ -225,9 +225,9 @@
     },
     {
       "name": "font_awesome_flutter",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/font_awesome_flutter-9.0.0",
+      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/font_awesome_flutter-8.12.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.0"
     },
     {
       "name": "glob",
@@ -333,9 +333,9 @@
     },
     {
       "name": "provider",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/provider-5.0.0",
+      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/provider-4.3.3",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.7"
     },
     {
       "name": "pub_semver",
@@ -345,9 +345,9 @@
     },
     {
       "name": "quiver",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/quiver-3.0.1",
+      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/quiver-2.1.5",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.0"
     },
     {
       "name": "shelf",
@@ -512,7 +512,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-06-08T17:47:51.257621Z",
+  "generated": "2021-06-11T15:41:54.832920Z",
   "generator": "pub",
   "generatorVersion": "2.13.0"
 }

@@ -3,10 +3,12 @@
 import 'dart:async';
 // flutter and ui libraries
 import 'package:amplify_auth_cognito/method_channel_auth_cognito.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // amplify packages we will need to use
 import 'package:amplify_flutter/amplify.dart';
 import 'package:amplify_datastore/amplify_datastore.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 // amplify configuration and models that should have been generated for you
 import 'amplifyconfiguration.dart';
@@ -16,6 +18,10 @@ import 'models/Todo.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
+String feedDetails = "";
+final ValueNotifier feedID = ValueNotifier("");
+List<Todo> todos;
+
 void main() {
   runApp(MyApp());
 }
@@ -23,11 +29,17 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Amplified Todo',
-      home: TodosPage(),
-      //home: Login(),
-    );
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider.value(
+            value: FeedChanger(),
+          ),
+        ],
+        child: MaterialApp(
+          title: 'Amplified Todo',
+          home: TodosPage(),
+          //home: Login(),
+        ));
   }
 }
 
@@ -163,6 +175,7 @@ class _TodosPageState extends State<TodosPage> {
           ? Center(child: CircularProgressIndicator())
           : TodosList(todos: _todos),
       drawer: FeedsList(feeds: _feeds),
+
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.push(
@@ -181,7 +194,7 @@ class _TodosPageState extends State<TodosPage> {
 }
 
 class TodosList extends StatelessWidget {
-  final List<Todo> todos;
+  List<Todo> todos;
   final List<Feed> feeds;
 
   final pageViewController = PageController();
@@ -189,68 +202,83 @@ class TodosList extends StatelessWidget {
 
   TodosList({this.todos, this.feeds});
 
+  Future<void> fetchNewTodos(var feedIdentifier) async {
+    print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+    List<Todo> updatedTodos = await Amplify.DataStore.query(Todo.classType,
+        where: Todo.NAME.eq(feedIdentifier));
+    todos = updatedTodos;
+  }
+
   @override
   Widget build(BuildContext context) {
+    var feedChoice = Provider.of<FeedChanger>(context).getFeedChoice;
+    fetchNewTodos(feedChoice);
+
     return Scaffold(
       key: scaffoldKey,
-      body: Container(
-        width: double.infinity,
-        height: 500,
-        child: Stack(
-          children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 50),
-              child: PageView(
-                controller: pageViewController,
-                scrollDirection: Axis.horizontal,
+      body: ValueListenableBuilder(
+          valueListenable: feedID,
+          builder: (context, value, child) {
+            return Container(
+              width: double.infinity,
+              height: 500,
+              child: Stack(
                 children: [
-                  todos.length >= 1
-                      ? ListView(
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 50),
+                    child: PageView(
+                      controller: pageViewController,
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        todos.length >= 1
+                            ? ListView(
+                                padding: EdgeInsets.zero,
+                                scrollDirection: Axis.vertical,
+                                children: todos
+                                    .map((todo) => TodoItem(todo: todo))
+                                    .toList())
+                            : Center(
+                                child: Text('Tap button below to add a todo!')),
+                        ListView(
                           padding: EdgeInsets.zero,
                           scrollDirection: Axis.vertical,
-                          children: todos
-                              .map((todo) => TodoItem(todo: todo))
-                              .toList())
-                      : Center(child: Text('Tap button below to add a todo!')),
-                  ListView(
-                    padding: EdgeInsets.zero,
-                    scrollDirection: Axis.vertical,
-                    children: [],
+                          children: [],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment(0, 1),
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                      child: SmoothPageIndicator(
+                        controller: pageViewController,
+                        count: 2,
+                        axisDirection: Axis.horizontal,
+                        onDotClicked: (i) {
+                          pageViewController.animateToPage(
+                            i,
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.ease,
+                          );
+                        },
+                        effect: ExpandingDotsEffect(
+                          expansionFactor: 2,
+                          spacing: 8,
+                          radius: 16,
+                          dotWidth: 16,
+                          dotHeight: 16,
+                          dotColor: Color(0xFF9E9E9E),
+                          activeDotColor: Colors.teal,
+                          paintStyle: PaintingStyle.fill,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
-            ),
-            Align(
-              alignment: Alignment(0, 1),
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                child: SmoothPageIndicator(
-                  controller: pageViewController,
-                  count: 2,
-                  axisDirection: Axis.horizontal,
-                  onDotClicked: (i) {
-                    pageViewController.animateToPage(
-                      i,
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.ease,
-                    );
-                  },
-                  effect: ExpandingDotsEffect(
-                    expansionFactor: 2,
-                    spacing: 8,
-                    radius: 16,
-                    dotWidth: 16,
-                    dotHeight: 16,
-                    dotColor: Color(0xFF9E9E9E),
-                    activeDotColor: Colors.teal,
-                    paintStyle: PaintingStyle.fill,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+            );
+          }),
     );
 
     /*
@@ -262,6 +290,19 @@ class TodosList extends StatelessWidget {
         children: [
          
         ]); */
+  }
+}
+
+class FeedChanger extends ChangeNotifier {
+  var _feedChoice = "";
+
+  String get getFeedChoice {
+    return _feedChoice;
+  }
+
+  void changeFeed(String a) {
+    _feedChoice = a;
+    notifyListeners();
   }
 }
 
@@ -409,10 +450,24 @@ class FeedItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _changeFeed() {
+      Provider.of<FeedChanger>(context, listen: false)
+          .changeFeed(feed.feedName);
+    }
+
+    ;
     return Card(
       child: InkWell(
         onLongPress: () {
           _deleteFeed(context);
+        },
+        onTap: () {
+          // update the ui state to reflect fetched todos
+          // feedID.value = feed.feedName;
+          print(feed.feedName);
+          _changeFeed();
+
+          //print(feedID.value);
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -588,23 +643,35 @@ class FeedsList extends StatelessWidget {
       color: Colors.white,
       child: Stack(
         children: [
+          Container(
+              child: feeds.length >= 1
+                  ? ListView(
+                      padding: EdgeInsets.fromLTRB(0, 229, 0, 0),
+                      scrollDirection: Axis.vertical,
+                      children:
+                          feeds.map((feeds) => FeedItems(feed: feeds)).toList())
+                  : Center(child: Text('Tap button below to add a todo!'))),
           DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.tealAccent,
               ),
               child: Column(
                 children: [
-                  Text('Feeds', style: TextStyle(fontSize: 35)),
+                  Padding(
+                      padding: EdgeInsets.fromLTRB(0, 2, 30, 0),
+                      child: Text(
+                        'Your Feeds',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            fontSize: 35,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Montserrat"),
+                      )),
                   Container(
                       child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 45, 160, 0),
+                    padding: EdgeInsets.fromLTRB(0, 0, 160, 0),
                     child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.teal),
-                      ),
                       onPressed: () {
-                        print("test");
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -616,16 +683,9 @@ class FeedsList extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                  ))
+                  )),
                 ],
               )),
-          feeds.length >= 1
-              ? ListView(
-                  padding: EdgeInsets.fromLTRB(0, 229, 0, 0),
-                  scrollDirection: Axis.vertical,
-                  children:
-                      feeds.map((feeds) => FeedItems(feed: feeds)).toList())
-              : Center(child: Text('Tap button below to add a todo!')),
         ],
       ),
     );
