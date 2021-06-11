@@ -24,8 +24,13 @@ def calculateSentiment(content):
 
     return (runningSentiment/totalVotes)
 
+def validateFunction():
+
+
 
 def lambda_handler(event, context):
+
+    print(event)
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table('Test')
     response = table.scan(
@@ -34,10 +39,10 @@ def lambda_handler(event, context):
     # print(response["Items"])
 
 
-    print(calculateSentiment(response["Items"]))
+    calculation = calculateSentiment(response["Items"])
 
     return {
         "statusCode": 200,
-        "body":response
+        "body": calculation
 
     }
