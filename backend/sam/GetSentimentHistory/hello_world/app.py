@@ -34,7 +34,7 @@ def lambda_handler(event, context):
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table('Test')
     response = table.scan(
-        FilterExpression = Key('Tweet_Id').gt(1) & Key('TimeStamp').between(1, 1623060456000))
+        FilterExpression = Key('Tweet_Id').gt(1) & Key('TimeStamp').between(event["BeginDate"], event["EndDate"]))
 
     # print(response["Items"])
 
