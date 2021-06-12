@@ -33,17 +33,25 @@ def lambda_handler(event, context):
     print(event)
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table('Test')
-    response = table.scan(
-        FilterExpression = Key('Tweet_Id').gt(1) & Key('TimeStamp').between(event["BeginDate"], event["EndDate"])& Key('CompanyName').eq(event["CompanyName"])
-    )
+    try:
+        response = table.scan(
+            FilterExpression = Key('Tweet_Id').gt(1) & Key('TimeStamp').between(event["BeginDate"], event["EndDate"])& Key('CompanyName').eq(event["CompanyName"])
+        )
 
-    print(response)
+        calculation = calculateSentiment(response["Items"])
+
+        return {
+            "statusCode": 200,
+            "body": calculation
+        }
+
+    except:
+        return {
+            "statusCode": 400,
+            "body": "Parameters not found in DB"
+        }
 
 
-    calculation = calculateSentiment(response["Items"])
 
-    return {
-        "statusCode": 200,
-        "body": calculation
 
-    }
+
