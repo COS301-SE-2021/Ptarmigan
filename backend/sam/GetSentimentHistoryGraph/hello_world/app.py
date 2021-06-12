@@ -57,14 +57,11 @@ def lambda_handler(event, context):
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table('Test')
 
-    print(int(time.time()*1000))
-
     returnObject = {
         "CompanyName": "Tesla",
         "Interval": interval,
         "Data": []
     }
-    returnArray = []
 
     while beginDate < int(time.time()*1000):
         try:
@@ -72,7 +69,6 @@ def lambda_handler(event, context):
                 FilterExpression=Key('Tweet_Id').gt(1) & Key('TimeStamp').between(beginDate,endDate) & Key('CompanyName').eq(event["CompanyName"])
             )
 
-            # returnArray.append(calculateSentiment(response["Items"]))
             returnObject["Data"].append({
                 "BeginDate": beginDate,
                 "EndDate": endDate,
