@@ -1,8 +1,6 @@
 import json
 import time
-from pprint import pprint
 import boto3
-from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Key
 import json
 
@@ -47,9 +45,6 @@ def getInterval(interval):
 
 
 def lambda_handler(event, context):
-
-    print(event)
-
     interval = getInterval(event["Interval"])
     beginDate = event["BeginDate"]
     endDate = beginDate + interval
