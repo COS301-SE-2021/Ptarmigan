@@ -62,9 +62,7 @@ def lambda_handler(event, context):
     returnObject = {
         "CompanyName": "Tesla",
         "Interval": interval,
-        "Data": {
-
-        }
+        "Data": []
     }
     returnArray = []
 
@@ -75,7 +73,7 @@ def lambda_handler(event, context):
             )
 
             # returnArray.append(calculateSentiment(response["Items"]))
-            returnObject["Data"].update({
+            returnObject["Data"].append({
                 "BeginDate": beginDate,
                 "EndDate": endDate,
                 "IntervalData": calculateSentiment(response["Items"])
@@ -84,7 +82,7 @@ def lambda_handler(event, context):
 
         except:
             print("asdfa")
-            returnObject["Data"].update({
+            returnObject["Data"].append({
                 "BeginDate": beginDate,
                 "EndDate": endDate,
                 "IntervalData": 0
@@ -95,7 +93,7 @@ def lambda_handler(event, context):
 
     return {
         "statusCode": 200,
-        "body": returnArray
+        "body": returnObject
     }
 
 
