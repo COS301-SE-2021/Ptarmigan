@@ -59,6 +59,13 @@ def lambda_handler(event, context):
 
     print(int(time.time()*1000))
 
+    returnObject = {
+        "CompanyName": "Tesla",
+        "Interval": interval,
+        "Data": {
+
+        }
+    }
     returnArray = []
 
     while beginDate < int(time.time()*1000):
@@ -67,12 +74,21 @@ def lambda_handler(event, context):
                 FilterExpression=Key('Tweet_Id').gt(1) & Key('TimeStamp').between(beginDate,endDate) & Key('CompanyName').eq(event["CompanyName"])
             )
 
-            returnArray.append(calculateSentiment(response["Items"]))
-            print(returnArray)
+            # returnArray.append(calculateSentiment(response["Items"]))
+            returnObject["Data"].update({
+                "BeginDate": beginDate,
+                "EndDate": endDate,
+                "IntervalData": calculateSentiment(response["Items"])
+            })
+
 
         except:
             print("asdfa")
-            returnArray.append(0)
+            returnObject["Data"].update({
+                "BeginDate": beginDate,
+                "EndDate": endDate,
+                "IntervalData": 0
+            })
 
         beginDate = endDate
         endDate = endDate + interval
