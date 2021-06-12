@@ -81,7 +81,6 @@ def lambda_handler(event, context):
 
 
         except:
-            print("asdfa")
             returnObject["Data"].append({
                 "BeginDate": beginDate,
                 "EndDate": endDate,
@@ -93,7 +92,7 @@ def lambda_handler(event, context):
 
     return {
         "statusCode": 200,
-        "body": returnObject
+        "body":  json.dumps(returnObject)
     }
 
 
