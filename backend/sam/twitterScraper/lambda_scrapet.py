@@ -8,7 +8,7 @@ def return_tweet_list(content,scrapeTimeframe):
     # Using TwitterSearchScraper to scrape data and append tweets to list
     # ["ar", "hi", "ko", "zh-TW", "ja", "zh", "de", "pt", "en", "it", "fr", "es"]
     for i, tweet in enumerate(snscrape.modules.twitter.TwitterSearchScraper(
-            content + " min_faves:100" + " lang:ar OR lang:hi OR lang:ko OR lang:zh OR lang:ja OR lang:de OR lang:pt OR lang:en OR lang:it OR lang:fr OR lang:es").get_items()):
+            content + " min_faves:100" + " lang:ar OR lang:hi OR lang:ko OR lang:zh OR lang:ja OR lang:de OR lang:pt OR lang:en OR lang:it OR lang:fr OR lang:es since:" + scrapeTimeframe).get_items()):
         if i >= 100:
             break
         tweets_list.append([tweet.id, tweet.content, tweet.retweetCount,
@@ -18,7 +18,7 @@ def return_tweet_list(content,scrapeTimeframe):
 
 def scrapet_handler(event, context):
     content = event['content']
-    scrape_until = event['scrape-until']
+    scrape_since = event['scrape-until']
     #call helper function
     tweets_list = return_tweet_list(content,scrape_until)
     #create dataframe
