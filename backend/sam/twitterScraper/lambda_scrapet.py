@@ -3,7 +3,7 @@ import snscrape.modules.twitter
 import pandas as pd
 
 #helper function for handler
-def return_tweet_list(content):
+def return_tweet_list(content,scrapeTimeframe):
     tweets_list = []
     # Using TwitterSearchScraper to scrape data and append tweets to list
     # ["ar", "hi", "ko", "zh-TW", "ja", "zh", "de", "pt", "en", "it", "fr", "es"]
@@ -18,8 +18,9 @@ def return_tweet_list(content):
 
 def scrapet_handler(event, context):
     content = event['content']
+    scrape_until = event['scrape-until']
     #call helper function
-    tweets_list = return_tweet_list(content)
+    tweets_list = return_tweet_list(content,scrape_until)
     #create dataframe
     tweets_df = pd.DataFrame(tweets_list,
                              columns=['Tweet Id', 'Text', 'Retweets', 'Likes', 'lang', 'date'])
