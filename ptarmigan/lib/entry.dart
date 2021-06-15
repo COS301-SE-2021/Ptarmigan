@@ -36,8 +36,12 @@ class _EntryScreenState extends State<EntryScreen> {
     final auth = AmplifyAuthCognito();
 
     try {
-      Amplify.addPlugins([auth]);
-      await Amplify.configure(amplifyconfig);
+      print('--------ATTEMPTING AMPLIFY CONFIG-----------');
+
+      if (Amplify.isConfigured == false) {
+        Amplify.addPlugins([auth]);
+        await Amplify.configure(amplifyconfig);
+      }
       setState(() {
         _amplifyconfigured = true;
       });

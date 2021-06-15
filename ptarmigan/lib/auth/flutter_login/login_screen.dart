@@ -22,12 +22,13 @@ class _LoginState extends State<Login> {
 
       _isSignedIn = res.isSignedIn;
     } on AuthException catch (e) {
-      if (e.message.contains('already a user which is signed in')) {
+      print('Message ============ ' + e.message);
+      if (e.message.contains('There is already a user  signed in.')) {
         await Amplify.Auth.signOut();
         return 'Problem logging in. Please try again.';
       }
-
-      return '${e.message} - ${e.recoverySuggestion}';
+      //await Amplify.Auth.signOut();   /////////////////////////////////////////MAKE SHIFT SOLUTION ---- NEEDS FIXING
+      //return '${e.message} - ${e.recoverySuggestion}';
     }
   }
 

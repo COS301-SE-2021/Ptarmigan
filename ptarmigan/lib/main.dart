@@ -42,8 +42,7 @@ class MyApp extends StatelessWidget {
         }
         if (settings.name == '/dashboard') {
           return PageRouteBuilder(
-            pageBuilder: (_, __, ___) =>
-                DashboardScreen(),
+            pageBuilder: (_, __, ___) => DashboardScreen(),
             transitionsBuilder: (_, __, ___, child) => child,
           );
         }
@@ -74,6 +73,9 @@ class _TodosPageState extends State<TodosPage> {
   void initState() {
     _isLoading = true;
     _todos = [];
+    try {
+      Amplify.Auth.signOut();
+    } catch (e) {}
     _initializeApp();
     super.initState();
   }
@@ -87,7 +89,7 @@ class _TodosPageState extends State<TodosPage> {
 
   Future<void> _initializeApp() async {
     // configure Amplify
-    await _configureAmplify();
+    //await _configureAmplify();                              ///////////Remove if other configure doesnt work
 
     // listen for updates to Todo entries by passing the Todo classType to
     // Amplify.DataStore.observe() and when an update event occurs, fetch the
@@ -116,6 +118,7 @@ class _TodosPageState extends State<TodosPage> {
       // add Amplify plugins
       //await Amplify.addPlugins([_dataStorePlugin]);
 
+      print('----------WRONG CONFIGURE RUNNING -------------');
       await Amplify.addPlugins([
         _dataStorePlugin,
         _apiPlugin,

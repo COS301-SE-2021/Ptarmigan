@@ -34,6 +34,26 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
     super.dispose();
   }
 
+  void _resendCode(BuildContext context, LoginData data) async {
+    try {
+      await Amplify.Auth.resendSignUpCode(username: data.name);
+
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.blueAccent,
+          content: Text(
+            'Confirmation code sent.',
+            style: TextStyle(fontSize: 15),
+          )));
+    } on AuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+          e.message,
+          style: TextStyle(fontSize: 15),
+        ),
+      ));
+    }
+  }
+
   void _verifyCode(BuildContext context, LoginData data, String code) async {
     try {
       final res = await Amplify.Auth.confirmSignUp(
@@ -44,7 +64,16 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
         await Amplify.Auth.signIn(username: data.name, password: data.password);
         Navigator.pushReplacementNamed(context, '/dashboard');
       }
-    } on AuthException catch (e) {}
+    } on AuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: Colors.blueAccent,
+        content: Text(
+          e.message,
+          style: TextStyle(fontSize: 15),
+        ),
+      ));
+      print(e.message);
+    }
   }
 
   Widget build(BuildContext context) {
@@ -103,7 +132,7 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
                       ),
                       MaterialButton(
                         onPressed: () {
-                         // _resendCode(context, widget.data);
+                          _resendCode(context, widget.data);
                         },
                         child: Text(
                           'Resend code',

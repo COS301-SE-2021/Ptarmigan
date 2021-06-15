@@ -32,6 +32,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Dashboard'),
+        actions: [
+          MaterialButton(onPressed: () {
+            Amplify.Auth.signOut().then((_) {
+              Navigator.pushReplacementNamed(context, '/MyApp');
+            });
+          },
+          child: Icon(
+            Icons.logout,
+            color: Colors.white,
+          )
+          )
+        ],
       ),
       body: Container(
         child: Center(
