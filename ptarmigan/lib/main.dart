@@ -18,7 +18,6 @@ import 'models/Todo.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
-String feedDetails = "";
 final ValueNotifier feedID = ValueNotifier("");
 List<Todo> todos;
 
@@ -196,100 +195,96 @@ class _TodosPageState extends State<TodosPage> {
 class TodosList extends StatelessWidget {
   List<Todo> todos;
   final List<Feed> feeds;
-
+  StreamSubscription _subscription;
   final pageViewController = PageController();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   TodosList({this.todos, this.feeds});
 
+  bocko(var feedChoice) async {
+    _subscription = Amplify.DataStore.observe(Todo.classType).listen((event) {
+      fetchNewTodos(feedChoice);
+    });
+
+    await fetchNewTodos(feedChoice);
+  }
+
   Future<void> fetchNewTodos(var feedIdentifier) async {
-    print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+    print("KONO: " + feedIdentifier);
     List<Todo> updatedTodos = await Amplify.DataStore.query(Todo.classType,
         where: Todo.NAME.eq(feedIdentifier));
     todos = updatedTodos;
+    print("VACO: " + todos.elementAt(0).name);
   }
 
   @override
   Widget build(BuildContext context) {
     var feedChoice = Provider.of<FeedChanger>(context).getFeedChoice;
-    fetchNewTodos(feedChoice);
+
+    bocko(feedChoice);
+    print("ORO: " + todos.elementAt(0).name);
 
     return Scaffold(
-      key: scaffoldKey,
-      body: ValueListenableBuilder(
-          valueListenable: feedID,
-          builder: (context, value, child) {
-            return Container(
-              width: double.infinity,
-              height: 500,
-              child: Stack(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 50),
-                    child: PageView(
-                      controller: pageViewController,
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        todos.length >= 1
-                            ? ListView(
-                                padding: EdgeInsets.zero,
-                                scrollDirection: Axis.vertical,
-                                children: todos
-                                    .map((todo) => TodoItem(todo: todo))
-                                    .toList())
-                            : Center(
-                                child: Text('Tap button below to add a todo!')),
-                        ListView(
-                          padding: EdgeInsets.zero,
-                          scrollDirection: Axis.vertical,
-                          children: [],
-                        ),
-                      ],
+        key: scaffoldKey,
+        body: Container(
+          width: double.infinity,
+          height: 500,
+          child: Stack(
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 50),
+                child: PageView(
+                  controller: pageViewController,
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    todos.length >= 1
+                        ? ListView(
+                            padding: EdgeInsets.zero,
+                            scrollDirection: Axis.vertical,
+                            children: todos
+                                .map((todo) => TodoItem(todo: todo))
+                                .toList())
+                        : Center(
+                            child: Text('Tap button below to add a todo!')),
+                    ListView(
+                      padding: EdgeInsets.zero,
+                      scrollDirection: Axis.vertical,
+                      children: [],
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment(0, 1),
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                      child: SmoothPageIndicator(
-                        controller: pageViewController,
-                        count: 2,
-                        axisDirection: Axis.horizontal,
-                        onDotClicked: (i) {
-                          pageViewController.animateToPage(
-                            i,
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.ease,
-                          );
-                        },
-                        effect: ExpandingDotsEffect(
-                          expansionFactor: 2,
-                          spacing: 8,
-                          radius: 16,
-                          dotWidth: 16,
-                          dotHeight: 16,
-                          dotColor: Color(0xFF9E9E9E),
-                          activeDotColor: Colors.teal,
-                          paintStyle: PaintingStyle.fill,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            );
-          }),
-    );
-
-    /*
-    
-
-    PageView(
-        controller: pageViewController,
-        scrollDirection: Axis.horizontal,
-        children: [
-         
-        ]); */
+              Align(
+                alignment: Alignment(0, 1),
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                  child: SmoothPageIndicator(
+                    controller: pageViewController,
+                    count: 2,
+                    axisDirection: Axis.horizontal,
+                    onDotClicked: (i) {
+                      pageViewController.animateToPage(
+                        i,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.ease,
+                      );
+                    },
+                    effect: ExpandingDotsEffect(
+                      expansionFactor: 2,
+                      spacing: 8,
+                      radius: 16,
+                      dotWidth: 16,
+                      dotHeight: 16,
+                      dotColor: Color(0xFF9E9E9E),
+                      activeDotColor: Colors.teal,
+                      paintStyle: PaintingStyle.fill,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }
 
@@ -302,6 +297,7 @@ class FeedChanger extends ChangeNotifier {
 
   void changeFeed(String a) {
     _feedChoice = a;
+    print("Ping2");
     notifyListeners();
   }
 }
@@ -451,6 +447,7 @@ class FeedItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void _changeFeed() {
+      print("Ping");
       Provider.of<FeedChanger>(context, listen: false)
           .changeFeed(feed.feedName);
     }
@@ -464,8 +461,8 @@ class FeedItems extends StatelessWidget {
         onTap: () {
           // update the ui state to reflect fetched todos
           // feedID.value = feed.feedName;
-          print(feed.feedName);
           _changeFeed();
+          print("HERE: " + feed.feedName);
 
           //print(feedID.value);
         },
