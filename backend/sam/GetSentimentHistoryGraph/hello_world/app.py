@@ -64,6 +64,8 @@ def lambda_handler(event, context):
                 FilterExpression=Key('Tweet_Id').gt(1) & Key('TimeStamp').between(beginDate,endDate) & Key('CompanyName').eq(event["CompanyName"])
             )
 
+            print(response)
+
             returnObject["Data"].append({
                 "BeginDate": beginDate,
                 "EndDate": endDate,
