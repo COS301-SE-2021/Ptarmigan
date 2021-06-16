@@ -23,7 +23,7 @@ def calculateSentiment(content):
 
     return (runningSentiment/totalVotes)
 
-
+#
 def getInterval(interval):
     if interval == "Second":
         return 1000
