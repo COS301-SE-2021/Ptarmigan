@@ -1,0 +1,9 @@
+Resources:
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 300
+      MemorySize: 128
+      Handler: app.lambda_handler
+      CodeUri: C:\Users\Benjamin Van Staden\Documents\Studies\COS 212\Ptarmigan\backend\sam\get_SentimentGraph\hello_world
+      Runtime: python3.7
