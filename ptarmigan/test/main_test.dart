@@ -9,10 +9,11 @@ import 'main_test.mocks.dart';
 @GenerateMocks([],
     customMocks: [MockSpec<FeedChanger>(returnNullOnMissingStub: true)])
 void main() {
-  test("dsadasdas", () {
+  test("Test to check for successful insight filtering", () {
     var mockFeedChanger = MockFeedChanger();
-    mockFeedChanger.notifyListeners();
+    //mockFeedChanger.notifyListeners();
+    mockFeedChanger.changeFeed("");
 
-    verify(mockFeedChanger.notifyListeners()).called(1);
+    verify(mockFeedChanger.changeFeed("")).called(1);
   });
 }

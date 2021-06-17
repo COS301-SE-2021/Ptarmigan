@@ -305,7 +305,7 @@ class FeedChanger extends ChangeNotifier {
 
   void changeFeed(String a) {
     _feedChoice = a;
-    print("Ping2");
+
     notifyListeners();
   }
 }
@@ -455,12 +455,12 @@ class FeedItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void _changeFeed() {
-      print("Ping");
       Provider.of<FeedChanger>(context, listen: false)
           .changeFeed(feed.feedName);
     }
 
     ;
+
     return Card(
       child: InkWell(
         onLongPress: () {
@@ -470,7 +470,6 @@ class FeedItems extends StatelessWidget {
           // update the ui state to reflect fetched todos
           // feedID.value = feed.feedName;
           _changeFeed();
-          print("HERE: " + feed.feedName);
 
           //print(feedID.value);
         },
