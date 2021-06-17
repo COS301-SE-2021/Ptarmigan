@@ -25,6 +25,14 @@ void main() {
   runApp(MyApp());
 }
 
+class Counter {
+  int value = 0;
+
+  void increment() => value++;
+
+  void decrement() => value--;
+}
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
