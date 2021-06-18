@@ -40,6 +40,12 @@ class TestClass(TestCase):
 
         assert ret["statusCode"] == 400
 
+    def test_getInterval_function_test(self):
+        input = "Week"
+        expected = 60*60*24*7*1000
+
+        assert app.getInterval(input) == expected
+
 
 
 
