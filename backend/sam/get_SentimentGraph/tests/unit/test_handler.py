@@ -35,7 +35,7 @@ class TestClass(TestCase):
                     "CompanyName": "Tesla"
                 }
 
-        ret = (app.lambda_handler(self.test_context, json.dumps("{}")))
+        ret = (app.lambda_handler(input, json.dumps("{}")))
         print(ret)
 
         assert ret["statusCode"] == 400

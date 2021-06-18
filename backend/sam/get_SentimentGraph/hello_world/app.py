@@ -45,6 +45,19 @@ def getInterval(interval):
 
 
 def lambda_handler(event, context):
+    try:
+        event["CompanyName"]
+        event["Interval"]
+        event["BeginDate"]
+
+    except:
+        return {
+            "statusCode": 400,
+            "body": {
+                "Error" : "Invalid Inputs"
+            }
+        }
+
     interval = getInterval(event["Interval"])
     beginDate = event["BeginDate"]
     endDate = beginDate + interval
@@ -57,6 +70,8 @@ def lambda_handler(event, context):
         "Interval": interval,
         "Data": []
     }
+
+
 
     while beginDate < int(time.time()*1000):
         try:
