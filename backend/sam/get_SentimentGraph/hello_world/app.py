@@ -72,7 +72,6 @@ def lambda_handler(event, context):
     }
 
 
-
     while beginDate < int(time.time()*1000):
         try:
             response = table.scan(
@@ -89,6 +88,7 @@ def lambda_handler(event, context):
 
 
         except:
+            print("Fail")
             returnObject["Data"].append({
                 "BeginDate": beginDate,
                 "EndDate": endDate,

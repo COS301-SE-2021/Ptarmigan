@@ -47,9 +47,9 @@ class TestClass(TestCase):
         assert app.getInterval(input) == expected
 
     def test_calculate_sentiment(self):
-        input = [{'Tweet_Id': 7, 'Sentiment': 'NEUTRAL', 'TimeStamp': 1623058451000, 'Weight': '583', 'Text': '1891年、ニコラ・テスラによって設計された電気共振トランス回路、\n"Tesla coils"により再生されたBohemian Rhapsody ♬ https://t.co/Z9KL6NGdG7', 'CompanyName': 'Tesla', 'lang': 'ja'}]
+        input = [{'Tweet_Id': 7, 'Sentiment': 'POSITIVE', 'TimeStamp': 1623058451000, 'Weight': '583', 'Text': '1891年、ニコラ・テスラによって設計された電気共振トランス回路、\n"Tesla coils"により再生されたBohemian Rhapsody ♬ https://t.co/Z9KL6NGdG7', 'CompanyName': 'Tesla', 'lang': 'ja'}]
 
-        expected = 0
+        expected = 1
 
         assert app.calculateSentiment(input) == expected
 
