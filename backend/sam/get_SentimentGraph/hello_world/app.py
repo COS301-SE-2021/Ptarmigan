@@ -6,8 +6,6 @@ import json
 
 # import requests
 def calculateSentiment(content):
-    print("Content")
-    print(content)
     totalVotes = 0
     runningSentiment = 0
     for element in content:
