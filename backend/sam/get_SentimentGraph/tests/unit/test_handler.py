@@ -26,3 +26,20 @@ class TestClass(TestCase):
             {"BeginDate": 1623612936000, "EndDate": 1624217736000, "IntervalData": 0}]}}
 
         assert "" == ""
+
+    def test_when_invalid_input(self):
+        expected = 400
+
+        input = {
+                    "Interval": "Week",
+                    "CompanyName": "Tesla"
+                }
+
+        ret = (app.lambda_handler(self.test_context, json.dumps("{}")))
+        print(ret)
+
+        assert ret["statusCode"] == 400
+
+
+
+
