@@ -19,11 +19,12 @@ def return_tweet_list(content,scrapeTimeframe):
 
 def scrapet_handler(event, context):
     content = event['content']
-    scrape_since = event['scrape-until']
-    #call helper function
+    scrape_since = int(event['scrape-until'])
     scrape_since = scrape_since - 86400
     scrape_timestamp = datetime.datetime.fromtimestamp(scrape_since)
     scrape_dateformat = scrape_timestamp.strftime('%Y-%m-%d')
+
+    # call helper function
     tweets_list = return_tweet_list(content, scrape_dateformat)
     #create dataframe
     tweets_df = pd.DataFrame(tweets_list,
@@ -45,4 +46,3 @@ def scrapet_handler(event, context):
     jsonOutput = tweets_df.to_json(orient="index")
     parsed = json.loads(jsonOutput)
     return json.dumps(parsed, indent=4)
-
