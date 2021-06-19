@@ -20,7 +20,7 @@ def scrapet_handler(event, context):
     content = event['content']
     scrape_since = event['scrape-until']
     #call helper function
-    tweets_list = return_tweet_list(content,scrape_until)
+    tweets_list = return_tweet_list(content,scrape_since)
     #create dataframe
     tweets_df = pd.DataFrame(tweets_list,
                              columns=['Tweet Id', 'Text', 'Retweets', 'Likes', 'lang', 'date'])
@@ -33,6 +33,7 @@ def scrapet_handler(event, context):
         weightList.append(1 + ((tweets_df.loc[x, 'Retweets']) * 3) + (tweets_df.loc[x, 'Likes']))
     # add list to dataframe
     tweets_df['Weight'] = weightList
+    tweets_df['Company'] = content
 
     # Remove unnecessary fields from table for output
     tweets_df = tweets_df.drop(['Retweets', 'Likes'], axis=1)
