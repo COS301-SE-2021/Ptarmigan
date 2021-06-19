@@ -66,6 +66,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       current_stock = stockname;
     });
-    NotificationService().showNotification(stockname, message);
+    //NotificationService().showNotification(stockname, message);
+    NotificationService().schedule_HODL(stockname, message, 10);
   }
 }
