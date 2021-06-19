@@ -3,6 +3,7 @@ type Feed @model @auth(rules: [{allow: public}]) {
   feedName: String
   tags: String
   description: String
+  subscribedTo: Boolean
 }
 
 type Todo @model @auth(rules: [{allow: public}]) {

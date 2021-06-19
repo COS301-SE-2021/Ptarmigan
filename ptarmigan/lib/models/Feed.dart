@@ -26,6 +26,7 @@ class Feed extends Model {
   final String feedName;
   final String tags;
   final String description;
+  final bool subscribedTo;
 
   @override
   getInstanceType() => classType;
@@ -39,18 +40,21 @@ class Feed extends Model {
       {required this.id,
       required this.feedName,
       required this.tags,
-      required this.description});
+      required this.description,
+      required this.subscribedTo});
 
   factory Feed(
       {required String id,
       required String feedName,
       required String tags,
-      required String description}) {
+      required String description,
+      required bool subscribedTo}) {
     return Feed._internal(
         id: id == null ? UUID.getUUID() : id,
         feedName: feedName,
         tags: tags,
-        description: description);
+        description: description,
+        subscribedTo: subscribedTo);
   }
 
   bool equals(Object other) {
@@ -64,7 +68,8 @@ class Feed extends Model {
         id == other.id &&
         feedName == other.feedName &&
         tags == other.tags &&
-        description == other.description;
+        description == other.description &&
+        subscribedTo == other.subscribedTo;
   }
 
   @override
@@ -78,7 +83,9 @@ class Feed extends Model {
     buffer.write("id=" + "$id" + ", ");
     buffer.write("feedName=" + "$feedName" + ", ");
     buffer.write("tags=" + "$tags" + ", ");
-    buffer.write("description=" + "$description");
+    buffer.write("description=" + "$description" + ", ");
+    buffer.write("subscribedTo=" +
+        (subscribedTo != null ? subscribedTo.toString() : "null"));
     buffer.write("}");
 
     return buffer.toString();
@@ -88,31 +95,36 @@ class Feed extends Model {
       {required String id,
       required String feedName,
       required String tags,
-      required String description}) {
+      required String description,
+      required bool subscribedTo}) {
     return Feed(
         id: id ?? this.id,
         feedName: feedName ?? this.feedName,
         tags: tags ?? this.tags,
-        description: description ?? this.description);
+        description: description ?? this.description,
+        subscribedTo: subscribedTo ?? this.subscribedTo);
   }
 
   Feed.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         feedName = json['feedName'],
         tags = json['tags'],
-        description = json['description'];
+        description = json['description'],
+        subscribedTo = json['subscribedTo'];
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'feedName': feedName,
         'tags': tags,
-        'description': description
+        'description': description,
+        'subscribedTo': subscribedTo
       };
 
   static final QueryField ID = QueryField(fieldName: "feed.id");
   static final QueryField FEEDNAME = QueryField(fieldName: "feedName");
   static final QueryField TAGS = QueryField(fieldName: "tags");
   static final QueryField DESCRIPTION = QueryField(fieldName: "description");
+  static final QueryField SUBSCRIBEDTO = QueryField(fieldName: "subscribedTo");
   static var schema =
       Model.defineSchema(define: (ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "Feed";
@@ -143,6 +155,11 @@ class Feed extends Model {
         key: Feed.DESCRIPTION,
         isRequired: false,
         ofType: ModelFieldType(ModelFieldTypeEnum.string)));
+
+    modelSchemaDefinition.addField(ModelFieldDefinition.field(
+        key: Feed.SUBSCRIBEDTO,
+        isRequired: false,
+        ofType: ModelFieldType(ModelFieldTypeEnum.bool)));
   });
 }
 
