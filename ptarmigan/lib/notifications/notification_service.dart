@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 /*
   Instantiate in main.dart using :
@@ -70,6 +71,7 @@ class NotificationService {
             "/dashboard"); // when the notification is tapped we want to navigate to dashboard
   }
 
+  //for testing purposes
   Future<String> onpress_showNotification(
       String stockname, String notificationMessage) async {
     await flutterLocalNotificationsPlugin.show(
@@ -82,5 +84,21 @@ class NotificationService {
         payload:
             "/dashboard"); // when the notification is tapped we want to navigate to dashboard
     return stockname;
+  }
+
+  Future<void> schedule_HODL(String stockname, String notificationMessage,
+      int daysToBeRemindedIn) async {
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        (stockname + daysToBeRemindedIn.toString()).hashCode,
+        "Ptarmigan",
+        notificationMessage,
+        //tz.TZDateTime.now(tz.local).add(Duration(days: daysToBeRemindedIn)), //going to need to pass it a customized datetime object
+        tz.TZDateTime.now(tz.local).add(Duration(seconds: daysToBeRemindedIn)), //for testing purposes
+        const NotificationDetails(
+            android: AndroidNotificationDetails(channel_id, "Ptarmigan",
+                "To remind you about your hold on for dear life reminder")),
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
   }
 }
