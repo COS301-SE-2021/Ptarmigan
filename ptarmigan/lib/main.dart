@@ -20,7 +20,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
 final ValueNotifier feedID = ValueNotifier("");
 List<Todo> todos;
-
+List<Feed> _feeds;
 void main() {
   runApp(MyApp());
 }
@@ -62,7 +62,6 @@ class _TodosPageState extends State<TodosPage> {
   StreamSubscription _subscriptionFeed;
 
   List<Todo> _todos;
-  List<Feed> _feeds;
 
   final AmplifyDataStore _dataStorePlugin =
       AmplifyDataStore(modelProvider: ModelProvider.instance);
@@ -536,24 +535,7 @@ class _AddFeedFormState extends State<AddFeedForm> {
       ),
       body: Container(
         padding: EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextFormField(
-                  controller: _nameController,
-                  decoration: InputDecoration(filled: true, labelText: 'Name')),
-              TextFormField(
-                  controller: _descriptionController,
-                  decoration:
-                      InputDecoration(filled: true, labelText: 'Description')),
-              TextFormField(
-                  controller: _tagsController,
-                  decoration: InputDecoration(filled: true, labelText: 'Tags')),
-              ElevatedButton(onPressed: _saveFeed, child: Text('Save'))
-            ],
-          ),
-        ),
+        child: FeedsListAdmin(feeds: _feeds),
       ),
     );
   }
@@ -703,53 +685,96 @@ class FeedsList extends StatelessWidget {
   }
 }
 
-/*
- drawer: Drawer(
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.orange,
-                ),
-                child: Column(
-                  children: [
-                    Text('Feeds'),
-                    Container(
-                        child: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 62.0, 160, 10),
-                      child: ElevatedButton(
-                        style: ButtonStyle(),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AddFeedForm()),
-                          );
-                        },
-                        child: Text('Add Feed'),
-                      ),
-                    ))
-                  ],
-                )),
-            ListTile(
-              title: Text('Feed 1'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-                Navigator.pop(context);
-              },
+class FeedsListAdmin extends StatelessWidget {
+  final List<Todo> todos;
+  final List<Feed> feeds;
+
+  final pageViewController = PageController();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  FeedsListAdmin({this.todos, this.feeds});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 280,
+      height: double.infinity,
+      color: Colors.white,
+      child: Stack(
+        children: [
+          Container(
+              child: feeds.length >= 1
+                  ? ListView(
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      scrollDirection: Axis.vertical,
+                      children:
+                          feeds.map((feeds) => FeedItems(feed: feeds)).toList())
+                  : Center(child: Text('Tap button below to add a todo!'))),
+        ],
+      ),
+    );
+    /*
+    PageView(
+        controller: pageViewController,
+        scrollDirection: Axis.horizontal,
+        children: [
+         
+        ]); */
+  }
+}
+
+class FeedItemsAdmin extends StatelessWidget {
+  final double iconSize = 24.0;
+  final Feed feed;
+
+  FeedItemsAdmin({this.feed});
+
+  void _deleteFeed(BuildContext context) async {
+    try {
+      // to delete data from DataStore, we pass the model instance to
+      // Amplify.DataStore.delete()
+      await Amplify.DataStore.delete(feed);
+    } catch (e) {
+      print('An error occurred while deleting Todo: $e');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    void _changeFeed() {
+      Provider.of<FeedChanger>(context, listen: false)
+          .changeFeed(feed.feedName);
+    }
+
+    ;
+
+    return Card(
+      child: InkWell(
+        onLongPress: () {},
+        onTap: () {
+          // update the ui state to reflect fetched todos
+          // feedID.value = feed.feedName;
+          _changeFeed();
+
+          //print(feedID.value);
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(feed.feedName,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text(feed.description ?? 'No description'),
+                ],
+              ),
             ),
-            ListTile(
-              title: Text('Feed 2'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-                Navigator.pop(context);
-              },
-            ),
-          ],
+          ]),
         ),
       ),
-*/
+    );
+  }
+}
