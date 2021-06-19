@@ -142,6 +142,14 @@ flutter_bloc
 2.12
 file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flutter_bloc-7.0.1/
 file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flutter_bloc-7.0.1/lib/
+flutter_local_notifications
+2.12
+file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flutter_local_notifications-6.0.0/
+file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flutter_local_notifications-6.0.0/lib/
+flutter_local_notifications_platform_interface
+2.12
+file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flutter_local_notifications_platform_interface-4.0.0/
+file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flutter_local_notifications_platform_interface-4.0.0/lib/
 flutter_login
 2.2
 file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/flutter_login-1.1.0/
@@ -210,6 +218,10 @@ pedantic
 2.12
 file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/pedantic-1.11.0/
 file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/pedantic-1.11.0/lib/
+platform
+2.12
+file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/platform-3.0.0/
+file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/platform-3.0.0/lib/
 plugin_platform_interface
 2.12
 file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/plugin_platform_interface-2.0.0/
@@ -294,6 +306,10 @@ test_core
 2.12
 file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/test_core-0.3.19/
 file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/test_core-0.3.19/lib/
+timezone
+2.12
+file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/timezone-0.7.0/
+file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/timezone-0.7.0/lib/
 transformer_page_view
 2.0
 file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/transformer_page_view-0.1.6/
