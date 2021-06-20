@@ -15,7 +15,7 @@ def fixture_event():
 
 class TestgetSentimentPeriod:
     def test_get_sentiment_period(self, fixture_event):
-        expected = 0.22625949087810593
+        expected = 0.21702209641803874
 
         output = app.lambda_handler(fixture_event, "")
 
