@@ -14,7 +14,7 @@ class TestGetSentiment(unittest.TestCase):
         }
 
     @patch('ptarmigan.synthesize.getGraphSentiment.app.dbReturn')
-    def test_if_sentiment_calculation(self, mock_dbReturn):
+    def test_if_sentiment_calculation_graph_returns_correct_data(self, mock_dbReturn):
         mock_dbReturn.return_value = {
                     "Items": [{
                         "Tweet_Id": 7,
@@ -33,7 +33,8 @@ class TestGetSentiment(unittest.TestCase):
                     'CompanyName': 'Tesla',
                     'Interval': 604800000,
                     'Data':
-                        [{
+                        [
+                        {
                             'BeginDate': 1623005418000,
                             'EndDate': 1623610218000,
                             'IntervalData': 1.0
@@ -42,8 +43,14 @@ class TestGetSentiment(unittest.TestCase):
                             'BeginDate': 1623610218000,
                             'EndDate': 1624215018000,
                             'IntervalData': 1.0
-                         }]
+                        },
+                        {
+                            'BeginDate': 1624215018000,
+                            'EndDate': 1624819818000,
+                            'IntervalData': 1.0
+                        }]
                 }
         }
         output = app.lambda_handler(self.testDatabaseOutput, "")
+        print(output)
         self.assertEquals(expected, output)
