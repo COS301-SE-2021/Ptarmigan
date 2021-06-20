@@ -1,5 +1,4 @@
-![GitHub commit activity](https://img.shields.io/github/commit-activity/w/COS301-SE-2021/Ptarmigan?style=plastic)
-
+<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/COS301-SE-2021/Ptarmigan">
 TeamName - One More Byte
 
 ProjectName - Ptarmigan
