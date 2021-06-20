@@ -6,7 +6,7 @@ from ptarmigan.synthesize.getSentimentPeriod import app
 
 class TestGetSentiment(unittest.TestCase):
 
-    def setup(self):
+    def setUp(self):
         self.testDatabaseOutput = '{ "BeginDate" : "1623005418000",'
         '"EndDate": "1623065669000", '
         ' "CompanyName": "Tesla" }'
@@ -18,4 +18,7 @@ class TestGetSentiment(unittest.TestCase):
             '"Text": "1891年、ニコラ・テスラによって設計された電気共振トランス回路、\n"Tesla coils"により再生されたBohemian Rhapsody '
             '♬ https://t.co/Z9KL6NGdG7", "CompanyName": "Tesla", "lang": "ja"}')
         output = app.lambda_handler(self.testDatabaseOutput, "")
+
+        print(output)
+        print(self.testDatabaseOutput)
         self.assertEquals(0, output)

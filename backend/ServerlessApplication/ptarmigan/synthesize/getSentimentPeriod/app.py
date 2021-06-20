@@ -24,16 +24,24 @@ def calculateSentiment(content):
 
     return (runningSentiment/totalVotes)
 
+def dbReturn(event):
+    dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table('Test')
+
+    response = table.scan(
+        FilterExpression=Key('Tweet_Id').gt(1) & Key('TimeStamp').between(event["BeginDate"], event["EndDate"]) & Key(
+            'CompanyName').eq(event["CompanyName"])
+    )
+
+    return response
+
 
 def lambda_handler(event, context):
 
     print(event)
-    dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('Test')
+
     try:
-        response = table.scan(
-            FilterExpression = Key('Tweet_Id').gt(1) & Key('TimeStamp').between(event["BeginDate"], event["EndDate"])& Key('CompanyName').eq(event["CompanyName"])
-        )
+        response = dbReturn(event)
 
         print(response)
 
