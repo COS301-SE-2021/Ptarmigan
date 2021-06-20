@@ -1,3 +1,5 @@
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/COS301-SE-2021/Ptarmigan?style=plastic)
+
 TeamName - One More Byte
 
 ProjectName - Ptarmigan
