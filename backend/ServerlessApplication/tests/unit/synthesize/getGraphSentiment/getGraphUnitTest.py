@@ -46,5 +46,4 @@ class TestGetSentiment(unittest.TestCase):
                 }
         }
         output = app.lambda_handler(self.testDatabaseOutput, "")
-        print(output)
         self.assertEquals(expected, output)
