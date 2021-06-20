@@ -22,6 +22,7 @@ final ValueNotifier feedID = ValueNotifier("");
 List<Todo> todos;
 List<Feed> _feeds;
 List<Feed> _feedsSub;
+
 void main() {
   runApp(MyApp());
 }
@@ -62,6 +63,7 @@ class _TodosPageState extends State<TodosPage> {
   StreamSubscription _subscription;
   StreamSubscription _subscriptionFeed;
   StreamSubscription _subscriptionFeedSub;
+  StreamSubscription _subscriptionTodoUpdate;
 
   List<Todo> _todos;
 
@@ -87,6 +89,7 @@ class _TodosPageState extends State<TodosPage> {
     _subscription.cancel();
     _subscriptionFeed.cancel();
     _subscriptionFeedSub.cancel();
+    _subscriptionTodoUpdate.cancel();
 
     super.dispose();
   }
@@ -117,6 +120,7 @@ class _TodosPageState extends State<TodosPage> {
     // fetch Todo entries from DataStore
     await _fetchTodos();
     await _fetchFeeds();
+    await _fetchSubFeeds();
     // after both configuring Amplify and fetching Todo entries, update loading
     // ui state to loaded state
     setState(() {
@@ -198,7 +202,7 @@ class _TodosPageState extends State<TodosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Feeds'),
+        title: Text("Insight Posts"),
         backgroundColor: Colors.teal,
       ),
       //body: Center(child: CircularProgressIndicator()),
@@ -206,20 +210,6 @@ class _TodosPageState extends State<TodosPage> {
           ? Center(child: CircularProgressIndicator())
           : TodosList(todos: _todos),
       drawer: FeedsList(feeds: _feedsSub),
-
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AddTodoForm()),
-          );
-        },
-        tooltip: 'Add insight',
-        label: Row(
-          children: [Icon(Icons.add), Text('Add insight')],
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
@@ -254,7 +244,6 @@ class TodosList extends StatelessWidget {
     var feedChoice = Provider.of<FeedChanger>(context).getFeedChoice;
 
     bocko(feedChoice);
-    print("ORO: " + todos.elementAt(0).name);
 
     return Scaffold(
         key: scaffoldKey,
@@ -284,34 +273,6 @@ class TodosList extends StatelessWidget {
                       children: [],
                     ),
                   ],
-                ),
-              ),
-              Align(
-                alignment: Alignment(0, 1),
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                  child: SmoothPageIndicator(
-                    controller: pageViewController,
-                    count: 2,
-                    axisDirection: Axis.horizontal,
-                    onDotClicked: (i) {
-                      pageViewController.animateToPage(
-                        i,
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.ease,
-                      );
-                    },
-                    effect: ExpandingDotsEffect(
-                      expansionFactor: 2,
-                      spacing: 8,
-                      radius: 16,
-                      dotWidth: 16,
-                      dotHeight: 16,
-                      dotColor: Color(0xFF9E9E9E),
-                      activeDotColor: Colors.teal,
-                      paintStyle: PaintingStyle.fill,
-                    ),
-                  ),
                 ),
               ),
             ],
@@ -386,11 +347,6 @@ class TodoItem extends StatelessWidget {
                 ],
               ),
             ),
-            Icon(
-                todo.isComplete
-                    ? Icons.check_box
-                    : Icons.check_box_outline_blank,
-                size: iconSize),
           ]),
         ),
       ),
@@ -472,7 +428,7 @@ class FeedItems extends StatelessWidget {
       // Amplify.DataStore.delete()
       await Amplify.DataStore.delete(feed);
     } catch (e) {
-      print('An error occurred while deleting Todo: $e');
+      print('An error occurred while deleting Insight: $e');
     }
   }
 
@@ -565,77 +521,6 @@ class _AddFeedFormState extends State<AddFeedForm> {
     );
   }
 }
-/*
-class FeedsList extends StatelessWidget {
-  final List<Feed> feeds;
-
-  final pageViewController = PageController();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  FeedsList({this.feeds});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      // Important: Remove any padding from the ListView.
-      padding: EdgeInsets.zero,
-      children: [
-        DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.orange,
-            ),
-            child: Column(
-              children: [
-                Text('Feeds'),
-                Container(
-                    child: Padding(
-                  padding: EdgeInsets.fromLTRB(0, 62.0, 160, 10),
-                  child: ElevatedButton(
-                    style: ButtonStyle(),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AddFeedForm()),
-                      );
-                    },
-                    child: Text('Add Feed'),
-                  ),
-                ))
-              ],
-            )),
-        ListTile(
-          title: Text('Feed 1'),
-          onTap: () {
-            // Update the state of the app.
-            // ...
-            Navigator.pop(context);
-          },
-        ),
-        ListTile(
-          title: Text('Feed 2'),
-          onTap: () {
-            // Update the state of the app.
-            // ...
-            Navigator.pop(context);
-          },
-        ),
-      feeds.map((feed) => FeedItems(feed: feed)).toList()
-            
-      ],
-    );
-  }
-}
-
-*/
-/*
-    
-
-    PageView(
-        controller: pageViewController,
-        scrollDirection: Axis.horizontal,
-        children: [
-         
-        ]); */
 
 class FeedsList extends StatelessWidget {
   final List<Todo> todos;
@@ -810,7 +695,10 @@ class FeedItemsAdmin extends StatelessWidget {
                 ],
               ),
             ),
-            Icon(true ? Icons.check_box : Icons.check_box_outline_blank,
+            Icon(
+                feed.subscribedTo == 0
+                    ? Icons.check_box
+                    : Icons.check_box_outline_blank,
                 size: iconSize),
           ]),
         ),
