@@ -2,7 +2,7 @@ import 'package:amplify_datastore/amplify_datastore.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ptarmigan/main.dart';
+import 'package:ptarmigan/basic_notification_main.dart';
 import 'package:flutter/material.dart';
 
 void main() {

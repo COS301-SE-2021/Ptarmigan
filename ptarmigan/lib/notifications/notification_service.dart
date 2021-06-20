@@ -39,7 +39,7 @@ class NotificationService {
         IOSInitializationSettings(
       requestSoundPermission: false,
       requestBadgePermission: false,
-      requestAlertPermission: false,
+      requestAlertPermission: true,
       //onDidReceiveLocalNotification: onDidReceiveLocalNotification,
     );
 
@@ -86,14 +86,14 @@ class NotificationService {
     return stockname;
   }
 
-  Future<void> schedule_HODL(String stockname, String notificationMessage,
-      int daysToBeRemindedIn) async {
+  Future<void> schedule_notification(String stockname, String notificationMessage,
+      DateTime daysToBeRemindedIn) async {
     await flutterLocalNotificationsPlugin.zonedSchedule(
         (stockname + daysToBeRemindedIn.toString()).hashCode,
         "Ptarmigan",
         notificationMessage,
-        //tz.TZDateTime.now(tz.local).add(Duration(days: daysToBeRemindedIn)), //going to need to pass it a customized datetime object
-        tz.TZDateTime.now(tz.local).add(Duration(seconds: daysToBeRemindedIn)), //for testing purposes
+        //daysToBeRemindedIn, //going to need to pass it a customized datetime object
+        tz.TZDateTime.now(tz.local).add(Duration(seconds: 20)), //for testing purposes
         const NotificationDetails(
             android: AndroidNotificationDetails(channel_id, "Ptarmigan",
                 "To remind you about your hold on for dear life reminder")),

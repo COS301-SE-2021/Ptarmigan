@@ -67,6 +67,6 @@ class _MyAppState extends State<MyApp> {
       current_stock = stockname;
     });
     //NotificationService().showNotification(stockname, message);
-    NotificationService().schedule_HODL(stockname, message, 10);
+    NotificationService().schedule_notification(stockname, message, DateTime(7,13,12)); //13 July 12:00
   }
 }
