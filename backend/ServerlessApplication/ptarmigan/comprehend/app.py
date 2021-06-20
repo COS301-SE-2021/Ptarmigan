@@ -49,7 +49,7 @@ def lambda_twitterComprehend(event, context):
     # TODO: write code...
 
     return {
-            "statusCode" : 200,
+            "statusCode": 200,
             "body": "This task was successfull"
             }
 
