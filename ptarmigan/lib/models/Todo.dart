@@ -142,7 +142,7 @@ class Todo extends Model {
 
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
         key: Todo.ISCOMPLETE,
-        isRequired: true,
+        isRequired: false,
         ofType: ModelFieldType(ModelFieldTypeEnum.bool)));
   });
 }

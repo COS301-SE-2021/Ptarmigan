@@ -1,15 +1,15 @@
 type Feed @model @auth(rules: [{allow: public}]) {
   id: ID!
-  feedName: String
+  feedName: String!
   tags: String
   description: String
-  subscribedTo: Boolean
+  subscribedTo: Int
 }
 
 type Todo @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
   description: String
-  isComplete: Boolean!
+  isComplete: Boolean
 }
  

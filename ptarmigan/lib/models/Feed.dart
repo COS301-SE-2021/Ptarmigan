@@ -26,7 +26,7 @@ class Feed extends Model {
   final String feedName;
   final String tags;
   final String description;
-  final bool subscribedTo;
+  final int subscribedTo;
 
   @override
   getInstanceType() => classType;
@@ -48,7 +48,7 @@ class Feed extends Model {
       required String feedName,
       required String tags,
       required String description,
-      required bool subscribedTo}) {
+      required int subscribedTo}) {
     return Feed._internal(
         id: id == null ? UUID.getUUID() : id,
         feedName: feedName,
@@ -96,7 +96,7 @@ class Feed extends Model {
       required String feedName,
       required String tags,
       required String description,
-      required bool subscribedTo}) {
+      required int subscribedTo}) {
     return Feed(
         id: id ?? this.id,
         feedName: feedName ?? this.feedName,
@@ -143,7 +143,7 @@ class Feed extends Model {
 
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
         key: Feed.FEEDNAME,
-        isRequired: false,
+        isRequired: true,
         ofType: ModelFieldType(ModelFieldTypeEnum.string)));
 
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
@@ -159,7 +159,7 @@ class Feed extends Model {
     modelSchemaDefinition.addField(ModelFieldDefinition.field(
         key: Feed.SUBSCRIBEDTO,
         isRequired: false,
-        ofType: ModelFieldType(ModelFieldTypeEnum.bool)));
+        ofType: ModelFieldType(ModelFieldTypeEnum.int)));
   });
 }
 

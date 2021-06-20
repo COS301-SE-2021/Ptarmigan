@@ -21,6 +21,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 final ValueNotifier feedID = ValueNotifier("");
 List<Todo> todos;
 List<Feed> _feeds;
+List<Feed> _feedsSub;
 void main() {
   runApp(MyApp());
 }
@@ -60,6 +61,7 @@ class _TodosPageState extends State<TodosPage> {
   bool isSignUpComplete;
   StreamSubscription _subscription;
   StreamSubscription _subscriptionFeed;
+  StreamSubscription _subscriptionFeedSub;
 
   List<Todo> _todos;
 
@@ -74,6 +76,7 @@ class _TodosPageState extends State<TodosPage> {
     _isLoading = true;
     _todos = [];
     _feeds = [];
+    _feedsSub = [];
     _initializeApp();
     super.initState();
   }
@@ -83,6 +86,7 @@ class _TodosPageState extends State<TodosPage> {
     // cancel the subscription when the state is removed from the tree
     _subscription.cancel();
     _subscriptionFeed.cancel();
+    _subscriptionFeedSub.cancel();
 
     super.dispose();
   }
@@ -103,6 +107,11 @@ class _TodosPageState extends State<TodosPage> {
     _subscriptionFeed =
         Amplify.DataStore.observe(Feed.classType).listen((event) {
       _fetchFeeds();
+    });
+
+    _subscriptionFeedSub =
+        Amplify.DataStore.observe(Feed.classType).listen((event) {
+      _fetchSubFeeds();
     });
 
     // fetch Todo entries from DataStore
@@ -169,6 +178,22 @@ class _TodosPageState extends State<TodosPage> {
     }
   }
 
+  Future<void> _fetchSubFeeds() async {
+    try {
+      // query for all Todo entries by passing the Todo classType to
+      // Amplify.DataStore.query()
+      List<Feed> updatedFeed = await Amplify.DataStore.query(Feed.classType,
+          where: Feed.SUBSCRIBEDTO.eq(0));
+
+      // update the ui state to reflect fetched todos
+      setState(() {
+        _feedsSub = updatedFeed;
+      });
+    } catch (e) {
+      print('An error occurred while querying Feeds: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -180,7 +205,7 @@ class _TodosPageState extends State<TodosPage> {
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : TodosList(todos: _todos),
-      drawer: FeedsList(feeds: _feeds),
+      drawer: FeedsList(feeds: _feedsSub),
 
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
@@ -707,8 +732,9 @@ class FeedsListAdmin extends StatelessWidget {
                   ? ListView(
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                       scrollDirection: Axis.vertical,
-                      children:
-                          feeds.map((feeds) => FeedItems(feed: feeds)).toList())
+                      children: feeds
+                          .map((feeds) => FeedItemsAdmin(feed: feeds))
+                          .toList())
                   : Center(child: Text('Tap button below to add a todo!'))),
         ],
       ),
@@ -739,22 +765,34 @@ class FeedItemsAdmin extends StatelessWidget {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    void _changeFeed() {
-      Provider.of<FeedChanger>(context, listen: false)
-          .changeFeed(feed.feedName);
+  Future<void> _subscribeTo() async {
+    // copy the Todo we wish to update, but with updated properties
+    Feed updatedFeed;
+
+    if (feed.subscribedTo == 1) {
+      updatedFeed = feed.copyWith(subscribedTo: 0);
+    } else {
+      updatedFeed = feed.copyWith(subscribedTo: 1);
     }
 
-    ;
+    try {
+      // to update data in DataStore, we again pass an instance of a model to
+      // Amplify.DataStore.save()
+      await Amplify.DataStore.save(updatedFeed);
+    } catch (e) {
+      print('An error occurred while saving Todo: $e');
+    }
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Card(
       child: InkWell(
         onLongPress: () {},
         onTap: () {
           // update the ui state to reflect fetched todos
           // feedID.value = feed.feedName;
-          _changeFeed();
+          _subscribeTo();
 
           //print(feedID.value);
         },
@@ -772,6 +810,8 @@ class FeedItemsAdmin extends StatelessWidget {
                 ],
               ),
             ),
+            Icon(true ? Icons.check_box : Icons.check_box_outline_blank,
+                size: iconSize),
           ]),
         ),
       ),
