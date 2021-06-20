@@ -7,18 +7,28 @@ from ptarmigan.synthesize.getSentimentPeriod import app
 class TestGetSentiment(unittest.TestCase):
 
     def setUp(self):
-        self.testDatabaseOutput = '{ "BeginDate" : "1623005418000",'
-        '"EndDate": "1623065669000", '
-        ' "CompanyName": "Tesla" }'
+        self.testDatabaseOutput = {
+            "BeginDate" : 1623005418000,
+            "EndDate": 1623065669000,
+            "CompanyName": "Tesla"
+        }
 
     @patch('ptarmigan.synthesize.getSentimentPeriod.app.dbReturn')
-    def test_LambdaFunc(self, mock_dbReturn):
-        mock_dbReturn.return_value = json.dumps(
-            '{"Items": [{"Tweet_Id": "7"), "Sentiment": "NEUTRAL", "TimeStamp": "1623058451000", "Weight": "583", '
-            '"Text": "1891年、ニコラ・テスラによって設計された電気共振トランス回路、\n"Tesla coils"により再生されたBohemian Rhapsody '
-            '♬ https://t.co/Z9KL6NGdG7", "CompanyName": "Tesla", "lang": "ja"}')
-        output = app.lambda_handler(self.testDatabaseOutput, "")
+    def test_if_sentiment_calculation_is_correct(self, mock_dbReturn):
+        mock_dbReturn.return_value = {
+                    "Items": [{
+                        "Tweet_Id": 7,
+                        "Sentiment": "POSITIVE",
+                        "TimeStamp": 1623058451000,
+                        "Weight": 583,
+                        "Text": "You dumb",
+                        "CompanyName": "Tesla", "lang": "ja"
+                    }]
+        }
 
-        print(output)
-        print(self.testDatabaseOutput)
-        self.assertEquals(0, output)
+        expected = {
+            "statusCode": 200,
+            "body": 1
+        }
+        output = app.lambda_handler(json.dumps(self.testDatabaseOutput), "")
+        self.assertEquals(expected, output)

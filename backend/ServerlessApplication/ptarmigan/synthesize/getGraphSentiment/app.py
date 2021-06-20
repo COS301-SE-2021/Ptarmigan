@@ -40,21 +40,34 @@ def getInterval(interval):
     if interval == "Year":
         return 60 * 60 * 24 * 365 * 1000
 
+def dbReturn(event, beginDate, endDate):
+    dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table('Test')
 
+    response = table.scan(
+        FilterExpression=Key('Tweet_Id').gt(1) & Key('TimeStamp').between(beginDate, endDate) & Key('CompanyName').eq(
+            event["CompanyName"])
+    )
 
-
+    return response
 
 def lambda_handler(event, context):
+    print(event)
     try:
-        event["CompanyName"]
-        event["Interval"]
-        event["BeginDate"]
+        print("as;lkhjjasdhfjuklasdfgk,jhsadukiljfhliuyhdfasd")
+        cName = event["CompanyName"]
+        print(cName)
+        interval = event["Interval"]
+        print("as;lkhjjasdhfjuklasdfgk,jhsadukiljfhliuyhdfasd")
+        ev = event["BeginDate"]
+
+        print(cName, " ", interval, " ", ev)
 
     except:
         return {
             "statusCode": 400,
             "body": {
-                "Error" : "Invalid Inputs"
+                "Error": "Invalid Inputs"
             }
         }
 
@@ -74,9 +87,7 @@ def lambda_handler(event, context):
 
     while beginDate < int(time.time()*1000):
         try:
-            response = table.scan(
-                FilterExpression=Key('Tweet_Id').gt(1) & Key('TimeStamp').between(beginDate,endDate) & Key('CompanyName').eq(event["CompanyName"])
-            )
+            response = dbReturn(event, beginDate, endDate)
 
             # print(response)
 
@@ -88,7 +99,6 @@ def lambda_handler(event, context):
 
 
         except:
-            print("Fail")
             returnObject["Data"].append({
                 "BeginDate": beginDate,
                 "EndDate": endDate,
