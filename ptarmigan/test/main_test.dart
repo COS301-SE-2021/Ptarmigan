@@ -6,6 +6,10 @@ import 'package:ptarmigan/models/Todo.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'main_test.mocks.dart';
+import 'package:flutter_test/flutter_test.dart' as back;
+import 'package:flutter_test/src/widget_tester.dart';
+import 'package:test_api/src/frontend/expect.dart' as front;
+import 'package:flutter/material.dart';
 
 @GenerateMocks([], customMocks: [
   MockSpec<FeedChanger>(returnNullOnMissingStub: true),
@@ -25,6 +29,15 @@ void main() {
     Subscriber sub = new Subscriber();
     print(sub.subscribe(0));
     int subscribed = 0;
-    expect(sub.subscribe(subscribed), 1);
+    back.expect(sub.subscribe(subscribed), 1);
+  });
+
+  testWidgets("MyWidget has a title and message", (WidgetTester tester) async {
+    var childWidget = AppBar();
+
+    await tester.pumpWidget(TodosList());
+    // Create the Finders.
+
+    front.expect(back.find.byType(Card), back.findsOneWidget);
   });
 }

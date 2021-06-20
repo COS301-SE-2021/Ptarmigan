@@ -27,14 +27,6 @@ void main() {
   runApp(MyApp());
 }
 
-class Counter {
-  int value = 0;
-
-  void increment() => value++;
-
-  void decrement() => value--;
-}
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -265,8 +257,7 @@ class TodosList extends StatelessWidget {
                             children: todos
                                 .map((todo) => TodoItem(todo: todo))
                                 .toList())
-                        : Center(
-                            child: Text('Tap button below to add a todo!')),
+                        : Center(child: Text('')),
                     ListView(
                       padding: EdgeInsets.zero,
                       scrollDirection: Axis.vertical,
@@ -414,6 +405,30 @@ class _AddTodoFormState extends State<AddTodoForm> {
   }
 }
 
+class MyWidget extends StatelessWidget {
+  const MyWidget({
+    this.title,
+    this.message,
+  });
+
+  final String title;
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(title),
+        ),
+        body: Center(
+          child: Text(message),
+        ),
+      ),
+    );
+  }
+}
 //Feeds===============================================================
 
 class FeedItems extends StatelessWidget {
@@ -525,11 +540,10 @@ class _AddFeedFormState extends State<AddFeedForm> {
 class FeedsList extends StatelessWidget {
   final List<Todo> todos;
   final List<Feed> feeds;
-
   final pageViewController = PageController();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  FeedsList({this.todos, this.feeds});
+  final String title;
+  FeedsList({this.todos, this.feeds, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -546,7 +560,7 @@ class FeedsList extends StatelessWidget {
                       scrollDirection: Axis.vertical,
                       children:
                           feeds.map((feeds) => FeedItems(feed: feeds)).toList())
-                  : Center(child: Text('Tap button below to add a todo!'))),
+                  : Center(child: Text(''))),
           DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.tealAccent,
@@ -634,7 +648,7 @@ class FeedsListAdmin extends StatelessWidget {
                       children: feeds
                           .map((feeds) => FeedItemsAdmin(feed: feeds))
                           .toList())
-                  : Center(child: Text('Tap button below to add a todo!'))),
+                  : Center(child: Text(''))),
         ],
       ),
     );
