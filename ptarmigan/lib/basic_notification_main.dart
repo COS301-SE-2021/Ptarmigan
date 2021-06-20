@@ -23,6 +23,9 @@ import 'models/Todo.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService().init();
@@ -40,6 +43,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    NotificationService().setContext(context);
   }
 
   @override
@@ -67,6 +71,30 @@ class _MyAppState extends State<MyApp> {
       current_stock = stockname;
     });
     //NotificationService().showNotification(stockname, message);
-    NotificationService().schedule_notification(stockname, message, DateTime(7,13,12)); //13 July 12:00
+    //NotificationService().schedule_notification(stockname, message, DateTime(6,20,17,34)); //13 July 12:00
+    NotificationService().schedule_notification(stockname, message,
+        tz.TZDateTime.now(tz.local).add(Duration(seconds: 20)));
+  }
+}
+
+class onSelectPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: new AppBar(
+        title: new Text("Selected notification"),
+      ),
+      body: new Center(
+        child: new FloatingActionButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: new Text(
+            'Tap to go back to notification button screen',
+            style: Theme.of(context).textTheme.headline5,
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -1,8 +1,12 @@
 // @dart=2.9
 
 import 'dart:convert';
+//import 'dart:js';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:ptarmigan/basic_notification_main.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
@@ -18,7 +22,7 @@ import 'package:timezone/timezone.dart' as tz;
 //singleton object
 class NotificationService {
   static const channel_id = "123";
-
+  var currentContext;
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
@@ -55,8 +59,16 @@ class NotificationService {
     tz.initializeTimeZones();
   }
 
+  void setContext(context) {
+    currentContext = context;
+  }
+
   Future selectNotification(String payload) async {
-    //when notification is selected
+    print("notification was selected");
+    Navigator.push(
+        currentContext,
+        MaterialPageRoute<void>(
+            builder: (BuildContext context) => onSelectPage()));
   }
 
   void showNotification(String stockname, String notificationMessage) async {
@@ -68,7 +80,7 @@ class NotificationService {
             android: AndroidNotificationDetails(
                 channel_id, "Ptarmigan", 'To inform you of stock sentiments')),
         payload:
-            "/dashboard"); // when the notification is tapped we want to navigate to dashboard
+            "/OnSelectPage"); // when the notification is tapped we want to navigate to dashboard
   }
 
   //for testing purposes
@@ -82,18 +94,18 @@ class NotificationService {
             android: AndroidNotificationDetails(
                 channel_id, "Ptarmigan", 'To inform you of stock sentiments')),
         payload:
-            "/dashboard"); // when the notification is tapped we want to navigate to dashboard
+            "/onSelectPage"); // when the notification is tapped we want to navigate to dashboard
     return stockname;
   }
 
-  Future<void> schedule_notification(String stockname, String notificationMessage,
-      DateTime daysToBeRemindedIn) async {
+  Future<void> schedule_notification(String stockname,
+      String notificationMessage, DateTime daysToBeRemindedIn) async {
     await flutterLocalNotificationsPlugin.zonedSchedule(
         (stockname + daysToBeRemindedIn.toString()).hashCode,
         "Ptarmigan",
         notificationMessage,
-        //daysToBeRemindedIn, //going to need to pass it a customized datetime object
-        tz.TZDateTime.now(tz.local).add(Duration(seconds: 20)), //for testing purposes
+        daysToBeRemindedIn, //going to need to pass it a customized datetime object
+        //tz.TZDateTime.now(tz.local).add(Duration(seconds: 20)), //for testing purposes
         const NotificationDetails(
             android: AndroidNotificationDetails(channel_id, "Ptarmigan",
                 "To remind you about your hold on for dear life reminder")),
