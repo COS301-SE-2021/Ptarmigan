@@ -595,6 +595,20 @@ class FeedsList extends StatelessWidget {
   }
 }
 
+class Subscriber {
+  int subscribe(int feed) {
+    int ret;
+
+    if (feed == 1) {
+      ret = 0;
+    } else {
+      ret = 1;
+    }
+
+    return ret;
+  }
+}
+
 class FeedsListAdmin extends StatelessWidget {
   final List<Todo> todos;
   final List<Feed> feeds;
@@ -650,20 +664,23 @@ class FeedItemsAdmin extends StatelessWidget {
     }
   }
 
-  Future<void> _subscribeTo() async {
+  Future<int> subscribeTo() async {
     // copy the Todo we wish to update, but with updated properties
     Feed updatedFeed;
 
-    if (feed.subscribedTo == 1) {
+    /*  if (feed.subscribedTo == 1) {
       updatedFeed = feed.copyWith(subscribedTo: 0);
     } else {
       updatedFeed = feed.copyWith(subscribedTo: 1);
-    }
+    }*/
+    updatedFeed =
+        feed.copyWith(subscribedTo: Subscriber().subscribe(feed.subscribedTo));
 
     try {
       // to update data in DataStore, we again pass an instance of a model to
       // Amplify.DataStore.save()
       await Amplify.DataStore.save(updatedFeed);
+      return feed.subscribedTo;
     } catch (e) {
       print('An error occurred while saving Todo: $e');
     }
@@ -677,7 +694,7 @@ class FeedItemsAdmin extends StatelessWidget {
         onTap: () {
           // update the ui state to reflect fetched todos
           // feedID.value = feed.feedName;
-          _subscribeTo();
+          subscribeTo();
 
           //print(feedID.value);
         },

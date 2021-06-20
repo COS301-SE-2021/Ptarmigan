@@ -4,6 +4,7 @@
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:ptarmigan/main.dart' as _i2;
+import 'package:ptarmigan/models/Feed.dart' as _i3;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: comment_references
@@ -15,3 +16,14 @@ import 'package:ptarmigan/main.dart' as _i2;
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockFeedChanger extends _i1.Mock implements _i2.FeedChanger {}
+
+/// A class which mocks [Subscriber].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSubscriber extends _i1.Mock implements _i2.Subscriber {}
+
+/// A class which mocks [Feed].
+///
+/// See the documentation for Mockito's code generation for more information.
+// ignore: must_be_immutable
+class MockFeed extends _i1.Mock implements _i3.Feed {}
