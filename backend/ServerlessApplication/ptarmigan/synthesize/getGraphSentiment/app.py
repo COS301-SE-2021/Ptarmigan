@@ -54,11 +54,9 @@ def dbReturn(event, beginDate, endDate):
 def lambda_handler(event, context):
     print(event)
     try:
-        print("as;lkhjjasdhfjuklasdfgk,jhsadukiljfhliuyhdfasd")
         cName = event["CompanyName"]
         print(cName)
         interval = event["Interval"]
-        print("as;lkhjjasdhfjuklasdfgk,jhsadukiljfhliuyhdfasd")
         ev = event["BeginDate"]
 
         print(cName, " ", interval, " ", ev)

@@ -37,9 +37,6 @@ def dbReturn(event):
 
 
 def lambda_handler(event, context):
-
-    print(event)
-
     try:
         response = dbReturn(event)
 
