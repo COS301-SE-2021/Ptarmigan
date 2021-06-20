@@ -1,9 +1,8 @@
 import json
 import unittest
-
+from unittest.mock import patch
 from ptarmigan.synthesize.getSentimentPeriod import app
-from moto import mock_dynamodb2
-import boto3
+
 
 class TestGetSentiment(unittest.TestCase):
 
@@ -12,15 +11,11 @@ class TestGetSentiment(unittest.TestCase):
         '"EndDate": "1623065669000", '
         ' "CompanyName": "Tesla" }'
 
-    @mock_dynamodb2
-    def test_LambdaFunc(self):
-        boto3.setup_default_session()
-        dynomodbTest = boto3.client("dynamodb")
-        dynomodbTest.create_table(
-
-        )
-        dynomodbTest.put_item(
-
-        )
+    @patch('ptarmigan.synthesize.getSentimentPeriod.app.dbReturn')
+    def test_LambdaFunc(self, mock_dbReturn):
+        mock_dbReturn.return_value = json.dumps(
+            '{"Items": [{"Tweet_Id": "7"), "Sentiment": "NEUTRAL", "TimeStamp": "1623058451000", "Weight": "583", '
+            '"Text": "1891年、ニコラ・テスラによって設計された電気共振トランス回路、\n"Tesla coils"により再生されたBohemian Rhapsody '
+            '♬ https://t.co/Z9KL6NGdG7", "CompanyName": "Tesla", "lang": "ja"}')
         output = app.lambda_handler(self.testDatabaseOutput, "")
-        self.assertEquals(0.21702209641803874,output)
+        self.assertEquals(0.21702209641803874, output)
