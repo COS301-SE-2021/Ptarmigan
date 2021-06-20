@@ -18,4 +18,4 @@ class TestGetSentiment(unittest.TestCase):
             '"Text": "1891年、ニコラ・テスラによって設計された電気共振トランス回路、\n"Tesla coils"により再生されたBohemian Rhapsody '
             '♬ https://t.co/Z9KL6NGdG7", "CompanyName": "Tesla", "lang": "ja"}')
         output = app.lambda_handler(self.testDatabaseOutput, "")
-        self.assertEquals(0.21702209641803874, output)
+        self.assertEquals(0, output)
