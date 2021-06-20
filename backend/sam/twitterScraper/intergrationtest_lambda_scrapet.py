@@ -11,17 +11,17 @@ class TestClass(TestCase):
                                   '"content": "Tesla"}'
 
     def test_scraper_returns_tweets(self):
-        testreturn = (ls.scrapet_handler(json.loads(self.test_tweet_context), ""))
+        testreturn = (ls.scrapetHandler(json.loads(self.test_tweet_context), ""))
 
-        #print(testreturn)
-        #check the function returns a string
-        assert isinstance(testreturn,str)
-        #turn the string back into dict
+        # print(testreturn)
+        # check the function returns a string
+        assert isinstance(testreturn, str)
+        # turn the string back into dict
         testreturn = json.loads(testreturn)
         testreturn1 = testreturn['0']
 
-        #check that the right types are returned in the dict object
-        assert  isinstance(testreturn1['Tweet Id'],int)
+        # check that the right types are returned in the dict object
+        assert isinstance(testreturn1['Tweet Id'], int)
         assert isinstance(testreturn1['Text'], str)
         assert isinstance(testreturn1['lang'], str)
         assert isinstance(testreturn1['date'], int)
