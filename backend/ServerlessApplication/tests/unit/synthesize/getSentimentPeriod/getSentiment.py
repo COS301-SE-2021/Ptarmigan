@@ -1,13 +1,16 @@
 import json
 import pytest
+from moto import mock_dynamodb2
 
 from ptarmigan.synthesize.getSentimentPeriod import app
+
+
 
 @pytest.fixture()
 
 def fixture_event():
     return {
-                "BeginDate" : 1623005418000,
+                "BeginDate": 1623005418000,
                 "EndDate": 1623065669000,
                 "CompanyName": "Tesla"
             }

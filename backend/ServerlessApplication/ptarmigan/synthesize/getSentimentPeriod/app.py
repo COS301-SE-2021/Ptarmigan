@@ -35,6 +35,8 @@ def lambda_handler(event, context):
             FilterExpression = Key('Tweet_Id').gt(1) & Key('TimeStamp').between(event["BeginDate"], event["EndDate"])& Key('CompanyName').eq(event["CompanyName"])
         )
 
+        print(response)
+
         calculation = calculateSentiment(response["Items"])
 
         return {
