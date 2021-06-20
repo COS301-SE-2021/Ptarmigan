@@ -1,4 +1,5 @@
-<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/COS301-SE-2021/Ptarmigan">
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/COS301-SE-2021/Ptarmigan)
+
 TeamName - One More Byte
 
 ProjectName - Ptarmigan
