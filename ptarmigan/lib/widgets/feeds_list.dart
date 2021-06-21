@@ -24,7 +24,7 @@ class FeedsList extends StatelessWidget {
   final pageViewController = PageController();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final String title;
-  FeedsList({this.todos, this.feeds,this.feedsSub, this.title});
+  FeedsList({this.todos, this.feeds, this.feedsSub, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +35,13 @@ class FeedsList extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-              child: feeds.length >= 1
+              child: feedsSub.length >= 1
                   ? ListView(
                       padding: EdgeInsets.fromLTRB(0, 229, 0, 0),
                       scrollDirection: Axis.vertical,
-                      children:
-                          feeds.map((feeds) => FeedItems(feed: feeds)).toList())
+                      children: feedsSub
+                          .map((feedsSub) => FeedItems(feed: feedsSub))
+                          .toList())
                   : Center(child: Text(''))),
           DrawerHeader(
               decoration: BoxDecoration(
@@ -64,10 +65,9 @@ class FeedsList extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AddFeedForm(feedsSub)),
-                        );
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AddFeedForm(feeds: feeds)));
                       },
                       child: Text(
                         'Add Feed',
