@@ -17,18 +17,18 @@ import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
 //for feeds go to feeds_list.dart
-List<Feed> feeds = [];
+
 class AddFeedForm extends StatefulWidget {
-  
-  AddFeedForm(List<Feed> feeds_passed) 
-  {
-    feeds = feeds_passed;
-  }
+  List<Feed> feeds;
+  AddFeedForm({this.feeds});
+
   @override
-  _AddFeedFormState createState() => _AddFeedFormState();
+  _AddFeedFormState createState() => _AddFeedFormState(feeds: feeds);
 }
 
 class _AddFeedFormState extends State<AddFeedForm> {
+  _AddFeedFormState({this.feeds});
+  List<Feed> feeds;
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _tagsController = TextEditingController();
