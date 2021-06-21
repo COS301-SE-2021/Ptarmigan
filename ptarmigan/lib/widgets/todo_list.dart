@@ -49,6 +49,10 @@ class TodosList extends StatelessWidget {
 
     bocko(feedChoice);
 
+    print('\n======================');
+    print(todos.toString());
+    print('======================\n');
+
     return Scaffold(
         key: scaffoldKey,
         body: Container(
