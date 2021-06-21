@@ -28,55 +28,63 @@ class FeedsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('|||||||||||||||||FEED LIST IS BUILDING||||||||||||||||||||||||');
     return Container(
+      alignment: Alignment.center,
       width: 280,
       height: double.infinity,
       color: Colors.white,
       child: Stack(
         children: [
           Container(
+              key: Key("ListView_container"),
               child: feedsSub.length >= 1
                   ? ListView(
+                      key: Key('ListView'),
                       padding: EdgeInsets.fromLTRB(0, 229, 0, 0),
                       scrollDirection: Axis.vertical,
                       children: feedsSub
                           .map((feedsSub) => FeedItems(feed: feedsSub))
                           .toList())
                   : Center(child: Text(''))),
-          DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.tealAccent,
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                      padding: EdgeInsets.fromLTRB(0, 2, 30, 0),
-                      child: Text(
-                        'Your Feeds',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "Montserrat"),
-                      )),
-                  Container(
-                      child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 160, 0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AddFeedForm(feeds: feeds)));
-                      },
-                      child: Text(
-                        'Add Feed',
-                        textAlign: TextAlign.center,
+          
+             DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.tealAccent,
+                ),
+                
+                child: Column(
+                  key: Key("ColumnOne"),
+                  children: [
+                    Padding(
+                        padding: EdgeInsets.fromLTRB(0, 2, 30, 0),
+                        child: Text(
+                          'Your Feeds',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              fontSize: 35,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Montserrat"),
+                        )),
+                    Container(
+                        child: Padding(
+                      padding: EdgeInsets.fromLTRB(0, 0, 160, 0),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      AddFeedForm(feeds: feeds)));
+                        },
+                        child: Text(
+                          'Add Feed',
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                    ),
-                  )),
-                ],
-              )),
+                    )),
+                  ],
+                )),
         ],
       ),
     );
