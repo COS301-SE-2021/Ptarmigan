@@ -1,0 +1,69 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ptarmigan-staging-92311-authRole",
+      "UnauthRoleArn": "arn:aws:iam::878292117449:role/amplify-ptarmigan-staging-92311-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::878292117449:role/amplify-ptarmigan-staging-92311-authRole",
+      "Region": "eu-west-2",
+      "DeploymentBucketName": "amplify-ptarmigan-staging-92311-deployment",
+      "UnauthRoleName": "amplify-ptarmigan-staging-92311-unauthRole",
+      "StackName": "amplify-ptarmigan-staging-92311",
+      "StackId": "arn:aws:cloudformation:eu-west-2:878292117449:stack/amplify-ptarmigan-staging-92311/26ad19b0-c384-11eb-bb6c-0ac1364244c2",
+      "AmplifyAppId": "d18omf0bna9cgn",
+      "AuthTriggerTemplateURL": ""
+    }
+  },
+  "api": {
+    "Ptarmigan": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 30,
+              "description": "api key description"
+            }
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ]
+        },
+        "GraphQLAPIIdOutput": "alr3ax6335h6fohmpxie3zbaqa",
+        "GraphQLAPIEndpointOutput": "https://acy6wmegzfas3fmwxla3hycxfi.appsync-api.eu-west-2.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-ku3jjwsgjjeljmuhf5zoon6rh4"
+      },
+      "lastPushTimeStamp": "2021-06-19T17:30:45.478Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-ptarmigan-staging-92311-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apiPtarmigan"
+      },
+      "lastPushDirHash": "akhHcegvYgpQ1M99KM1y5WoMdTQ="
+    }
+  },
+  "auth": {
+    "Ptarmigan": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "output": {
+        "UserPoolId": "eu-west-2_smsu78wGa",
+        "AppClientIDWeb": "1etsf55rroocfi6cul2ld47d0",
+        "AppClientID": "79ji24k1mlp099qtqh2rcp6k4g",
+        "IdentityPoolId": "eu-west-2:b31f9508-405f-4461-b51e-bc4b96705f64",
+        "UserPoolArn": "arn:aws:cognito-idp:eu-west-2:878292117449:userpool/eu-west-2_smsu78wGa",
+        "IdentityPoolName": "testAuthIdentityPool__staging",
+        "UserPoolName": "Ptarmigan"
+      },
+      "lastPushTimeStamp": "2021-06-19T17:30:45.475Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-ptarmigan-staging-92311-deployment/amplify-cfn-templates/auth/Ptarmigan-cloudformation-template.yml",
+        "logicalId": "authPtarmigan"
+      }
+    }
+  }
+}

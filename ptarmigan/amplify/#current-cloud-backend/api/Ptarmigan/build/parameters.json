@@ -1,0 +1,8 @@
+{
+    "CreateAPIKey": 1,
+    "AppSyncApiName": "Ptarmigan",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "S3DeploymentBucket": "amplify-ptarmigan-staging-92311-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/7f0ccda9d7a06b22a08c5a5e91da4cf356cc25fb"
+}

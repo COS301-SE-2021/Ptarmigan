@@ -1,0 +1,10 @@
+{
+  "ptarmigan": {
+    "configLevel": "project",
+    "useProfile": true,
+    "profileName": "default"
+  },
+  "staging": {
+    "configLevel": "amplifyAdmin"
+  }
+}
