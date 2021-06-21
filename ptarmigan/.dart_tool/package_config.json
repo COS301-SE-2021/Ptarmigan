@@ -80,6 +80,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "archive",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/archive-3.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "args",
       "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/args-2.1.1",
       "packageUri": "lib/",
@@ -231,7 +237,7 @@
     },
     {
       "name": "file",
-      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/file-6.1.1",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/file-6.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -244,6 +250,12 @@
     {
       "name": "flutter",
       "rootUri": "file:///C:/src/flutter/packages/flutter",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_driver",
+      "rootUri": "file:///C:/src/flutter/packages/flutter_driver",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -268,6 +280,12 @@
     {
       "name": "frontend_server_client",
       "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/frontend_server_client-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "fuchsia_remote_debug_protocol",
+      "rootUri": "file:///C:/src/flutter/packages/fuchsia_remote_debug_protocol",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -374,6 +392,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "platform",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/platform-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "plugin_platform_interface",
       "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/plugin_platform_interface-2.0.0",
       "packageUri": "lib/",
@@ -382,6 +406,12 @@
     {
       "name": "pool",
       "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/pool-1.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "process",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/process-4.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -494,6 +524,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "sync_http",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/sync_http-0.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "term_glyph",
       "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/term_glyph-1.2.0",
       "packageUri": "lib/",
@@ -566,6 +602,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "webdriver",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/webdriver-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "webkit_inspection_protocol",
       "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/webkit_inspection_protocol-1.0.0",
       "packageUri": "lib/",
@@ -584,7 +626,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-06-20T22:19:33.430305Z",
+  "generated": "2021-06-21T03:08:34.716013Z",
   "generator": "pub",
   "generatorVersion": "2.13.3"
 }
