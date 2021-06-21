@@ -50,8 +50,9 @@ class FeedsList extends StatelessWidget {
           
              DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.tealAccent,
+                 color: Colors.tealAccent,
                 ),
+               
                 
                 child: Column(
                   key: Key("ColumnOne"),
