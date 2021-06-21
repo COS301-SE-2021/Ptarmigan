@@ -165,6 +165,8 @@ class _TodosPageState extends State<TodosPage> {
       // update the ui state to reflect fetched todos
       setState(() {
         _feedsSub = updatedFeed;
+        print("\n==========SUB FEEDS==============\n");
+        print(_feeds.toString());
       });
     } catch (e) {
       print('An error occurred while querying Feeds: $e');
@@ -182,7 +184,10 @@ class _TodosPageState extends State<TodosPage> {
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : TodosList(todos: _todos),
-      drawer: FeedsList(feeds: _feedsSub, feedsSub: feeds,),
+      drawer: FeedsList(
+        feeds: _feeds,
+        feedsSub: _feedsSub,
+      ),
     );
   }
 }
