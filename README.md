@@ -20,6 +20,10 @@ Demo Video - OneMoreByte-Demo1 - https://drive.google.com/file/d/19hfsr9zKiIVOqL
 
 Functional Requirements (SRS) - https://drive.google.com/file/d/19WwLKUhMdkfEV1m4KT02yPJpnR_LRpP3/view?usp=sharing
 
+Architectural Requirenents (SRS) - https://drive.google.com/file/d/1WgmJn7oOvWL5iq4N2S4zspZ63Wo2MBzt/view?usp=sharing
+
+Coding Standard - https://drive.google.com/file/d/1oBwUDbI_35n6cnec50-yjROyxu043Vg6/view?usp=sharing
+
 GitHub Project Board - 
 https://github.com/COS301-SE-2021/Ptarmigan/projects/1?add_cards_query=is%3Aopen
 https://github.com/orgs/COS301-SE-2021/teams/one-more-byte
