@@ -184,7 +184,8 @@ class _TodosPageState extends State<TodosPage> {
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : TodosList(todos: _todos),
-      drawer: FeedsList(
+      drawer: 
+      FeedsList(
         feeds: _feeds,
         feedsSub: _feedsSub,
       ),
