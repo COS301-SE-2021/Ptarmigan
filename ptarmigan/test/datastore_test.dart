@@ -6,8 +6,8 @@ import 'package:ptarmigan/main.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  testWidgets('Todo list should not be 0', (WidgetTester tester) async {
-    print("Hello there");
+  //testWidgets('Todo list should not be 0', (WidgetTester tester) async {
+    //print("Hello there");
     // await tester.pumpWidget(MyApp());
     // expect(find.text("Luke"), findsOneWidget);
     // expect(find.text(""), findsNothing);
@@ -16,5 +16,5 @@ void main() {
     //await tester.pump();
 
     //expect(find.text("Name"), findsNothing);
-  });
+  //});
 }
