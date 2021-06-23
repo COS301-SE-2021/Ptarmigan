@@ -22,7 +22,8 @@ class TestGetSentiment(unittest.TestCase):
                         "TimeStamp": 1623058451000,
                         "Weight": 583,
                         "Text": "You dumb",
-                        "CompanyName": "Tesla", "lang": "ja"
+                        "CompanyName": "Tesla",
+                        "lang": "ja"
                     }]
         }
 
