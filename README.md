@@ -18,9 +18,11 @@ Ptarmigan will use a design that scales automatically when there is a need to do
 
 Demo Video - OneMoreByte-Demo1 - https://drive.google.com/file/d/19hfsr9zKiIVOqLxTjXKPKyh4SKOMua2o/view?usp=sharing
 
-Functional Requirements (SRS) - https://drive.google.com/file/d/19WwLKUhMdkfEV1m4KT02yPJpnR_LRpP3/view?usp=sharing
+Functional Requirements (SRS)(Demo1) - https://drive.google.com/file/d/19WwLKUhMdkfEV1m4KT02yPJpnR_LRpP3/view?usp=sharing
 
-Architectural Requirenents (SRS) - https://drive.google.com/file/d/1WgmJn7oOvWL5iq4N2S4zspZ63Wo2MBzt/view?usp=sharing
+Architectural Requirements (SRS)(Demo2) - https://drive.google.com/file/d/1WgmJn7oOvWL5iq4N2S4zspZ63Wo2MBzt/view?usp=sharing
+
+Demo2 Video - https://drive.google.com/file/d/1eR1-LJsdPGZUbrEi949NXnkD0zIGisOS/view?usp=sharing
 
 Coding Standard - https://drive.google.com/file/d/1oBwUDbI_35n6cnec50-yjROyxu043Vg6/view?usp=sharing
 
