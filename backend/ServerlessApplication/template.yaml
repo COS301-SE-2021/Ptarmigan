@@ -18,11 +18,11 @@ Resources:
       Handler: app.lambda_twitterComprehend
       Runtime: python3.8
       Events:
-        HelloWorld:
+        HttpPost:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /comprehend
-            Method: get
+            Method: post
 
   getGraphSentiment:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -31,11 +31,11 @@ Resources:
       Handler: getGraphSentiment.app.lambda_handler
       Runtime: python3.8
       Events:
-        HelloWorld:
+        HttpPost:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /senthisize/getGraphSentiment
-            Method: get
+            Method: post
 
   getSentimentPeriod:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -44,9 +44,9 @@ Resources:
       Handler: getSentimentPeriod.app.lambda_handler
       Runtime: python3.8
       Events:
-        HelloWorld:
+        HttpPost:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /senthisize/getSentimentPeriod
-            Method: get
+            Method: post
 
