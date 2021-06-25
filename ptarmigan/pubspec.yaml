@@ -33,6 +33,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   smooth_page_indicator: ^0.2.3
+  bezier_chart: "^1.0.16"
+  fl_chart: ^0.36.2
   
 
 dev_dependencies:
