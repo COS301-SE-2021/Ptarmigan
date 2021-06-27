@@ -17,7 +17,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
-
 class TodosList extends StatelessWidget {
   List<Todo> todos;
   final List<Feed> feeds;

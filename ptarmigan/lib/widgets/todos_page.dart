@@ -178,14 +178,13 @@ class _TodosPageState extends State<TodosPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Insight Posts"),
-        backgroundColor: Colors.teal,
+        backgroundColor: Color(0xff232d37),
       ),
       //body: Center(child: CircularProgressIndicator()),
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : TodosList(todos: _todos),
-      drawer: 
-      FeedsList(
+      drawer: FeedsList(
         feeds: _feeds,
         feedsSub: _feedsSub,
       ),
