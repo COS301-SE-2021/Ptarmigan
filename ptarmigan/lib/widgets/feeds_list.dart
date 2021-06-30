@@ -82,20 +82,6 @@ class FeedsList extends StatelessWidget {
                       ),
                     ),
                   )),
-                  Container(
-                      child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 180, 0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Graph()));
-                      },
-                      child: Text(
-                        'Graph',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  )),
                 ],
               )),
         ],

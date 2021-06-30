@@ -28,7 +28,7 @@ class Graph extends StatefulWidget {
 
 class _GraphState extends State<Graph> {
   Widget build(BuildContext context) {
-    final fromDate = DateTime(2019, 05, 22);
+    final fromDate = DateTime(2021, 06, 15);
     final toDate = DateTime.now();
 
     final date1 = DateTime.now().subtract(Duration(days: 2));
@@ -36,7 +36,7 @@ class _GraphState extends State<Graph> {
 
     return Center(
         child: AspectRatio(
-            aspectRatio: 1.70,
+            aspectRatio: 1.90,
             child: Container(
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(
@@ -48,12 +48,12 @@ class _GraphState extends State<Graph> {
                     right: 18.0, left: 12.0, top: 24, bottom: 12),
                 child: BezierChart(
                   fromDate: fromDate,
-                  bezierChartScale: BezierChartScale.WEEKLY,
+                  bezierChartScale: BezierChartScale.MONTHLY,
                   toDate: toDate,
                   selectedDate: toDate,
                   series: [
                     BezierLine(
-                      label: "Duty",
+                      label: "Sentiment",
                       onMissingValue: (dateTime) {
                         if (dateTime.day.isEven) {
                           return 10.0;
@@ -63,15 +63,16 @@ class _GraphState extends State<Graph> {
                       data: [
                         DataPoint<DateTime>(value: 10, xAxis: date1),
                         DataPoint<DateTime>(value: 50, xAxis: date2),
+                        DataPoint<DateTime>(value: 50, xAxis: date2),
                       ],
                     ),
                   ],
                   config: BezierChartConfig(
                     verticalIndicatorStrokeWidth: 3.0,
-                    verticalIndicatorColor: Colors.black26,
+                    verticalIndicatorColor: Colors.white,
                     showVerticalIndicator: true,
                     verticalIndicatorFixedPosition: false,
-                    backgroundColor: Color(0xff232d37),
+                    backgroundColor: Colors.amber, // Color(0xff232d37),
                     footerHeight: 30.0,
                   ),
                 ),

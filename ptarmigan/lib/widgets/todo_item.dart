@@ -19,8 +19,9 @@ import 'package:bezier_chart/bezier_chart.dart';
 class TodoItem extends StatelessWidget {
   final double iconSize = 24.0;
   final Todo todo;
+  final List<DataPoint<DateTime>> graphPoints;
 
-  TodoItem({this.todo});
+  TodoItem({this.todo, this.graphPoints});
 
   void _deleteTodo(BuildContext context) async {
     try {
@@ -52,7 +53,7 @@ class TodoItem extends StatelessWidget {
           _toggleIsComplete();
         },
         onLongPress: () {
-          _bottomSheetMore(context);
+          _bottomSheetMore(context, graphPoints);
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -75,70 +76,74 @@ class TodoItem extends StatelessWidget {
   }
 }
 
-void _bottomSheetMore(context) {
-  final fromDate = DateTime(2019, 05, 22);
+void _bottomSheetMore(context, points) {
+  final fromDate = DateTime(2021, 05, 22);
   final toDate = DateTime.now();
-
   final date1 = DateTime.now().subtract(Duration(days: 2));
   final date2 = DateTime.now().subtract(Duration(days: 3));
-  showModalBottomSheet(
-    context: context,
-    builder: (builder) {
-      return new Container(
-        height: 240,
-        padding: EdgeInsets.only(
-          left: 5.0,
-          right: 5.0,
-          top: 0,
-          bottom: 0,
-        ),
-        decoration: new BoxDecoration(
-          color: Color(0xff232d37),
-        ),
-        child: Center(
-            child: Container(
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(18),
-              ),
-              color: Color(0xff232d37)),
-          child: Padding(
-            padding: const EdgeInsets.only(
-                right: 12.0, left: 12.0, top: 0, bottom: 20),
-            child: BezierChart(
-              fromDate: fromDate,
-              bezierChartScale: BezierChartScale.WEEKLY,
-              toDate: toDate,
-              selectedDate: toDate,
-              series: [
-                BezierLine(
-                  lineColor: Color(0xff02d39a),
-                  lineStrokeWidth: 2.0,
-                  label: "Duty",
-                  onMissingValue: (dateTime) {
-                    if (dateTime.day.isEven) {
-                      return 10.0;
-                    }
-                    return 5.0;
-                  },
-                  data: [
-                    DataPoint<DateTime>(value: 10, xAxis: date1),
-                    DataPoint<DateTime>(value: 50, xAxis: date2),
-                  ],
-                ),
-              ],
-              config: BezierChartConfig(
-                verticalIndicatorStrokeWidth: 3.0,
-                verticalIndicatorColor: Colors.black26,
-                showVerticalIndicator: true,
-                verticalIndicatorFixedPosition: false,
-                backgroundColor: Color(0xff232d37),
-                footerHeight: 50.0,
-              ),
+
+  final List<DataPoint<DateTime>> graphPoints = points;
+
+  DateTime <
+      showModalBottomSheet(
+        context: context,
+        builder: (builder) {
+          return new Container(
+            height: 240,
+            padding: EdgeInsets.only(
+              left: 5.0,
+              right: 5.0,
+              top: 0,
+              bottom: 0,
             ),
-          ),
-        )),
+            decoration: new BoxDecoration(
+              color: Color(0xff232d37),
+            ),
+            child: Center(
+                child: Container(
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(18),
+                  ),
+                  color: Color(0xff232d37)),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    right: 12.0, left: 12.0, top: 0, bottom: 20),
+                child: BezierChart(
+                  fromDate: fromDate,
+                  bezierChartScale: BezierChartScale.WEEKLY,
+                  toDate: toDate,
+                  selectedDate: toDate,
+                  series: [
+                    BezierLine(
+                      lineColor: Color(0xff02d39a),
+                      lineStrokeWidth: 2.0,
+                      label: "Duty",
+                      onMissingValue: (dateTime) {
+                        if (dateTime.day.isEven) {
+                          return 10.0;
+                        }
+                        return 5.0;
+                      },
+                      data: [
+                        //DataPoint<DateTime>(value: 10, xAxis: date1),
+                        //DataPoint<DateTime>(value: 50, xAxis: date2),
+                        for (int i = 0; i < 10; i++) graphPoints[i],
+                      ],
+                    ),
+                  ],
+                  config: BezierChartConfig(
+                    verticalIndicatorStrokeWidth: 3.0,
+                    verticalIndicatorColor: Colors.black26,
+                    showVerticalIndicator: true,
+                    verticalIndicatorFixedPosition: false,
+                    backgroundColor: Color(0xff232d37),
+                    footerHeight: 50.0,
+                  ),
+                ),
+              ),
+            )),
+          );
+        },
       );
-    },
-  );
 }
