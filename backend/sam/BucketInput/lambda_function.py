@@ -14,6 +14,6 @@ def lambda_handler(event, context):
 
     filedata = fileobj['Body'].read()
     contents = (filedata.decode('utf-8'))
-
+    contents = json.loads(contents)
     return contents
 
