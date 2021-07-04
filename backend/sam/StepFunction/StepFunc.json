@@ -25,7 +25,7 @@
       "Next": "Map"
       },
       "Map": {
-        "Comment": "Map state - next state applied to everything in the aray",
+        "Comment": "Map state - next state applied to everything in the array",
         "Type": "Map",
         "End": true,
         "Iterator": {
@@ -61,6 +61,25 @@
                 "Payload.$": "$",
                 "FunctionName": "arn:aws:lambda:eu-west-1:878292117449:function:Sentiment_Analysis:$LATEST"
               },
+              "Retry": [
+              {
+                "ErrorEquals": [
+                  "Lambda.ServiceException",
+                  "Lambda.AWSLambdaException",
+                  "Lambda.SdkClientException"
+                ],
+                "IntervalSeconds": 2,
+                "MaxAttempts": 6,
+                "BackoffRate": 2
+              }
+            ],
+            "End": true
+          }
+        }
+      }
+    }
+  }
+}
 
 {
   "Scrape-until" : "123421343214",
