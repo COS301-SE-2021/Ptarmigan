@@ -21,7 +21,7 @@
           "BackoffRate": 2
         }
        ],
-      "Next": "Map",
+      "Next": "Map"
       },
       "Map": {
         "Type": "Map",
@@ -30,13 +30,31 @@
           "StartAt": "Twitter Scraper",
           "States": {
             "Twitter Scraper": {
-            "Type": "Task",
-            "Resource": "arn:aws:states:::lambda:invoke",
-            "OutputPath": "$.Payload",
-            "Parameters": {
-              "Payload.$": "$",
-              "FunctionName": "arn:aws:lambda:eu-west-1:878292117449:function:Twitter_scraper:$LATEST"
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "OutputPath": "$.Payload",
+              "Parameters": {
+                "Payload.$": "$",
+                "FunctionName": "arn:aws:lambda:eu-west-1:878292117449:function:Twitter_scraper:$LATEST"
+              },
+              "Retry": [
+                {
+                  "ErrorEquals": [
+                    "Lambda.ServiceException",
+                    "Lambda.AWSLambdaException",
+                    "Lambda.SdkClientException"
+                  ],
+                  "IntervalSeconds": 2,
+                  "MaxAttempts": 6,
+                  "BackoffRate": 2
+                }
+              ],
+              "Next": "Sentiment Analysis"
             },
+            "Sentiment Analysis": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "OutputPath": "$.Payload",
 
 
 {
