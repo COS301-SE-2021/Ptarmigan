@@ -12,5 +12,7 @@ def lambda_handler(event, context):
         Key=file_to_read
     )
 
-    return "nothing"
+    filedata = fileobj['Body'].read()
+
+    return filedata
 
