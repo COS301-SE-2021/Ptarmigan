@@ -78,7 +78,11 @@
             "End": true
           }
         }
-      }
+      },
+      "Next": "Success"
+    },
+    "Success": {
+      "Type": "Succeed"
     }
   }
 }
