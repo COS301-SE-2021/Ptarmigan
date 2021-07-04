@@ -13,6 +13,7 @@ def lambda_handler(event, context):
     )
 
     filedata = fileobj['Body'].read()
+    contents = (filedata.decode('utf-8'))
 
-    return filedata
+    return contents
 
