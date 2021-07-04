@@ -20,7 +20,15 @@
           "MaxAttempts": 6,
           "BackoffRate": 2
         }
-
+       ],
+      "Next": "Map",
+      },
+      "Map": {
+        "Type": "Map",
+        "End": true,
+        "Iterator": {
+          "StartAt": "Twitter Scraper",
+          "States": {
 
 
 {
