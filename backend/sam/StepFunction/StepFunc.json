@@ -8,10 +8,19 @@
       "OutputPath": "$.Payload",
       "Parameters": {
         "FunctionName": "arn:aws:lambda:eu-west-1:878292117449:function:PassBucketInput:$LATEST"
-      }
-    }
-  }
-}
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException"
+          ],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 6,
+          "BackoffRate": 2
+        }
+
 
 
 {
