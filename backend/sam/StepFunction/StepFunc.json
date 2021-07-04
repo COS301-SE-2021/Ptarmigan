@@ -54,6 +54,7 @@
               "Next": "Sentiment Analysis"
             },
             "Sentiment Analysis": {
+              "Comment": "Sentiment analysis lambda function",
               "Type": "Task",
               "Resource": "arn:aws:states:::lambda:invoke",
               "OutputPath": "$.Payload",
