@@ -80,14 +80,3 @@
     }
   }
 }
-
-{
-  "Scrape-until" : "123421343214",
-  "scrape-detail": [
-    { "content": "Tesla"},
-    { "content": "Neuralink"},
-    { "content": "Bitcoin"},
-    { "content": "Etherium"},
-    { "content": "spacex"}
-    ]
-}
