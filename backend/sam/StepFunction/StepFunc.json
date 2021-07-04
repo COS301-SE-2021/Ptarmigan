@@ -1,8 +1,9 @@
 {
-  "Comment": "This is your state machine",
+  "Comment": "State machine start",
   "StartAt": "Pass Scraper Content",
   "States": {
     "Pass Scraper Content": {
+      "Comment": "Pass s3 file to next state",
       "Type": "Task",
       "Resource": "arn:aws:states:::lambda:invoke",
       "OutputPath": "$.Payload",
@@ -24,6 +25,7 @@
       "Next": "Map"
       },
       "Map": {
+        "Comment": "Map state - next state applied to everything in the aray",
         "Type": "Map",
         "End": true,
         "Iterator": {
