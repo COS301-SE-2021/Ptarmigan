@@ -32,6 +32,7 @@
           "StartAt": "Twitter Scraper",
           "States": {
             "Twitter Scraper": {
+              "Comment": "Twitter scraper lambda function",
               "Type": "Task",
               "Resource": "arn:aws:states:::lambda:invoke",
               "OutputPath": "$.Payload",
