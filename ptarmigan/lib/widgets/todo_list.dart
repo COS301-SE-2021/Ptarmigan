@@ -16,6 +16,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 // amplify configuration and models that should have been generated for you
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:bezier_chart/bezier_chart.dart';
 
 class TodosList extends StatelessWidget {
   List<Todo> todos;
@@ -51,16 +52,84 @@ class TodosList extends StatelessWidget {
     print('\n======================');
     print(todos.toString());
     print('======================\n');
+    final fromDate = DateTime(2021, 05, 22);
+    final toDate = DateTime.now();
+    final date1 = DateTime.now().subtract(Duration(days: 2));
+    final date2 = DateTime.now().subtract(Duration(days: 3));
 
     return Scaffold(
         key: scaffoldKey,
         body: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: [
+                0.1,
+                0.55,
+                0.98,
+                // 0.99,
+              ],
+                  colors: [
+                Color(0xff488286),
+                Color(0xff305252),
+                Color(0xff3AAFB9),
+                //Color(0xff093A3E),
+                //  Color(0xff4087a1),
+                //  Color(0xff0a5bad),
+                //  Color(0xff044dc2),
+              ])),
           width: double.infinity,
-          height: 500,
+          height: 700,
           child: Stack(
             children: [
+              Container(
+                height: 240,
+                padding: EdgeInsets.only(
+                  left: 5.0,
+                  right: 5.0,
+                  top: 0,
+                  bottom: 0,
+                ),
+                child: Center(
+                    child: Container(
+                  decoration: const BoxDecoration(color: Colors.white10),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        right: 12.0, left: 12.0, top: 0, bottom: 20),
+                    child: BezierChart(
+                      fromDate: fromDate,
+                      bezierChartScale: BezierChartScale.WEEKLY,
+                      toDate: toDate,
+                      selectedDate: toDate,
+                      series: [
+                        BezierLine(
+                          lineColor: Colors.white,
+                          lineStrokeWidth: 2.0,
+                          label: "Duty",
+                          onMissingValue: (dateTime) {
+                            if (dateTime.day.isEven) {
+                              return 10.0;
+                            }
+                            return 5.0;
+                          },
+                          data: //graphPoints
+                              const [],
+                        ),
+                      ],
+                      config: BezierChartConfig(
+                        verticalIndicatorStrokeWidth: 3.0,
+                        verticalIndicatorColor: Colors.black26,
+                        showVerticalIndicator: true,
+                        verticalIndicatorFixedPosition: false,
+                        footerHeight: 50.0,
+                      ),
+                    ),
+                  ),
+                )),
+              ),
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 50),
+                padding: EdgeInsets.fromLTRB(0, 260, 0, 50),
                 child: PageView(
                   controller: pageViewController,
                   scrollDirection: Axis.horizontal,

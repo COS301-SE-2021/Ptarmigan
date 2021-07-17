@@ -54,6 +54,7 @@ class TodoItem extends StatelessWidget {
     graphPoints.add(DataPoint<DateTime>(value: 10, xAxis: date1));
 
     return Card(
+      color: Colors.white30,
       child: InkWell(
         onTap: () {
           // _toggleIsComplete();
@@ -62,16 +63,25 @@ class TodoItem extends StatelessWidget {
           _bottomSheetMore(context, graphPoints);
         },
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(5.0),
           child: Row(children: [
             Expanded(
-              child: Column(
+              child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(todo.name,
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                  Text(todo.description ?? 'No description'),
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white)),
+                  Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      child: Text(todo.description ?? 'No description',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white))),
                 ],
               ),
             ),
@@ -83,6 +93,10 @@ class TodoItem extends StatelessWidget {
 }
 
 void _bottomSheetMore(context, points) {
+  String responseBody =
+      '[{"BeginDate": 1623005418000,"EndDate": 1623610218000,"IntervalData": 1.0}]';
+
+  // parsePhotos(responseBody);
   final fromDate = DateTime(2021, 05, 22);
   final toDate = DateTime.now();
   final date1 = DateTime.now().subtract(Duration(days: 2));
@@ -130,9 +144,8 @@ void _bottomSheetMore(context, points) {
                     }
                     return 5.0;
                   },
-                  data: graphPoints
-                  //for (int i = 0; i < 10; i++) graphPoints[i],
-                  ,
+                  data: //graphPoints
+                      const [],
                 ),
               ],
               config: BezierChartConfig(
@@ -151,10 +164,17 @@ void _bottomSheetMore(context, points) {
   );
 }
 
-List<DataPoint> parsePhotos(String responseBody) {
-  final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+List<FeedSentiment> parsePhotos(String responseBody) {
+  final json = jsonDecode(responseBody).cast(Map<String, dynamic>());
+  // FeedSentiment obj = FeedSentiment.fromJson(json);
 
-  return parsed
+  return json
       .map<FeedSentiment>((json) => FeedSentiment.fromJson(json))
       .toList();
+}
+
+List<DataPoint> test(String responseBody) {
+  final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+
+  //return parsed.map<DataPoint>((json) => DataPoint.fromJson(json)).toList();
 }

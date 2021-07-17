@@ -32,7 +32,7 @@ class FeedsList extends StatelessWidget {
     print('|||||||||||||||||FEED LIST IS BUILDING||||||||||||||||||||||||');
     return Container(
       alignment: Alignment.center,
-      width: 280,
+      width: 270,
       height: double.infinity,
       color: Colors.white,
       child: Stack(
@@ -50,24 +50,25 @@ class FeedsList extends StatelessWidget {
                   : Center(child: Text(''))),
           DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.tealAccent,
+                color: Color(0xff4087a1),
               ),
               child: Column(
                 key: Key("ColumnOne"),
                 children: [
                   Padding(
-                      padding: EdgeInsets.fromLTRB(0, 2, 30, 0),
+                      padding: EdgeInsets.fromLTRB(0, 0, 90, 0),
                       child: Text(
-                        'Your Feeds',
+                        'Feeds',
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             fontSize: 35,
                             fontWeight: FontWeight.bold,
+                            color: Colors.white,
                             fontFamily: "Montserrat"),
                       )),
                   Container(
                       child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 160, 0),
+                    padding: EdgeInsets.fromLTRB(30, 0, 120, 0),
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.push(
@@ -76,10 +77,11 @@ class FeedsList extends StatelessWidget {
                                 builder: (context) =>
                                     AddFeedForm(feeds: feeds)));
                       },
-                      child: Text(
-                        'Add Feed',
-                        textAlign: TextAlign.center,
-                      ),
+                      child: Text('Add Feed',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Color(0xff02d39a))),
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.black12, textStyle: TextStyle()),
                     ),
                   )),
                 ],
