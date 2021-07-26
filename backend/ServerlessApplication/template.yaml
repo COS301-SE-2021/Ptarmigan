@@ -49,6 +49,14 @@ Resources:
           Properties:
             Path: /senthisize/getSentimentPeriod
             Method: post
+      Policies:
+        Verion: 2016-10-31
+        Statement:
+          Effect: Allow
+          Action:
+            'dynamodb:PutItem'
+            'dynamodb:GetItem'
+
 
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
