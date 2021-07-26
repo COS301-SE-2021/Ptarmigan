@@ -53,7 +53,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: handler
-      Runtime: runtime
+      Runtime: python3.8
       Policies: AWSLambdaDynamoDBExecutionRole
       Events:
         Stream:
