@@ -49,19 +49,6 @@ Resources:
           Properties:
             Path: /senthisize/getSentimentPeriod
             Method: post
-  ProcessDynamoDBStream:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: handler
-      Runtime: python3.8
-      Policies: AWSLambdaDynamoDBExecutionRole
-      Events:
-        Stream:
-          Type: DynamoDB
-          Properties:
-            Stream: !GetAtt DynamoDBTable.StreamArn
-            BatchSize: 100
-            StartingPosition: TRIM_HORIZON
 
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
