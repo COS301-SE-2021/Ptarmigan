@@ -50,26 +50,15 @@ Resources:
             Path: /senthisize/getSentimentPeriod
             Method: post
       Policies:
-        Verion: 2016-10-31
-        Statement:
-          Effect: Allow
-          Action:
-            'dynamodb:PutItem'
-            'dynamodb:GetItem'
-          Resource:
-            'Fn::Join':
-              ''
-                  'arn:aws:dynamodb'
-                  Ref: 'AWS::Region'
-                  ':'
-                  Ref: 'AWS::AccountId'
-                  ':table/DynamoDBTable'
+        DynamoDbCrudPolicy:
+          TableName: TestOne
 
 
 
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
+      TableName: TestOne
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
