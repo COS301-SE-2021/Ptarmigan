@@ -19,7 +19,7 @@ def lambda_handler(event, context):
     filecontents = json.loads(filecontents)
 
     replaceContent = filecontents['scrape-detail']
-    replaceLine = "{'content': '" + update + "'}"
+    replaceLine = '{"content": "' + update + '"}'
     replaceLine = json.loads(replaceLine)
     replaceContent.append(replaceLine)
     #filecontents['scrape-detail'] = {'content' : 'yes'}
