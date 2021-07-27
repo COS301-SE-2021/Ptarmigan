@@ -17,7 +17,10 @@ def lambda_handler(event, context):
     filedata = fileobj['Body'].read()
     filecontents = (filedata.decode('utf-8'))
     filecontents = json.loads(filecontents)
-    print(type(filecontents))
+
+    filecontents['scrape-detail']['content'] = update
+
+    print(filecontents))
 
     # TODO upload to bucket
 
