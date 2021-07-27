@@ -26,7 +26,7 @@ def calculateSentiment(content):
 
 def dbReturn(event):
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('Test')
+    table = dynamodb.Table(TestOne)
 
     response = table.scan(
         FilterExpression=Key('Tweet_Id').gt(1) & Key('TimeStamp').between(event["BeginDate"], event["EndDate"]) & Key(
