@@ -18,7 +18,7 @@ def lambda_handler(event, context):
     filecontents = (filedata.decode('utf-8'))
     filecontents = json.loads(filecontents)
 
-    filecontents['scrape-detail']['content'] = update
+    filecontents['scrape-detail'] = {'content' : 'yes'}
 
     print(filecontents))
 
