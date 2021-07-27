@@ -4,7 +4,6 @@ import boto3
 def lambda_handler(event, context):
     # read file
     update = event['content']
-    print(update)
     s3client = boto3.client('s3')
     bucketname = 'stepfunctestbucket'
     file_to_read = 'scrapeContent.json'
@@ -22,9 +21,11 @@ def lambda_handler(event, context):
     replaceLine = '{"content": "' + update + '"}'
     replaceLine = json.loads(replaceLine)
     replaceContent.append(replaceLine)
-    #filecontents['scrape-detail'] = {'content' : 'yes'}
 
-    print(type(replaceContent))
+    strList = [json.dumps(e) for e in replaceContent]
+    strOfList = ''.join(strList)
+
+    print(strOfList)
 
     # TODO upload to bucket
 
