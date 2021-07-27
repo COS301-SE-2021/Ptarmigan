@@ -12,7 +12,13 @@ def lambda_handler(event, context):
         Bucket=bucketname,
         Key=file_to_read
     )
-    # TODO write to file
+
+    # write to file
+    filedata = fileobj['Body'].read()
+    print(type(filedata))
     # TODO upload to bucket
 
-    return()
+    return {
+        'statusCode': 200,
+        'body': json.dumps('nice')
+    }
