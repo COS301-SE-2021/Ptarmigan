@@ -15,6 +15,7 @@ def lambda_handler(event, context):
 
     # write to file
     filedata = fileobj['Body'].read()
+    filecontents = (filedata.decode('utf-8'))
     print(type(filedata))
     # TODO upload to bucket
 
