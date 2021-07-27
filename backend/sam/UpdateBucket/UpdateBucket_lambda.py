@@ -18,9 +18,11 @@ def lambda_handler(event, context):
     filecontents = (filedata.decode('utf-8'))
     filecontents = json.loads(filecontents)
 
+    replaceContent = filecontents['scrape-detail']
+    replaceContent.add({"'content': '" + "' update +'"})
     filecontents['scrape-detail'] = {'content' : 'yes'}
 
-    print(filecontents))
+    print(type(replaceContent))
 
     # TODO upload to bucket
 
