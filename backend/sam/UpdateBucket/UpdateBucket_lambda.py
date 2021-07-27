@@ -24,9 +24,13 @@ def lambda_handler(event, context):
 
     filecontents['scrape-detail'] = replaceContent
 
+    s3client.put_object(
+        Bucket=bucketname,
+        Key=file_to_read,
+        Body=filecontents)
     # TODO upload to bucket
 
     return {
         'statusCode': 200,
-        'body': json.dumps('nice')
+        'body': json.dumps('Successfully Updated the Content to scrap.')
     }
