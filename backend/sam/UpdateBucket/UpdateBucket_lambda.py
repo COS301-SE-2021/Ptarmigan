@@ -24,10 +24,12 @@ def lambda_handler(event, context):
 
     filecontents['scrape-detail'] = replaceContent
 
+    uploadByteStream = bytes(json.dumps(filecontents).encode('UTF-8'))
+
     s3client.put_object(
         Bucket=bucketname,
         Key=file_to_read,
-        Body=filecontents)
+        Body=uploadByteStream)
     # TODO upload to bucket
 
     return {
