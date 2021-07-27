@@ -22,10 +22,7 @@ def lambda_handler(event, context):
     replaceLine = json.loads(replaceLine)
     replaceContent.append(replaceLine)
 
-    strList = [json.dumps(e) for e in replaceContent]
-    strOfList = ''.join(strList)
-
-    print(strOfList)
+    filecontents['scrape-detail'] = replaceContent
 
     # TODO upload to bucket
 
