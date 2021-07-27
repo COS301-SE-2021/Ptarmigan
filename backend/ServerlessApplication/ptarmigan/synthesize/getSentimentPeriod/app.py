@@ -49,7 +49,8 @@ def lambda_handler(event, context):
             "body": calculation
         }
 
-    except:
+    except ValueError:
+        print(ValueError)
         return {
             "statusCode": 400,
             "body": "Parameters not found in DB"
