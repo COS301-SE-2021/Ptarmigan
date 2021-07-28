@@ -3,6 +3,7 @@ from pprint import pprint
 import boto3
 from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Key
+import os
 import json
 
 # import requests
@@ -26,7 +27,9 @@ def calculateSentiment(content):
 
 def dbReturn(event):
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table(TABLE_NAME)
+    tableName = os.environ["TABLE_NAME"]
+    print(tableName)
+    table = dynamodb.Table(os.environ["TABLE_NAME"])
 
     response = table.scan(
         FilterExpression=Key('Tweet_Id').gt(1) & Key('TimeStamp').between(event["BeginDate"], event["EndDate"]) & Key(
@@ -53,7 +56,7 @@ def lambda_handler(event, context):
         print(ValueError)
         return {
             "statusCode": 400,
-            "body": "Parameters not found in DB"
+            "body": ValueError
         }
 
 
