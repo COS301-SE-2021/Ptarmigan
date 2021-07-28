@@ -30,7 +30,7 @@ def dbReturn(event):
     print("Something")
     tableName = os.environ["TABLE_NAME"]
     print(tableName)
-    table = dynamodb.Table(os.environ["TABLE_NAME"])
+    table = dynamodb.Table(tableName)
 
     response = table.scan(
         FilterExpression=Key('Tweet_Id').gt(1) & Key('TimeStamp').between(event["BeginDate"], event["EndDate"]) & Key(
