@@ -55,39 +55,43 @@ class TodoItem extends StatelessWidget {
 
     return Card(
       color: Colors.white30,
-      child: InkWell(
-        onTap: () {
-          // _toggleIsComplete();
-        },
-        onLongPress: () {
-          _bottomSheetMore(context, graphPoints);
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: Row(children: [
-            Expanded(
-              child: Row(
+      child: Row(children: [
+        Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(todo.name,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white)),
+
+              // padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(todo.name,
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white)),
-                  Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                      child: Text(todo.description ?? 'No description',
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white))),
+                  Column(
+                    children: [
+                      Container(
+                          constraints:
+                              BoxConstraints(minWidth: 100, maxWidth: 300),
+                          padding: EdgeInsets.fromLTRB(250, 0, 0, 0),
+                          child: Text(todo.description ?? 'No description',
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white)))
+                    ],
+                  ),
                 ],
-              ),
-            ),
-          ]),
+              )
+            ],
+          ),
         ),
-      ),
+      ]),
     );
   }
 }
