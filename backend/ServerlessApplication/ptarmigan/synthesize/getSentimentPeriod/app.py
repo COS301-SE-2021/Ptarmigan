@@ -27,6 +27,7 @@ def calculateSentiment(content):
 
 def dbReturn(event):
     dynamodb = boto3.resource('dynamodb')
+    print("Something")
     tableName = os.environ["TABLE_NAME"]
     print(tableName)
     table = dynamodb.Table(os.environ["TABLE_NAME"])
@@ -42,7 +43,6 @@ def dbReturn(event):
 def lambda_handler(event, context):
     try:
         response = dbReturn(event)
-
         print(response)
 
         calculation = calculateSentiment(response["Items"])
