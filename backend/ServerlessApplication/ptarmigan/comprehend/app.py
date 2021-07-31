@@ -1,11 +1,15 @@
 import json
+import os
+
 import boto3
 
 
 def lambda_twitterComprehend(event, context):
     dbClient = boto3.resource("dynamodb")
 
-    table = dbClient.Table('Test')
+    tableName = os.environ["TABLE_NAME"]
+
+    table = dbClient.Table(tableName)
 
     comprehend = boto3.client("comprehend")
 
