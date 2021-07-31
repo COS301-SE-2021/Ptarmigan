@@ -1,4 +1,5 @@
 import json
+import os
 import time
 import boto3
 from boto3.dynamodb.conditions import Key
@@ -42,7 +43,8 @@ def getInterval(interval):
 
 def dbReturn(event, beginDate, endDate):
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('Test')
+    tableName = os.environ["TABLE_NAME"]
+    table = dynamodb.Table(tableName)
 
     response = table.scan(
         FilterExpression=Key('Tweet_Id').gt(1) & Key('TimeStamp').between(beginDate, endDate) & Key('CompanyName').eq(

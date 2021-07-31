@@ -27,9 +27,7 @@ def calculateSentiment(content):
 
 def dbReturn(event):
     dynamodb = boto3.resource('dynamodb')
-    print("Something")
     tableName = os.environ["TABLE_NAME"]
-    print(tableName)
     table = dynamodb.Table(tableName)
 
     response = table.scan(
