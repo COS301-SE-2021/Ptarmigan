@@ -34,7 +34,6 @@ def scrapetHandler(event, context):
     content = ScrapeDetail['content']
 
     scrape_since = int(event['scrape-until'])
-    scrape_since = scrape_since - 86400
     scrape_timestamp = datetime.datetime.fromtimestamp(scrape_since)
     scrape_dateformat = scrape_timestamp.strftime('%Y-%m-%d')
 
