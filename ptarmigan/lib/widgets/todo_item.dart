@@ -80,10 +80,15 @@ class TodoItem extends StatelessWidget {
                           padding: EdgeInsets.fromLTRB(250, 0, 0, 0),
                           child: Text(todo.description ?? 'No description',
                               textAlign: TextAlign.right,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white)))
+                              style: todo.description.compareTo("%50") > 0
+                                  ? TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xff00f525))
+                                  : TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xffff2f00))))
                     ],
                   ),
                 ],
