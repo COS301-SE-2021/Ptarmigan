@@ -11,6 +11,7 @@ import 'package:amplify_datastore/amplify_datastore.dart';
 import 'package:provider/provider.dart';
 import 'package:ptarmigan/models/ModelProvider.dart';
 import 'package:ptarmigan/services/feed_changer.dart';
+import 'package:ptarmigan/widgets/feed_items.dart';
 import 'package:ptarmigan/widgets/todo_item.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 // amplify configuration and models that should have been generated for you
@@ -20,7 +21,7 @@ import 'package:bezier_chart/bezier_chart.dart';
 
 class TodosList extends StatelessWidget {
   List<Todo> todos;
-  final List<Feed> feeds;
+  List<Feed> feeds;
   StreamSubscription _subscription;
   final pageViewController = PageController();
   final scaffoldKey = GlobalKey<ScaffoldState>();
