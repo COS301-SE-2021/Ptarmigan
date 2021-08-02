@@ -69,11 +69,8 @@
         <tr>
             <td scope="row">Benjamin van Staden</td>
             <td>9710055071083</td>
-
-
             <td>
-            <button type="button" class="btn btn-danger" id="adminStatus" value="notThisValue">No<span class="glyphicon glyphicon-thumbs-down"></span></button>
-
+            <button type="button" class="btn btn-danger adminStatus" value="notThisValue">No<span class="glyphicon glyphicon-thumbs-down"></span></button>
             </td>
             <th scope="col">
                 <button type="button" class="btn btn-danger">Delete</button>
@@ -82,7 +79,9 @@
         <tr>
             <td scope="row">Reinier Mouton</td>
             <td>9712053072133</td>
-            <td>No</td>
+            <td>
+                <button type="button" class="btn btn-danger adminStatus" value="notThisValue">No<span class="glyphicon glyphicon-thumbs-down"></span></button>
+            </td>
             <th scope="col">
                 <button type="button" class="btn btn-danger">Delete</button>
             </th>
@@ -90,7 +89,9 @@
         <tr>
             <td scope="row">Bob the Builder</td>
             <td>9811084123451</td>
-            <td>No</td>
+            <td>
+                <button type="button" class="btn btn-danger adminStatus" value="notThisValue">No<span class="glyphicon glyphicon-thumbs-down"></span></button>
+            </td>
             <th scope="col">
                 <button type="button" class="btn btn-danger">Delete</button>
             </th>
@@ -108,12 +109,12 @@
 <script>
 //help
         $(document).ready(function () {
-            $('#adminStatus').click(function () {
-                if($("#adminStatus").text() == 'Yes') {
-                    $("#adminStatus").text('No');
+            $('.adminStatus').click(function () {
+                if($(this).text() == 'Yes') {
+                    $(this).text('No');
                 }
                 else {
-                    $("#adminStatus").text('Yes');
+                    $(this).text('Yes');
                 }
             })
         });
