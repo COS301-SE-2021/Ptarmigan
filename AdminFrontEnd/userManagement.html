@@ -69,24 +69,32 @@
         <tr>
             <td scope="row">Benjamin van Staden</td>
             <td>9710055071083</td>
-            <td>Yes</td>
+
+
+            <td>
+            <button type="button" class="btn btn-danger" id="adminStatus" value="notThisValue">No<span class="glyphicon glyphicon-thumbs-down"></span></button>
+
+            </td>
             <th scope="col">
                 <button type="button" class="btn btn-danger">Delete</button>
-            </th>        </tr>
+            </th>
+        </tr>
         <tr>
             <td scope="row">Reinier Mouton</td>
             <td>9712053072133</td>
             <td>No</td>
             <th scope="col">
                 <button type="button" class="btn btn-danger">Delete</button>
-            </th>        </tr>
+            </th>
+        </tr>
         <tr>
             <td scope="row">Bob the Builder</td>
             <td>9811084123451</td>
             <td>No</td>
             <th scope="col">
                 <button type="button" class="btn btn-danger">Delete</button>
-            </th>        </tr>
+            </th>
+        </tr>
         </tbody>
     </table>
 </div>
@@ -97,5 +105,14 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+        $('#adminStatus').click(function() {
+            $("#adminStatus").text('Yes');
+        })
+    });
+</script>
+
+
 </body>
 </html>
