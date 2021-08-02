@@ -109,7 +109,12 @@
 //help
         $(document).ready(function () {
             $('#adminStatus').click(function () {
-                $("#adminStatus").text('Yes');
+                if($("#adminStatus").text() == 'Yes') {
+                    $("#adminStatus").text('No');
+                }
+                else {
+                    $("#adminStatus").text('Yes');
+                }
             })
         });
 
