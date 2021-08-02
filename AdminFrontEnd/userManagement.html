@@ -9,17 +9,39 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>User Management</title>
 </head>
-<body>
+<body style="background-color:grey;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"><i class="fas fa-feather-alt"></i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Admin Pages
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Landing Page</a>
+                    <a class="dropdown-item disabled" href="#">User Management</a>
+                </div>
+            </li>
+        </ul>
+        <button class="btn my-2 my-sm-0" type="submit">Logout</button>
+    </div>
+</nav>
+<br>
 <div class="container">
-    <div class="row">
+    <div class="row bg-white">
 
         <div class="col-sm">
-            User Name
-        </div>
-        <div class="col-sm">
-            User ID
+            <b>Filters  </b>
+            <button type="button" class="btn btn-dark">User Name</button>
+            <button type="button" class="btn btn-dark">User ID</button>
+            <button type="button" class="btn btn-dark">Admin</button>
         </div>
         <div class="col-sm">
             <form class="form-inline my-2 my-lg-0">
@@ -29,54 +51,53 @@
         </div>
     </div>
 </div>
-<span class="border borer-dark">
+<br>
 <div class="container">
 
-    <div class="row bg-light">
+    <div class="row bg-light border border-dark">
 
-        <div class="col-sm">
+        <div class="col-sm border-right">
             User Name
         </div>
-        <div class="col-sm">
+        <div class="col-sm border-right">
             User ID
         </div>
-        <div class="col-sm">
+        <div class="col-sm border-right">
             Admin Status
         </div>
         <div class="col-sm">
             Delete Account
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm">
+    <div class="row bg-white border border-dark">
+        <div class="col-sm border-right">
             Benjamin van Staden
         </div>
-        <div class="col-sm">
+        <div class="col-sm border-right">
             9710055071083
         </div>
-        <div class="col-sm">
+        <div class="col-sm border-right">
             Yes
         </div>
-        <div class="col-sm">
+        <div class="col-sm border-right">
             <button type="button" class="btn btn-danger">Delete</button>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm">
+    <div class="row bg-light border border-dark">
+        <div class="col-sm border-right">
             Reinier Mouton
         </div>
-        <div class="col-sm">
+        <div class="col-sm border-right">
             9712052842075
         </div>
-        <div class="col-sm">
+        <div class="col-sm border-right">
             No
         </div>
-        <div class="col-sm">
+        <div class="col-sm border-right">
             <button type="button" class="btn btn-danger">Delete</button>
         </div>
     </div>
 </div>
-</span>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
