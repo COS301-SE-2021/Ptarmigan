@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('.completedTask').click(function () {
+    $('.removeOnClick').click(function () {
         $(this).parent().parent().remove()
     })
 });
