@@ -107,7 +107,7 @@ class TodosList extends StatelessWidget {
                         BezierLine(
                           lineColor: Colors.white,
                           lineStrokeWidth: 2.0,
-                          label: "Duty",
+                          //   label: "Dutysdas",
                           onMissingValue: (dateTime) {
                             if (dateTime.day.isEven) {
                               return 10.0;

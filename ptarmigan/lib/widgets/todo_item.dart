@@ -77,7 +77,7 @@ class TodoItem extends StatelessWidget {
                       Container(
                           constraints:
                               BoxConstraints(minWidth: 100, maxWidth: 300),
-                          padding: EdgeInsets.fromLTRB(250, 0, 0, 0),
+                          padding: EdgeInsets.fromLTRB(260, 0, 0, 0),
                           child: Text(todo.description ?? 'No description',
                               textAlign: TextAlign.right,
                               style: todo.description.compareTo("%50") > 0
