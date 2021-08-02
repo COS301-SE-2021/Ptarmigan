@@ -54,49 +54,36 @@
 <br>
 <div class="container">
 
-    <div class="row bg-light border border-dark">
-
-        <div class="col-sm border-right">
-            User Name
-        </div>
-        <div class="col-sm border-right">
-            User ID
-        </div>
-        <div class="col-sm border-right">
-            Admin Status
-        </div>
-        <div class="col-sm">
-            Delete Account
-        </div>
-    </div>
-    <div class="row bg-white border border-dark">
-        <div class="col-sm border-right">
-            Benjamin van Staden
-        </div>
-        <div class="col-sm border-right">
-            9710055071083
-        </div>
-        <div class="col-sm border-right">
-            Yes
-        </div>
-        <div class="col-sm border-right">
-            <button type="button" class="btn btn-danger">Delete</button>
-        </div>
-    </div>
-    <div class="row bg-light border border-dark">
-        <div class="col-sm border-right">
-            Reinier Mouton
-        </div>
-        <div class="col-sm border-right">
-            9712052842075
-        </div>
-        <div class="col-sm border-right">
-            No
-        </div>
-        <div class="col-sm border-right">
-            <button type="button" class="btn btn-danger">Delete</button>
-        </div>
-    </div>
+    <table class="table table-striped table-dark">
+        <thead>
+        <tr >
+            <th scope="col">User Name</th>
+            <th scope="col">User ID</th>
+            <th scope="col">Admin</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">Benjamin van Staden</th>
+            <td>9710055071083</td>
+            <td>Yes</td>
+            <td>Delete</td>
+        </tr>
+        <tr>
+            <th scope="row">Reinier Mouton</th>
+            <td>9712053072133</td>
+            <td>No</td>
+            <td>Delete</td>
+        </tr>
+        <tr>
+            <th scope="row">Bob the Builder</th>
+            <td>9811084123451</td>
+            <td>No</td>
+            <td>Delete</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <!-- Optional JavaScript -->
