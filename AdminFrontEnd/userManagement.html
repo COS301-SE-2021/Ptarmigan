@@ -12,6 +12,27 @@
     <title>Hello, world!</title>
 </head>
 <body style="background-color:grey;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"><i class="fas fa-feather-alt"></i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Admin Pages
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Landing Page</a>
+                    <a class="dropdown-item disabled" href="#">User Management</a>
+                </div>
+            </li>
+        </ul>
+        <button class="btn my-2 my-sm-0" type="submit">Logout</button>
+    </div>
+</nav>
 <div class="container">
     <div class="row">
 
