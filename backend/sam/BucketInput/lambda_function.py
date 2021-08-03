@@ -24,10 +24,15 @@ def lambda_handler(event, context):
 
     uploadByteStream = bytes(json.dumps(updated).encode('UTF-8'))
 
-    s3client.put_object(
-        Bucket=bucketname,
-        Key=file_to_read,
-        Body=uploadByteStream)
-
-    # TODO update time stamp and overwrite file
+    try:
+        s3client.put_object(
+            Bucket=bucketname,
+            Key=file_to_read,
+            Body=uploadByteStream)
+    except:
+        return {
+            'statusCode': 500,
+            'body': json.dumps('Error updating Content file')
+        }
+    # else return success json
     return contents
