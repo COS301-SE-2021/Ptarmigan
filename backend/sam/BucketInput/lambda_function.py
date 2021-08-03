@@ -1,4 +1,4 @@
-import datetime
+import time
 import json
 import boto3
 
@@ -20,7 +20,7 @@ def lambda_handler(event, context):
     updated = (filedata.decode('utf-8'))
     updated = json.loads(updated)
 
-    updated['Scrape-until'] = datetime.datetime.now()
+    updated['Scrape-until'] = time.time()
 
     uploadByteStream = bytes(json.dumps(updated).encode('UTF-8'))
 
