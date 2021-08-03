@@ -21,7 +21,13 @@ def lambda_handler(event, context):
     updated = json.loads(updated)
 
     updated['Scrape-until'] = datetime.datetime.now()
-    print(updated['Scrape-until'])
+
+    uploadByteStream = bytes(json.dumps(updated).encode('UTF-8'))
+
+    s3client.put_object(
+        Bucket=bucketname,
+        Key=file_to_read,
+        Body=uploadByteStream)
 
     # TODO update time stamp and overwrite file
     return contents
