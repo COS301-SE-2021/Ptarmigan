@@ -71,6 +71,40 @@ Resources:
       Handler: bucketInput.app.lambda_handler
       Runtime: python3.8
 
+  twitterScraper:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/scraper/twitterScraper
+      Handler: twitterScraper.app.scrapetHandler
+      Runtime: python3.8
+
+  UpdateBucket:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/scraper/UpdateBucket
+      Handler: UpdateBucket.app.lambda_handler
+      Runtime: python3.8
+
+      Events:
+        HttpPost:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /scraper/UpdateBucket
+            Method: post
+
+  deleteBucketItem:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/scraper/deleteBucketItem
+      Handler: UpdateBucket.app.lambda_handler
+      Runtime: python3.8
+
+      Events:
+        HttpPost:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /scraper/deleteBucketItem
+            Method: post
 
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
