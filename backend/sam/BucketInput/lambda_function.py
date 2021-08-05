@@ -19,7 +19,6 @@ def lambda_handler(event, context):
 
     updated = (filedata.decode('utf-8'))
     updated = json.loads(updated)
-
     updated['Scrape-until'] = time.time()
 
     uploadByteStream = bytes(json.dumps(updated).encode('UTF-8'))
