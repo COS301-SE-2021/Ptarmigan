@@ -20,6 +20,12 @@ def lambda_handler(event, context):
 
     replaceContent = filecontents['scrape-detail']
 
+    for i in replaceContent:
+        if i['content'] == toDelete:
+            replaceContent.remove(i)
+            delFlag = True
+            break
+
     filecontents['scrape-detail'] = replaceContent
 
     uploadByteStream = bytes(json.dumps(filecontents).encode('UTF-8'))
