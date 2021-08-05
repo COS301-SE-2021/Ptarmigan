@@ -30,6 +30,17 @@ def lambda_handler(event, context):
 
     uploadByteStream = bytes(json.dumps(filecontents).encode('UTF-8'))
 
+    try:
+        s3client.put_object(
+            Bucket=bucketname,
+            Key=file_to_read,
+            Body=uploadByteStream)
+    except:
+        return {
+            'statusCode': 500,
+            'body': json.dumps('Error updating Content file')
+        }
+
     return {
         'statusCode': 200,
         'body': json.dumps('Item Deleted successfully and Content file has been updated')
