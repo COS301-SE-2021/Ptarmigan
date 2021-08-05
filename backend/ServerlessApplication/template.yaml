@@ -63,6 +63,14 @@ Resources:
             Path: /senthisize/getSentimentPeriod
             Method: post
 
+  bucketInput:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/scraper/bucketInput
+      Handler: bucketInput.app.lambda_handler
+      Runtime: python3.8
+
+
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
