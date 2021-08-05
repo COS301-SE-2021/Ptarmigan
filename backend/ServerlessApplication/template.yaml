@@ -11,7 +11,7 @@ Globals:
     Timeout: 300
     Environment:
       Variables:
-        TABLE_NAME: TestOne
+        TABLE_NAME: Twitter_Sentiment_Data
 
 
 Resources:
@@ -75,16 +75,16 @@ Resources:
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: TestOne
+      TableName: Twitter_Sentiment_Data
       AttributeDefinitions:
-        - AttributeName: id
-          AttributeType: S
+        - AttributeName: Tweet_Id
+          AttributeType: N
       KeySchema:
-        - AttributeName: id
+        - AttributeName: Tweet_Id
           KeyType: HASH
       ProvisionedThroughput:
-        ReadCapacityUnits: 5
-        WriteCapacityUnits: 5
+        ReadCapacityUnits: 10
+        WriteCapacityUnits: 10
       StreamSpecification:
         StreamViewType: NEW_IMAGE
 

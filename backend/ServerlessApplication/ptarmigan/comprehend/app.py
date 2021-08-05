@@ -11,24 +11,50 @@ def lambda_twitterComprehend(event, context):
 
     table = dbClient.Table(tableName)
 
+    print("TableName",tableName)
+
     comprehend = boto3.client("comprehend")
 
     print(event)
+
+    putItem = []
 
     for item in event:
         response = comprehend.detect_sentiment(Text=event[item]["Text"], LanguageCode=event[item]["lang"])
         event[item]["sentiment"] = response["Sentiment"]
 
-        table.put_item(
-            Item={
-                'Tweet_Id': int(event[item]["Tweet Id"]),
-                'Text': event[item]["Text"],
-                'lang': event[item]["lang"],
-                'Weight': str(event[item]["Weight"]),
-                'Sentiment': event[item]["sentiment"],
-                'TimeStamp': event[item]["date"],
-                'CompanyName': event[item]["CompanyName"]
-            })
+        newItem = {
+            'PutRequest': {
+                'Item': {
+                    'Tweet_Id': int(event[item]["Tweet Id"]),
+                    'Text': event[item]["Text"],
+                    'lang': event[item]["lang"],
+                    'Weight': str(event[item]["Weight"]),
+                    'Sentiment': event[item]["sentiment"],
+                    'TimeStamp': event[item]["date"],
+                    'CompanyName': event[item]["Company"]
+                }
+            }
+        }
+        putItem.append(newItem)
+
+    print("plasing items", json.dumps(putItem))
+
+    dbClient.batch_write_item(
+        RequestItems = {
+            tableName : putItem
+        }
+    )
+        # table.put_item(
+        #     Item={
+        #         'Tweet_Id': int(event[item]["Tweet Id"]),
+        #         'Text': event[item]["Text"],
+        #         'lang': event[item]["lang"],
+        #         'Weight': str(event[item]["Weight"]),
+        #         'Sentiment': event[item]["sentiment"],
+        #         'TimeStamp': event[item]["date"],
+        #         'CompanyName': event[item]["Company"]
+        #     })
 
         # TODO: write code...
         # TODO: write code...
