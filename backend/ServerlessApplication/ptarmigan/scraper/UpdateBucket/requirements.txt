@@ -1,4 +1,2 @@
 json
-snscrape.modules.twitter
-pandas as pd
-datetime
+boto3
