@@ -1,5 +1,5 @@
 /*
-* Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+* Copyright 2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 *
 * Licensed under the Apache License, Version 2.0 (the "License").
 * You may not use this file except in compliance with the License.
@@ -24,31 +24,26 @@ export 'Todo.dart';
 
 class ModelProvider implements ModelProviderInterface {
   @override
-  String version = "88c98d698221c36127bde54a228d1e44";
+  String version = "2bffb04382a4d7f1e112c457ffb2d2cd";
   @override
   List<ModelSchema> modelSchemas = [Feed.schema, Todo.schema];
   static final ModelProvider _instance = ModelProvider();
 
   static ModelProvider get instance => _instance;
-
+  
   ModelType getModelTypeByModelName(String modelName) {
-    switch (modelName) {
-      case "Feed":
-        {
-          return Feed.classType;
-        }
-        break;
-      case "Todo":
-        {
-          return Todo.classType;
-        }
-        break;
-      default:
-        {
-          throw Exception(
-              "Failed to find model in model provider for model name: " +
-                  modelName);
-        }
+    switch(modelName) {
+    case "Feed": {
+    return Feed.classType;
+    }
+    break;
+    case "Todo": {
+    return Todo.classType;
+    }
+    break;
+    default: {
+    throw Exception("Failed to find model in model provider for model name: " + modelName);
+    }
     }
   }
 }

@@ -59,9 +59,9 @@ class FeedItems extends StatelessWidget {
         // create a new Todo from the form values
         // `isComplete` is also required, but should start false in a new Todo
         Todo newTodo = Todo(
-            name: name,
-            description: description.isNotEmpty ? description : null,
-            isComplete: false);
+          name: name,
+          description: description.isNotEmpty ? description : null,
+        );
 
         try {
           // to write data to DataStore, we simply pass an instance of a model to

@@ -60,7 +60,7 @@ class TodoItem extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(todo.name,
+              Text(todo.date.format(),
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -77,7 +77,7 @@ class TodoItem extends StatelessWidget {
                       Container(
                           constraints:
                               BoxConstraints(minWidth: 100, maxWidth: 300),
-                          padding: EdgeInsets.fromLTRB(260, 0, 0, 0),
+                          padding: EdgeInsets.fromLTRB(230, 0, 0, 0),
                           child: Text(todo.description ?? 'No description',
                               textAlign: TextAlign.right,
                               style: todo.description.compareTo("%50") > 0

@@ -6,10 +6,10 @@ const amplifyconfig = ''' {
             "awsAPIPlugin": {
                 "Ptarmigan": {
                     "endpointType": "GraphQL",
-                    "endpoint": "https://acy6wmegzfas3fmwxla3hycxfi.appsync-api.eu-west-2.amazonaws.com/graphql",
-                    "region": "eu-west-2",
+                    "endpoint": "https://6mdpm2tiijbx5jxsfjcekazodm.appsync-api.eu-west-1.amazonaws.com/graphql",
+                    "region": "eu-west-1",
                     "authorizationType": "API_KEY",
-                    "apiKey": "da2-ku3jjwsgjjeljmuhf5zoon6rh4"
+                    "apiKey": "da2-j52s3vopxzaknljn2dhnqquoqm"
                 }
             }
         }
