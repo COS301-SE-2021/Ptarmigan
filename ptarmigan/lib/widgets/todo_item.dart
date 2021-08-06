@@ -62,8 +62,8 @@ class TodoItem extends StatelessWidget {
             children: [
               Text(todo.date.format(),
                   style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400,
                       color: Colors.white)),
 
               // padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
