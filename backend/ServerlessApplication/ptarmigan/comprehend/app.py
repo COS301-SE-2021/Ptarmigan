@@ -25,10 +25,16 @@ def batchSentiment(items):
 
             if len(newItems) == 25:
                 print("Len is above 25")
-                getSentimentBatch(newItems)
+                doneItems.append(getSentimentBatch(newItems, j))
+                newItems = []
 
         if len(newItems):
-            getSentimentBatch(newItems, j)
+            doneItems.append(getSentimentBatch(newItems, j))
+            newItems= []
+
+    print(doneItems)
+    return doneItems
+
 
 
 def getSentimentBatch(batchArray, lang):
@@ -39,30 +45,49 @@ def getSentimentBatch(batchArray, lang):
         print(i)
         textList.append(i["Text"])
 
-
-    request =  {
-        "LanguageCode": lang,
-        "TextList": textList
-    }
-
-    print("Request content: ", request)
-
     response = comprehend.batch_detect_sentiment(
-        TextList=[
-            json.dumps(textList)
-        ],
+        TextList=textList,
         LanguageCode='en'
     )
 
-    print("RES", response)
+    print("Res", response)
+
+    for i in response["ResultList"]:
+        batchArray[i["Index"]]["Sentiment"] = i["Sentiment"]
+        # print("DOne ", batchArray[i["Index"]])
+
+    return batchArray
+
 
 
 
 
 
 def lambda_twitterComprehend(event, context):
+    dbClient = boto3.resource("dynamodb")
+    tableName = os.environ["TABLE_NAME"]
+    table = dbClient.Table(tableName)
+    processedData = batchSentiment(event)
+    putItem = []
 
-    batchSentiment(event)
+    for item in processedData[0]:
+        newItem = {
+            'PutRequest': {
+                'Item': {
+                    'Tweet_Id': int(item["Tweet Id"]),
+                    'Text': item["Text"],
+                    'lang': item["lang"],
+                    'Weight': str(item["Weight"]),
+                    'Sentiment': item["Sentiment"],
+                    'TimeStamp': item["date"],
+                    'CompanyName': item["Company"]
+                }
+            }
+        }
+        putItem.append(newItem)
+
+    print("PutItems ", putItem)
+
 
     # dbClient = boto3.resource("dynamodb")
     #
@@ -99,12 +124,12 @@ def lambda_twitterComprehend(event, context):
     #
     # print("plasing items", json.dumps(putItem))
     #
-    # dbClient.batch_write_item(
-    #     RequestItems = {
-    #         tableName : putItem
-    #     }
-    # )
-    #
+    dbClient.batch_write_item(
+        RequestItems = {
+            tableName : putItem
+        }
+    )
+
     return {
             "statusCode": 200,
             "body": "This task was successfull"
