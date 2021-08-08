@@ -67,6 +67,7 @@ Resources:
       CodeUri: ptarmigan/scraper/bucketInput
       Handler: bucketInput.app.lambda_handler
       Runtime: python3.8
+      Role: arn:aws:iam::878292117449:role/S3Lambda
 
   twitterScraper:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -74,6 +75,11 @@ Resources:
       CodeUri: ptarmigan/scraper/twitterScraper
       Handler: twitterScraper.app.scrapetHandler
       Runtime: python3.8
+      Role: arn:aws:iam::878292117449:role/Comprehend_Dyno_Lambda
+      Layers:
+        - arn:aws:lambda:eu-west-1:878292117449:layer:SnscrapeLib:1
+        - arn:aws:lambda:eu-west-1:878292117449:layer:PandasLib:1
+        - arn:aws:lambda:eu-west-1:399891621064:layer:AWSLambda-Python38-SciPy1x:29
 
   UpdateBucket:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -81,6 +87,7 @@ Resources:
       CodeUri: ptarmigan/scraper/UpdateBucket
       Handler: UpdateBucket.app.lambda_handler
       Runtime: python3.8
+      Role: arn:aws:iam::878292117449:role/S3Lambda
 
       Events:
         HttpPost:
@@ -95,6 +102,7 @@ Resources:
       CodeUri: ptarmigan/scraper/deleteBucketItem
       Handler: UpdateBucket.app.lambda_handler
       Runtime: python3.8
+      Role: arn:aws:iam::878292117449:role/S3Lambda
 
       Events:
         HttpPost:
@@ -103,6 +111,10 @@ Resources:
             Path: /scraper/deleteBucketItem
             Method: post
 
+  stepFunction:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      DefinitionUri:
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
