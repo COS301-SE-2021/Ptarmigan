@@ -89,14 +89,14 @@ def lambda_twitterComprehend(event, context):
     print("PutItems ", putItem)
 
     dbClient.batch_write_item(
-        RequestItems = {
-            tableName : putItem
+        RequestItems={
+            tableName: putItem
         }
     )
 
     return {
             "statusCode": 200,
-            "body": "This task was successfull"
+            "body": "This task was successful"
             }
 
 
