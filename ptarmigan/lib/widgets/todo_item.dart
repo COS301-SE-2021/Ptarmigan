@@ -54,7 +54,7 @@ class TodoItem extends StatelessWidget {
     graphPoints.add(DataPoint<DateTime>(value: 10, xAxis: date1));
 
     return Card(
-      color: Colors.white30,
+      color: Colors.white12,
       child: Row(children: [
         Expanded(
           child: Row(

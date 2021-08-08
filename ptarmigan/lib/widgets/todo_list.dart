@@ -71,13 +71,14 @@ class TodosList extends StatelessWidget {
                   stops: [
                 0.1,
                 0.55,
-                0.98,
+                //  0.98,
                 // 0.99,
               ],
                   colors: [
-                Color(0xff488286),
-                Color(0xff305252),
-                Color(0xff3AAFB9),
+                Color(0xff07424B),
+                Color(0xff07424B),
+                //  Color(0xff488286),
+                //  Color(0xff3AAFB9),
                 //Color(0xff093A3E),
                 //  Color(0xff4087a1),
                 //  Color(0xff0a5bad),
@@ -138,7 +139,40 @@ class TodosList extends StatelessWidget {
                             return 5.0;
                           },
                           data: //graphPoints
-                              const [],
+                              [
+                            DataPoint<DateTime>(
+                                value: 10,
+                                xAxis:
+                                    DateTime.now().subtract(Duration(days: 2))),
+                            DataPoint<DateTime>(
+                                value: 130,
+                                xAxis:
+                                    DateTime.now().subtract(Duration(days: 3))),
+                            DataPoint<DateTime>(
+                                value: 50,
+                                xAxis:
+                                    DateTime.now().subtract(Duration(days: 4))),
+                            DataPoint<DateTime>(
+                                value: 150,
+                                xAxis:
+                                    DateTime.now().subtract(Duration(days: 2))),
+                            DataPoint<DateTime>(
+                                value: 75,
+                                xAxis:
+                                    DateTime.now().subtract(Duration(days: 2))),
+                            DataPoint<DateTime>(
+                                value: 0,
+                                xAxis:
+                                    DateTime.now().subtract(Duration(days: 2))),
+                            DataPoint<DateTime>(
+                                value: 5,
+                                xAxis:
+                                    DateTime.now().subtract(Duration(days: 2))),
+                            DataPoint<DateTime>(
+                                value: 45,
+                                xAxis:
+                                    DateTime.now().subtract(Duration(days: 2))),
+                          ],
                         ),
                       ],
                       config: BezierChartConfig(

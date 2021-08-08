@@ -181,7 +181,7 @@ class _TodosPageState extends State<TodosPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Insight Posts"),
-        backgroundColor: Color(0xff488286),
+        backgroundColor: Color(0xff07424B),
       ),
       //body: Center(child: CircularProgressIndicator()),
       body: _isLoading

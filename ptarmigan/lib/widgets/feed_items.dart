@@ -76,6 +76,7 @@ class FeedItems extends StatelessWidget {
     }
 
     return Card(
+      color: Colors.white,
       child: InkWell(
         onLongPress: () {
           _deleteFeed(context);
@@ -97,7 +98,7 @@ class FeedItems extends StatelessWidget {
                   Text(feed.feedName,
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                  Text(feed.description ?? 'No description'),
+                  Text(feed.description ?? ''),
                 ],
               ),
             ),

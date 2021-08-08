@@ -38,11 +38,12 @@ class FeedsList extends StatelessWidget {
       child: Stack(
         children: [
           Container(
+              color: Color(0xffCEE1E4),
               key: Key("ListView_container"),
               child: feedsSub.length >= 1
                   ? ListView(
                       key: Key('ListView'),
-                      padding: EdgeInsets.fromLTRB(0, 229, 0, 0),
+                      padding: EdgeInsets.fromLTRB(0, 190, 0, 0),
                       scrollDirection: Axis.vertical,
                       children: feedsSub
                           .map((feedsSub) => FeedItems(feed: feedsSub))
@@ -50,7 +51,7 @@ class FeedsList extends StatelessWidget {
                   : Center(child: Text(''))),
           DrawerHeader(
               decoration: BoxDecoration(
-                color: Color(0xff488286),
+                color: Color(0xff07424B),
               ),
               child: Column(
                 key: Key("ColumnOne"),
@@ -81,7 +82,7 @@ class FeedsList extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(color: Color(0xff02d39a))),
                       style: ElevatedButton.styleFrom(
-                          primary: Colors.black12, textStyle: TextStyle()),
+                          primary: Colors.black45, textStyle: TextStyle()),
                     ),
                   )),
                 ],
