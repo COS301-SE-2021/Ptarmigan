@@ -22,8 +22,7 @@ Resources:
       Handler: app.lambda_twitterComprehend
       Runtime: python3.8
       Policies:
-        DynamoDbCrudPolicy:
-          TableName: TestOne
+        - AmazonDynamoDBFullAccess
       Events:
         HttpPost:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -38,8 +37,7 @@ Resources:
       Handler: getGraphSentiment.app.lambda_handler
       Runtime: python3.8
       Policies:
-        DynamoDbCrudPolicy:
-          TableName: TestOne
+        - AmazonDynamoDBFullAccess
       Events:
         HttpPost:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -54,8 +52,7 @@ Resources:
       Handler: getSentimentPeriod.app.lambda_handler
       Runtime: python3.8
       Policies:
-        DynamoDbCrudPolicy:
-          TableName: TestOne
+        - AmazonDynamoDBFullAccess
 
       Events:
         HttpPost:
@@ -109,7 +106,7 @@ Resources:
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: Twitter_Sentiment_Data
+      TableName: SentimentTable
       AttributeDefinitions:
         - AttributeName: Tweet_Id
           AttributeType: N
