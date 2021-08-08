@@ -114,7 +114,9 @@ Resources:
   stepFunction:
     Type: AWS::Serverless::StateMachine
     Properties:
-      DefinitionUri:
+      DefinitionUri:  ptarmigan/Stepfunc/
+      Role: arn:aws:iam::878292117449:role/stepFunctionLambdaRole
+
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
