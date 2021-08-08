@@ -30,7 +30,7 @@ class _TodosPageState extends State<TodosPage> {
   List<Todo> todos;
   List<Feed> _feeds;
   List<Feed> _feedsSub;
-
+  String currentFeedSelected = " ";
   bool _isLoading;
   bool isSignUpComplete;
   StreamSubscription _subscription;
@@ -39,6 +39,7 @@ class _TodosPageState extends State<TodosPage> {
   StreamSubscription _subscriptionTodoUpdate;
 
   List<Todo> _todos;
+  String _feedTitle;
 
   final AmplifyDataStore _dataStorePlugin =
       AmplifyDataStore(modelProvider: ModelProvider.instance);

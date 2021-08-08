@@ -22,6 +22,7 @@ import 'package:bezier_chart/bezier_chart.dart';
 class TodosList extends StatelessWidget {
   List<Todo> todos;
   List<Feed> feeds;
+  String feedTitle = "All";
   StreamSubscription _subscription;
   final pageViewController = PageController();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -41,6 +42,8 @@ class TodosList extends StatelessWidget {
     List<Todo> updatedTodos = await Amplify.DataStore.query(Todo.classType,
         where: Todo.NAME.eq(feedIdentifier));
     todos = updatedTodos;
+    feedTitle = feedIdentifier;
+
     //print("VACO: " + todos.elementAt(0).name);
   }
 
@@ -84,20 +87,40 @@ class TodosList extends StatelessWidget {
           height: 700,
           child: Stack(
             children: [
+              Column(
+                children: [
+                  Container(
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      width: double.infinity,
+                      color: Colors.black45,
+                      child: Padding(
+                          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          child: Text(
+                            feedTitle ?? 'No description',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 35,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0xff02d39a),
+                              fontFamily: "Montserrat",
+                            ),
+                          )))
+                ],
+              ),
               Container(
                 height: 240,
                 padding: EdgeInsets.only(
-                  left: 5.0,
-                  right: 5.0,
-                  top: 0,
+                  left: 0.0,
+                  right: 0.0,
+                  top: 40,
                   bottom: 0,
                 ),
-                child: Center(
-                    child: Container(
-                  decoration: const BoxDecoration(color: Colors.white10),
+                child: Container(
+                  width: 800,
+                  decoration: const BoxDecoration(color: Colors.black45),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        right: 12.0, left: 12.0, top: 0, bottom: 20),
+                        right: 0.0, left: 0.0, top: 0, bottom: 20),
                     child: BezierChart(
                       fromDate: fromDate,
                       bezierChartScale: BezierChartScale.WEEKLY,
@@ -105,7 +128,7 @@ class TodosList extends StatelessWidget {
                       selectedDate: toDate,
                       series: [
                         BezierLine(
-                          lineColor: Colors.white,
+                          lineColor: Color(0xff02d39a),
                           lineStrokeWidth: 2.0,
                           //   label: "Dutysdas",
                           onMissingValue: (dateTime) {
@@ -127,7 +150,7 @@ class TodosList extends StatelessWidget {
                       ),
                     ),
                   ),
-                )),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(0, 260, 0, 50),
