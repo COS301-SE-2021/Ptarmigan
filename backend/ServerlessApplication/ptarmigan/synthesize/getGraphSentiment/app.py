@@ -43,12 +43,11 @@ def getInterval(interval):
 
 def dbReturn(event, beginDate, endDate):
     dynamodb = boto3.resource('dynamodb')
-    tableName = os.environ["TABLE_NAME"]
+    tableName = "Tesla"
     table = dynamodb.Table(tableName)
 
-    response = table.scan(
-        FilterExpression=Key('Tweet_Id').gt(1) & Key('TimeStamp').between(beginDate, endDate) & Key('CompanyName').eq(
-            event["CompanyName"])
+    response = table.query(
+        KeyConditionExpression=Key('Tweet_Id').eq(1423156475799683000)
     )
 
     return response
