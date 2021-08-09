@@ -1,6 +1,6 @@
 import json
 import os
-
+import database
 import boto3
 
 def batchSentiment(items):
@@ -65,11 +65,11 @@ def getSentimentBatch(batchArray, lang):
 
 def lambda_twitterComprehend(event, context):
     dbClient = boto3.resource("dynamodb")
-    tableName = os.environ["TABLE_NAME"]
-    table = dbClient.Table(tableName)
     processedData = batchSentiment(event)
+    db = database.database("Twitter_Sentiment_Data")
+    # db.writeToDB(processedData)
     putItem = []
-
+    tableName = event['0']["Company"]
     for item in processedData[0]:
         newItem = {
             'PutRequest': {
