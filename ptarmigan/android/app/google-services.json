@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "775795216387",
+    "project_id": "ptarmigan-test",
+    "storage_bucket": "ptarmigan-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:775795216387:android:2d870469c2f6d14c1d7e36",
+        "android_client_info": {
+          "package_name": "com.example.ptarmigan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "775795216387-m5kb4g98gqsus8ojkaedf7a6lkuu96bs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbu5P-jjIetVpC1fdpDZe5F5spf-D_P9c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "775795216387-m5kb4g98gqsus8ojkaedf7a6lkuu96bs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
