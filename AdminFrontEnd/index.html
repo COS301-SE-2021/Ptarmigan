@@ -95,7 +95,75 @@
             </tbody>
         </table>
     </div>
+    <br>
 
+<!--    Second table-->
+
+    <div class="container">
+        <div class="container m-2 bg-dark text-white rounded p-8">
+
+            <div class="col-sm">
+                <b class="text-light">Filters :</b>
+                <button type="button" class="btn btn-dark">User Name</button>
+                <button type="button" class="btn btn-dark">User ID</button>
+                <button type="button" class="btn btn-dark">Admin</button>
+            </div>
+            <div class="col-sm">
+                <form class="form-inline my-2 my-lg-0 float-right">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+
+
+
+        <div class="container m-2 bg-dark text-white rounded p-8">
+            <table class="table table-dark table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">User Name</th>
+                    <th scope="col">User ID</th>
+                    <th scope="col">Admin</th>
+                    <th scope="col">Delete</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td scope="row">Benjamin van Staden</td>
+                    <td>9710055071083</td>
+                    <td>
+                        <button type="button" class="btn btn-danger adminStatus" value="notThisValue">No<span class="glyphicon glyphicon-thumbs-down"></span></button>
+                    </td>
+                    <th scope="col">
+                        <button type="button" class="btn btn-danger removeOnClick">Delete</button>
+                    </th>
+                </tr>
+                <tr>
+                    <td scope="row">Reinier Mouton</td>
+                    <td>9712053072133</td>
+                    <td>
+                        <button type="button" class="btn btn-danger adminStatus" value="notThisValue">No<span class="glyphicon glyphicon-thumbs-down"></span></button>
+                    </td>
+                    <th scope="col">
+                        <button type="button" class="btn btn-danger removeOnClick">Delete</button>
+                    </th>
+                </tr>
+                <tr>
+                    <td scope="row">Bob the Builder</td>
+                    <td>9811084123451</td>
+                    <td>
+                        <button type="button" class="btn btn-danger adminStatus" value="notThisValue">No<span class="glyphicon glyphicon-thumbs-down"></span></button>
+                    </td>
+                    <th scope="col">
+                        <button type="button" class="btn btn-danger removeOnClick">Delete</button>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 </div>
 
@@ -106,5 +174,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="homeJs.js"></script>
+
+
+<script>
+    //help
+    $(document).ready(function () {
+        $('.adminStatus').click(function () {
+            if($(this).text() == 'Yes') {
+                $(this).text('No');
+            }
+            else {
+                $(this).text('Yes');
+            }
+        })
+    });
+
+</script>
 </body>
 </html>
