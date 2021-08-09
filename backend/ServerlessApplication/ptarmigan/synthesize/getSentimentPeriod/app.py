@@ -22,17 +22,17 @@ def calculateSentiment(content):
             sentiment = -1
 
         runningSentiment = runningSentiment + (weight * sentiment)
-
+    if totalVotes == 0:
+        return 0
     return (runningSentiment/totalVotes)
 
 def dbReturn(event):
     dynamodb = boto3.resource('dynamodb')
-    tableName = os.environ["TABLE_NAME"]
+    tableName = event["CompanyName"]
     table = dynamodb.Table(tableName)
 
     response = table.scan(
-        FilterExpression=Key('Tweet_Id').gt(1) & Key('TimeStamp').between(event["BeginDate"], event["EndDate"]) & Key(
-            'CompanyName').eq(event["CompanyName"])
+        FilterExpression=Key('Tweet_Id').gt(1) & Key('TimeStamp').between(event["BeginDate"], event["EndDate"])
     )
 
     return response
