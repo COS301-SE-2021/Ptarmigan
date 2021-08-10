@@ -1,10 +1,13 @@
 import json
 import boto3
+import database
 
 def lambda_handler(event, context):
 
     # read context from passed json argument
     update = event['content']
+
+    database.database(update)
 
     #connet to s3 and file the scrape conent file
     s3client = boto3.client('s3')
