@@ -75,7 +75,7 @@ class _LoginState extends State<Login> {
       ),
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacementNamed(
-          _isSignedIn ? '/dashboard' : '/confirm',
+          _isSignedIn ? '/home' : '/confirm',
           arguments: _data,
         );
       },

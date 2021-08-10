@@ -40,20 +40,17 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           title: 'Amplified Todo',
-          home: TodosPage(),
+          //home: TodosPage(),
           //home: Login(),
+          initialRoute: '/login',
+          routes: {
+            '/login': (context) => Login(),
+            '/home': (context) => TodosPage(), // REPLACE WITH HOME SCREEN
+            '/insights': (context) => TodosPage()
+          },
         ));
   }
 }
-
-
-
-
-
-
-
-
-
 
 // FOR TESTING PURPOSES
 class MyWidget extends StatelessWidget {
