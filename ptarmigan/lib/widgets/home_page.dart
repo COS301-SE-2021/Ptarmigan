@@ -1,40 +1,58 @@
-import '../flutter_flow/flutter_flow_theme.dart';
-import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_flutter/amplify.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-class HomePageWidget extends StatefulWidget {
-  HomePageWidget({Key key}) : super(key: key);
-
+class DashboardScreen extends StatefulWidget {
   @override
-  _HomePageWidgetState createState() => _HomePageWidgetState();
+  _DashboardScreenState createState() => _DashboardScreenState();
 }
 
-class _HomePageWidgetState extends State<HomePageWidget> {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+class _DashboardScreenState extends State<DashboardScreen> {
+  late AuthUser _user;
+  @override
+  void initState() {
+    super.initState();
+    Amplify.Auth.getCurrentUser().then((user) {
+      setState(() {
+        _user = user;
+      });
+    }).catchError((error) {
+      print(error.message as AuthException);
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
-      body: SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.01,
-              decoration: BoxDecoration(
-                color: Color(0xFFEEEEEE),
-                shape: BoxShape.rectangle,
-              ),
-            ),
-            ElevatedButton(onPressed: 
-            Navigator.push(context, '/login')
-            , child: child)
-          ],
+      appBar: AppBar(
+        title: Text('Dashboard'),
+        actions: [
+          MaterialButton(
+              onPressed: () {
+                Amplify.Auth.signOut().then((_) {
+                  Navigator.pushReplacementNamed(context, '/login');
+                });
+              },
+              child: Icon(
+                Icons.logout,
+                color: Colors.white,
+              ))
+        ],
+      ),
+      body: Container(
+        child: Center(
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/login');
+            },
+            child: Text('Insight page'),
+          ),
         ),
       ),
     );

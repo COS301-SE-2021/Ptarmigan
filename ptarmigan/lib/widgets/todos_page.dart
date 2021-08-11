@@ -41,11 +41,11 @@ class _TodosPageState extends State<TodosPage> {
   List<Todo> _todos;
   String _feedTitle;
 
-  final AmplifyDataStore _dataStorePlugin =
-      AmplifyDataStore(modelProvider: ModelProvider.instance);
+  //final AmplifyDataStore _dataStorePlugin =
+   //   AmplifyDataStore(modelProvider: ModelProvider.instance);
 
-  final AmplifyAPI _apiPlugin = AmplifyAPI();
-  final AmplifyAuthCognito _authPlugin = AmplifyAuthCognito();
+ // final AmplifyAPI _apiPlugin = AmplifyAPI();
+ // final AmplifyAuthCognito _authPlugin = AmplifyAuthCognito();
 
   @override
   void initState() {
@@ -70,7 +70,7 @@ class _TodosPageState extends State<TodosPage> {
 
   Future<void> _initializeApp() async {
     // configure Amplify
-    await _configureAmplify();
+    //await _configureAmplify();
 
     // listen for updates to Todo entries by passing the Todo classType to
     // Amplify.DataStore.observe() and when an update event occurs, fetch the
@@ -105,7 +105,7 @@ class _TodosPageState extends State<TodosPage> {
   //---------------------------------------------------------------------
   //Beginning of signing in flow
 
-  Future<void> _configureAmplify() async {
+  /*Future<void> _configureAmplify() async {
     try {
       // add Amplify plugins
       //await Amplify.addPlugins([_dataStorePlugin]);
@@ -124,7 +124,7 @@ class _TodosPageState extends State<TodosPage> {
       // but this will be sufficient for the purposes of this tutorial
       print('An error occurred while configuring Amplify: $e');
     }
-  }
+  }*/
 
   Future<void> _fetchTodos() async {
     try {

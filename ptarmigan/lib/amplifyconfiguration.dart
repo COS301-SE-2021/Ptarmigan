@@ -22,34 +22,12 @@ const amplifyconfig = ''' {
                 "IdentityManager": {
                     "Default": {}
                 },
-                "AppSync": {
-                    "Default": {
-                        "ApiUrl": "https://acy6wmegzfas3fmwxla3hycxfi.appsync-api.eu-west-2.amazonaws.com/graphql",
-                        "Region": "eu-west-2",
-                        "AuthMode": "API_KEY",
-                        "ApiKey": "da2-ku3jjwsgjjeljmuhf5zoon6rh4",
-                        "ClientDatabasePrefix": "Ptarmigan_API_KEY"
-                    },
-                    "Ptarmigan_AWS_IAM": {
-                        "ApiUrl": "https://acy6wmegzfas3fmwxla3hycxfi.appsync-api.eu-west-2.amazonaws.com/graphql",
-                        "Region": "eu-west-2",
-                        "AuthMode": "AWS_IAM",
-                        "ClientDatabasePrefix": "Ptarmigan_AWS_IAM"
-                    }
-                },
-                "CredentialsProvider": {
-                    "CognitoIdentity": {
-                        "Default": {
-                            "PoolId": "eu-west-2:b31f9508-405f-4461-b51e-bc4b96705f64",
-                            "Region": "eu-west-2"
-                        }
-                    }
-                },
+
                 "CognitoUserPool": {
                     "Default": {
-                        "PoolId": "eu-west-2_smsu78wGa",
-                        "AppClientId": "79ji24k1mlp099qtqh2rcp6k4g",
-                        "Region": "eu-west-2"
+                        "PoolId": "eu-west-1_gM8mCo99w",
+                        "AppClientId": "3df2qnjks8rd8j4kpm0idhfl41",
+                        "Region": "eu-west-1"
                     }
                 },
                 "Auth": {
