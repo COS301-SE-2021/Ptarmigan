@@ -20,8 +20,8 @@ def returnTweetList(content, scrapetimeframe):
         # only retrieves the first n tweets
         if i >= 100:
             break
-        tweets_list.append([tweet.id, tweet.content, tweet.retweetCount,
-                            tweet.likeCount, tweet.lang, tweet.date])
+        tweets_list.append([str(tweet.id), tweet.content, tweet.retweetCount,
+                            tweet.likeCount, tweet.lang, tweet.date.timestamp()])
     # Creating a dataframe from the tweets list above
     return tweets_list
 
@@ -30,8 +30,7 @@ def returnTweetList(content, scrapetimeframe):
 # event - json object (contains content and scrape_since)
 def scrapetHandler(event, context):
     # Extract from json objects
-    ScrapeDetail = event['Scrape-detail']
-    content = ScrapeDetail['content']
+    content = event['content']['content']
 
     scrape_since = int(event['scrape-until'])
     scrape_timestamp = datetime.datetime.fromtimestamp(scrape_since)
@@ -60,4 +59,5 @@ def scrapetHandler(event, context):
     # Convert to json and return
     jsonOutput = tweets_df.to_json(orient="index")
     parsed = json.loads(jsonOutput)
-    return json.dumps(parsed, indent=4)
+    return parsed
+    #return json.dumps(parsed, indent=4)

@@ -1,9 +1,8 @@
 {
-  "Comment": "State machine start",
+  "Comment": "This is your state machine",
   "StartAt": "Pass Scraper Content",
   "States": {
     "Pass Scraper Content": {
-      "Comment": "Pass s3 file to next state",
       "Type": "Task",
       "Resource": "arn:aws:states:::lambda:invoke",
       "OutputPath": "$.Payload",
@@ -21,49 +20,45 @@
           "MaxAttempts": 6,
           "BackoffRate": 2
         }
-       ],
+      ],
       "Next": "Map"
-      },
-      "Map": {
-        "Comment": "Map state - next state applied to everything in the array",
-        "Type": "Map",
-        "End": true,
-        "Iterator": {
-          "StartAt": "Twitter Scraper",
-          "States": {
-            "Twitter Scraper": {
-              "Comment": "Twitter scraper lambda function",
-              "Type": "Task",
-              "Resource": "arn:aws:states:::lambda:invoke",
-              "OutputPath": "$.Payload",
-              "Parameters": {
-                "Payload.$": "$",
-                "FunctionName": "arn:aws:lambda:eu-west-1:878292117449:function:Twitter_scraper:$LATEST"
-              },
-              "Retry": [
-                {
-                  "ErrorEquals": [
-                    "Lambda.ServiceException",
-                    "Lambda.AWSLambdaException",
-                    "Lambda.SdkClientException"
-                  ],
-                  "IntervalSeconds": 2,
-                  "MaxAttempts": 6,
-                  "BackoffRate": 2
-                }
-              ],
-              "Next": "Sentiment Analysis"
+    },
+    "Map": {
+      "Type": "Map",
+      "Iterator": {
+        "StartAt": "Twitter Scraper",
+        "States": {
+          "Twitter Scraper": {
+            "Type": "Task",
+            "Resource": "arn:aws:states:::lambda:invoke",
+            "OutputPath": "$.Payload",
+            "Parameters": {
+              "Payload.$": "$",
+              "FunctionName": "arn:aws:lambda:eu-west-1:878292117449:function:Twitter_scraper:$LATEST"
             },
-            "Sentiment Analysis": {
-              "Comment": "Sentiment analysis lambda function",
-              "Type": "Task",
-              "Resource": "arn:aws:states:::lambda:invoke",
-              "OutputPath": "$.Payload",
-              "Parameters": {
-                "Payload.$": "$",
-                "FunctionName": "arn:aws:lambda:eu-west-1:878292117449:function:Sentiment_Analysis:$LATEST"
-              },
-              "Retry": [
+            "Retry": [
+              {
+                "ErrorEquals": [
+                  "Lambda.ServiceException",
+                  "Lambda.AWSLambdaException",
+                  "Lambda.SdkClientException"
+                ],
+                "IntervalSeconds": 2,
+                "MaxAttempts": 6,
+                "BackoffRate": 2
+              }
+            ],
+            "Next": "Sentiment Analysis"
+          },
+          "Sentiment Analysis": {
+            "Type": "Task",
+            "Resource": "arn:aws:states:::lambda:invoke",
+            "OutputPath": "$.Payload",
+            "Parameters": {
+              "Payload.$": "$",
+              "FunctionName": "arn:aws:lambda:eu-west-1:878292117449:function:Sentiment_Analysis:$LATEST"
+            },
+            "Retry": [
               {
                 "ErrorEquals": [
                   "Lambda.ServiceException",
@@ -79,7 +74,12 @@
           }
         }
       },
-      "Next": "Success"
+      "Next": "Success",
+      "ItemsPath": "$.scrape-detail",
+      "Parameters": {
+        "Scrape-until.$": "$.Scrape-until",
+        "content.$": "$$.Map.Item.Value"
+      }
     },
     "Success": {
       "Type": "Succeed"
