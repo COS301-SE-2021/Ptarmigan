@@ -65,7 +65,7 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ptarmigan/scraper/bucketInput
-      Handler: bucketInput.app.lambda_handler
+      Handler: app.lambda_handler
       Runtime: python3.8
       Role: arn:aws:iam::878292117449:role/S3Lambda
 
@@ -73,7 +73,7 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ptarmigan/scraper/twitterScraper
-      Handler: twitterScraper.app.scrapetHandler
+      Handler: app.scraperHandler
       Runtime: python3.8
       Role: arn:aws:iam::878292117449:role/Comprehend_Dyno_Lambda
       Layers:
@@ -85,7 +85,7 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ptarmigan/scraper/UpdateBucket
-      Handler: UpdateBucket.app.lambda_handler
+      Handler: app.lambda_handler
       Runtime: python3.8
       Role: arn:aws:iam::878292117449:role/S3Lambda
 
@@ -100,22 +100,16 @@ Resources:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ptarmigan/scraper/deleteBucketItem
-      Handler: UpdateBucket.app.lambda_handler
+      Handler: app.lambda_handler
       Runtime: python3.8
       Role: arn:aws:iam::878292117449:role/S3Lambda
 
       Events:
         HttpPost:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Type: Api # More info about API    db = database.database(tableName) Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /scraper/deleteBucketItem
             Method: post
-
-  stepFunction:
-    Type: AWS::Serverless::StateMachine
-    Properties:
-      DefinitionUri:  ptarmigan/Stepfunc/
-      Role: arn:aws:iam::878292117449:role/stepFunctionLambdaRole
 
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
