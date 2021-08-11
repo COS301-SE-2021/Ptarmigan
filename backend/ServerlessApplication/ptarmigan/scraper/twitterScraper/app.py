@@ -59,4 +59,5 @@ def scrapetHandler(event, context):
     # Convert to json and return
     jsonOutput = tweets_df.to_json(orient="index")
     parsed = json.loads(jsonOutput)
-    return json.dumps(parsed, indent=4)
+    return parsed
+    #return json.dumps(parsed, indent=4)
