@@ -1,8 +1,19 @@
 // @dart=2.9
+import 'package:amplify_api/amplify_api.dart';
+import 'package:amplify_datastore/amplify_datastore.dart';
 import 'package:flutter/material.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:flutter_login/flutter_login.dart';
+import 'package:ptarmigan/models/ModelProvider.dart';
+
+import '../../amplifyconfiguration.dart';
+
+final AmplifyDataStore _dataStorePlugin =
+    AmplifyDataStore(modelProvider: ModelProvider.instance);
+
+final AmplifyAPI _apiPlugin = AmplifyAPI();
+final AmplifyAuthCognito _authPlugin = AmplifyAuthCognito();
 
 class Login extends StatefulWidget {
   @override
@@ -14,6 +25,7 @@ class _LoginState extends State<Login> {
   bool _isSignedIn = false;
 
   Future<String> _onLogin(LoginData data) async {
+    print("--LOGIN--");
     try {
       final res = await Amplify.Auth.signIn(
         username: data.name,
@@ -33,6 +45,7 @@ class _LoginState extends State<Login> {
   }
 
   Future<String> _onRecoverPassword(BuildContext context, String email) async {
+    print("--RECOVER PASS--");
     try {
       final res = await Amplify.Auth.resetPassword(username: email);
 
@@ -48,6 +61,7 @@ class _LoginState extends State<Login> {
   }
 
   Future<String> _onSignup(LoginData data) async {
+    print("--SIGN UP--");
     try {
       print("attempting sign up");
       await Amplify.Auth.signUp(
@@ -64,8 +78,15 @@ class _LoginState extends State<Login> {
     }
   }
 
+  Future<void> _initState() async {
+    print("ATTEMPTING CONFIG");
+    await _configureAmplify();
+  }
+
   @override
   Widget build(BuildContext context) {
+    _initState();
+    print("====Amplify configure finished====");
     return FlutterLogin(
       title: 'Welcome',
       onLogin: _onLogin,
@@ -83,5 +104,25 @@ class _LoginState extends State<Login> {
       },
     );
   }
-  
+
+  Future<void> _configureAmplify() async {
+    try {
+      // add Amplify plugins
+      //await Amplify.addPlugins([_dataStorePlugin]);
+      print("=====AMPLIFY CONFIGURING=====");
+      await Amplify.addPlugins([
+        _dataStorePlugin,
+        _apiPlugin,
+        _authPlugin,
+      ]);
+      // configure Amplify
+      //
+      // note that Amplify cannot be configured more than once!
+      await Amplify.configure(amplifyconfig);
+    } catch (e) {
+      // error handling can be improved for sure!
+      // but this will be sufficient for the purposes of this tutorial
+      print('An error occurred while configuring Amplify: $e');
+    }
+  }
 }

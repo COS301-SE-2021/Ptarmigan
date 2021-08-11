@@ -15,7 +15,8 @@ import 'package:ptarmigan/widgets/todos_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 // amplify configuration and models that should have been generated for you
 import 'amplifyconfiguration.dart';
-import 'auth/login/login_screen.dart';
+
+import 'auth/flutter_login/login_screen.dart';
 import 'models/ModelProvider.dart';
 import 'models/Todo.dart';
 import 'package:amplify_api/amplify_api.dart';
@@ -40,10 +41,11 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    _configureAmplify();
+    //_configureAmplify();
+    print("Displaying login screen");
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider.value(
+           ChangeNotifierProvider.value(
             value: FeedChanger(),
           ),
         ],
@@ -56,6 +58,7 @@ class MyApp extends StatelessWidget {
             '/login': (context) => Login(),
             '/home': (context) => DashboardScreen(), // REPLACE WITH HOME SCREEN
             '/insights': (context) => TodosPage()
+            '/confirm': (context) => 
           },
         ));
   }
@@ -87,25 +90,6 @@ class MyWidget extends StatelessWidget {
   }
 }
 
-Future<void> _configureAmplify() async {
-  try {
-    // add Amplify plugins
-    //await Amplify.addPlugins([_dataStorePlugin]);
 
-    await Amplify.addPlugins([
-      // _dataStorePlugin,
-      _apiPlugin,
-      _authPlugin,
-    ]);
-    // configure Amplify
-    //
-    // note that Amplify cannot be configured more than once!
-    await Amplify.configure(amplifyconfig);
-  } catch (e) {
-    // error handling can be improved for sure!
-    // but this will be sufficient for the purposes of this tutorial
-    print('An error occurred while configuring Amplify: $e');
-  }
-}
 //Feeds===============================================================
 
