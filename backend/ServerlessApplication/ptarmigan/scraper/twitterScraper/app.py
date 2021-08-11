@@ -20,7 +20,7 @@ def returnTweetList(content, scrapetimeframe):
         # only retrieves the first n tweets
         if i >= 100:
             break
-        tweets_list.append([tweet.id, tweet.content, tweet.retweetCount,
+        tweets_list.append([str(tweet.id), tweet.content, tweet.retweetCount,
                             tweet.likeCount, tweet.lang, tweet.date])
     # Creating a dataframe from the tweets list above
     return tweets_list
