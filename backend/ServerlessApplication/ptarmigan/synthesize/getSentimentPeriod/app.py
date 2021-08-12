@@ -39,7 +39,7 @@ def dbReturn(event):
 
 
 def lambda_handler(event, context):
-    event = event["body"]
+    event = json.loads(event["body"])
     try:
         response = dbReturn(event)
         print(response)
@@ -48,14 +48,14 @@ def lambda_handler(event, context):
 
         return {
             "statusCode": 200,
-            "body": calculation
+            "body": json.dumps(calculation)
         }
 
     except ValueError:
         print(ValueError)
         return {
             "statusCode": 400,
-            "body": ValueError
+            "body": json.dumps(ValueError)
         }
 
 
