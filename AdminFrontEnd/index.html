@@ -110,7 +110,7 @@
 
 
                 <form class="form-inline my-2 my-lg-0 float-right">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control mr-sm-2" id="myInput" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
                 </form>
             </div>
@@ -129,7 +129,7 @@
 
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="myTable">
                 <tr>
                     <td scope="row">Benjamin van Staden</td>
                     <td>9710055071083</td>
@@ -188,6 +188,17 @@
             }
         })
     });
+
+
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
 
 </script>
 </body>
