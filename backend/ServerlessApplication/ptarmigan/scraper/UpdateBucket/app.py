@@ -6,7 +6,17 @@ import database
 def lambda_handler(event, context):
 
     # read context from passed json argument
-    update = event['content']
+    try:
+        update = event['content']
+    except:
+        return {
+            "isBase64Encoded": False,
+            'statusCode': 400,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            'body': json.dumps('Bad Request - invalid JSON input')
+        }
 
     database.database(update)
 
