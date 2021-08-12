@@ -17,25 +17,42 @@ def lambda_handler(event, context):
             },
             'body': json.dumps('Bad Request - invalid JSON input')
         }
-
-    database.database(update)
-
+    try:
+        database.database(update)
+    except:
+        return {
+            'statusCode': 500,
+            'body': json.dumps("Somthing Went wrong with database table creation")
+        }
     # connet to s3 and file the scrape conent file
     s3client = boto3.client('s3')
     bucketname = 'stepfunctestbucket'
     file_to_read = 'scrapeContent.json'
-    fileobj = s3client.get_object(
-        Bucket=bucketname,
-        Key=file_to_read
-    )
+    try:
+        fileobj = s3client.get_object(
+            Bucket=bucketname,
+            Key=file_to_read
+        )
+    except:
+        return {
+            'statusCode': 500,
+            'body': json.dumps("Cannot find file within bucket")
+        }
 
     # decode file into python dict
     filedata = fileobj['Body'].read()
     filecontents = (filedata.decode('utf-8'))
     filecontents = json.loads(filecontents)
 
-    # #append content onto the dict
+    #append content onto the dict
     replaceContent = filecontents['scrape-detail']
+    #check if item exists - if it does return
+    for i in replaceContent:
+        if i['content'] == update:
+            return {
+                'statusCode': 400,
+                'body': json.dumps('Item is already in the file')
+            }
     replaceLine = '{"content": "' + update + '"}'
     replaceLine = json.loads(replaceLine)
     replaceContent.append(replaceLine)
