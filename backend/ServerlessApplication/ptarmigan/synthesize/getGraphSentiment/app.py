@@ -110,6 +110,7 @@ def lambda_handler(event, context):
 
     return {
         "statusCode": 200,
-        "body":  returnObject
+        "body":  returnObject,
+        "isBase64Encoded": False
     }
 

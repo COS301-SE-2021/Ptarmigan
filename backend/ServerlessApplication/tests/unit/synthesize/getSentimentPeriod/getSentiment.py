@@ -10,8 +10,8 @@ from ptarmigan.synthesize.getSentimentPeriod import app
 
 def fixture_event():
     return {
-                "BeginDate": 1623005418000,
-                "EndDate": 1623065669000,
+                "BeginDate": 1623005418,
+                "EndDate": 1623065669,
                 "CompanyName": "Tesla"
             }
 

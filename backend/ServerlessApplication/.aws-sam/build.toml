@@ -43,4 +43,11 @@ source_md5 = ""
 packagetype = "Zip"
 functions = ["deleteBucketItem"]
 
+[function_build_definitions.a84ba2dc-dbb5-48de-b3cd-06ae3f2a5ce2]
+codeuri = "/home/reinier/Documents/GitHub/Ptarmigan/backend/ServerlessApplication/ptarmigan/admin/tweetManagement/getTweetById"
+runtime = "python3.8"
+source_md5 = ""
+packagetype = "Zip"
+functions = ["getTweetById"]
+
 [layer_build_definitions]
