@@ -39,6 +39,7 @@ def dbReturn(event):
 
 
 def lambda_handler(event, context):
+    event = event["body"]
     try:
         response = dbReturn(event)
         print(response)
