@@ -61,9 +61,8 @@ class _LoginState extends State<Login> {
   }
 
   Future<String> _onSignup(LoginData data) async {
-    print("--SIGN UP--");
     try {
-      print("attempting sign up");
+      print("attempting sign up" + data.name);
       await Amplify.Auth.signUp(
         username: data.name,
         password: data.password,
@@ -96,7 +95,7 @@ class _LoginState extends State<Login> {
         primaryColor: Theme.of(context).primaryColor,
       ),
       onSubmitAnimationCompleted: () {
-        print(_data);
+        print("Pushing replacement choice : " + _data.name);
         Navigator.of(context).pushReplacementNamed(
           _isSignedIn ? '/home' : '/confirm',
           arguments: _data,

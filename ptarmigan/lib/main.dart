@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:amplify_datastore/amplify_datastore.dart';
 import 'package:provider/provider.dart';
+import 'package:ptarmigan/auth/flutter_login/confirm_screen.dart';
 import 'package:ptarmigan/services/feed_changer.dart';
 import 'package:ptarmigan/widgets/home_page.dart';
 import 'package:ptarmigan/widgets/todos_page.dart';
@@ -57,8 +58,8 @@ class MyApp extends StatelessWidget {
           routes: {
             '/login': (context) => Login(),
             '/home': (context) => DashboardScreen(), // REPLACE WITH HOME SCREEN
-            '/insights': (context) => TodosPage()
-            '/confirm': (context) => 
+            '/insights': (context) => TodosPage(),
+            '/confirm': (context) => ConfirmScreen(),
           },
         ));
   }
