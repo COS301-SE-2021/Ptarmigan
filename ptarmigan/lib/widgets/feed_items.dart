@@ -68,12 +68,35 @@ class FeedItems extends StatelessWidget {
           .changeFeed(feed.feedName);
     }
 
-    void _updateFeedPosts(String b) {
+    Future<FeedSentiment> _updateFeedPosts(String b) async {
       String a =
           '[{"BeginDate": 1623005418000, "EndDate": 1623610218000, "IntervalData": 0}, {"BeginDate": 1623610218000, "EndDate": 1624215018000, "IntervalData": 0}, {"BeginDate": 1624215018000, "EndDate": 1624819818000, "IntervalData": 0}, {"BeginDate": 1624819818000, "EndDate": 1625424618000, "IntervalData": 0}, {"BeginDate": 1625424618000, "EndDate": 1626029418000, "IntervalData": 0}, {"BeginDate": 1626029418000, "EndDate": 1626634218000, "IntervalData": 0}, {"BeginDate": 1626634218000, "EndDate": 1627239018000, "IntervalData": 0}, {"BeginDate": 1627239018000, "EndDate": 1627843818000, "IntervalData": 0}, {"BeginDate": 1627843818000, "EndDate": 1628448618000, "IntervalData": 0.06540074664700189}, {"BeginDate": 1628448618000, "EndDate": 1629053418000, "IntervalData": 0}]';
       // final parsed = jsonDecode(a).cast<Map<String, dynamic>>();
 
-      http.post
+      final response2 = await http.post(
+          Uri.parse(
+              'https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/senthisize/getGraphSentiment'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(<String, String>{
+            "BeginDate": "1623005418000", //maybe needs to be an int
+            "Interval": "Week",
+            "CompanyName": "Tesla"
+          }));
+
+      if (response2.statusCode == 201) {
+        // If the server did return a 201 CREATED response,
+        // then parse the JSON.
+        print(FeedSentiment.fromJson(jsonDecode(response2.body)));
+        return FeedSentiment.fromJson(jsonDecode(response2.body));
+      } else {
+        // If the server did not return a 201 CREATED response,
+        // then throw an exception.
+        print("oooooooooooooooooooooooooooooooooooooooooooooo");
+        print(response2.statusCode);
+        throw Exception('Failed to create album.');
+      }
 
       List<dynamic> response = jsonDecode(a);
       // List<FeedSentiment> sentimentFeed = List<FeedSentiment.fromJson(map));
