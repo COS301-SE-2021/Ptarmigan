@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/cupertino.dart';
@@ -46,15 +48,36 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ))
         ],
       ),
-      body: Container(
-        child: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, '/insight');
-            },
-            child: Text('Insight page'),
-          ),
-        ),
+      //Drawer
+      drawer: Drawer(),
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Container(
+            width: double.infinity,
+            height: 100,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(
+                color: Color(0xFFE6E6E6),
+              )
+            ),
+            child: Padding(padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+              child: Row(mainAxisAlignment: 
+                MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    '<Tweet 1>'
+                  )
+                  SocialEmbed()
+                ],
+
+            ),
+            ),
+          )
+        ],
+        ]
       ),
     );
   }
