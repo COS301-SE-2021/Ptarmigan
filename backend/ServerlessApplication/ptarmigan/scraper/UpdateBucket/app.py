@@ -7,7 +7,8 @@ def lambda_handler(event, context):
 
     # read context from passed json argument
     try:
-        update = event['body']['content']
+        update = json.loads(event['body'])
+        update = update['content']
     except:
         return {
             "isBase64Encoded": False,
