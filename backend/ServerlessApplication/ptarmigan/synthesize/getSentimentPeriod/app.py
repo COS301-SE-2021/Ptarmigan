@@ -6,6 +6,7 @@ from boto3.dynamodb.conditions import Key
 import os
 import json
 
+
 # import requests
 def calculateSentiment(content):
     totalVotes = 0
@@ -24,7 +25,8 @@ def calculateSentiment(content):
         runningSentiment = runningSentiment + (weight * sentiment)
     if totalVotes == 0:
         return 0
-    return (runningSentiment/totalVotes)
+    return (runningSentiment / totalVotes)
+
 
 def dbReturn(event):
     dynamodb = boto3.resource('dynamodb')
@@ -39,8 +41,8 @@ def dbReturn(event):
 
 
 def lambda_handler(event, context):
-    event = json.loads(event["body"])
     try:
+        event = json.loads(event["body"])
         response = dbReturn(event)
         print(response)
 
@@ -51,15 +53,11 @@ def lambda_handler(event, context):
             "body": json.dumps(calculation)
         }
 
-    except ValueError:
-        print(ValueError)
+    except:
         return {
             "statusCode": 400,
-            "body": json.dumps(ValueError)
+            "body": json.dumps("Invalid Inputs")
         }
-
-
-
 
 # //{
 #   "BeginDate" : 1623005418000,
