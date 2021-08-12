@@ -15,7 +15,7 @@ def lambda_handler(event, context):
     except:
         return {
             'statusCode': 500,
-            'body': json.dumps("Cannot find item within bucket")
+            'body': json.dumps("Cannot find file within bucket")
         }
     filedata = fileobj['Body'].read()
 
