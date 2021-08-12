@@ -41,39 +41,50 @@ class FeedItems extends StatelessWidget {
           .changeFeed(feed.feedName);
     }
 
-    void _updateFeedPosts(String a) {
-      final parsed = jsonDecode(a).cast<Map<String, dynamic>>();
+    void _updateFeedPosts(String b) {
+      String a =
+          '[{"BeginDate": 1623005418000, "EndDate": 1623610218000, "IntervalData": 0}, {"BeginDate": 1623610218000, "EndDate": 1624215018000, "IntervalData": 0}, {"BeginDate": 1624215018000, "EndDate": 1624819818000, "IntervalData": 0}, {"BeginDate": 1624819818000, "EndDate": 1625424618000, "IntervalData": 0}, {"BeginDate": 1625424618000, "EndDate": 1626029418000, "IntervalData": 0}, {"BeginDate": 1626029418000, "EndDate": 1626634218000, "IntervalData": 0}, {"BeginDate": 1626634218000, "EndDate": 1627239018000, "IntervalData": 0}, {"BeginDate": 1627239018000, "EndDate": 1627843818000, "IntervalData": 0}, {"BeginDate": 1627843818000, "EndDate": 1628448618000, "IntervalData": 0.06540074664700189}, {"BeginDate": 1628448618000, "EndDate": 1629053418000, "IntervalData": 0}]';
+      // final parsed = jsonDecode(a).cast<Map<String, dynamic>>();
 
-      List<FeedSentiment> sentimentFeed = parsed
-          .map<FeedSentiment>((json) => FeedSentiment.fromJson(json))
-          .toList();
+      List<dynamic> response = jsonDecode(a);
+      // List<FeedSentiment> sentimentFeed = List<FeedSentiment.fromJson(map));
+      List<FeedSentiment> test1 = List<FeedSentiment>.from(
+          response.map((i) => FeedSentiment.fromJson(i)));
 
-      for (int i = 0; i < sentimentFeed.length; i++) {
-        String _nameController = sentimentFeed[i].beginDate;
-        String _descriptionController = sentimentFeed[i].intervalData;
+      for (int i = 0; i < 4; i++) {
+        print("HOPE");
+        print(test1[i].beginDate);
+      }
 
-        // get the current text field contents
-        String name = _nameController;
-        String description = _descriptionController;
+      DateTime.fromMillisecondsSinceEpoch(test1[0].beginDate);
 
-        // create a new Todo from the form values
-        // `isComplete` is also required, but should start false in a new Todo
-        Todo newTodo = Todo(
-          name: name,
-          description: description.isNotEmpty ? description : null,
-        );
+      //  for (int i = 0; i < sentimentFeed.length; i++) {
+      //   String _dateController = sentimentFeed[i].beginDate;
+      //  String _descriptionController = sentimentFeed[i].intervalData;
 
-        try {
-          // to write data to DataStore, we simply pass an instance of a model to
-          // Amplify.DataStore.save()
-          Amplify.DataStore.save(newTodo);
-          // after creating a new Todo, close the form
-          Navigator.of(context).pop();
-        } catch (e) {
-          print('An error occurred while saving Todo: $e');
-        }
+      // get the current text field contents
+      //   String date = _dateController;
+      //    String description = _descriptionController;
+
+      // create a new Todo from the form values
+      // `isComplete` is also required, but should start false in a new Todo
+      Todo newTodo = Todo(
+          //     name: name,
+          //     description: description.isNotEmpty ? description : null,
+          //     date: date,
+          );
+      print("TRIGGERED JSON");
+      try {
+        // to write data to DataStore, we simply pass an instance of a model to
+        // Amplify.DataStore.save()
+        //   Amplify.DataStore.save(newTodo);
+        // after creating a new Todo, close the form
+        //  Navigator.of(context).pop();
+      } catch (e) {
+        print('An error occurred while saving Todo: $e');
       }
     }
+    //  }
 
     return Card(
       color: Colors.white,
@@ -85,7 +96,7 @@ class FeedItems extends StatelessWidget {
           // update the ui state to reflect fetched todos
           // feedID.value = feed.feedName;
           _changeFeed();
-
+          _updateFeedPosts("as");
           //print(feedID.value);
         },
         child: Padding(
