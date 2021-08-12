@@ -5,6 +5,7 @@ import boto3
 from boto3.dynamodb.conditions import Key
 import json
 
+
 # import requests
 def calculateSentiment(content):
     totalVotes = 0
@@ -22,24 +23,26 @@ def calculateSentiment(content):
 
         runningSentiment = runningSentiment + (weight * sentiment)
 
-    return (runningSentiment/totalVotes)
+    return (runningSentiment / totalVotes)
+
 
 #
 def getInterval(interval):
     if interval == "Second":
         return 1000
     if interval == "Minute":
-        return 60*1000
+        return 60 * 1000
     if interval == "Hour":
-        return 60*60*1000
+        return 60 * 60 * 1000
     if interval == "Day":
-        return 60*60*24*1000
+        return 60 * 60 * 24 * 1000
     if interval == "Week":
-        return 60*60*24*7*1000
+        return 60 * 60 * 24 * 7 * 1000
     if interval == "Month":
         return 60 * 60 * 24 * 30 * 1000
     if interval == "Year":
         return 60 * 60 * 24 * 365 * 1000
+
 
 def dbReturn(event, beginDate, endDate):
     dynamodb = boto3.resource('dynamodb')
@@ -53,9 +56,12 @@ def dbReturn(event, beginDate, endDate):
 
     return response
 
+
 def lambda_handler(event, context):
     print(event)
+
     try:
+        event = json.loads(event["body"])
         cName = event["CompanyName"]
         print(cName)
         interval = event["Interval"]
@@ -66,9 +72,9 @@ def lambda_handler(event, context):
     except:
         return {
             "statusCode": 400,
-            "body": {
+            "body": json.dumps({
                 "Error": "Invalid Inputs"
-            }
+            })
         }
 
     interval = getInterval(event["Interval"])
@@ -84,8 +90,7 @@ def lambda_handler(event, context):
         "Data": []
     }
 
-
-    while beginDate < int(time.time()*1000):
+    while beginDate < int(time.time()):
         try:
             response = dbReturn(event, beginDate, endDate)
 
@@ -110,7 +115,7 @@ def lambda_handler(event, context):
 
     return {
         "statusCode": 200,
-        "body":  returnObject,
+        "body": json.dumps(returnObject),
         "isBase64Encoded": False
     }
 

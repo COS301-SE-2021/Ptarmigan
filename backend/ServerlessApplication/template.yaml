@@ -8,7 +8,7 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 300
+    Timeout: 30
     Environment:
       Variables:
         TABLE_NAME: Twitter_Sentiment_Data
@@ -23,12 +23,6 @@ Resources:
       Runtime: python3.8
       Policies:
         - AmazonDynamoDBFullAccess
-      Events:
-        HttpPost:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /comprehend
-            Method: post
 
   getGraphSentiment:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -134,23 +128,6 @@ Resources:
       Runtime: python3.8
       Policies:
         - AmazonDynamoDBFullAccess
-
-
-  DynamoDBTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: SentimentTable
-      AttributeDefinitions:
-        - AttributeName: Tweet_Id
-          AttributeType: N
-      KeySchema:
-        - AttributeName: Tweet_Id
-          KeyType: HASH
-      ProvisionedThroughput:
-        ReadCapacityUnits: 10
-        WriteCapacityUnits: 10
-      StreamSpecification:
-        StreamViewType: NEW_IMAGE
 
 
 
