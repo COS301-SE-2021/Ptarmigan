@@ -55,6 +55,7 @@ def dbReturn(event, beginDate, endDate):
 
 def lambda_handler(event, context):
     print(event)
+    event = event["body"]
     try:
         cName = event["CompanyName"]
         print(cName)

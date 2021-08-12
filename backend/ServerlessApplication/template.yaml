@@ -8,7 +8,7 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 300
+    Timeout: 30
     Environment:
       Variables:
         TABLE_NAME: Twitter_Sentiment_Data
@@ -134,23 +134,6 @@ Resources:
       Runtime: python3.8
       Policies:
         - AmazonDynamoDBFullAccess
-
-
-  DynamoDBTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: SentimentTable
-      AttributeDefinitions:
-        - AttributeName: Tweet_Id
-          AttributeType: N
-      KeySchema:
-        - AttributeName: Tweet_Id
-          KeyType: HASH
-      ProvisionedThroughput:
-        ReadCapacityUnits: 10
-        WriteCapacityUnits: 10
-      StreamSpecification:
-        StreamViewType: NEW_IMAGE
 
 
 
