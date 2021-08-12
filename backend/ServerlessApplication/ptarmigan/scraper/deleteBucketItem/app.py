@@ -31,7 +31,7 @@ def lambda_handler(event, context):
     replaceContent = filecontents['scrape-detail']
 
     for i in replaceContent:
-        if i['content'] == toDelete:
+        if i['content'] == delete:
             replaceContent.remove(i)
             delFlag = True
             break
