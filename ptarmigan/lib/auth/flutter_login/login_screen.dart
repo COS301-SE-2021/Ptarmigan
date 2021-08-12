@@ -15,6 +15,8 @@ final AmplifyDataStore _dataStorePlugin =
 final AmplifyAPI _apiPlugin = AmplifyAPI();
 final AmplifyAuthCognito _authPlugin = AmplifyAuthCognito();
 
+bool amplifyConfigured = false;
+
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
@@ -26,6 +28,7 @@ class _LoginState extends State<Login> {
 
   Future<String> _onLogin(LoginData data) async {
     print("--LOGIN--");
+    Amplify.Auth.signOut();
     try {
       final res = await Amplify.Auth.signIn(
         username: data.name,
@@ -79,7 +82,10 @@ class _LoginState extends State<Login> {
 
   Future<void> _initState() async {
     print("ATTEMPTING CONFIG");
-    await _configureAmplify();
+    if (amplifyConfigured == false) {
+      amplifyConfigured = true;
+      await _configureAmplify();
+    }
   }
 
   @override

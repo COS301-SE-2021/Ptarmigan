@@ -12,14 +12,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
   late AuthUser _user;
   @override
   void initState() {
+    print("Home page loaded.");
     super.initState();
-    Amplify.Auth.getCurrentUser().then((user) {
-      setState(() {
-        _user = user;
-      });
-    }).catchError((error) {
-      print(error.message as AuthException);
-    });
+   // Amplify.Auth.getCurrentUser().then((user) {
+    //  setState(() {
+     //   _user = user;
+     // });
+   // }).catchError((error) {
+   //   print(error.message as AuthException);
+  //  });
   }
 
   @override
@@ -49,7 +50,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Center(
           child: ElevatedButton(
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/login');
+              Navigator.pushReplacementNamed(context, '/insight');
             },
             child: Text('Insight page'),
           ),

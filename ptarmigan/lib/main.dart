@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 // amplify packages we will need to use
 import 'package:amplify_flutter/amplify.dart';
 import 'package:amplify_datastore/amplify_datastore.dart';
+import 'package:flutter_login/flutter_login.dart';
 import 'package:provider/provider.dart';
 import 'package:ptarmigan/auth/flutter_login/confirm_screen.dart';
 import 'package:ptarmigan/services/feed_changer.dart';
@@ -33,6 +34,7 @@ final AmplifyAuthCognito _authPlugin = AmplifyAuthCognito();
 //List<Todo> todos;
 //List<Feed> _feeds;
 //List<Feed> _feedsSub;
+bool pastFirstLaunch = false;
 
 void main() {
   //_configureAmplify();
@@ -43,25 +45,64 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //_configureAmplify();
-    print("Displaying login screen");
     return MultiProvider(
         providers: [
-           ChangeNotifierProvider.value(
+          ChangeNotifierProvider.value(
             value: FeedChanger(),
           ),
         ],
         child: MaterialApp(
-          title: 'Amplified Todo',
-          //home: TodosPage(),
-          //home: Login(),
-          initialRoute: '/login',
-          routes: {
-            '/login': (context) => Login(),
-            '/home': (context) => DashboardScreen(), // REPLACE WITH HOME SCREEN
-            '/insights': (context) => TodosPage(),
-            '/confirm': (context) => ConfirmScreen(),
-          },
-        ));
+            title: 'Amplified Todo',
+            //home: TodosPage(),
+            //home: Login(),
+            //initialRoute: '/login',
+            initialRoute: pastFirstLaunch == false ? '/login' : '/',
+            // ignore: missing_return
+            onGenerateRoute: (settings) {
+              if (settings.name == '/confirm') {
+                print("Navigator push : /CONFIRM");
+                return PageRouteBuilder(
+                  pageBuilder: (_, __, ___) =>
+                      ConfirmScreen(data: settings.arguments as LoginData),
+                  transitionsBuilder: (_, __, ___, child) => child,
+                );
+              }
+              if (settings.name == '/home') {
+                //print("Navigator push : /HOME");
+                return PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => DashboardScreen(),
+                  transitionsBuilder: (_, __, ___, child) => child,
+                );
+              }
+              if (settings.name == '/login') {
+                //print("Navigator push : /LOGIN");
+                return PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => Login(),
+                  transitionsBuilder: (_, __, ___, child) => child,
+                );
+              }
+              if (settings.name == '/insight') {
+               // print("Navigator push : /INSIGHT");
+                return PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => TodosPage(),
+                  transitionsBuilder: (_, __, ___, child) => child,
+                );
+              }
+              if (settings.name == '/') {
+                //print("Navigator push : /");
+                return PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => DashboardScreen(),
+                  transitionsBuilder: (_, __, ___, child) => child,
+                );
+              }
+            }
+            //routes: {
+            // '/login': (context) => Login(),
+            //  '/home': (context) => DashboardScreen(), // REPLACE WITH HOME SCREEN
+            // '/insights': (context) => TodosPage(),
+            // '/confirm': (context) => ConfirmScreen(),
+            //},
+            ));
   }
 }
 

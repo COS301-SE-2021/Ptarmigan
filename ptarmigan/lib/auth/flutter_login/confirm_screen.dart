@@ -60,9 +60,12 @@ class _ConfirmScreenState extends State<ConfirmScreen> {
         username: data.name,
         confirmationCode: code,
       );
+      print("signup confirmed");
       if (res.isSignUpComplete) {
+        print("Sign up completed.");
+        await Amplify.Auth.signOut();
         await Amplify.Auth.signIn(username: data.name, password: data.password);
-        Navigator.pushReplacementNamed(context, '/dashboard');
+        Navigator.pushReplacementNamed(context, '/home');
       }
     } on AuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
