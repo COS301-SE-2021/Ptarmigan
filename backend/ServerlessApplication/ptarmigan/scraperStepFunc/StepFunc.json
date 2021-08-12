@@ -7,7 +7,7 @@
       "Resource": "arn:aws:states:::lambda:invoke",
       "OutputPath": "$.Payload",
       "Parameters": {
-        "FunctionName": "arn:aws:lambda:eu-west-1:878292117449:function:PassBucketInput:$LATEST"
+        "FunctionName": "arn:aws:lambda:eu-west-1:878292117449:function:ptarmiganbackend-bucketInput-Tx84OWTemfc1"
       },
       "Retry": [
         {
@@ -34,7 +34,7 @@
             "OutputPath": "$.Payload",
             "Parameters": {
               "Payload.$": "$",
-              "FunctionName": "arn:aws:lambda:eu-west-1:878292117449:function:Twitter_scraper:$LATEST"
+              "FunctionName": "arn:aws:lambda:eu-west-1:878292117449:function:ptarmiganbackend-twitterScraper-FUYVrtRDd62N"
             },
             "Retry": [
               {
@@ -56,7 +56,7 @@
             "OutputPath": "$.Payload",
             "Parameters": {
               "Payload.$": "$",
-              "FunctionName": "arn:aws:lambda:eu-west-1:878292117449:function:Sentiment_Analysis:$LATEST"
+              "FunctionName": "arn:aws:lambda:eu-west-1:878292117449:function:ptarmiganbackend-comprehend-vmDIZQkwuIr9"
             },
             "Retry": [
               {
