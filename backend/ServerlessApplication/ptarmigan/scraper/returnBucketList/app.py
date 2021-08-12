@@ -13,7 +13,11 @@ def lambda_handler(event, context):
         Key=file_to_read
     )
 
+    filedata = fileobj['Body'].read()
+    filecontents = (filedata.decode('utf-8'))
+    filecontents = json.loads(filecontents)
+
     return {
         'statusCode': 400,
-        'body': json.dumps("Hello")
+        'body': json.dumps(filecontents)
     }
