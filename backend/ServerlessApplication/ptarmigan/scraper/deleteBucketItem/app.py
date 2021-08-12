@@ -19,10 +19,17 @@ def lambda_handler(event, context):
     bucketname = 'stepfunctestbucket'
     file_to_read = 'scrapeContent.json'
 
-    fileobj = s3client.get_object(
-        Bucket=bucketname,
-        Key=file_to_read
-    )
+    #try read file from bucket
+    try:
+        fileobj = s3client.get_object(
+            Bucket=bucketname,
+            Key=file_to_read
+        )
+    except:
+        return {
+            'statusCode': 500,
+            'body': json.dumps("Cannot find item within bucket")
+        }
 
     filedata = fileobj['Body'].read()
     filecontents = (filedata.decode('utf-8'))
