@@ -75,6 +75,7 @@ class MyApp extends StatelessWidget {
                 );
               }
               if (settings.name == '/login') {
+                pastFirstLaunch = true;
                 //print("Navigator push : /LOGIN");
                 return PageRouteBuilder(
                   pageBuilder: (_, __, ___) => Login(),
@@ -82,7 +83,7 @@ class MyApp extends StatelessWidget {
                 );
               }
               if (settings.name == '/insight') {
-               // print("Navigator push : /INSIGHT");
+                // print("Navigator push : /INSIGHT");
                 return PageRouteBuilder(
                   pageBuilder: (_, __, ___) => TodosPage(),
                   transitionsBuilder: (_, __, ___, child) => child,

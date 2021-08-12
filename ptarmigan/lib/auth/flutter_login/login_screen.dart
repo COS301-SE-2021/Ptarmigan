@@ -27,15 +27,17 @@ class _LoginState extends State<Login> {
   bool _isSignedIn = false;
 
   Future<String> _onLogin(LoginData data) async {
-    print("--LOGIN--");
-    Amplify.Auth.signOut();
+    print("--LOGIN--" + data.name);
+
     try {
+      await Amplify.Auth.signOut();
       final res = await Amplify.Auth.signIn(
         username: data.name,
         password: data.password,
       );
 
       _isSignedIn = res.isSignedIn;
+      print(_isSignedIn);
     } on AuthException catch (e) {
       print('Message ============ ' + e.message);
       if (e.message.contains('There is already a user  signed in.')) {
@@ -101,7 +103,7 @@ class _LoginState extends State<Login> {
         primaryColor: Theme.of(context).primaryColor,
       ),
       onSubmitAnimationCompleted: () {
-        print("Pushing replacement choice : " + _data.name);
+        //print("Pushing replacement choice : " + _data.name);
         Navigator.of(context).pushReplacementNamed(
           _isSignedIn ? '/home' : '/confirm',
           arguments: _data,
