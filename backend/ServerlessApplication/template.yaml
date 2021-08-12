@@ -110,6 +110,22 @@ Resources:
           Properties:
             Path: /scraper/deleteBucketItem
             Method: post
+#Admin Subsystem
+  getTweetById:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/admin/tweetManagement
+      Handler: getGraphSentiment.app.lambda_handler
+      Runtime: python3.8
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        HttpPost:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /senthisize/getGraphSentiment
+            Method: post
+
 
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
