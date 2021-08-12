@@ -17,9 +17,13 @@ def lambda_handler(event, context):
             },
             'body': json.dumps('Bad Request - invalid JSON input')
         }
-
-    database.database(update)
-
+    try:
+        database.database(update)
+    except:
+        return {
+            'statusCode': 500,
+            'body': json.dumps("Somthing Went wrong with database table creation")
+        }
     # connet to s3 and file the scrape conent file
     s3client = boto3.client('s3')
     bucketname = 'stepfunctestbucket'
