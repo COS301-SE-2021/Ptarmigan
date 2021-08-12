@@ -34,8 +34,15 @@ def lambda_handler(event, context):
     filecontents = (filedata.decode('utf-8'))
     filecontents = json.loads(filecontents)
 
-    # #append content onto the dict
+    #append content onto the dict
     replaceContent = filecontents['scrape-detail']
+    #check if item exists - if it does return
+    for i in replaceContent:
+        if i['content'] == update:
+            return {
+                'statusCode': 400,
+                'body': json.dumps('Item is already in the file')
+            }
     replaceLine = '{"content": "' + update + '"}'
     replaceLine = json.loads(replaceLine)
     replaceContent.append(replaceLine)
