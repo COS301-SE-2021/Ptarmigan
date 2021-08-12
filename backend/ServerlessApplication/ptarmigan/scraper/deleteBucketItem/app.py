@@ -2,7 +2,8 @@ import json
 import boto3
 
 def lambda_handler(event, context):
-    toDelete = event['delete']
+    delete = json.loads(event['body'])
+    delete = delete['content']
 
     s3client = boto3.client('s3')
 
