@@ -2,9 +2,18 @@ import json
 import boto3
 
 def lambda_handler(event, context):
-    delete = json.loads(event['body'])
-    delete = delete['content']
-
+    try:
+        delete = json.loads(event['body'])
+        delete = delete['content']
+    except:
+        return {
+            "isBase64Encoded": False,
+            'statusCode': 400,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            'body': json.dumps('Bad Request - invalid JSON input')
+        }
     s3client = boto3.client('s3')
 
     bucketname = 'stepfunctestbucket'
