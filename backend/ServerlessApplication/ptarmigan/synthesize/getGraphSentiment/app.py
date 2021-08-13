@@ -85,7 +85,7 @@ def lambda_handler(event, context):
     table = dynamodb.Table('Test')
 
     returnObject = {
-        "CompanyName": "Tesla",
+        "CompanyName": cName,
         "Interval": interval,
         "Data": []
     }
