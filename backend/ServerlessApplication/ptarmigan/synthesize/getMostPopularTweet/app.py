@@ -22,16 +22,19 @@ def getMostPopularTweet(companyName, beginDate, endDate):
             companyName)
     )
 
-    #
+    # Loop through the results and setting the highest one to high
 
-    for i in response:
-        print(i)
+    for i in response["Items"]:
+        if int(i["Weight"]) > int(high["Weight"]):
+            high = i
+
+
 
 
 
     print(response)
 
-    return response
+    return high
 
 
 def lambda_handler(event, context):
