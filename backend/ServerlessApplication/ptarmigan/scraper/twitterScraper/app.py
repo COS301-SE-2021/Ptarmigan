@@ -28,11 +28,11 @@ def returnTweetList(content, scrapetimeframe):
 
 # Params
 # event - json object (contains content and scrape_since)
-def scrapetHandler(event, context):
+def scraperHandler(event, context):
     # Extract from json objects
     content = event['content']['content']
 
-    scrape_since = int(event['scrape-until'])
+    scrape_since = int(event['Scrape-until'])
     scrape_timestamp = datetime.datetime.fromtimestamp(scrape_since)
     scrape_dateformat = scrape_timestamp.strftime('%Y-%m-%d')
 
