@@ -39,11 +39,13 @@ def getMostPopularTweet(companyName, beginDate, endDate):
 
 def lambda_handler(event, context):
     print("Starting")
-    print(event)
     if "body" in event:
         data = json.loads(event["body"])
 
     else:
         data = event
 
-    return getMostPopularTweet(data["CompanyName"], data["BeginDate"], data["EndDate"])
+        return {
+            "statusCode": 200,
+            "body": getMostPopularTweet(data["CompanyName"], data["BeginDate"], data["EndDate"]),
+        }
