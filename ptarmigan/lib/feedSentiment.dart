@@ -1,7 +1,7 @@
 class FeedSentiment {
   final int beginDate;
   final int endDate;
-  final int intervalData;
+  final double intervalData;
 
   FeedSentiment({
     required this.beginDate,
@@ -13,7 +13,7 @@ class FeedSentiment {
     return FeedSentiment(
       beginDate: json['BeginDate'] as int,
       endDate: json['EndDate'] as int,
-      intervalData: json['IntervalData'] as int,
+      intervalData: json['IntervalData'] as double,
     );
   }
 }

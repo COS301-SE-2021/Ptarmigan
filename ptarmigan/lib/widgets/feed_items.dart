@@ -23,7 +23,9 @@ class FeedItems extends StatelessWidget {
   final double iconSize = 24.0;
   final Feed feed;
 
-  FeedItems({this.feed});
+  int lastUpdated = 0;
+
+  FeedItems({this.feed, this.lastUpdated});
 
   void _deleteFeed(BuildContext context) async {
     try {
@@ -68,9 +70,9 @@ class FeedItems extends StatelessWidget {
           .changeFeed(feed.feedName);
     }
 
-    Future<FeedSentiment> _updateFeedPosts(String b) async {
-      String a =
-          '[{"BeginDate": 1623005418000, "EndDate": 1623610218000, "IntervalData": 0}, {"BeginDate": 1623610218000, "EndDate": 1624215018000, "IntervalData": 0}, {"BeginDate": 1624215018000, "EndDate": 1624819818000, "IntervalData": 0}, {"BeginDate": 1624819818000, "EndDate": 1625424618000, "IntervalData": 0}, {"BeginDate": 1625424618000, "EndDate": 1626029418000, "IntervalData": 0}, {"BeginDate": 1626029418000, "EndDate": 1626634218000, "IntervalData": 0}, {"BeginDate": 1626634218000, "EndDate": 1627239018000, "IntervalData": 0}, {"BeginDate": 1627239018000, "EndDate": 1627843818000, "IntervalData": 0}, {"BeginDate": 1627843818000, "EndDate": 1628448618000, "IntervalData": 0.06540074664700189}, {"BeginDate": 1628448618000, "EndDate": 1629053418000, "IntervalData": 0}]';
+    Future<FeedSentiment> _updateFeedPosts(String feedName) async {
+      // String a =
+      //     '[{"BeginDate": 1623005418000, "EndDate": 1623610218000, "IntervalData": 0}, {"BeginDate": 1623610218000, "EndDate": 1624215018000, "IntervalData": 0}, {"BeginDate": 1624215018000, "EndDate": 1624819818000, "IntervalData": 0}, {"BeginDate": 1624819818000, "EndDate": 1625424618000, "IntervalData": 0}, {"BeginDate": 1625424618000, "EndDate": 1626029418000, "IntervalData": 0}, {"BeginDate": 1626029418000, "EndDate": 1626634218000, "IntervalData": 0}, {"BeginDate": 1626634218000, "EndDate": 1627239018000, "IntervalData": 0}, {"BeginDate": 1627239018000, "EndDate": 1627843818000, "IntervalData": 0}, {"BeginDate": 1627843818000, "EndDate": 1628448618000, "IntervalData": 0.06540074664700189}, {"BeginDate": 1628448618000, "EndDate": 1629053418000, "IntervalData": 0}]';
       // final parsed = jsonDecode(a).cast<Map<String, dynamic>>();
 
       final response2 = await http.post(
@@ -79,56 +81,59 @@ class FeedItems extends StatelessWidget {
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
-          body: jsonEncode(<String, String>{
-            "BeginDate": "1623005418000", //maybe needs to be an int
+          body: jsonEncode({
+            "BeginDate": 1623005418, //lastUpdated //replace for newest
             "Interval": "Week",
-            "CompanyName": "Tesla"
+            "CompanyName": feedName
           }));
+      print("-----------");
+      print(response2.body);
 
-      if (response2.statusCode == 201) {
+      lastUpdated = DateTime.now().millisecondsSinceEpoch;
+
+      if (response2.statusCode == 200) {
         // If the server did return a 201 CREATED response,
         // then parse the JSON.
-        print(FeedSentiment.fromJson(jsonDecode(response2.body)));
-        return FeedSentiment.fromJson(jsonDecode(response2.body));
+
+        List<dynamic> response = jsonDecode(response2.body
+            .substring(response2.body.indexOf("["), response2.body.length - 1));
+
+        // List<FeedSentiment> sentimentFeed = List<FeedSentiment.fromJson(map));
+        List<FeedSentiment> test1 = List<FeedSentiment>.from(
+            response.map((i) => FeedSentiment.fromJson(i)));
+
+        for (int i = 0; i < test1.length; i++) {
+          print(DateTime.fromMillisecondsSinceEpoch(test1[i].beginDate)
+              .toIso8601String()
+              .substring(0, 10));
+
+          Todo newTodo = Todo(
+            name: feedName,
+            description: test1[i].intervalData.toString(),
+            date: TemporalDate.fromString(DateTime.fromMillisecondsSinceEpoch(
+                    test1[i].beginDate)
+                .toIso8601String()
+                .substring(0,
+                    10)), //TemporalDate.fromMillisecondsSinceEpoch(test1[0].beginDate);
+          );
+
+          try {
+            Amplify.DataStore.save(newTodo);
+
+            Navigator.of(context).pop();
+          } catch (e) {
+            print('An error occurred while saving Todo: $e');
+          }
+        }
       } else {
         // If the server did not return a 201 CREATED response,
         // then throw an exception.
-        print("oooooooooooooooooooooooooooooooooooooooooooooo");
+
         print(response2.statusCode);
-        throw Exception('Failed to create album.');
+        throw Exception('Failed to create post.');
       }
 
-      List<dynamic> response = jsonDecode(a);
-      // List<FeedSentiment> sentimentFeed = List<FeedSentiment.fromJson(map));
-      List<FeedSentiment> test1 = List<FeedSentiment>.from(
-          response.map((i) => FeedSentiment.fromJson(i)));
-
-      for (int i = 0; i < 4; i++) {
-        print("HOPE");
-        print(DateTime.fromMillisecondsSinceEpoch(test1[i].beginDate)
-            .toIso8601String()
-            .substring(0, 10));
-
-        Todo newTodo = Todo(
-          name: "BMW",
-          description: test1[i].intervalData.toString(),
-          date: TemporalDate.fromString(DateTime.fromMillisecondsSinceEpoch(
-                  test1[i].beginDate)
-              .toIso8601String()
-              .substring(0,
-                  10)), //TemporalDate.fromMillisecondsSinceEpoch(test1[0].beginDate);
-        );
-
-        try {
-          Amplify.DataStore.save(newTodo);
-
-          Navigator.of(context).pop();
-        } catch (e) {
-          print('An error occurred while saving Todo: $e');
-        }
-      }
-
-      DateTime tester = DateTime.fromMillisecondsSinceEpoch(test1[0].beginDate);
+      /* DateTime tester = DateTime.fromMillisecondsSinceEpoch(test1[0].beginDate);
       tester.toIso8601String();
 
       //  for (int i = 0; i < sentimentFeed.length; i++) {
@@ -155,7 +160,7 @@ class FeedItems extends StatelessWidget {
         //  Navigator.of(context).pop();
       } catch (e) {
         print('An error occurred while saving Todo: $e');
-      }
+      } */
     }
     //  }
 
@@ -169,7 +174,8 @@ class FeedItems extends StatelessWidget {
           // update the ui state to reflect fetched todos
           // feedID.value = feed.feedName;
           _changeFeed();
-          _updateFeedPosts("as");
+
+          _updateFeedPosts(feed.feedName);
           //print(feedID.value);
         },
         child: Padding(
