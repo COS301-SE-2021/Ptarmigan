@@ -1,0 +1,155 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  ServerlessApplication
+
+  Sample SAM Template for ServerlessApplication
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 30
+    Environment:
+      Variables:
+        TABLE_NAME: Twitter_Sentiment_Data
+
+
+Resources:
+  comprehend:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/comprehend
+      Handler: app.lambda_twitterComprehend
+      Runtime: python3.8
+      Policies:
+        - AmazonDynamoDBFullAccess
+
+  getGraphSentiment:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/synthesize
+      Handler: getGraphSentiment.app.lambda_handler
+      Runtime: python3.8
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        HttpPost:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /senthisize/getGraphSentiment
+            Method: post
+
+  getSentimentPeriod:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/synthesize
+      Handler: getSentimentPeriod.app.lambda_handler
+      Runtime: python3.8
+      Policies:
+        - AmazonDynamoDBFullAccess
+
+      Events:
+        HttpPost:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /senthisize/getSentimentPeriod
+            Method: post
+
+  bucketInput:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/scraper/bucketInput
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Role: arn:aws:iam::878292117449:role/S3Lambda
+
+  twitterScraper:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/scraper/twitterScraper
+      Handler: app.scraperHandler
+      Runtime: python3.8
+      Role: arn:aws:iam::878292117449:role/Comprehend_Dyno_Lambda
+      Layers:
+        - arn:aws:lambda:eu-west-1:878292117449:layer:SnscrapeLib:1
+        - arn:aws:lambda:eu-west-1:878292117449:layer:PandasLib:1
+        - arn:aws:lambda:eu-west-1:399891621064:layer:AWSLambda-Python38-SciPy1x:29
+
+  UpdateBucket:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/scraper/UpdateBucket
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Role: arn:aws:iam::878292117449:role/S3Lambda
+
+      Events:
+        HttpPost:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /scraper/UpdateBucket
+            Method: post
+
+  returnBucketList:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/scraper/returnBucketList
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Role: arn:aws:iam::878292117449:role/S3Lambda
+
+      Events:
+        HttpPost:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /scraper/returnBucketList
+            Method: post
+
+  deleteBucketItem:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/scraper/deleteBucketItem
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Role: arn:aws:iam::878292117449:role/S3Lambda
+
+      Events:
+        HttpPost:
+          Type: Api # More info about API    db = database.database(tableName) Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /scraper/deleteBucketItem
+            Method: post
+
+  scraperStepFunction:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      DefinitionUri: ptarmigan/scraperStepFunc/StepFunc.json
+      Role: arn:aws:iam::878292117449:role/stepFunctionLambdaRole
+      Type: EXPRESS
+      Tags:
+        - Key: auto-delete
+          Value: no
+      Events:
+        HttpPost:
+          Type: Api # More info about API    db = database.database(tableName) Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /scraperStepFunc/
+            Method: post
+#Admin Subsystem
+  getTweetById:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/admin/tweetManagement/getTweetById
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Policies:
+        - AmazonDynamoDBFullAccess
+
+
+
+
+
+
+
+
+
