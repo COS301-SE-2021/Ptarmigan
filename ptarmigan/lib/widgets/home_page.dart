@@ -5,6 +5,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ptarmigan/widgets/twitter_page.dart';
 import 'package:social_embed_webview/platforms/twitter.dart';
 import 'package:social_embed_webview/social_embed_webview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -55,11 +56,35 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
         //Drawer
         drawer: Drawer(),
-        body: WebView(
-          initialUrl:
-              'https://twitter.com/ZacksJerryRig/status/1424895584075354118',
-          //'https://www.youtube.com/watch?v=HNODkS9gZmM',
-          javascriptMode: JavascriptMode.unrestricted,
+        body: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Hello"),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TwitterScreen()));
+                      },
+                      child: Text("tweet"))
+                ],
+              )
+            ],
+          ),
         ));
   }
 }
+
+/*
+WebView(
+  initialUrl:
+  'https://twitter.com/ZacksJerryRig/status/1424895584075354118',
+  //'https://www.youtube.com/watch?v=HNODkS9gZmM',
+  javascriptMode: JavascriptMode.unrestricted,
+  )
+  */
