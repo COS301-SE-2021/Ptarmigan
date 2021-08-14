@@ -32,6 +32,14 @@ Resources:
       Runtime: python3.8
       Policies:
         - AmazonDynamoDBFullAccess
+      Events:
+        HttpPost:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /senthisize/getMostPopularTweet
+            Method: post
+
+
 
   getGraphSentiment:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -47,6 +55,7 @@ Resources:
           Properties:
             Path: /senthisize/getGraphSentiment
             Method: post
+
 
   getSentimentPeriod:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
