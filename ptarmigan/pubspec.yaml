@@ -42,6 +42,7 @@ dependencies:
   #tweet_ui: ^3.0.0
   bezier_chart: ^1.0.16
   webview_flutter: ^2.0.12
+  carousel_slider: ^4.0.0
   
 
 dev_dependencies:

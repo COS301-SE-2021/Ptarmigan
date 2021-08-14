@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ptarmigan/widgets/twitter_page.dart';
@@ -57,25 +58,50 @@ class _DashboardScreenState extends State<DashboardScreen> {
         //Drawer
         drawer: Drawer(),
         body: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Hello"),
-                  ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TwitterScreen()));
-                      },
-                      child: Text("tweet"))
-                ],
-              )
-            ],
-          ),
+          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Hello"),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  TwitterScreen("1424895584075354118")));
+                    },
+                    child: Text("tweet"))
+              ],
+            ),
+            Row(
+              children: [
+                Image.network("https://logo.clearbit.com/tesla.com"),
+              ],
+            ),
+            CarouselSlider(
+              options: CarouselOptions(height: 400.0),
+              items: [
+                "https://logo.clearbit.com/tesla.com",
+                "https://logo.clearbit.com/bitcoin.com",
+                "https://logo.clearbit.com/neuralink.com",
+                "https://logo.clearbit.com/apple.com",
+                "https://logo.clearbit.com/microsoft.com"
+              ]
+                  .map((item) => Container(
+                          child: Center(
+                        child: GestureDetector(
+                            onTap: () {
+                              print("Image : " +
+                                  item +
+                                  "  ==== HAS BEEN CLICKED");
+                            },
+                            child: Image.network(item,
+                                fit: BoxFit.cover, width: 1000)),
+                      )))
+                  .toList(),
+            )
+          ]),
         ));
   }
 }
