@@ -6,10 +6,14 @@ import 'package:amplify_flutter/amplify.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ptarmigan/services/feed_image_generator.dart';
 import 'package:ptarmigan/widgets/twitter_page.dart';
 import 'package:social_embed_webview/platforms/twitter.dart';
 import 'package:social_embed_webview/social_embed_webview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+late Future<FeedImage> feedimage;
+FeedImageGenerator generator = FeedImageGenerator();
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -21,6 +25,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
     print("Home page loaded.");
+    feedimage = generator.fetchImages();
+    print("-=-=-=-=-=-=-=-=-=-=-=-=-");
+
     //if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
     super.initState();
     // Amplify.Auth.getCurrentUser().then((user) {
@@ -70,6 +77,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           MaterialPageRoute(
                               builder: (context) =>
                                   TwitterScreen("1424895584075354118")));
+                      //feedimage.printContent();
                     },
                     child: Text("tweet"))
               ],
