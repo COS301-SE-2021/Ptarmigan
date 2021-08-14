@@ -23,6 +23,6 @@ def lambda_handler(event, context):
     filecontents = json.loads(filecontents)
 
     return {
-        'statusCode': 400,
+        'statusCode': 200,
         'body': json.dumps(filecontents)
     }
