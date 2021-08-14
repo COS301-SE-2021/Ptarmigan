@@ -21,8 +21,7 @@ Resources:
       CodeUri: ptarmigan/comprehend
       Handler: app.lambda_twitterComprehend
       Runtime: python3.8
-      Policies:
-        - AmazonDynamoDBFullAccess
+      Role: arn:aws:iam::878292117449:role/ptarmiganbackend-comprehendRole-DS4EAUQKKTBE
 
   getGraphSentiment:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
