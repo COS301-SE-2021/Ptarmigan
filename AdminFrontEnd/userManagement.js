@@ -50,7 +50,7 @@ $(document).ready(function () {
 
         $(this).addClass("disabled")
         //Add Api call
-        let content = {"content": "input"}
+        let content = {"content": input}
         updateBucketcall = "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/scraper/UpdateBucket"
         $.post(updateBucketcall, JSON.stringify(content), function(result){
             console.log(result)
