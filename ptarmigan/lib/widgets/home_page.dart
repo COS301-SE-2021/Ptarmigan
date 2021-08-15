@@ -7,12 +7,15 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ptarmigan/services/feed_image_generator.dart';
+import 'package:ptarmigan/widgets/todos_page.dart';
 import 'package:ptarmigan/widgets/twitter_page.dart';
 import 'package:social_embed_webview/platforms/twitter.dart';
 import 'package:social_embed_webview/social_embed_webview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-late Future<FeedImage> feedimage;
+var feedimage;
+var feedImageLink;
+
 FeedImageGenerator generator = FeedImageGenerator();
 
 class DashboardScreen extends StatefulWidget {
@@ -22,10 +25,11 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   late AuthUser _user;
+
   @override
   void initState() {
     print("Home page loaded.");
-    feedimage = generator.fetchImages();
+    _initFeedInterests();
     print("-=-=-=-=-=-=-=-=-=-=-=-=-");
 
     //if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
@@ -71,13 +75,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
               children: [
                 Text("Hello"),
                 ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  TwitterScreen("1424895584075354118")));
-                      //feedimage.printContent();
+                                  //TwitterScreen("1424895584075354118")));
+                                  TodosPage()));
+                      //await feedimage = generator.fetchImages();
+                      // var feedimage = await generator.fetchImages();
+                      //print("feed image below:");
+                      //print(feedimage);
                     },
                     child: Text("tweet"))
               ],
@@ -103,8 +111,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     "https://logo.clearbit.com/tesla.com",
     "https://logo.clearbit.com/bitcoin.com",
     "https://logo.clearbit.com/neuralink.com",
-    "https://logo.clearbit.com/apple.com",
-    "https://logo.clearbit.com/microsoft.com"
+    "https://logo.clearbit.com/tencent.com",
+    "https://logo.clearbit.com/tesla.com",
   ]
       .map((item) => Container(
             child: Container(
@@ -132,7 +140,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           padding: EdgeInsets.symmetric(
                               vertical: 10.0, horizontal: 20.0),
                           child: Text(
-                            "image demo",
+                            "text",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20.0,
@@ -146,6 +154,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
           ))
       .toList();
+
+  Future<void> _initFeedInterests() async {
+    feedimage = await generator.fetchImages();
+
+    for (var i = 0; i < feedimage.length; i++) {
+      feedImageLink[i] = ("https://logo.clearbit.com/" + feedimage + ".com");
+    }
+    print(feedImageLink);
+  }
 }
 
 /*
