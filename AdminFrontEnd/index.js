@@ -35,7 +35,7 @@ $(document).ready(function () {
 
     var userListdata;
     var params = {
-        UserPoolId: 'eu-west-1_nn8eU3DXM', /* required */
+        UserPoolId: 'eu-west-1_gM8mCo99w', /* required */ // actual pool eu-west-1_gM8mCo99w //Test pool eu-west-1_nn8eU3DXM
         AttributesToGet: [],
         Filter: '',
         Limit: '50'
