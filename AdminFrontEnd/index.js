@@ -11,7 +11,7 @@ function addUserToTable(user){
                         <button type="button" class="btn btn-danger adminStatus" value="notThisValue">No<span class="glyphicon glyphicon-thumbs-down"></span></button>
                     </td>
                     <th scope="col">
-                        <button type="button" class="btn btn-danger removeOnClick">Delete</button>
+                        <button type="button" class="btn btn-danger removeOnClick removeOnClick">Delete</button>
                     </th>
                 </tr>`)
 }
@@ -26,7 +26,25 @@ function userTable(users){
 
 
 $(document).ready(function () {
+    // functionality to remove on click
+    $('#userTable').on('click', '.removeOnClick', function() {
+        console.log("Somethinhg")
+        companyName = $(this).parent().parent().remove()
+    })
+    //Set User to admin
+    $('#userTable').on('click', '.adminStatus', function() {
+        console.log("Somethinhg")
+        // companyName = $(this).text("YES")
+
+        if($(this).text() == 'Yes') {
+            $(this).text('No');
+        }
+        else {
+            $(this).text('Yes');
+        }
+        })
     //initalize credentials
+    // userPool = 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902'
     AWS.config.region = 'eu-west-1'; // Region
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902',
     });
