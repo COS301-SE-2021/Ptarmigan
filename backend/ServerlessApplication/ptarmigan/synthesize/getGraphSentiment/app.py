@@ -113,7 +113,7 @@ def lambda_handler(event, context):
             returnObject["Data"].append({
                 "BeginDate": beginDate,
                 "EndDate": endDate,
-                "IntervalData": 0
+                "IntervalData": 0.0
             })
 
         beginDate = endDate
