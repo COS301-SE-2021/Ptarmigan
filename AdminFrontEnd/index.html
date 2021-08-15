@@ -24,8 +24,8 @@
                     Admin Pages
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">User Management</a>
-                    <a class="dropdown-item disabled" href="#">Landing Page</a>
+                    <a class="dropdown-item disabled" href="index.html">Landing Page</a>
+                    <a class="dropdown-item" href="userManagement.html">Scraper Management</a>
                 </div>
             </li>
         </ul>
@@ -169,7 +169,7 @@
             $("#userTable tr").filter(function() {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
-        });
+        })}
     });
 </script>
 </body>
