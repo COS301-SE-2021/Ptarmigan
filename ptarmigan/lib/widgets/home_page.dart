@@ -95,25 +95,68 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 Image.network("https://logo.clearbit.com/tesla.com"),
               ],
             ),
-            CarouselSlider(
+            /*CarouselSlider(
               options: CarouselOptions(
                 autoPlay: true,
                 aspectRatio: 2.0,
                 enlargeCenterPage: true,
               ),
               items: imageSliders,
+            )*/
+
+            CarouselSlider.builder(
+              itemCount: feedimage.length,
+              options: CarouselOptions(
+                autoPlay: true,
+                aspectRatio: 2.0,
+                enlargeCenterPage: true,
+              ),
+              itemBuilder: (context, index, realIdx) {
+                return Container(
+                    child: Center(
+                  child: Stack(children: [
+                    Image.network(
+                        "https://logo.clearbit.com/" +
+                            feedimage[index] +
+                            ".com",
+                        fit: BoxFit.cover,
+                        width: 1000),
+                    Positioned(
+                      bottom: 0.0,
+                      left: 0.0,
+                      right: 0.0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Color.fromARGB(200, 0, 0, 0),
+                              Color.fromARGB(0, 0, 0, 0)
+                            ],
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                          ),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 20.0),
+                        child: Text(
+                          feedimage[index],
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]),
+                ));
+              },
             )
           ]),
         ));
   }
 
-  final List<Widget> imageSliders = [
-    "https://logo.clearbit.com/tesla.com",
-    "https://logo.clearbit.com/bitcoin.com",
-    "https://logo.clearbit.com/neuralink.com",
-    "https://logo.clearbit.com/tencent.com",
-    "https://logo.clearbit.com/tesla.com",
-  ]
+  late final List<Widget> imageSliders = feedImageLink
       .map((item) => Container(
             child: Container(
               margin: EdgeInsets.all(5.0),
@@ -158,8 +201,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Future<void> _initFeedInterests() async {
     feedimage = await generator.fetchImages();
 
-    for (var i = 0; i < feedimage.length; i++) {
-      feedImageLink[i] = ("https://logo.clearbit.com/" + feedimage + ".com");
+    if (feedimage != null) {
+      for (var i = 0; i < feedimage.length; i++) {
+        feedImageLink[i] =
+            ("https://logo.clearbit.com/" + feedimage[i] + ".com");
+      }
     }
     print(feedImageLink);
   }
