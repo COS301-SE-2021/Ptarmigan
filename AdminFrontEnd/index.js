@@ -1,3 +1,10 @@
+function setUsers(numberOfUsers){
+    $("#numberOfUsers").text(numberOfUsers)
+}
+
+function
+
+
 $(document).ready(function () {
     //initalize credentials
     AWS.config.region = 'eu-west-1'; // Region
@@ -19,6 +26,8 @@ $(document).ready(function () {
         else
             {
                 userListData = data
+                length = data["Users"]["length"]
+                setUsers(length)
                 console.log(data);
             }           // successful response
     });
