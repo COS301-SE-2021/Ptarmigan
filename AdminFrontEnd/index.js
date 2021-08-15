@@ -1,5 +1,3 @@
-
-
 $(document).ready(function () {
     //initalize credentials
     AWS.config.region = 'eu-west-1'; // Region
@@ -8,12 +6,13 @@ $(document).ready(function () {
     //initalize cognito service
     var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({apiVersion: '2016-04-18'});
 
+    var userListdata;
     var params = {
         UserPoolId: 'eu-west-1_nn8eU3DXM', /* required */
         AttributesToGet: [],
         Filter: '',
-        Limit: '100',
-        PaginationToken: ''
+        Limit: '50'
+        //PaginationToken: '1'
         };
     cognitoidentityserviceprovider.listUsers(params, function(err, data) {
         if (err) console.log(err, err.stack); // an error occurred
@@ -23,5 +22,5 @@ $(document).ready(function () {
                 console.log(data);
             }           // successful response
     });
-// i have no idea what i am doing
+// This actually returns the object wtf
 });
