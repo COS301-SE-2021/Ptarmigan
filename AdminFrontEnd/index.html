@@ -123,43 +123,14 @@
                 <thead>
                 <tr>
                     <th scope="col">User Name</th>
-                    <th scope="col">User ID</th>
+                    <th scope="col">Last Access</th>
                     <th scope="col">Admin</th>
                     <th scope="col">Delete</th>
 
                 </tr>
                 </thead>
-                <tbody id="myTable">
-                <tr>
-                    <td scope="row">Benjamin van Staden</td>
-                    <td>9710055071083</td>
-                    <td>
-                        <button type="button" class="btn btn-danger adminStatus" value="notThisValue">No<span class="glyphicon glyphicon-thumbs-down"></span></button>
-                    </td>
-                    <th scope="col">
-                        <button type="button" class="btn btn-danger removeOnClick">Delete</button>
-                    </th>
-                </tr>
-                <tr>
-                    <td scope="row">Reinier Mouton</td>
-                    <td>9712053072133</td>
-                    <td>
-                        <button type="button" class="btn btn-danger adminStatus" value="notThisValue">No<span class="glyphicon glyphicon-thumbs-down"></span></button>
-                    </td>
-                    <th scope="col">
-                        <button type="button" class="btn btn-danger removeOnClick">Delete</button>
-                    </th>
-                </tr>
-                <tr>
-                    <td scope="row">Bob the Builder</td>
-                    <td>9811084123451</td>
-                    <td>
-                        <button type="button" class="btn btn-danger adminStatus" value="notThisValue">No<span class="glyphicon glyphicon-thumbs-down"></span></button>
-                    </td>
-                    <th scope="col">
-                        <button type="button" class="btn btn-danger removeOnClick">Delete</button>
-                    </th>
-                </tr>
+                <tbody id="userTable">
+
                 </tbody>
             </table>
         </div>
@@ -195,7 +166,7 @@
     $(document).ready(function(){
         $("#myInput").on("keyup", function() {
             var value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function() {
+            $("#userTable tr").filter(function() {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });

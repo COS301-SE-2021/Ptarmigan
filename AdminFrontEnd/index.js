@@ -2,7 +2,27 @@ function setUsers(numberOfUsers){
     $("#numberOfUsers").text(numberOfUsers)
 }
 
-function
+function addUserToTable(user){
+    console.log(user)
+    $("#userTable").append(`<tr>
+                    <td scope="row">${user["Username"]}</td>
+                    <td>${user["UserLastModifiedDate"]}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger adminStatus" value="notThisValue">No<span class="glyphicon glyphicon-thumbs-down"></span></button>
+                    </td>
+                    <th scope="col">
+                        <button type="button" class="btn btn-danger removeOnClick">Delete</button>
+                    </th>
+                </tr>`)
+}
+
+function userTable(users){
+    console.log(users)
+    for (let i in users){
+        console.log(i)
+        addUserToTable(users[i])
+    }
+}
 
 
 $(document).ready(function () {
@@ -28,6 +48,7 @@ $(document).ready(function () {
                 userListData = data
                 length = data["Users"]["length"]
                 setUsers(length)
+                userTable(data["Users"])
                 console.log(data);
             }           // successful response
     });
