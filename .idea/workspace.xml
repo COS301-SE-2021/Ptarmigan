@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7857c19e-01d9-41df-b1f7-09c3af39aea8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AdminFrontEnd/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/AdminFrontEnd/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +17,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1wAFA48j5w1gD03ClKFh2gaD8j3" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -65,5 +69,18 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Ptarmigan$pop3.coverage" NAME="pop3 Coverage Results" MODIFIED="1623495166881" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend/sam/twitterScraper" />
+    <SUITE FILE_PATH="coverage/Ptarmigan$Unittests_for_test_lambda_scrapet_TestClass_test_IfScrapetReturnsTweetsWithCorrectData.coverage" NAME="Unittests for test_lambda_scrapet.TestClass.test_IfScrapetReturnsTweetsWithCorrectData Coverage Results" MODIFIED="1622766786398" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend/sam/twitterScraper" />
+    <SUITE FILE_PATH="coverage/Ptarmigan$Unittests_for_intergrationtest_lambda_scrapet_TestClass_test_scraper_returns_tweets.coverage" NAME="Unittests for intergrationtest_lambda_scrapet.TestClass.test_scraper_returns_tweets Coverage Results" MODIFIED="1628160319622" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend/sam/twitterScraper" />
+    <SUITE FILE_PATH="coverage/Ptarmigan$Unittests_for_unittest_lambda_scrapet_TestClass_test_IfScrapetReturnsTweetsWithCorrectData.coverage" NAME="Unittests for unittest_lambda_scrapet.TestClass.test_IfScrapetReturnsTweetsWithCorrectData Coverage Results" MODIFIED="1624179025736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend/sam/twitterScraper" />
+    <SUITE FILE_PATH="coverage/Ptarmigan$Unittests_for_intergrationtest_lambda_scrapet_TestClass.coverage" NAME="Unittests for intergrationtest_lambda_scrapet.TestClass Coverage Results" MODIFIED="1624139390664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend/sam/twitterScraper" />
+    <SUITE FILE_PATH="coverage/Ptarmigan$Unittests_for_test_lambda_scrapet_TestClass.coverage" NAME="Unittests for test_lambda_scrapet.TestClass Coverage Results" MODIFIED="1622765948384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend/sam/twitterScraper" />
+    <SUITE FILE_PATH="coverage/Ptarmigan$lambda_scrapet.coverage" NAME="lambda_scrapet Coverage Results" MODIFIED="1624286794491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend/sam/twitterScraper" />
+    <SUITE FILE_PATH="coverage/Ptarmigan$Unittests_in_intergrationtest_lambda_scrapet_py.coverage" NAME="Unittests in intergrationtest_lambda_scrapet.py Coverage Results" MODIFIED="1622787364950" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend/sam/twitterScraper" />
+    <SUITE FILE_PATH="coverage/Ptarmigan$Unittests_for_unittest_lambda_scrapet_TestClass.coverage" NAME="Unittests for unittest_lambda_scrapet.TestClass Coverage Results" MODIFIED="1624140624872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend/sam/twitterScraper" />
+    <SUITE FILE_PATH="coverage/Ptarmigan$Unittests_in_test_lambda_scrapet_py.coverage" NAME="Unittests in test_lambda_scrapet.py Coverage Results" MODIFIED="1622766286593" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend/sam/twitterScraper" />
   </component>
 </project>
