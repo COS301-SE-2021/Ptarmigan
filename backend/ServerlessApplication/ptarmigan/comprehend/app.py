@@ -64,34 +64,38 @@ def getSentimentBatch(batchArray, lang):
 def lambda_twitterComprehend(event, context):
     dbClient = boto3.resource("dynamodb")
     processedData = batchSentiment(event)
-    tableName = event['0']["Company"]
-    # db.writeToDB(processedData)
-    putItem = []
-    tableName = event['0']["Company"]
-    for item in processedData[0]:
-        newItem = {
-            'PutRequest': {
-                'Item': {
-                    'Tweet_Id': int(item["Tweet Id"]),
-                    'Text': item["Text"],
-                    'lang': item["lang"],
-                    'Weight': str(item["Weight"]),
-                    'Sentiment': item["Sentiment"],
-                    'TimeStamp': int(item["date"]),
-                    'CompanyName': item["Company"]
+    try:
+        # db.writeToDB(processedData)
+        putItem = []
+        tableName = event['0']["Company"]
+        for item in processedData[0]:
+            newItem = {
+                'PutRequest': {
+                    'Item': {
+                        'Tweet_Id': int(item["Tweet Id"]),
+                        'Text': item["Text"],
+                        'lang': item["lang"],
+                        'Weight': str(item["Weight"]),
+                        'Sentiment': item["Sentiment"],
+                        'TimeStamp': int(item["date"]),
+                        'CompanyName': item["Company"]
+                    }
                 }
             }
+            putItem.append(newItem)
+
+        print("PutItems ", putItem)
+
+        dbClient.batch_write_item(
+            RequestItems={
+                tableName: putItem
+            }
+        )
+    except:
+        {
+            "statusCode": 200,
+            "body": "No tweets scraped, successful execution"
         }
-        putItem.append(newItem)
-
-    print("PutItems ", putItem)
-
-    dbClient.batch_write_item(
-        RequestItems={
-            tableName: putItem
-        }
-    )
-
     return {
             "statusCode": 200,
             "body": "This task was successful"
