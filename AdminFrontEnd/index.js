@@ -23,5 +23,5 @@ $(document).ready(function () {
                 console.log(data);
             }           // successful response
     });
-
+// i have no idea what i am doing
 });
