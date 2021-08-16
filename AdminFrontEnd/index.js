@@ -54,12 +54,18 @@ $(document).ready(function () {
         // companyName = $(this).text("YES")
 
         if($(this).text() == 'Yes') {
-            $(this).text('No');
+            $(this).text('No')
+            $(this).removeClass("btn-success")
+            $(this).addClass("btn-danger");
         }
         else {
-            $(this).text('Yes');
+            $(this).text('Yes')
+            $(this).removeClass("btn-danger")
+            $(this).addClass("btn-success");
         }
         })
+
+
     //initalize cognito service
 
     var userListdata;
