@@ -106,7 +106,21 @@ def writeToBucket(dict):
     bucketname = 'stepfunctestbucket'
     file_to_read = 'priceList.json'
 
+    # encode python dict to bytes for upload
+    uploadByteStream = bytes(json.dumps(dict).encode('UTF-8'))
 
+    # try upload return error is failed
+    try:
+        s3client.put_object(
+            Bucket=bucketname,
+            Key=file_to_read,
+            Body=uploadByteStream)
+    except:
+        return {
+            'statusCode': 500,
+            'body': json.dumps('Error updating Content file')
+        }
+    # else return success json
     return {
         'statusCode': 200,
         'body': json.dumps('Successfully Updated Stock Price List')
