@@ -246,13 +246,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Future<void> _initFeedInterests() async {
     feedimage = await generator.fetchImages();
 
-    if (feedimage != null) {
-      for (var i = 0; i < feedimage.length; i++) {
-        feedImageLink[i] =
-            ("https://logo.clearbit.com/" + feedimage[i] + ".com");
+    // if (feedimage != null) {
+    /*for (var i = 0; i < feedimage.length; i++) {
+        try {
+          feedImageLink[i] = ("https://logo.clearbit.com/" +
+              (feedimage[i] as String) +
+              ".com");
+        } on NoSuchMethodError catch (e) {
+          print("Null throw occurred");
+        }
       }
-    }
-    print(feedImageLink);
+    }*/
+    //print(feedImageLink);
   }
 }
 
