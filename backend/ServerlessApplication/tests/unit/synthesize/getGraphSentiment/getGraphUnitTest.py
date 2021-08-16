@@ -8,7 +8,7 @@ class TestGetSentiment(unittest.TestCase):
 
     def setUp(self):
         self.testDatabaseOutput = {
-            "BeginDate": 1623005418000,
+            "BeginDate": 1623005418,
             "Interval": "Week",
             "CompanyName": "Tesla"
         }
@@ -19,7 +19,7 @@ class TestGetSentiment(unittest.TestCase):
                     "Items": [{
                         "Tweet_Id": 7,
                         "Sentiment": "POSITIVE",
-                        "TimeStamp": 1623058451000,
+                        "TimeStamp": 1623058451,
                         "Weight": "583",
                         "Text": "You dumb",
                         "CompanyName": "Tesla", "lang": "ja"
@@ -31,22 +31,22 @@ class TestGetSentiment(unittest.TestCase):
             'body':
                 {
                     'CompanyName': 'Tesla',
-                    'Interval': 604800000,
+                    'Interval': 604800,
                     'Data':
                         [
                         {
-                            'BeginDate': 1623005418000,
-                            'EndDate': 1623610218000,
+                            'BeginDate': 1623005418,
+                            'EndDate': 1623610218,
                             'IntervalData': 1.0
                         },
                         {
-                            'BeginDate': 1623610218000,
-                            'EndDate': 1624215018000,
+                            'BeginDate': 1623610218,
+                            'EndDate': 1624215018,
                             'IntervalData': 1.0
                         },
                         {
-                            'BeginDate': 1624215018000,
-                            'EndDate': 1624819818000,
+                            'BeginDate': 1624215018,
+                            'EndDate': 1624819818,
                             'IntervalData': 1.0
                         }]
                 }
