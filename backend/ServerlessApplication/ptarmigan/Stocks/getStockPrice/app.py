@@ -49,6 +49,9 @@ def getList():
 def getPriceList(list):
     listPrices = []
 
+    for stuff in list:
+        requestUrl = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={stuff}&apikey=VDLMI3ZNV3LSSLDZ"
+
     return (listPrices)
 
 def getTickerSymbols():
