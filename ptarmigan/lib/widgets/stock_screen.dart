@@ -1,7 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:ptarmigan/widgets/todos_page.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:ptarmigan/services/stock_price_generator.dart';
+import 'package:ptarmigan/widgets/todos_page.dart';
+import 'package:http/http.dart' as http;
 import 'home_page.dart';
+
+StockPriceGenerator stockgenerator = StockPriceGenerator();
 
 class StockScreen extends StatefulWidget {
   var feedList;
@@ -13,8 +18,13 @@ class StockScreen extends StatefulWidget {
 
 class _StockScreenState extends State<StockScreen> {
   var feedList;
-
+  var stockPrices;
   _StockScreenState(this.feedList);
+
+  void initState() {
+    print("Initiating stock screen");
+    _initStockPrices();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,24 +52,35 @@ class _StockScreenState extends State<StockScreen> {
         body: Column(
           children: [
             Text("Hello there"),
-            ListView.builder(
-                padding: const EdgeInsets.all(8),
-                itemCount: feedList,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    height: 70,
-                    color: Colors.white, // change via settings page
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(feedList[index]),
-                          Text(getStockPrice(feedList[index]))
-                        ],
-                      ),
-                    ),
-                  );
-                })
+            ElevatedButton(
+                onPressed: () {
+                  print(" Prices output : ");
+                  print(stockPrices);
+                },
+                child: Text("Test button")),
+            Container(
+                height: 500,
+                width: double.infinity,
+                child: ListView.builder(
+                    padding: const EdgeInsets.all(8),
+                    itemCount: feedList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        height: 70,
+                        color: Colors.white, // change via settings page
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                  child: Text(feedList[index] +
+                                      " : " +
+                                      printStockPrice(index))),
+                            ],
+                          ),
+                        ),
+                      );
+                    }))
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -91,8 +112,23 @@ class _StockScreenState extends State<StockScreen> {
     }
   }
 
-  String getStockPrice(String stockName) {
-    //call api using stock name
-    return " ";
+  String printStockPrice(int index) {
+    if (stockPrices != null)
+      return stockPrices[feedList[index]];
+    else
+      return "Loading data...";
+  }
+
+  void _initStockPrices() async {
+    var stockPricestemp = await stockgenerator.fetchPrices();
+    if (stockPricestemp != null)
+      setState(() {
+        stockPrices = stockPricestemp;
+      });
+    try {
+      for (var i = 0; i < feedList.length; i++) {
+        print(stockPrices[feedList[i]]);
+      }
+    } on NoSuchMethodError catch (e) {}
   }
 }
