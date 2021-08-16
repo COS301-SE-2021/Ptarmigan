@@ -57,4 +57,11 @@ source_md5 = ""
 packagetype = "Zip"
 functions = ["returnBucketList"]
 
+[function_build_definitions.de9c758b-fbc0-432c-91fb-10fa32452144]
+codeuri = "/home/reinier/Documents/GitHub/Ptarmigan/backend/ServerlessApplication/ptarmigan/synthesize/getMostPopularTweet"
+runtime = "python3.8"
+source_md5 = ""
+packagetype = "Zip"
+functions = ["getMostPopularTweet"]
+
 [layer_build_definitions]
