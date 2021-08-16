@@ -7,6 +7,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ptarmigan/services/feed_image_generator.dart';
+import 'package:ptarmigan/settings/application_settings.dart';
+import 'package:ptarmigan/widgets/Settings_page.dart';
+import 'package:ptarmigan/widgets/stock_screen.dart';
 import 'package:ptarmigan/widgets/todos_page.dart';
 import 'package:ptarmigan/widgets/twitter_page.dart';
 import 'package:social_embed_webview/platforms/twitter.dart';
@@ -50,8 +53,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Settings settings = Settings();
     return Scaffold(
+        backgroundColor: settings.getBackgroundColor(),
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SettingsScreen()));
+            },
+          ),
           title: Text('Dashboard'),
           actions: [
             MaterialButton(
@@ -67,33 +79,35 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ],
         ),
         //Drawer
-        drawer: Drawer(),
+
         body: Container(
           child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Hello"),
-                ElevatedButton(
-                    onPressed: () async {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  //TwitterScreen("1424895584075354118")));
-                                  TodosPage()));
-                      //await feedimage = generator.fetchImages();
-                      // var feedimage = await generator.fetchImages();
-                      //print("feed image below:");
-                      //print(feedimage);
-                    },
-                    child: Text("tweet"))
-              ],
-            ),
-            Row(
-              children: [
-                Image.network("https://logo.clearbit.com/tesla.com"),
-              ],
+            Container(
+              height: 200,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                      child: Text(
+                          "View the most influential tweet of the last 24 hours..............................................",
+                          style: TextStyle(fontSize: 20))),
+                  ElevatedButton(
+                      onPressed: () async {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    TwitterScreen("1424895584075354118")));
+                        //TodosPage()));
+                        //await feedimage = generator.fetchImages();
+                        // var feedimage = await generator.fetchImages();
+                        //print("feed image below:");
+                        //print(feedimage);
+                      },
+                      child: Text("tweet"))
+                ],
+              ),
             ),
             /*CarouselSlider(
               options: CarouselOptions(
@@ -151,9 +165,40 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ]),
                 ));
               },
-            )
+            ),
           ]),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.business), label: "Insights"),
+            BottomNavigationBarItem(icon: Icon(Icons.grade), label: "Stocks"),
+          ],
+          selectedItemColor: Colors.amber[800],
+          onTap: _OnItemTapped,
         ));
+  }
+
+  void _OnItemTapped(int index) {
+    switch (index) {
+      case 0:
+        //Navigator.push(context,
+        //  MaterialPageRoute(builder: (context) => DashboardScreen()));
+        break;
+      case 1:
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => TodosPage()));
+        break;
+      case 2:
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => StockScreen(
+                      feedList: feedimage,
+                    )));
+        break;
+    }
   }
 
   late final List<Widget> imageSliders = feedImageLink
