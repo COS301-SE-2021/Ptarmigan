@@ -43,7 +43,7 @@ $(document).ready(function () {
         cognitoidentityserviceprovider.adminDeleteUser(paramsDeleteUser, function(err, data) {
         if (err) console.log(err, err.stack); // an error occurred
         else
-
+            alert("user deleted successfully")
             console.log(data);           // successful response
         });
         companyName = $(this).parent().parent().remove()
