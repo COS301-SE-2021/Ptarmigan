@@ -74,19 +74,24 @@ def getPriceList(list):
 
 def getTickerSymbols(list):
     tickerSymbolList = []
+    apiCalls = 0
     # should probably change this functions api since its pepega
     # Make api request to get ticker symbol based on search query
     for stuff in list:
+        if apiCalls == 5:
+            sleep(60)
+            apiCalls = 0
         #api requerst to sock api to get ticker
         requestUrl = f"https://api.polygon.io/v3/reference/tickers?market=stocks&search={stuff} &active=true&sort=ticker&order=asc&limit=10&apiKey=PNqoXU3luX7smsggLGPacHd8JnKZkDMV"
         requestReturn = requests.get(requestUrl)
+        apiCalls += 1
         requestReturn = json.loads(requestReturn.text)
         requestResults = requestReturn['results']
         # Make request to crypo api if error returns from stock api
         if requestResults == None:
-
             requestUrlCrypto = f"https://api.polygon.io/v3/reference/tickers?market=crypto&search={stuff} Dollar&order=asc&limit=10&apiKey=PNqoXU3luX7smsggLGPacHd8JnKZkDMV"
             requestReturnCrypto = requests.get(requestUrlCrypto)
+            apiCalls += 1
             requestReturnCrypto = json.loads(requestReturnCrypto.text)
             requestResultsCrypto = requestReturnCrypto['results']
             tickerSymbolList.append(requestResultsCrypto[0]['ticker'])
