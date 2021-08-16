@@ -54,4 +54,5 @@ def getTickerSymbols():
         requestReturn = json.loads(requestReturn.text)
         requestResults = requestReturn['results']
 
+        tickerSymbolList.append(requestResults[0]['ticker'])
     return (tickerSymbolList)
