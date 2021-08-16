@@ -45,6 +45,12 @@ def getList():
 
     return (listContents)
 
+
+def getPriceList(list):
+    listPrices = []
+
+    return (listPrices)
+
 def getTickerSymbols():
     tickerSymbolList = []
     # should probably change this functions api since its pepega
