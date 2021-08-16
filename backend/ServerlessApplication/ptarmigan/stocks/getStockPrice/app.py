@@ -45,25 +45,30 @@ def getList():
 
 def getPriceList(list):
     listPrices = []
+    apiCalls = 0
     # Make api request to get price based on ticker symbols
     for stuff in list:
-        requestUrl = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={stuff}&apikey=VDLMI3ZNV3LSSLDZ"
+        if apiCalls == 5:
+            sleep(60)
+            apiCalls = 0
+        requestUrl = f"https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={stuff}&apikey=VDLMI3ZNV3LSSLDZ"
         requestReturn = requests.get(requestUrl)
+        apiCalls +=1
         requestResults = json.loads(requestReturn.text)
         # Make request to crypo api if error returns from stock api
-        if ([*requestResults.keys()])[0] == "Error Message":
+        if not requestResults['Global Quote']:
             #pull crypto symblo from ticker
             crypto = stuff[2:5]
             # add appropriate field to list
             requestUrlCrypto = f"https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency={crypto}&to_currency=USD&apikey=VDLMI3ZNV3LSSLDZ"
             requestReturnCrypto = requests.get(requestUrlCrypto)
+            apiCalls +=1
             requestResultsCrypto = json.loads(requestReturnCrypto.text)
             listPrices.append((requestResultsCrypto['Realtime Currency Exchange Rate'])['5. Exchange Rate'])
         else:
             #add appropriate field to list
-            requestResults = requestResults['Time Series (Daily)']
-            key1 = ([*requestResults.keys()])[0]
-            listPrices.append((requestResults[key1])['4. close'])
+            requestResults = requestResults['Global Quote']
+            listPrices.append(requestResults['08. previous close'])
 
     return (listPrices)
 
