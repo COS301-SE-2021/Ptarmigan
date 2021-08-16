@@ -7,20 +7,20 @@ from ptarmigan.synthesize.getGraphSentiment import app
 
 def fixture_event():
     return {
-                "BeginDate" : 1623008136000,
-                "Interval":  "Week",
-                "CompanyName": "Tesla"
-            }
+            "BeginDate": 1623005418000,
+            "Interval": "Week",
+            "CompanyName": "Tesla"
+        }
 
 class TestGetGraphSentiment:
     def test_get_sentiment_graph(self):
-        testReturn = (app.lambda_handler(fixture_event, json.dumps("{}")))
+        testReturn = app.lambda_handler(fixture_event, "")
         print("some")
 
         print(testReturn)
 
         expected = {
-                        "statusCode": 200,
+                        "statusCode": 400,
                         "body":
                             {
                                 "CompanyName": "Tesla", "Interval": 604800000, "Data": [
@@ -34,7 +34,7 @@ class TestGetGraphSentiment:
                         }
                     }
 
-        assert "" == ""
+        assert expected["statusCode"] == testReturn["statusCode"]
 
     def test_when_invalid_input(self):
         expected = 400
