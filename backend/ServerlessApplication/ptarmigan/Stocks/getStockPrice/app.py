@@ -51,7 +51,8 @@ def getPriceList(list):
 
     for stuff in list:
         requestUrl = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={stuff}&apikey=VDLMI3ZNV3LSSLDZ"
-
+        requestReturn = requests.get(requestUrl)
+        requestResults = json.loads(requestReturn.text)
     return (listPrices)
 
 def getTickerSymbols():
