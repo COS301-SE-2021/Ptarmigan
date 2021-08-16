@@ -40,10 +40,14 @@ class _LoginState extends State<Login> {
       print(_isSignedIn);
     } on AuthException catch (e) {
       print('Message ============ ' + e.message);
-      if (e.message.contains('There is already a user  signed in.')) {
+      if (e.message.contains('There is already a user signed in.')) {
         await Amplify.Auth.signOut();
         return 'Problem logging in. Please try again.';
       }
+      if (e.message.contains("Sign in failed")) {
+        return "Sign in failed, please enter a correct password";
+      }
+      if (e.message.contains("User not found in the system.")) return e.message;
       //await Amplify.Auth.signOut();   /////////////////////////////////////////MAKE SHIFT SOLUTION ---- NEEDS FIXING
       //return '${e.message} - ${e.recoverySuggestion}';
     }
