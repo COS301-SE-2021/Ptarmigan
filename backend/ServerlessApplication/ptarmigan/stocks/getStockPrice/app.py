@@ -70,7 +70,7 @@ def getPriceList(list):
 
     return (listPrices)
 
-def getTickerSymbols():
+def getTickerSymbols(list):
     tickerSymbolList = []
     # should probably change this functions api since its pepega
     # Make api request to get ticker symbol based on search query
