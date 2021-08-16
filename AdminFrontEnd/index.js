@@ -82,8 +82,7 @@ $(document).ready(function () {
     })
     //Set User to admin
     $('#userTable').on('click', '.adminStatus', function() {
-        console.log("Somethinhg")
-        // companyName = $(this).text("YES")
+
 
         if($(this).text() == 'Yes') {
             $(this).text('No')
