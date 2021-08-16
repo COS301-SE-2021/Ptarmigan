@@ -2,9 +2,11 @@ function setUsers(numberOfUsers){
     $("#numberOfUsers").text(numberOfUsers)
 }
 
-function addUserToTable(user){
+function addUserToTable(user,adminFlag){
     console.log(user)
-    $("#userTable").append(`<tr>
+    if (adminFlag == false)
+    {
+        $("#userTable").append(`<tr>
                     <td scope="row" class="Username">${user["Username"]}</td>
                     <td>${user["UserLastModifiedDate"]}</td>
                     <td>
@@ -14,13 +16,28 @@ function addUserToTable(user){
                         <button type="button" class="btn btn-danger removeOnClick removeOnClick">Delete</button>
                     </th>
                 </tr>`)
+    }
+
 }
 
-function userTable(users){
+function userTable(users,adminUsers){
     console.log(users)
+    console.log(adminUsers)
+
+
     for (let i in users){
+        adminFlag = false
         console.log(i)
-        addUserToTable(users[i])
+        userID = (users[i])["Username"]
+        for (let k in adminUsers)
+        {
+            adminID = ((adminUsers[k])["Username"])
+            if (userID == adminID)
+            {
+                adminFlag = true
+            }
+        }
+        addUserToTable(users[i],adminFlag)
     }
 }
 
@@ -75,9 +92,22 @@ $(document).ready(function () {
         else
             {
                 userListData = data
-                length = data["Users"]["length"]
+                length = userListData["Users"]["length"]
                 setUsers(length)
-                userTable(data["Users"])
+
+                var paramsAdminUsers = {
+                  GroupName: 'Admins', /* required */
+                  UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
+                  Limit: '50',
+                };
+                cognitoidentityserviceprovider.listUsersInGroup(paramsAdminUsers, function(err, data) {
+                  if (err) console.log(err, err.stack); // an error occurred
+                  else
+                      adminData = data
+                      console.log("Users in admin group returned");           // successful response
+                });
+
+                userTable(userListData["Users"],adminData["Users"])
             }           // successful response
     });
 });
