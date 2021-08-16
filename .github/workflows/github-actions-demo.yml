@@ -32,6 +32,13 @@ jobs:
             aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             aws-region: eu-west-1
+        - name: Install Dependencies with Apt Get
+          run: |
+              sudo apt-get update
+              sudo apt-get install python3.8 jq -y
+        - name: Install Pip Dependencies
+          run: |
+            pip3 install pytest
         - name: Build Sam
           working-directory: ./backend/ServerlessApplication
           run: sam build --use-container
