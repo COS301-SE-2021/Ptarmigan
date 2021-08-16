@@ -99,3 +99,15 @@ def getTickerSymbols(list):
             # add appropriate field to list
             tickerSymbolList.append(requestResults[0]['ticker'])
     return (tickerSymbolList)
+
+
+def writeToBucket(dict):
+    s3client = boto3.client('s3')
+    bucketname = 'stepfunctestbucket'
+    file_to_read = 'priceList.json'
+
+
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Successfully Updated Stock Price List')
+    }
