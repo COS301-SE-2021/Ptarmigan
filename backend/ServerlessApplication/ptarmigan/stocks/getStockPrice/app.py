@@ -10,10 +10,7 @@ def lambda_handler(event, context):
 
     priceDict = {contentList[i]: priceList[i] for i in range(len(contentList))}
 
-    return {
-        'statusCode': 200,
-        'body': json.dumps(priceDict)
-    }
+    return writeToBucket(priceDict)
 
 def getList():
     #get list from s3 Bucket
