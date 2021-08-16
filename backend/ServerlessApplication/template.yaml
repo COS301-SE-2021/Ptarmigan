@@ -23,6 +23,23 @@ Resources:
       Runtime: python3.8
       Role: arn:aws:iam::878292117449:role/ptarmiganbackend-comprehendRole-DS4EAUQKKTBE
 
+  getMostPopularTweet:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/synthesize/getMostPopularTweet
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        HttpPost:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /senthisize/getMostPopularTweet
+            Method: post
+
+
+
   getGraphSentiment:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
@@ -37,6 +54,7 @@ Resources:
           Properties:
             Path: /senthisize/getGraphSentiment
             Method: post
+
 
   getSentimentPeriod:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -141,9 +159,9 @@ Resources:
       DefinitionUri: ptarmigan/scraperStepFunc/StepFunc.json
       Role: arn:aws:iam::878292117449:role/stepFunctionLambdaRole
       Type: EXPRESS
-      Tags:
-        - Key: auto-delete
-          Value: no
+#      Tags:
+#        - Key: auto-delete
+#          Value: no
       Events:
         HttpPost:
           Type: Api # More info about API    db = database.database(tableName) Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api

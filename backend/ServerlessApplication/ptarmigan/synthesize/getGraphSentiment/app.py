@@ -29,19 +29,19 @@ def calculateSentiment(content):
 #
 def getInterval(interval):
     if interval == "Second":
-        return 1000
+        return 1
     if interval == "Minute":
-        return 60 * 1000
+        return 60
     if interval == "Hour":
-        return 60 * 60 * 1000
+        return 60 * 60
     if interval == "Day":
-        return 60 * 60 * 24 * 1000
+        return 60 * 60 * 24
     if interval == "Week":
-        return 60 * 60 * 24 * 7 * 1000
+        return 60 * 60 * 24 * 7
     if interval == "Month":
-        return 60 * 60 * 24 * 30 * 1000
+        return 60 * 60 * 24 * 30
     if interval == "Year":
-        return 60 * 60 * 24 * 365 * 1000
+        return 60 * 60 * 24 * 365
 
 
 def dbReturn(event, beginDate, endDate):
@@ -61,7 +61,12 @@ def lambda_handler(event, context):
     print(event)
 
     try:
-        event = json.loads(event["body"])
+        if "body" in event:
+            event = json.loads(event["body"])
+
+        else:
+            event = event
+
         cName = event["CompanyName"]
         print(cName)
         interval = event["Interval"]
@@ -85,12 +90,13 @@ def lambda_handler(event, context):
     table = dynamodb.Table('Test')
 
     returnObject = {
-        "CompanyName": "Tesla",
+        "CompanyName": cName,
         "Interval": interval,
         "Data": []
     }
 
     while beginDate < int(time.time()):
+        print("Something")
         try:
             response = dbReturn(event, beginDate, endDate)
 
@@ -107,7 +113,7 @@ def lambda_handler(event, context):
             returnObject["Data"].append({
                 "BeginDate": beginDate,
                 "EndDate": endDate,
-                "IntervalData": 0
+                "IntervalData": 0.0
             })
 
         beginDate = endDate
