@@ -58,6 +58,8 @@ def getPriceList(list):
             crypto = stuff[2:5]
             requestUrlCrypto = f"https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency={crypto}&to_currency=USD&apikey=VDLMI3ZNV3LSSLDZ"
             requestReturnCrypto = requests.get(requestUrlCrypto)
+            requestResultsCrypto = json.loads(requestReturnCrypto.text)
+            listPrices.append((requestResultsCrypto['Realtime Currency Exchange Rate'])['5. Exchange Rate'])
 
     return (listPrices)
 
