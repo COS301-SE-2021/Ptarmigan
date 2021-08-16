@@ -62,6 +62,8 @@ def getPriceList(list):
             listPrices.append((requestResultsCrypto['Realtime Currency Exchange Rate'])['5. Exchange Rate'])
         else:
             requestResults = requestResults['Time Series (Daily)']
+            key1 = ([*requestResults.keys()])[0]
+            listPrices.append((requestResults[key1])['4. close'])
 
     return (listPrices)
 
