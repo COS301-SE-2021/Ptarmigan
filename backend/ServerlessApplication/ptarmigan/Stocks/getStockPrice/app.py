@@ -59,6 +59,8 @@ def getTickerSymbols():
             requestUrlCrypto = f"https://api.polygon.io/v3/reference/tickers?market=crypto&search={stuff} Dollar&order=asc&limit=10&apiKey=PNqoXU3luX7smsggLGPacHd8JnKZkDMV"
             requestReturnCrypto = requests.get(requestUrlCrypto)
             requestReturnCrypto = json.loads(requestReturnCrypto.text)
+            requestResultsCrypto = requestReturnCrypto['results']
+            tickerSymbolList.append(requestResultsCrypto[0]['ticker'])
         else:
             tickerSymbolList.append(requestResults[0]['ticker'])
     return (tickerSymbolList)
