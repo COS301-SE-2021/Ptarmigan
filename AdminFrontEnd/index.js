@@ -113,7 +113,7 @@ $(document).ready(function () {
         else
             {
                 var adminData
-                userListData = data
+                var userListData = data
                 length = userListData["Users"]["length"]
                 setUsers(length)
 
@@ -123,13 +123,14 @@ $(document).ready(function () {
                   Limit: '50',
                 };
                 cognitoidentityserviceprovider.listUsersInGroup(paramsAdminUsers, function(err, data) {
-                  if (err) console.log(err, err.stack); // an error occurred
-                  else
-                      adminData = data
-                      console.log("Users in admin group returned");           // successful response
-                });
-
-                userTable(userListData["Users"],adminData["Users"])
+                    if (err) console.log(err, err.stack); // an error occurred
+                    else
+                        adminData = data;
+                        console.log(adminData)
+                        console.log("Users in admin group returned");           // successful response
+                        userTable(userListData["Users"],adminData["Users"])
+                    });
+                //userTable((userListData["Users"]),(adminData["Users"]))
             }           // successful response
     });
 });
