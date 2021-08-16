@@ -53,6 +53,12 @@ def getPriceList(list):
         requestUrl = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={stuff}&apikey=VDLMI3ZNV3LSSLDZ"
         requestReturn = requests.get(requestUrl)
         requestResults = json.loads(requestReturn.text)
+
+        if ([*requestResults.keys()])[0] == "Error Message":
+            crypto = stuff[2:5]
+            requestUrlCrypto = f"https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency={crypto}&to_currency=USD&apikey=VDLMI3ZNV3LSSLDZ"
+            requestReturnCrypto = requests.get(requestUrlCrypto)
+
     return (listPrices)
 
 def getTickerSymbols():
