@@ -100,7 +100,6 @@ $(document).ready(function () {
 
     //initalize cognito service
 
-    var userListdata;
     var params = {
         UserPoolId: 'eu-west-1_gM8mCo99w', /* required */ // actual pool eu-west-1_gM8mCo99w //Test pool eu-west-1_nn8eU3DXM
         AttributesToGet: [],
@@ -127,8 +126,7 @@ $(document).ready(function () {
                     if (err) console.log(err, err.stack); // an error occurred
                     else
                         adminData = data;
-                        console.log(adminData)
-                        console.log("Users in admin group returned");           // successful response
+                        //console.log("Users in admin group returned");           // successful response
                         userTable(userListData["Users"],adminData["Users"])
                     });
             }
