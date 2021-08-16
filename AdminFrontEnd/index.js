@@ -17,6 +17,21 @@ function addUserToTable(user,adminFlag){
                     </th>
                 </tr>`)
     }
+    else
+    {
+        {
+        $("#userTable").append(`<tr>
+                    <td scope="row" class="Username">${user["Username"]}</td>
+                    <td>${user["UserLastModifiedDate"]}</td>
+                    <td>
+                        <button type="button" class="btn btn-success adminStatus" value="notThisValue">yes<span class="glyphicon glyphicon-thumbs-down"></span></button>
+                    </td>
+                    <th scope="col">
+                        <button type="button" class="btn btn-danger removeOnClick removeOnClick">Delete</button>
+                    </th>
+                </tr>`)
+    }
+    }
 
 }
 
