@@ -6,11 +6,11 @@ from ptarmigan.synthesize.getGraphSentiment import app
 @pytest.fixture()
 
 def fixture_event():
-    return {
+    return {"body" : {
             "BeginDate": 1623005418000,
             "Interval": "Week",
             "CompanyName": "Tesla"
-        }
+        }}
 
 class TestGetGraphSentiment:
     def test_get_sentiment_graph(self):
