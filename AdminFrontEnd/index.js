@@ -5,7 +5,7 @@ function setUsers(numberOfUsers){
 function addUserToTable(user){
     console.log(user)
     $("#userTable").append(`<tr>
-                    <td scope="row">${user["Username"]}</td>
+                    <td scope="row" class="Username">${user["Username"]}</td>
                     <td>${user["UserLastModifiedDate"]}</td>
                     <td>
                         <button type="button" class="btn btn-danger adminStatus" value="notThisValue">No<span class="glyphicon glyphicon-thumbs-down"></span></button>
@@ -26,10 +26,18 @@ function userTable(users){
 
 
 $(document).ready(function () {
+    //initalize credentials
+    // userPool = 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902'
+    AWS.config.region = 'eu-west-1'; // Region
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902',
+    });
+    var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({apiVersion: '2016-04-18'});
+
     // functionality to remove on click
     $('#userTable').on('click', '.removeOnClick', function() {
-        console.log("Somethinhg")
-        companyName = $(this).parent().parent().remove()
+        username = $(this).parent().parent().find(".Username").text()
+        console.log(username + " hello this is the username")
+
     })
     //Set User to admin
     $('#userTable').on('click', '.adminStatus', function() {
@@ -43,13 +51,7 @@ $(document).ready(function () {
             $(this).text('Yes');
         }
         })
-    //initalize credentials
-    // userPool = 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902'
-    AWS.config.region = 'eu-west-1'; // Region
-    AWS.config.credentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902',
-    });
     //initalize cognito service
-    var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({apiVersion: '2016-04-18'});
 
     var userListdata;
     var params = {
@@ -67,8 +69,6 @@ $(document).ready(function () {
                 length = data["Users"]["length"]
                 setUsers(length)
                 userTable(data["Users"])
-                console.log(data);
             }           // successful response
     });
-// This actually returns the object wtf
 });
