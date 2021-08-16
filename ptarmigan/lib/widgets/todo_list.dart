@@ -26,9 +26,11 @@ class TodosList extends StatelessWidget {
   StreamSubscription _subscription;
   final pageViewController = PageController();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  List<DataPoint<dynamic>> list = [];
 
   TodosList({this.todos, this.feeds});
 
+  //IGNORE
   bocko(var feedChoice) async {
     _subscription = Amplify.DataStore.observe(Todo.classType).listen((event) {
       fetchNewTodos(feedChoice);
@@ -44,7 +46,20 @@ class TodosList extends StatelessWidget {
     todos = updatedTodos;
     feedTitle = feedIdentifier;
 
+    convertToGraph(updatedTodos);
+
     //print("VACO: " + todos.elementAt(0).name);
+  }
+
+  void convertToGraph(List<Todo> entry) {
+    for (int i = 0; i < entry.length; i++) {
+      print("plick");
+      list.add(new DataPoint<DateTime>(
+        value: 100, // double.parse(entry[i].description).toInt(),
+        xAxis: DateTime.parse(entry[i].date.toString()),
+      )); //DateTime.parse(entry[i].date.toString())));
+    }
+    print("GRAPHED __________");
   }
 
   @override
@@ -58,8 +73,18 @@ class TodosList extends StatelessWidget {
     print('======================\n');
     final fromDate = DateTime(2021, 05, 22);
     final toDate = DateTime.now();
-    final date1 = DateTime.now().subtract(Duration(days: 2));
-    final date2 = DateTime.now().subtract(Duration(days: 3));
+
+    var andew = [
+      DataPoint<DateTime>(
+          value: 10, xAxis: DateTime.now().subtract(Duration(days: 2))),
+      DataPoint<DateTime>(
+          value: 130, xAxis: DateTime.now().subtract(Duration(days: 3))),
+      DataPoint<DateTime>(
+          value: 50, xAxis: DateTime.now().subtract(Duration(days: 4)))
+    ];
+
+    andew.add(DataPoint<DateTime>(
+        value: 10, xAxis: DateTime.now().subtract(Duration(days: 2))));
 
     return Scaffold(
         key: scaffoldKey,
@@ -109,6 +134,7 @@ class TodosList extends StatelessWidget {
                 ],
               ),
               Container(
+                //Grapg Container
                 height: 240,
                 padding: EdgeInsets.only(
                   left: 0.0,
@@ -134,12 +160,13 @@ class TodosList extends StatelessWidget {
                           //   label: "Dutysdas",
                           onMissingValue: (dateTime) {
                             if (dateTime.day.isEven) {
-                              return 10.0;
+                              return 0.0;
                             }
-                            return 5.0;
+                            return 0.0;
                           },
-                          data: //graphPoints
-                              [
+                          data: list, //graphPoints
+                          //[
+                          /*
                             DataPoint<DateTime>(
                                 value: 10,
                                 xAxis:
@@ -172,7 +199,8 @@ class TodosList extends StatelessWidget {
                                 value: 45,
                                 xAxis:
                                     DateTime.now().subtract(Duration(days: 2))),
-                          ],
+                                    */
+                          //],
                         ),
                       ],
                       config: BezierChartConfig(

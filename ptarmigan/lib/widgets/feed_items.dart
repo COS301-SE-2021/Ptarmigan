@@ -23,7 +23,7 @@ class FeedItems extends StatelessWidget {
   final double iconSize = 24.0;
   final Feed feed;
 
-  int lastUpdated = 0;
+  int lastUpdated = 1623005418;
 
   FeedItems({this.feed, this.lastUpdated});
 
@@ -71,6 +71,7 @@ class FeedItems extends StatelessWidget {
     }
 
     Future<FeedSentiment> _updateFeedPosts(String feedName) async {
+      //Amplify.DataStore.clear();
       // String a =
       //     '[{"BeginDate": 1623005418000, "EndDate": 1623610218000, "IntervalData": 0}, {"BeginDate": 1623610218000, "EndDate": 1624215018000, "IntervalData": 0}, {"BeginDate": 1624215018000, "EndDate": 1624819818000, "IntervalData": 0}, {"BeginDate": 1624819818000, "EndDate": 1625424618000, "IntervalData": 0}, {"BeginDate": 1625424618000, "EndDate": 1626029418000, "IntervalData": 0}, {"BeginDate": 1626029418000, "EndDate": 1626634218000, "IntervalData": 0}, {"BeginDate": 1626634218000, "EndDate": 1627239018000, "IntervalData": 0}, {"BeginDate": 1627239018000, "EndDate": 1627843818000, "IntervalData": 0}, {"BeginDate": 1627843818000, "EndDate": 1628448618000, "IntervalData": 0.06540074664700189}, {"BeginDate": 1628448618000, "EndDate": 1629053418000, "IntervalData": 0}]';
       // final parsed = jsonDecode(a).cast<Map<String, dynamic>>();
@@ -89,7 +90,8 @@ class FeedItems extends StatelessWidget {
       print("-----------");
       print(response2.body);
 
-      lastUpdated = DateTime.now().millisecondsSinceEpoch;
+      //  if (lastUpdated == 1623005418)
+      //lastUpdated = (DateTime.now().millisecondsSinceEpoch / 1000).toInt();
 
       if (response2.statusCode == 200) {
         // If the server did return a 201 CREATED response,
@@ -103,24 +105,36 @@ class FeedItems extends StatelessWidget {
             response.map((i) => FeedSentiment.fromJson(i)));
 
         for (int i = 0; i < test1.length; i++) {
+          print(
+              "----------------------------------------------------------------");
           print(DateTime.fromMillisecondsSinceEpoch(test1[i].beginDate)
               .toIso8601String()
               .substring(0, 10));
 
+          int len = test1[i].intervalData.toString().indexOf(".") + 1;
+          TemporalDate a = TemporalDate.fromString(
+              DateTime.fromMillisecondsSinceEpoch(test1[i].beginDate * 1000)
+                  .toIso8601String()
+                  .substring(0, 10));
+          if (test1[i].intervalData < 0) {
+            len = len - 1;
+          }
+
           Todo newTodo = Todo(
             name: feedName,
-            description: test1[i].intervalData.toString(),
-            date: TemporalDate.fromString(DateTime.fromMillisecondsSinceEpoch(
-                    test1[i].beginDate)
-                .toIso8601String()
-                .substring(0,
-                    10)), //TemporalDate.fromMillisecondsSinceEpoch(test1[0].beginDate);
+            description: ((test1[i].intervalData) * 50 + 50)
+                    .toString()
+                    .substring(0, len) +
+                "%",
+
+            date:
+                a, //TemporalDate.fromMillisecondsSinceEpoch(test1[0].beginDate);
           );
 
           try {
             Amplify.DataStore.save(newTodo);
 
-            Navigator.of(context).pop();
+            // Navigator.of(context).pop();
           } catch (e) {
             print('An error occurred while saving Todo: $e');
           }
