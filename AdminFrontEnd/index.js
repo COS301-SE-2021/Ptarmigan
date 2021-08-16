@@ -112,12 +112,13 @@ $(document).ready(function () {
         if (err) console.log(err, err.stack); // an error occurred
         else
             {
+                var adminData
                 userListData = data
                 length = userListData["Users"]["length"]
                 setUsers(length)
 
                 var paramsAdminUsers = {
-                  GroupName: 'Admins', /* required */
+                  GroupName: 'Admin', /* required */
                   UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
                   Limit: '50',
                 };
