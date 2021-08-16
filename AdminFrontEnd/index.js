@@ -112,6 +112,7 @@ $(document).ready(function () {
         if (err) console.log(err, err.stack); // an error occurred
         else
             {
+                // successful response
                 var adminData
                 var userListData = data
                 length = userListData["Users"]["length"]
@@ -130,7 +131,6 @@ $(document).ready(function () {
                         console.log("Users in admin group returned");           // successful response
                         userTable(userListData["Users"],adminData["Users"])
                     });
-                //userTable((userListData["Users"]),(adminData["Users"]))
-            }           // successful response
+            }
     });
 });
