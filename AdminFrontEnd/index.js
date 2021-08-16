@@ -40,7 +40,13 @@ $(document).ready(function () {
         var paramsDeleteUser = {UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
         Username: username /* required */
         };
+        cognitoidentityserviceprovider.adminDeleteUser(paramsDeleteUser, function(err, data) {
+        if (err) console.log(err, err.stack); // an error occurred
+        else
 
+            console.log(data);           // successful response
+        });
+        companyName = $(this).parent().parent().remove()
     })
     //Set User to admin
     $('#userTable').on('click', '.adminStatus', function() {
