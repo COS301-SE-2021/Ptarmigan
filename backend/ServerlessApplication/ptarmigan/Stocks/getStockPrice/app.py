@@ -45,12 +45,13 @@ def getList():
 
     return (listContents)
 
-def getTickerSymbols()
+def getTickerSymbols():
     tickerSymbolList = []
     # should probably change this functions api since its pepega
     for stuff in list:
         requestUrl = f"https://api.polygon.io/v3/reference/tickers?market=stocks&search={stuff} &active=true&sort=ticker&order=asc&limit=10&apiKey=PNqoXU3luX7smsggLGPacHd8JnKZkDMV"
         requestReturn = requests.get(requestUrl)
-
+        requestReturn = json.loads(requestReturn.text)
+        requestResults = requestReturn['results']
 
     return (tickerSymbolList)
