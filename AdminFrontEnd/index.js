@@ -37,6 +37,9 @@ $(document).ready(function () {
     $('#userTable').on('click', '.removeOnClick', function() {
         username = $(this).parent().parent().find(".Username").text()
         console.log(username + " hello this is the username")
+        var paramsDeleteUser = {UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
+        Username: username /* required */
+        };
 
     })
     //Set User to admin
