@@ -9,7 +9,6 @@ class TestClass(TestCase):
     def setUp(self):
         self.delete_test_input = {"body": json.dumps({"content": "IBM"})}
         self.delete_invalid_input = {"body": {"context": "IBM"}}
-        self.delete_not_found = {"body": {"content": "IBM"}}
 
     @patch('ptarmigan.scraper.deleteBucketItem.app.uploadBucketList')
     @patch('ptarmigan.scraper.deleteBucketItem.app.getBucketList')
@@ -35,6 +34,37 @@ class TestClass(TestCase):
         testReturn = (app.lambda_handler(self.delete_invalid_input, ""))
         assert testReturn == expected
 
+    @patch('ptarmigan.scraper.deleteBucketItem.app.uploadBucketList')
+    @patch('ptarmigan.scraper.deleteBucketItem.app.getBucketList')
+    def test_if_item_not_found(self,mock_BucketList,mock_Upload):
+        mock_Upload.return_value = True
+        mock_BucketList.return_value = bytes(json.dumps({"Scrape-until": 1628659921.2764487,
+                                                         "scrape-detail": [{"content": "Bitcoin"},
+                                                                           {"content": "Microsoft"}, {"content": "Tesla"},
+                                                                           {"content": "Apple"}]}).encode('UTF-8'))
 
+        expected = {
+            'statusCode': 400,
+            'body': json.dumps('Item not found.')
+        }
 
+        testReturn = (app.lambda_handler(self.delete_test_input, ""))
+        assert testReturn == expected
+
+    @patch('ptarmigan.scraper.deleteBucketItem.app.uploadBucketList')
+    @patch('ptarmigan.scraper.deleteBucketItem.app.getBucketList')
+    def test_if_error_deleting(self,mock_BucketList,mock_Upload):
+        mock_Upload.return_value = False
+        mock_BucketList.return_value = bytes(json.dumps({"Scrape-until": 1628659921.2764487,
+                                                         "scrape-detail": [{"content": "Bitcoin"},
+                                                                           {"content": "Microsoft"},
+                                                                           {"content": "IBM"}, {"content": "Tesla"},
+                                                                           {"content": "Apple"}]}).encode('UTF-8'))
+        expected = {
+                'statusCode': 500,
+                'body': json.dumps('Error updating Content file')
+            }
+
+        testReturn = (app.lambda_handler(self.delete_test_input, ""))
+        assert testReturn == expected
 

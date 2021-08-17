@@ -24,7 +24,6 @@ def lambda_handler(event, context):
             break
 
     filecontents['scrape-detail'] = replaceContent
-    print(filecontents)
     uploadByteStream = bytes(json.dumps(filecontents).encode('UTF-8'))
 
 
