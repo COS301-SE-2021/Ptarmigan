@@ -31,7 +31,7 @@ jobs:
          - name: Install Pip Dependencies
            working-directory: ./backend/ServerlessApplication/tests/
            run: |
-              pip3 -m install -r requirements.txt 
+              python -m pip install -r requirements.txt 
           
          - name: Unit Testing
            working-directory: ./backend/ServerlessApplication/
