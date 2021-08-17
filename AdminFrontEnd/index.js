@@ -7,7 +7,7 @@ function addUserToTable(user,adminFlag){
     if (adminFlag == false)
     {
         $("#userTable").append(`<tr>
-                    <td scope="row" class="Username">${user["Attributes"][1]["Value"]}</td>
+                    <td scope="row" class="Username">${user["Attributes"][0]["Value"]}</td>
                     <td>${user["UserLastModifiedDate"]}</td>
                     <td>
                         <button type="button" class="btn btn-danger adminStatus" value="notThisValue">No<span class="glyphicon glyphicon-thumbs-down"></span></button>
@@ -21,7 +21,7 @@ function addUserToTable(user,adminFlag){
     {
         {
         $("#userTable").append(`<tr>
-                    <td scope="row" class="Username">${user["Attributes"][2]["Value"]}</td>
+                    <td scope="row" class="Username">${user["Attributes"][0]["Value"]}</td>
                     <td>${user["UserLastModifiedDate"]}</td>
                     <td>
                         <button type="button" class="btn btn-success adminStatus" value="notThisValue">Yes<span class="glyphicon glyphicon-thumbs-down"></span></button>
@@ -147,7 +147,8 @@ $(document).ready(function () {
     var params = {
         UserPoolId: 'eu-west-1_gM8mCo99w', /* required */ // actual pool eu-west-1_gM8mCo99w //Test pool eu-west-1_nn8eU3DXM
         Filter: '',
-        Limit: '50'
+        Limit: '50',
+        AttributesToGet: ['email']
         //PaginationToken: '1'
         };
     cognitoidentityserviceprovider.listUsers(params, function(err, data) {
@@ -163,7 +164,7 @@ $(document).ready(function () {
                 var paramsAdminUsers = {
                   GroupName: 'Admin', /* required */
                   UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
-                  Limit: '50',
+                  Limit: '50'
                 };
                 cognitoidentityserviceprovider.listUsersInGroup(paramsAdminUsers, function(err, data) {
                     if (err) console.log(err, err.stack); // an error occurred
