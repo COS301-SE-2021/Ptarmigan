@@ -28,32 +28,34 @@ jobs:
            run: |
               sudo apt-get update
               sudo apt-get install python3.8 jq -y
-              sudo apt-get -y install python3-pip
+              python -m pip install --upgrade pip
+         
+ 
          - name: Verify pip install
            run: pip3 --version
          - name: Install Pip Dependencies
            working-directory: ./backend/ServerlessApplication/tests/
            run: |
-                pip3 install -r requirements.txt 
+                 if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           
          - name: Unit Testing
            working-directory: ./backend/ServerlessApplication/
            run: python -m pytest tests/unit/
   
-  build-deploy:
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v2
-        - uses: actions/setup-python@v2
-        - uses: aws-actions/setup-sam@v1
-        - uses: aws-actions/configure-aws-credentials@v1
-          with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws-region: eu-west-1
-        - name: Build Sam
-          working-directory: ./backend/ServerlessApplication
-          run: sam build --use-container
+#   build-deploy:
+#         runs-on: ubuntu-latest
+#         steps:
+#         - uses: actions/checkout@v2
+#         - uses: actions/setup-python@v2
+#         - uses: aws-actions/setup-sam@v1
+#         - uses: aws-actions/configure-aws-credentials@v1
+#           with:
+#             aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#             aws-region: eu-west-1
+#         - name: Build Sam
+#           working-directory: ./backend/ServerlessApplication
+#           run: sam build --use-container
         
   
     
