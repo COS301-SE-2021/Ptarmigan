@@ -5,7 +5,6 @@ import boto3
 def lambda_handler(event, context):
     return returnListFromS3()
 
-
 def returnListFromS3():
     try:
         s3client = boto3.client('s3')
@@ -17,10 +16,10 @@ def returnListFromS3():
         )
 
         filedata = fileobj['Body'].read()
-        filecontents = (filedata.decode('utf-8'))
+        filecontents = json.loads((filedata.decode('utf-8')))
         return {
             'statusCode': 200,
-            'body': json.loads(filecontents)
+            'body': json.dumps(filecontents)
         }
     except:
         return {
