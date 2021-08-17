@@ -36,6 +36,7 @@ User manual - (Link required)
 
 Technical installation manual - (Link required)
 
+SRS document - (Link required)
 
 Team members - 
 
