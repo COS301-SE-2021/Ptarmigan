@@ -28,6 +28,10 @@ class StockPriceGenerator {
     final response = await client.post(Uri.parse(
         "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/stocks/returnStockPriceList"));
 
+    if (response.statusCode != 200) {
+      throw Exception("API is not responding/ API Timed out");
+    }
+
     print(response.body);
     var code = response.statusCode;
     print(code);

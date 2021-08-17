@@ -28,6 +28,10 @@ class FeedImageGenerator {
         "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/scraper/returnBucketList"));
 
     //print(response.body);
+    if (response.statusCode != 200) {
+      throw Exception("API is not responding/ API Timed out");
+      return ["N/A"];
+    }
     var res = FeedImage.fromJson(jsonDecode(response.body));
     //if (response.statusCode == 200) {
     //print(res.contents[1]);
