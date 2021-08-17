@@ -21,7 +21,7 @@ Resources:
       CodeUri: ptarmigan/comprehend
       Handler: app.lambda_twitterComprehend
       Runtime: python3.8
-      Role: arn:aws:iam::878292117449:role/ptarmiganbackend-comprehendRole-DS4EAUQKKTBE
+      Role: arn:aws:iam::878292117449:role/Comprehend_Dyno_Lambda
       Tags:
         auto-delete: no
 
