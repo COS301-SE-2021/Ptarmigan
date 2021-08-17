@@ -114,6 +114,7 @@ Resources:
       Role: arn:aws:iam::878292117449:role/S3Lambda
       Tags:
         auto-delete: no
+      Timeout: 600
 
       Events:
         HttpPost:
