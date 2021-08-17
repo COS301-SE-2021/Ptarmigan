@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:amplify_datastore/amplify_datastore.dart';
 import 'package:flutter_login/flutter_login.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:ptarmigan/auth/flutter_login/confirm_screen.dart';
 import 'package:ptarmigan/services/feed_changer.dart';
@@ -19,6 +20,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'amplifyconfiguration.dart';
 
 import 'auth/flutter_login/login_screen.dart';
+import 'constants.dart';
 import 'models/ModelProvider.dart';
 import 'models/Todo.dart';
 import 'package:amplify_api/amplify_api.dart';
@@ -52,6 +54,13 @@ class MyApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp(
+            theme: ThemeData.dark().copyWith(
+              scaffoldBackgroundColor: bgColor,
+              textTheme:
+                  GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
+                      .apply(bodyColor: Colors.white),
+              canvasColor: secondaryColor,
+            ),
             title: 'Amplified Todo',
             //home: TodosPage(),
             //home: Login(),
