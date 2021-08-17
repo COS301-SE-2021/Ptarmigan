@@ -18,7 +18,7 @@ def return_tweet_list(content,scrapeTimeframe):
         #print(type(tweets_list[0][0]))
     return tweets_list
 
-def scrapet_handler(event, context):
+def scraper_handler(event, context):
     content = event['content']['content']
     scrape_since = int(event['Scrape-until'])
     scrape_timestamp = datetime.datetime.fromtimestamp(scrape_since)
