@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart' show Client;
 import 'package:ptarmigan/models/Feed.dart';
 
 class FeedImage {
@@ -20,15 +20,11 @@ class FeedImage {
 class FeedImageGenerator {
   FeedImageGenerator({this.contents});
   final contents;
-
-  Future<http.Response> fetchFeeds() {
-    return http.post(Uri.parse(
-        "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/scraper/returnBucketList"));
-  }
+  Client client = Client();
 
   Future<List> fetchImages() async {
     //print("calling api for feed list ");
-    final response = await http.post(Uri.parse(
+    final response = await client.post(Uri.parse(
         "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/scraper/returnBucketList"));
 
     //print(response.body);

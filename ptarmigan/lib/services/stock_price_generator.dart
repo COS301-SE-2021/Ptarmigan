@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' show Client;
 
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:ptarmigan/models/Feed.dart';
 
 class StockPrices {
@@ -19,20 +19,21 @@ class StockPrices {
 
 class StockPriceGenerator {
   final contents;
+  Client client = Client();
   StockPriceGenerator({this.contents});
 
   Future<Map> fetchPrices() async {
     print("Attempting to access Stock API");
     //print("calling api for feed list ");
-    final response = await http.post(Uri.parse(
-        "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/stocks/getStockPrice"));
+    final response = await client.post(Uri.parse(
+        "https://qxy7tk71zf.execute-api.eu-west-1.amazonaws.com/Test/returnStockPriceList"));
 
     print(response.body);
     var code = response.statusCode;
     print(code);
     Map<String, dynamic> res = jsonDecode(response.body);
     //if (response.statusCode == 200) {
-    print(res['Bitcoin']);
+    //print(res['Bitcoin']);
 
     //print("temp : " + temp);
 
