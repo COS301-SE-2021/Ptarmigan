@@ -71,4 +71,11 @@ source_md5 = ""
 packagetype = "Zip"
 functions = ["getStockPrice"]
 
+[function_build_definitions.8491eed0-9afc-41a0-b5a6-c1f6393f993d]
+codeuri = "/home/reinier/Documents/GitHub/Ptarmigan/backend/ServerlessApplication/ptarmigan/stocks/returnStockPriceList"
+runtime = "python3.8"
+source_md5 = ""
+packagetype = "Zip"
+functions = ["returnStockPriceList"]
+
 [layer_build_definitions]
