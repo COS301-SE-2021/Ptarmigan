@@ -35,5 +35,13 @@ $(document).ready(function () {
     $('#loginButton').click(function () {
         username = $("#loginUsername").text();
 
+    for (var i in adminUsers){
+        if (adminUsers[i]["Attributes"][2]["Value"] == username){
+            console.log("Help")
+        }
+        adminUsers[i];
+
+        console.log(adminUsers[i])
+    }
     });
 });
