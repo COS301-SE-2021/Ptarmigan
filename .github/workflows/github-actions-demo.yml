@@ -6,32 +6,45 @@ on:
     pull_request:
         branches: [backend]
 jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
-  
-  build-deploy:
+  unit-tests:
         runs-on: ubuntu-latest
         steps:
-        - uses: actions/checkout@v2
-        - uses: actions/setup-python@v2
-        - uses: aws-actions/setup-sam@v1
-        - uses: aws-actions/configure-aws-credentials@v1
-          with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws-region: eu-west-1
-        - name: Build Sam
-          working-directory: ./backend/ServerlessApplication
-          run: sam build --use-container
+         - name: Install Dependencies with Apt Get
+           run: |
+              sudo apt-get update
+              sudo apt-get install python3.8 jq -y         
+ 
+         - name: Verify pip install
+           run: | 
+            pip3 --version
+            ls
+            
+         - name: Install Pip Dependencies
+           run: |
+            pip3 install pytest  
+            pip3 install requirements.txt
+          
+         - name: Unit Testing
+           working-directory: ./backend/ServerlessApplication/
+           run: python -m pytest tests/unit/
+  
+#   build-deploy:
+#         runs-on: ubuntu-latest
+#         steps:
+#         - uses: actions/checkout@v2
+#         - uses: actions/setup-python@v2
+#         - uses: aws-actions/setup-sam@v1
+#         - uses: aws-actions/configure-aws-credentials@v1
+#           with:
+#             aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#             aws-region: eu-west-1
+#         - name: Build Sam
+#           working-directory: ./backend/ServerlessApplication
+#           run: sam build --use-container
+        
+  
+    
+
+
+          

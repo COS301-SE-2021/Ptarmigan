@@ -146,11 +146,20 @@ Resources:
       Role: arn:aws:iam::878292117449:role/S3Lambda
       Layers:
         - arn:aws:lambda:eu-west-1:878292117449:layer:requests:1
+
+  returnStockPriceList:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/stocks/returnStockPriceList
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Role: arn:aws:iam::878292117449:role/S3Lambda
+
       Events:
         HttpPost:
           Type: Api # More info about API    db = database.database(tableName) Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /stocks/getStockPrice
+            Path: /stocks/returnStockPriceList
             Method: post
 
   scraperStepFunction:

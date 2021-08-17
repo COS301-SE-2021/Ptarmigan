@@ -59,4 +59,4 @@ class TestGetSentiment(unittest.TestCase):
         }
         output = app.lambda_handler(self.testDatabaseOutput, "")
         print(output)
-        self.assertEquals(400, 400)
+        self.assertEquals(200, 200)
