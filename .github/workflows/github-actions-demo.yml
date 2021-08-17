@@ -21,30 +21,43 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
   
-  build-deploy:
+  unit-tests:
         runs-on: ubuntu-latest
         steps:
-        - uses: actions/checkout@v2
-        - uses: actions/setup-python@v2
-        - uses: aws-actions/setup-sam@v1
-        - uses: aws-actions/configure-aws-credentials@v1
-          with:
-            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            aws-region: eu-west-1
-        - name: Install Dependencies with Apt Get
-          run: |
+         - name: Install Dependencies with Apt Get
+           run: |
               sudo apt-get update
-              sudo apt-get install python3.8 jq -y
-        - name: Install Pip Dependencies
-          run: |
-            pip3 install pytest
-        - name: Build Sam
-          working-directory: ./backend/ServerlessApplication
-          run: sam build --use-container
-        - name: Unit Testing
-          working-directory: ./backend/ServerlessApplication
-          run: python -m pytest tests/unit/
+              sudo apt-get install python3.8 jq -y         
+ 
+         - name: Verify pip install
+           run: | 
+            pip3 --version
+            ls
+         - name: Install Pip Dependencies
+           run: |
+              pip install ./backend/ServerlessApplication/tests/requirements.txt
+          
+         - name: Unit Testing
+           working-directory: ./backend/ServerlessApplication/
+           run: python -m pytest tests/unit/
+  
+#   build-deploy:
+#         runs-on: ubuntu-latest
+#         steps:
+#         - uses: actions/checkout@v2
+#         - uses: actions/setup-python@v2
+#         - uses: aws-actions/setup-sam@v1
+#         - uses: aws-actions/configure-aws-credentials@v1
+#           with:
+#             aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#             aws-region: eu-west-1
+#         - name: Build Sam
+#           working-directory: ./backend/ServerlessApplication
+#           run: sam build --use-container
+        
+  
+    
 
 
           

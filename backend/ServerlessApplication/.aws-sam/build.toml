@@ -64,4 +64,11 @@ source_md5 = ""
 packagetype = "Zip"
 functions = ["getMostPopularTweet"]
 
+[function_build_definitions.5ccba32f-728b-44d2-a8b1-86908aa33df3]
+codeuri = "/home/reinier/Documents/GitHub/Ptarmigan/backend/ServerlessApplication/ptarmigan/stocks/getStockPrice"
+runtime = "python3.8"
+source_md5 = ""
+packagetype = "Zip"
+functions = ["getStockPrice"]
+
 [layer_build_definitions]

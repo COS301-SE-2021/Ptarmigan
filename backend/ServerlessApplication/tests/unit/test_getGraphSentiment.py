@@ -6,11 +6,11 @@ from ptarmigan.synthesize.getGraphSentiment import app
 @pytest.fixture()
 
 def fixture_event():
-    return {
+    return {"body" : {
             "BeginDate": 1623005418000,
             "Interval": "Week",
             "CompanyName": "Tesla"
-        }
+        }}
 
 class TestGetGraphSentiment:
     def test_get_sentiment_graph(self):
@@ -51,12 +51,12 @@ class TestGetGraphSentiment:
 
     def test_getInterval_function_test(self):
         input = "Week"
-        expected = 60*60*24*7*1000
+        expected = 60*60*24*7
 
         assert app.getInterval(input) == expected
 
     def test_calculate_sentiment(self):
-        input = [{'Tweet_Id': 7, 'Sentiment': 'POSITIVE', 'TimeStamp': 1623058451000, 'Weight': '583', 'Text': '1891年、ニコラ・テスラによって設計された電気共振トランス回路、\n"Tesla coils"により再生されたBohemian Rhapsody ♬ https://t.co/Z9KL6NGdG7', 'CompanyName': 'Tesla', 'lang': 'ja'}]
+        input = [{'Tweet_Id': 7, 'Sentiment': 'POSITIVE', 'TimeStamp': 1623058451, 'Weight': '583', 'Text': '1891年、ニコラ・テスラによって設計された電気共振トランス回路、\n"Tesla coils"により再生されたBohemian Rhapsody ♬ https://t.co/Z9KL6NGdG7', 'CompanyName': 'Tesla', 'lang': 'ja'}]
 
         expected = 1
 

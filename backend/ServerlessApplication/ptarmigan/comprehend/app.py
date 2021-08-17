@@ -80,6 +80,7 @@ def lambda_twitterComprehend(event, context):
                         'TimeStamp': int(item["date"]),
                         'CompanyName': item["Company"]
                     }
+
                 }
             }
             putItem.append(newItem)
