@@ -17,8 +17,6 @@ class TestGetGraphSentiment:
         testReturn = app.lambda_handler(fixture_event, "")
         print("some")
 
-        print(testReturn)
-
         expected = {
                         "statusCode": 400,
                         "body":
@@ -81,7 +79,7 @@ class TestGetGraphSentiment:
 
     def test_getInterval_month(self):
         input = "Month"
-        expected = 60*60*24*7
+        expected = 60*60*24*30
 
         assert app.getInterval(input) == expected
 
