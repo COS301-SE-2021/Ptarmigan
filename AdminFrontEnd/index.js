@@ -38,26 +38,6 @@ function addUserToTable(user,adminFlag){
 function userTable(users,adminUsers){
     console.log(users)
     console.log(adminUsers)
-
-function addUserToAdmin(username){
-    var params = {
-            GroupName: 'Admin', /* required */
-            UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
-            Username: $(this).parent().parent().find(".Username").text() /* required */
-        };
-        cognitoidentityserviceprovider.adminAddUserToGroup(params, function(err, data) {
-            if (err){
-                console.log(err, err.stack); // an error occurred
-                return false
-            }
-            else{
-              console.log("User removed as admin");           // successful response
-                return true
-            }
-        });
-}
-
-
     for (let i in users){
         adminFlag = false
         console.log(i)
@@ -74,6 +54,42 @@ function addUserToAdmin(username){
     }
 }
 
+function addUserToAdmin(username){
+    var params = {
+            GroupName: 'Admin', /* required */
+            UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
+            Username: username /* required */
+        };
+    cognitoidentityserviceprovider.adminAddUserToGroup(params, function(err, data) {
+        if (err){
+            console.log(err, err.stack); // an error occurred
+            return false
+        }
+        else{
+          console.log("User removed as admin");           // successful response
+            return true
+        }
+    });
+}
+
+function RemoveUserAsAdmin(username){
+    var params = {
+              GroupName: 'Admin', /* required */
+              UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
+              Username: username /* required */
+            };
+    console.log(params)
+    cognitoidentityserviceprovider.adminRemoveUserFromGroup(params, function(err, data) {
+      if (err) {
+          console.log(err, err.stack); // an error occurred
+          return false
+      }
+      else{
+          console.log("USer Added as admin");           // successful response
+          return true
+      }
+    });
+}
 
 $(document).ready(function () {
     //initalize credentials
@@ -100,10 +116,9 @@ $(document).ready(function () {
     })
     //Set User to admin
     $('#userTable').on('click', '.adminStatus', function() {
-    var ChangeFlag = false
 
         if($(this).text() == 'Yes') {
-
+            ChangeFlag = addUserToAdmin($(this).parent().parent().find(".Username").text())
             if(ChangeFlag == true)
             {
                 $(this).text('No')
@@ -117,19 +132,7 @@ $(document).ready(function () {
 
         }
         else {
-            var params = {
-              GroupName: 'Admin', /* required */
-              UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
-              Username: $(this).parent().parent().find(".Username").text() /* required */
-            };
-            console.log(params)
-            cognitoidentityserviceprovider.adminRemoveUserFromGroup(params, function(err, data) {
-              if (err) console.log(err, err.stack); // an error occurred
-              else{
-                  console.log("USer Added as admin");           // successful response
-                  ChangeFlag = true
-              }
-            });
+
             console.log(ChangeFlag + " flag is ")
             if(ChangeFlag == true) {
                 console.log("CHANGING BUTTON")
