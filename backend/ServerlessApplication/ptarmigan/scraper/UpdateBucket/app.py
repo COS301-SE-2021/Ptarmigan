@@ -2,6 +2,24 @@ import json
 
 import boto3
 import database
+# Creating functions to to replace s3 calls
+def getBucketList():
+    s3client = boto3.client('s3')
+    bucketname = 'stepfunctestbucket'
+    file_to_read = 'scrapeContent.json'
+    return s3client.get_object(
+        Bucket=bucketname,
+        Key=file_to_read
+    )
+
+def uploadBucketList(uploadByteStream):
+    s3client = boto3.client('s3')
+    bucketname = 'stepfunctestbucket'
+    file_to_read = 'scrapeContent.json'
+    s3client.put_object(
+        Bucket=bucketname,
+        Key=file_to_read,
+        Body=uploadByteStream)
 
 def lambda_handler(event, context):
     # read context from passed json argument
@@ -25,14 +43,8 @@ def lambda_handler(event, context):
             'body': json.dumps("Somthing Went wrong with database table creation")
         }
     # connet to s3 and file the scrape conent file
-    s3client = boto3.client('s3')
-    bucketname = 'stepfunctestbucket'
-    file_to_read = 'scrapeContent.json'
     try:
-        fileobj = s3client.get_object(
-            Bucket=bucketname,
-            Key=file_to_read
-        )
+        fileobj = getBucketList()
     except:
         return {
             'statusCode': 500,
@@ -64,10 +76,7 @@ def lambda_handler(event, context):
 
     # try upload return error is failed
     try:
-        s3client.put_object(
-            Bucket=bucketname,
-            Key=file_to_read,
-            Body=uploadByteStream)
+        uploadToBucket(uploadByteStream)
     except:
         return {
             'statusCode': 500,
