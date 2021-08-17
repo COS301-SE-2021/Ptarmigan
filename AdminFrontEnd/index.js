@@ -7,7 +7,7 @@ function addUserToTable(user,adminFlag){
     if (adminFlag == false)
     {
         $("#userTable").append(`<tr>
-                    <td scope="row" class="Username">${user["Username"]}</td>
+                    <td scope="row" class="Username">${user["Attributes"][1]["Value"]}</td>
                     <td>${user["UserLastModifiedDate"]}</td>
                     <td>
                         <button type="button" class="btn btn-danger adminStatus" value="notThisValue">No<span class="glyphicon glyphicon-thumbs-down"></span></button>
@@ -21,10 +21,10 @@ function addUserToTable(user,adminFlag){
     {
         {
         $("#userTable").append(`<tr>
-                    <td scope="row" class="Username">${user["Username"]}</td>
+                    <td scope="row" class="Username">${user["Attributes"][2]["Value"]}</td>
                     <td>${user["UserLastModifiedDate"]}</td>
                     <td>
-                        <button type="button" class="btn btn-success adminStatus" value="notThisValue">yes<span class="glyphicon glyphicon-thumbs-down"></span></button>
+                        <button type="button" class="btn btn-success adminStatus" value="notThisValue">Yes<span class="glyphicon glyphicon-thumbs-down"></span></button>
                     </td>
                     <th scope="col">
                         <button type="button" class="btn btn-danger removeOnClick removeOnClick">Delete</button>
