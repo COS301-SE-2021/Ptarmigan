@@ -32,7 +32,6 @@ jobs:
          - name: Verify pip install
            run: pip3 --version
          - name: Install Pip Dependencies
-           working-directory: ./backend/ServerlessApplication/tests/
            run: |
               pip install boto3
           
