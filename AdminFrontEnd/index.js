@@ -106,7 +106,6 @@ $(document).ready(function () {
         //initalize cognito service
     var params = {
         UserPoolId: 'eu-west-1_gM8mCo99w', /* required */ // actual pool eu-west-1_gM8mCo99w //Test pool eu-west-1_nn8eU3DXM
-        AttributesToGet: [],
         Filter: '',
         Limit: '50'
         //PaginationToken: '1'
