@@ -17,8 +17,6 @@ class TestGetGraphSentiment:
         testReturn = app.lambda_handler(fixture_event, "")
         print("some")
 
-        print(testReturn)
-
         expected = {
                         "statusCode": 400,
                         "body":
@@ -49,9 +47,39 @@ class TestGetGraphSentiment:
 
         assert ret["statusCode"] == 400
 
-    def test_getInterval_function_test(self):
+    def test_getInterval_week(self):
         input = "Week"
         expected = 60*60*24*7
+
+        assert app.getInterval(input) == expected
+
+    def test_getInterval_day(self):
+        input = "Day"
+        expected = 60 * 60 * 24
+
+        assert app.getInterval(input) == expected
+
+    def test_getInterval_second(self):
+        input = "Second"
+        expected = 1
+
+        assert app.getInterval(input) == expected
+
+    def test_getInterval_hour(self):
+        input = "Hour"
+        expected = 60*60
+
+        assert app.getInterval(input) == expected
+
+    def test_getInterval_minute(self):
+        input = "Minute"
+        expected = 60
+
+        assert app.getInterval(input) == expected
+
+    def test_getInterval_month(self):
+        input = "Month"
+        expected = 60*60*24*30
 
         assert app.getInterval(input) == expected
 

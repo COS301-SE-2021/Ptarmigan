@@ -1,8 +1,9 @@
 import boto3
 
-
 def batchSentiment(items):
     print(len(items))
+    print("Items")
+    print(items)
 
     newItems = []
     languages = []

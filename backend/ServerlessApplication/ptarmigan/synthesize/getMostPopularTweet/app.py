@@ -3,10 +3,7 @@ import json
 import boto3
 from boto3.dynamodb.conditions import Key
 
-
-def getMostPopularTweet(companyName, beginDate, endDate):
-    print("Getting Time")
-
+def dbCall(companyName, beginDate, endDate):
     dynamodb = boto3.resource('dynamodb')
     tableName = companyName
     table = dynamodb.Table(tableName)
@@ -17,6 +14,13 @@ def getMostPopularTweet(companyName, beginDate, endDate):
         FilterExpression=Key('Tweet_Id').gt(1) & Key('TimeStamp').between(beginDate, endDate) & Key('CompanyName').eq(
             companyName)
     )
+    return response
+
+
+def getMostPopularTweet(companyName, beginDate, endDate):
+    print("Getting Time")
+
+    response = dbCall(companyName, beginDate, endDate)
 
     # Loop through the results and setting the highest one to high
 
