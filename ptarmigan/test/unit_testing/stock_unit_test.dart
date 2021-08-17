@@ -37,6 +37,18 @@ void main() {
     back.expect(back.find.byType(Card), back.findsOneWidget);
   });*/
 
+  back.test('Insuring Stock API call works with multiple objects', () async {
+    StockPriceGenerator generator = StockPriceGenerator();
+    generator.client = MockClient((request) async {
+      final mapJson = {"bitcoin": 420.69, "tesla": 666.8};
+
+      return Response(json.encode(mapJson), 200,
+          headers: {'content-type': 'application/json'});
+    });
+    final item = await generator.fetchPrices();
+    back.expect(item['tesla'], 666.8);
+  });
+
   back.test('Insuring Stock API call works', () async {
     StockPriceGenerator generator = StockPriceGenerator();
     generator.client = MockClient((request) async {
@@ -45,5 +57,21 @@ void main() {
     });
     final item = await generator.fetchPrices();
     back.expect(item['bitcoin'], 420.69);
+  });
+
+  back.test('In event of API failure, exception is thrown and caught.',
+      () async {
+    StockPriceGenerator generator = StockPriceGenerator();
+    generator.client = MockClient((request) async {
+      final mapJson = {"message": "Internal server error"};
+      return Response(json.encode(mapJson), 502);
+    });
+    var message;
+    try {
+      final item = await generator.fetchPrices();
+    } on Exception catch (e) {
+      message = e.toString();
+    }
+    back.expect(message, "Exception: API is not responding/ API Timed out");
   });
 }
