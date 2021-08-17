@@ -26,7 +26,7 @@ class StockPriceGenerator {
     print("Attempting to access Stock API");
     //print("calling api for feed list ");
     final response = await client.post(Uri.parse(
-        "https://qxy7tk71zf.execute-api.eu-west-1.amazonaws.com/Test/returnStockPriceList"));
+        "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/stocks/returnStockPriceList"));
 
     print(response.body);
     var code = response.statusCode;
