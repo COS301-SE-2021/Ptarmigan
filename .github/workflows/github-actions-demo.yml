@@ -30,7 +30,9 @@ jobs:
               sudo apt-get install python3.8 jq -y         
  
          - name: Verify pip install
-           run: pip3 --version
+           run: | 
+            pip3 --version
+            ls
          - name: Install Pip Dependencies
            run: |
               pip install ./backend/ServerlessApplication/tests/requirements.txt
