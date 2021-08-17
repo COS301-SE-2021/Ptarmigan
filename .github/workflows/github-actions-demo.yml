@@ -17,12 +17,15 @@ jobs:
          - name: Verify pip install
            run: | 
             pip3 --version
-            ls
+            dir
             
          - name: Install Pip Dependencies
            run: |
             pip3 install pytest  
-            pip3 install requirements.txt
+            pip3 install boto3
+            pip3 install ujson
+            pip3 install pymongo
+            pip3 install requests
           
          - name: Unit Testing
            working-directory: ./backend/ServerlessApplication/
