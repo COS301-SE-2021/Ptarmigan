@@ -9,8 +9,8 @@ jobs:
   unit-tests:
         runs-on: ubuntu-latest
         steps:
-#         - uses: actions/checkout@v2
-#         - uses: actions/setup-python@v2
+        - uses: actions/checkout@v2
+        - uses: actions/setup-python@v2
 #         - uses: aws-actions/setup-sam@v1
 #         - uses: aws-actions/configure-aws-credentials@v1
 #           with:
@@ -21,7 +21,6 @@ jobs:
 #           working-directory: ./backend/ServerlessApplication
 #           run: sam build --use-container
         - name: Install Dependencies with Apt Get
-          working-directory: ./backend/ServerlessApplication
           run: |
             sudo apt-get update
             sudo apt-get install python3.8 jq -y         
