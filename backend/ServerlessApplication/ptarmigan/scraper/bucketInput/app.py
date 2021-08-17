@@ -1,6 +1,6 @@
-import time
 import json
 import boto3
+import time
 
 def lambda_handler(event, context):
     s3client = boto3.client('s3')
@@ -33,5 +33,4 @@ def lambda_handler(event, context):
             'statusCode': 500,
             'body': json.dumps('Error updating Content file')
         }
-    # else return success json
     return contents
