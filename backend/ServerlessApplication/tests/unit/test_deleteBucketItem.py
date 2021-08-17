@@ -27,3 +27,14 @@ class TestClass(TestCase):
         testReturn = (app.lambda_handler(self.delete_test_input, ""))
         assert testReturn == expected
 
+    def test_if_invalid_input(self):
+        expected = {
+            'statusCode': 400,
+            'body': json.dumps('Bad Request - invalid JSON input')
+        }
+        testReturn = (app.lambda_handler(self.delete_invalid_input, ""))
+        assert testReturn == expected
+
+
+
+
