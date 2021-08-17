@@ -1,3 +1,10 @@
+//initalize credentials
+    // userPool = 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902'
+AWS.config.region = 'eu-west-1'; // Region
+AWS.config.credentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902',
+});
+var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({apiVersion: '2016-04-18'});
+
 function setUsers(numberOfUsers){
     $("#numberOfUsers").text(numberOfUsers)
 }
@@ -54,42 +61,7 @@ function userTable(users,adminUsers){
     }
 }
 
-function addUserToAdmin(username){
-    var params = {
-            GroupName: 'Admin', /* required */
-            UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
-            Username: username /* required */
-        };
-    cognitoidentityserviceprovider.adminAddUserToGroup(params, function(err, data) {
-        if (err){
-            console.log(err, err.stack); // an error occurred
-            return false
-        }
-        else{
-          console.log("User removed as admin");           // successful response
-            return true
-        }
-    });
-}
 
-function RemoveUserAsAdmin(username){
-    var params = {
-              GroupName: 'Admin', /* required */
-              UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
-              Username: username /* required */
-            };
-    console.log(params)
-    cognitoidentityserviceprovider.adminRemoveUserFromGroup(params, function(err, data) {
-      if (err) {
-          console.log(err, err.stack); // an error occurred
-          return false
-      }
-      else{
-          console.log("USer Added as admin");           // successful response
-          return true
-      }
-    });
-}
 
 $(document).ready(function () {
     //initalize credentials
@@ -116,35 +88,47 @@ $(document).ready(function () {
     })
     //Set User to admin
     $('#userTable').on('click', '.adminStatus', function() {
-
+        let button = $(this)
+    //check state of admin
         if($(this).text() == 'Yes') {
-            ChangeFlag = addUserToAdmin($(this).parent().parent().find(".Username").text())
-            if(ChangeFlag == true)
-            {
-                $(this).text('No')
-                $(this).removeClass("btn-success")
-                $(this).addClass("btn-danger");
-            }
-            else
-            {
-                console.log("Unable to change user status ")
-            }
-
+            //get username
+            username = $(this).parent().parent().find(".Username").text()
+            var params = {
+                GroupName: 'Admin', /* required */
+                UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
+                Username: username /* required */
+            };
+            cognitoidentityserviceprovider.adminAddUserToGroup(params, function (err, data) {
+                if (err) {
+                    console.log(err, err.stack); // an error occurred
+                    console.log("Unable to change user status ")
+                } else {
+                    console.log("User removed as admin");           // successful response
+                    button.text('No')
+                    button.removeClass("btn-success")
+                    button.addClass("btn-danger");
+                }
+            });
         }
         else {
-
-            console.log(ChangeFlag + " flag is ")
-            if(ChangeFlag == true) {
-                console.log("CHANGING BUTTON")
-                $(this).text('Yes')
-                $(this).removeClass("btn-danger")
-                $(this).addClass("btn-success");
-            }
-            else
-            {
-                console.log("Unable to change user status ")
-            }
-
+            username =$(this).parent().parent().find(".Username").text()
+            var params = {
+              GroupName: 'Admin', /* required */
+              UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
+              Username: username /* required */
+            };
+            cognitoidentityserviceprovider.adminRemoveUserFromGroup(params, function(err, data) {
+              if (err) {
+                  console.log(err, err.stack); // an error occurred
+                  console.log("Unable to change user status ")
+              }
+              else{
+                  console.log("USer Added as admin");
+                    button.text('Yes')
+                    button.removeClass("btn-danger")
+                    button.addClass("btn-success");// successful response
+              }
+            });
         }
     })
 

@@ -102,7 +102,21 @@
       <option name="project" value="LOCAL" />
       <updated>1629216699428</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Functionality to set users as admin">
+      <created>1629217067248</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1629217067248</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Functionality to set users as admin">
+      <created>1629217317416</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1629217317416</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
