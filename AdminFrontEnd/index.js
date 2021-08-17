@@ -66,10 +66,10 @@ function userTable(users,adminUsers){
 $(document).ready(function () {
     //initalize credentials
     // userPool = 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902'
-    AWS.config.region = 'eu-west-1'; // Region
-    AWS.config.credentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902',
-    });
-    var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({apiVersion: '2016-04-18'});
+    // AWS.config.region = 'eu-west-1'; // Region
+    // AWS.config.credentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902',
+    // });
+    // var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({apiVersion: '2016-04-18'});
 
     // functionality to remove on click
     $('#userTable').on('click', '.removeOnClick', function() {
