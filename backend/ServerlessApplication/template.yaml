@@ -91,6 +91,7 @@ Resources:
         - arn:aws:lambda:eu-west-1:878292117449:layer:SnscrapeLib:1
         - arn:aws:lambda:eu-west-1:878292117449:layer:PandasLib:1
         - arn:aws:lambda:eu-west-1:399891621064:layer:AWSLambda-Python38-SciPy1x:29
+      Timeout: 120
 
   UpdateBucket:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -146,6 +147,7 @@ Resources:
       Role: arn:aws:iam::878292117449:role/S3Lambda
       Layers:
         - arn:aws:lambda:eu-west-1:878292117449:layer:requests:1
+      Timeout: 300
 
   returnStockPriceList:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
