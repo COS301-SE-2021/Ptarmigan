@@ -11,8 +11,10 @@ class TestClass(TestCase):
     def setUp(self):
         self.test_tweet_context = '{ "Scrape-until": "1629235961",' \
                                     '"content": {' \
-                                    '"content": "IBM"}}'\
+                                    '"content": "IBM"}}'
 
+        self.invalidInputContext = '{ "Scrape-until": "1629235961",' \
+                                    '"content": "IBM"}'\
 
     @patch('ptarmigan.scraper.twitterScraper.app.return_tweet_list')
 
@@ -67,4 +69,12 @@ class TestClass(TestCase):
                                     [100000000005, "U", 9, 9, "en", 1629235961]]
         # call function
         testReturn = (app.scraper_handler(json.loads(self.test_tweet_context), ""))
+        assert testReturn == expected
+
+    def test_IfScrapetReturnsInvalidInput(self):
+        expected = {
+            'statusCode': 200,
+            'body': json.dumps("invalid input")
+        }
+        testReturn = (app.scraper_handler(json.loads(self.invalidInputContext), ""))
         assert testReturn == expected

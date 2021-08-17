@@ -27,6 +27,7 @@ def scraper_handler(event, context):
             'statusCode': 200,
             'body': json.dumps("invalid input")
         }
+
     scrape_timestamp = datetime.datetime.fromtimestamp(scrape_since)
     scrape_dateformat = scrape_timestamp.strftime('%Y-%m-%d')
 
