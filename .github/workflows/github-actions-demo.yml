@@ -29,12 +29,12 @@ jobs:
               sudo apt-get update
               sudo apt-get install python3.8 jq -y
          - name: Install Pip Dependencies
-           working-directory: ./backend/ServerlessApplication
+           working-directory: ./backend/ServerlessApplication/tests/
            run: |
-              pip3 install -r tests/requirements.txt 
+              pip3 -m install -r requirements.txt 
           
          - name: Unit Testing
-           working-directory: ./backend/ServerlessApplication
+           working-directory: ./backend/ServerlessApplication/
            run: python -m pytest tests/unit/
   
   build-deploy:
