@@ -19,7 +19,7 @@ class GetMostPopularTweet(unittest.TestCase):
         #     "CompanyName": "Microsoft"
         # }
 
-    @patch('ptarmigan.synthesize.getGraphSentiment.app.dbCall')
+    @patch('ptarmigan.synthesize.getMostPopularTweet.app.dbCall')
     def test_if_sentiment_calculation_graph_returns_correct_data(self, mock_dbReturn):
         mock_dbReturn.return_value = {
                     "Items": [
