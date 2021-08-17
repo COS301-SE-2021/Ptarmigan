@@ -96,9 +96,14 @@ $(document).ready(function () {
         }
         })
 
+    //Logout
 
-    //initalize cognito service
+    $('#logoutIndex').click(function () {
+        window.location.href = "login.html";
+    });
 
+
+        //initalize cognito service
     var params = {
         UserPoolId: 'eu-west-1_gM8mCo99w', /* required */ // actual pool eu-west-1_gM8mCo99w //Test pool eu-west-1_nn8eU3DXM
         AttributesToGet: [],
