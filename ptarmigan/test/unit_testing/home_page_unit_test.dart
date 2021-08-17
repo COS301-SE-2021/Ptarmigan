@@ -15,7 +15,7 @@ import 'package:test_api/src/frontend/expect.dart' as front;
 import 'package:http/http.dart' show Response;
 
 main() {
-  back.test('Insuring Stock API call works', () async {
+  back.test('Insuring Stock API call works with multiple objects', () async {
     FeedImageGenerator generator = FeedImageGenerator();
     generator.client = MockClient((request) async {
       final mapJson = {
@@ -30,5 +30,36 @@ main() {
     });
     final item = await generator.fetchImages();
     back.expect(item[0], "Tesla");
+  });
+
+  back.test('Insuring Stock API call works with a single object', () async {
+    FeedImageGenerator generator = FeedImageGenerator();
+    generator.client = MockClient((request) async {
+      final mapJson = {
+        "Scrape-until": 123421343214.0,
+        "scrape-detail": [
+          {"content": "Tesla"}
+        ]
+      };
+      return Response(json.encode(mapJson), 200);
+    });
+    final item = await generator.fetchImages();
+    back.expect(item[0], "Tesla");
+  });
+
+  back.test('In event of API failure, exception is thrown and caught.',
+      () async {
+    FeedImageGenerator generator = FeedImageGenerator();
+    generator.client = MockClient((request) async {
+      final mapJson = {"message": "Internal server error"};
+      return Response(json.encode(mapJson), 502);
+    });
+    var message;
+    try {
+      final item = await generator.fetchImages();
+    } on Exception catch (e) {
+      message = e.toString();
+    }
+    back.expect(message, "Exception: API is not responding/ API Timed out");
   });
 }
