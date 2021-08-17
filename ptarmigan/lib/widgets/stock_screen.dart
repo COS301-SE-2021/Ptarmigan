@@ -1,6 +1,9 @@
 import 'dart:convert';
 
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:ptarmigan/components/menu_drawer.dart';
+import 'package:ptarmigan/constants.dart';
 import 'package:ptarmigan/services/stock_price_generator.dart';
 import 'package:ptarmigan/widgets/todos_page.dart';
 import 'package:http/http.dart' as http;
@@ -29,58 +32,51 @@ class _StockScreenState extends State<StockScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: MenuDrawer(),
         appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {
-              //Navigator.push(context,
-              //  MaterialPageRoute(builder: (context) => SettingsScreen()));
-            },
-          ),
+          backgroundColor: bgColor,
           title: Text('Dashboard'),
           actions: [
-            MaterialButton(
+            /*MaterialButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
                 child: Icon(
                   Icons.arrow_left,
                   color: Colors.white,
-                ))
+                ))*/
           ],
         ),
         body: Column(
           children: [
-            Text("Hello there"),
-            ElevatedButton(
-                onPressed: () {
-                  print(" Prices output : ");
-                  print(stockPrices);
-                },
-                child: Text("Test button")),
-            Container(
-                height: 500,
-                width: double.infinity,
-                child: ListView.builder(
-                    padding: const EdgeInsets.all(8),
-                    itemCount: feedList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        height: 70,
-                        color: Colors.white, // change via settings page
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                  child: Text(feedList[index] +
-                                      " : " +
-                                      printStockPrice(index))),
-                            ],
-                          ),
-                        ),
-                      );
-                    }))
+            Padding(padding: EdgeInsets.fromLTRB(5, 10, 5, 10)),
+            Text(
+              "Historical stock data",
+              style: TextStyle(fontSize: 30),
+            ),
+            SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Container(
+                  color: bgColor,
+                  height: 500,
+                  width: MediaQuery.of(context).size.width,
+                  child: DataTable2(
+                    columnSpacing: defaultPadding,
+                    minWidth: 400,
+                    columns: [
+                      DataColumn(
+                        label: Text("Stock name"),
+                      ),
+                      DataColumn(
+                        label: Text("Worth"),
+                      ),
+                    ],
+                    rows: List.generate(
+                      feedList.length,
+                      (index) => recentFileDataRow(index),
+                    ),
+                  ),
+                ))
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -90,6 +86,8 @@ class _StockScreenState extends State<StockScreen> {
                 icon: Icon(Icons.business), label: "Insights"),
             BottomNavigationBarItem(icon: Icon(Icons.grade), label: "Stocks"),
           ],
+         
+         
           selectedItemColor: Colors.amber[800],
           onTap: _OnItemTapped,
         ));
@@ -130,5 +128,24 @@ class _StockScreenState extends State<StockScreen> {
         print(stockPrices[feedList[i]]);
       }
     } on NoSuchMethodError catch (e) {}
+  }
+
+  DataRow recentFileDataRow(int index) {
+    return DataRow(
+      cells: [
+        DataCell(
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+                child: Text(feedimage[index]),
+              ),
+            ],
+          ),
+        ),
+        DataCell(Text(printStockPrice(index))),
+        //DataCell(Text(("#"))),
+      ],
+    );
   }
 }
