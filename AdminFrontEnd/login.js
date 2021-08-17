@@ -1,7 +1,10 @@
+var adminUsers
+
 $(document).ready(function () {
 
     AWS.config.region = 'eu-west-1'; // Region
-    AWS.config.credentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902',
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902',
     });
     var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({apiVersion: '2016-04-18'});
 
@@ -18,11 +21,19 @@ $(document).ready(function () {
         UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
         Limit: '50',
     };
-    cognitoidentityserviceprovider.listUsersInGroup(paramsAdminUsers, function(err, data) {
+    cognitoidentityserviceprovider.listUsersInGroup(paramsAdminUsers, function (err, data) {
         if (err) console.log(err, err.stack); // an error occurred
-        else
+        else {
             adminData = data;
+            adminUsers = adminData["Users"];
+            console.log(adminData)
+        }
+
         console.log("Users in admin group returned");           // successful response
-        userTable(userListData["Users"],adminData["Users"])
+
+    });
+    $('#loginButton').click(function () {
+        username = $("#loginUsername").text();
+
     });
 });
