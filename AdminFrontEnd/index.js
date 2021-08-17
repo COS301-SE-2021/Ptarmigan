@@ -39,6 +39,24 @@ function userTable(users,adminUsers){
     console.log(users)
     console.log(adminUsers)
 
+function addUserToAdmin(username){
+    var params = {
+            GroupName: 'Admin', /* required */
+            UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
+            Username: $(this).parent().parent().find(".Username").text() /* required */
+        };
+        cognitoidentityserviceprovider.adminAddUserToGroup(params, function(err, data) {
+            if (err){
+                console.log(err, err.stack); // an error occurred
+                return false
+            }
+            else{
+              console.log("User removed as admin");           // successful response
+                return true
+            }
+        });
+}
+
 
     for (let i in users){
         adminFlag = false
@@ -85,18 +103,7 @@ $(document).ready(function () {
     var ChangeFlag = false
 
         if($(this).text() == 'Yes') {
-            var params = {
-                GroupName: 'Admin', /* required */
-                UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
-                Username: $(this).parent().parent().find(".Username").text() /* required */
-            };
-            cognitoidentityserviceprovider.adminAddUserToGroup(params, function(err, data) {
-                if (err) console.log(err, err.stack); // an error occurred
-                else{
-                  console.log("User removed as admin");           // successful response
-                    ChangeFlag = true
-                }
-            });
+
             if(ChangeFlag == true)
             {
                 $(this).text('No')
@@ -123,7 +130,9 @@ $(document).ready(function () {
                   ChangeFlag = true
               }
             });
+            console.log(ChangeFlag + " flag is ")
             if(ChangeFlag == true) {
+                console.log("CHANGING BUTTON")
                 $(this).text('Yes')
                 $(this).removeClass("btn-danger")
                 $(this).addClass("btn-success");
