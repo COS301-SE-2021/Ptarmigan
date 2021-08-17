@@ -8,6 +8,12 @@ function addCompanyToTable(name){
     $("#companyTable").prepend(content)
 }
 
+//logout
+
+$('#logoutCompany').click(function () {
+    window.location.href = "login.html";
+});
+
 $(document).ready(function () {
     //This will populate the company table with elements from the db
     let getBucketItemsURL = "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/scraper/returnBucketList"
