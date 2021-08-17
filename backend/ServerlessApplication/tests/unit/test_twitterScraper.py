@@ -2,14 +2,16 @@ import json
 from unittest import TestCase
 from unittest.mock import patch
 
-import backend.sam.twitterScraper.lambda_scrapet as ls
+from ptarmigan.scraper.twitterScraper import app
+
 
 
 class TestClass(TestCase):
 
     def setUp(self):
-        self.test_tweet_context = '{"scrape-until": "1624053600", ' \
-                                  '"content": "Bitcoin"}'
+        self.test_tweet_context = '{ "Scrape-until": "123421343214",' \
+                                    '"content": {' \
+                                    '"content": "IBM"}}'\
 
     @patch('backend.sam.twitterScraper.lambda_scrapet.returnTweetList')
     def test_IfScrapetReturnsTweetsWithCorrectData(self, mock_scrape):
@@ -20,7 +22,7 @@ class TestClass(TestCase):
                 "lang": "en",
                 "date": 1622746104001,
                 "Weight": 21,
-                "Company": "Bitcoin"
+                "Company": "IBM"
             },
             "1": {
                 "Tweet Id": 100000000002,
@@ -28,7 +30,7 @@ class TestClass(TestCase):
                 "lang": "en",
                 "date": 1622746104002,
                 "Weight": 25,
-                "Company": "Bitcoin"
+                "Company": "IBM"
             },
             "2": {
                 "Tweet Id": 100000000003,
@@ -36,7 +38,7 @@ class TestClass(TestCase):
                 "lang": "en",
                 "date": 1622746104003,
                 "Weight": 29,
-                "Company": "Bitcoin"
+                "Company": "IBM"
             },
             "3": {
                 "Tweet Id": 100000000004,
@@ -44,7 +46,7 @@ class TestClass(TestCase):
                 "lang": "en",
                 "date": 1622746104004,
                 "Weight": 33,
-                "Company": "Bitcoin"
+                "Company": "IBM"
             },
             "4": {
                 "Tweet Id": 100000000005,
@@ -52,9 +54,10 @@ class TestClass(TestCase):
                 "lang": "en",
                 "date": 1622746104005,
                 "Weight": 37,
-                "Company": "Bitcoin"
+                "Company": "IBM"
             }
         })
+
         expected = json.dumps(expected, indent=4)
         # mock data for scraper library
         mock_scrape.return_value = [[100000000001, "A", 5, 5, "en", 1622746104001],
@@ -63,5 +66,5 @@ class TestClass(TestCase):
                                     [100000000004, "O", 8, 8, "en", 1622746104004],
                                     [100000000005, "U", 9, 9, "en", 1622746104005]]
         # call function
-        testReturn = (ls.scrapetHandler(json.loads(self.test_tweet_context), ""))
+        testReturn = (app.scraperHandler(json.loads(self.test_tweet_context), ""))
         assert testReturn == expected
