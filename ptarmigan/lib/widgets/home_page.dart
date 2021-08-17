@@ -259,6 +259,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }*/
     //print(feedImageLink);
   }
+
+  List getFeedImages() {
+    return feedimage;
+  }
 }
 
 /*
