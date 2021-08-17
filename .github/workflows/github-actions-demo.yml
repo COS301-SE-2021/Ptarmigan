@@ -17,7 +17,7 @@ jobs:
          - name: Verify pip install
            run: | 
             pip3 --version
-            ls
+            dir
             
          - name: Install Pip Dependencies
            run: |
