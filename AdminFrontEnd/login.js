@@ -37,13 +37,13 @@ $(document).ready(function () {
         password = $("#loginPassword").val();
 
 
-        for (var i in adminUsers){
-        if (adminUsers[i]["Attributes"][2]["Value"] == username && password == "password") {
+        for (var i in adminUsers) {
+            if (adminUsers[i]["Attributes"][2]["Value"] == username && password == "password") {
                 window.location.href = "index.html";
+                return
+            }
         }
-        else{
-            alert("Incorrect username or password");
-        }
-    }
+        alert("Incorrect username or password");
+
     });
 });
