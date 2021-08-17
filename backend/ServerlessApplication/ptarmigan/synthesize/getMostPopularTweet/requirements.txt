@@ -1,4 +1,3 @@
 requests
-ujson
 pymongo
 marshmallow
