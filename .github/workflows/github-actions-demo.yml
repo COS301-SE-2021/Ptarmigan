@@ -27,16 +27,14 @@ jobs:
          - name: Install Dependencies with Apt Get
            run: |
               sudo apt-get update
-              sudo apt-get install python3.8 jq -y
-              python -m pip install --upgrade pip
-         
+              sudo apt-get install python3.8 jq -y         
  
          - name: Verify pip install
            run: pip3 --version
          - name: Install Pip Dependencies
            working-directory: ./backend/ServerlessApplication/tests/
            run: |
-                 if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+              pip3 install boto3
           
          - name: Unit Testing
            working-directory: ./backend/ServerlessApplication/
