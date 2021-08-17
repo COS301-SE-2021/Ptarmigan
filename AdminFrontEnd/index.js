@@ -82,7 +82,7 @@ $(document).ready(function () {
     })
     //Set User to admin
     $('#userTable').on('click', '.adminStatus', function() {
-
+    var ChangeFlag = false
 
         if($(this).text() == 'Yes') {
             var params = {
@@ -93,29 +93,38 @@ $(document).ready(function () {
             cognitoidentityserviceprovider.adminAddUserToGroup(params, function(err, data) {
                 if (err) console.log(err, err.stack); // an error occurred
                 else{
-                  console.log(data);           // successful response
-                  $(this).text('No')
-                  $(this).removeClass("btn-success")
-                  $(this).addClass("btn-danger");
+                  console.log("User removed as admin");           // successful response
+                    ChangeFlag = true
                 }
             });
+            if(ChangeFlag == true)
+            {
+                $(this).text('No')
+                $(this).removeClass("btn-success")
+                $(this).addClass("btn-danger");
+            }
+            else
+            {
+                console("Unable to change user status ")
+            }
+
         }
         else {
             var params = {
-              GroupName: 'STRING_VALUE', /* required */
-              UserPoolId: 'STRING_VALUE', /* required */
-              Username: 'STRING_VALUE' /* required */
+              GroupName: 'Admin', /* required */
+              UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
+              Username: $(this).parent().parent().find(".Username").text() /* required */
             };
+            console.log(params)
             cognitoidentityserviceprovider.adminRemoveUserFromGroup(params, function(err, data) {
               if (err) console.log(err, err.stack); // an error occurred
               else{
-                  console.log(data);           // successful response
-                  $(this).text('Yes')
-                  $(this).removeClass("btn-danger")
-                  $(this).addClass("btn-success");
+                  console.log("USer Added as admin");           // successful response
               }
             });
-
+            $(this).text('Yes')
+            $(this).removeClass("btn-danger")
+            $(this).addClass("btn-success");
         }
     })
 
