@@ -30,6 +30,13 @@ GitHub Project Board -
 https://github.com/COS301-SE-2021/Ptarmigan/projects/1?add_cards_query=is%3Aopen
 https://github.com/orgs/COS301-SE-2021/teams/one-more-byte
 
+Project Management - (Link required)
+
+User manual - (Link required)
+
+Technical installation manual - (Link required)
+
+
 Team members - 
 
 Alexander Schmid: Alexander excels in learning new technologies due to his work in the Computer Science department of the University of Pretoria. He is incredibly hard working and his leadership skills and experience promotes good team dynamics and cohesion.
@@ -41,8 +48,6 @@ Benjamin van Staden: Benjamin is an excellent communicator and has excellent peo
 Luke Bradford: Luke is an enthusiastic and diligent member of our team. He is experienced with a wide variety of technologies and is eager for the opportunity to work.
 
 Richard Reinier Mouton: Reinier excels when working in a team and is incredibility accommodating. He works well under pressure and always ensure that his work is of the highest quality. He has a deep interest in artificial intelligence.
-
-
 
 
 Professional Profile of members:
