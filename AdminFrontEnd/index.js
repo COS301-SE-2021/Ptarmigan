@@ -105,7 +105,7 @@ $(document).ready(function () {
             }
             else
             {
-                console("Unable to change user status ")
+                console.log("Unable to change user status ")
             }
 
         }
@@ -120,11 +120,19 @@ $(document).ready(function () {
               if (err) console.log(err, err.stack); // an error occurred
               else{
                   console.log("USer Added as admin");           // successful response
+                  ChangeFlag = true
               }
             });
-            $(this).text('Yes')
-            $(this).removeClass("btn-danger")
-            $(this).addClass("btn-success");
+            if(ChangeFlag == true) {
+                $(this).text('Yes')
+                $(this).removeClass("btn-danger")
+                $(this).addClass("btn-success");
+            }
+            else
+            {
+                console.log("Unable to change user status ")
+            }
+
         }
     })
 
