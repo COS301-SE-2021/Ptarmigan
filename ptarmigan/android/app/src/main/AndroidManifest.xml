@@ -3,6 +3,7 @@
    <application
         android:label="ptarmigan"
         android:icon="@mipmap/ic_launcher">
+        <!--<uses-permission android:name="android.permission.INTERNET" /> Recently added, change if it breaks things-->
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
