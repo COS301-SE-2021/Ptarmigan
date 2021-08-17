@@ -21,7 +21,9 @@ Resources:
       CodeUri: ptarmigan/comprehend
       Handler: app.lambda_twitterComprehend
       Runtime: python3.8
-      Role: arn:aws:iam::878292117449:role/ptarmiganbackend-comprehendRole-DS4EAUQKKTBE
+      Role: arn:aws:iam::878292117449:role/Comprehend_Dyno_Lambda
+      Tags:
+        auto-delete: no
 
   getMostPopularTweet:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -31,6 +33,8 @@ Resources:
       Runtime: python3.8
       Policies:
         - AmazonDynamoDBFullAccess
+      Tags:
+        auto-delete: no
       Events:
         HttpPost:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -48,6 +52,8 @@ Resources:
       Runtime: python3.8
       Policies:
         - AmazonDynamoDBFullAccess
+      Tags:
+        auto-delete: no
       Events:
         HttpPost:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -64,6 +70,8 @@ Resources:
       Runtime: python3.8
       Policies:
         - AmazonDynamoDBFullAccess
+      Tags:
+        auto-delete: no
 
       Events:
         HttpPost:
@@ -79,18 +87,23 @@ Resources:
       Handler: app.lambda_handler
       Runtime: python3.8
       Role: arn:aws:iam::878292117449:role/S3Lambda
+      Tags:
+        auto-delete: no
 
   twitterScraper:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ptarmigan/scraper/twitterScraper
-      Handler: app.scraperHandler
+      Handler: app.scraper_Handler
       Runtime: python3.8
       Role: arn:aws:iam::878292117449:role/Comprehend_Dyno_Lambda
       Layers:
         - arn:aws:lambda:eu-west-1:878292117449:layer:SnscrapeLib:1
         - arn:aws:lambda:eu-west-1:878292117449:layer:PandasLib:1
         - arn:aws:lambda:eu-west-1:399891621064:layer:AWSLambda-Python38-SciPy1x:29
+      Timeout: 120
+      Tags:
+        auto-delete: no
 
   UpdateBucket:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -99,6 +112,9 @@ Resources:
       Handler: app.lambda_handler
       Runtime: python3.8
       Role: arn:aws:iam::878292117449:role/S3Lambda
+      Tags:
+        auto-delete: no
+      Timeout: 600
 
       Events:
         HttpPost:
@@ -114,6 +130,8 @@ Resources:
       Handler: app.lambda_handler
       Runtime: python3.8
       Role: arn:aws:iam::878292117449:role/S3Lambda
+      Tags:
+        auto-delete: no
 
       Events:
         HttpPost:
@@ -129,6 +147,8 @@ Resources:
       Handler: app.lambda_handler
       Runtime: python3.8
       Role: arn:aws:iam::878292117449:role/S3Lambda
+      Tags:
+        auto-delete: no
 
       Events:
         HttpPost:
@@ -146,6 +166,9 @@ Resources:
       Role: arn:aws:iam::878292117449:role/S3Lambda
       Layers:
         - arn:aws:lambda:eu-west-1:878292117449:layer:requests:1
+      Timeout: 300
+      Tags:
+        auto-delete: no
 
   returnStockPriceList:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -154,6 +177,8 @@ Resources:
       Handler: app.lambda_handler
       Runtime: python3.8
       Role: arn:aws:iam::878292117449:role/S3Lambda
+      Tags:
+        auto-delete: no
 
       Events:
         HttpPost:
@@ -168,9 +193,9 @@ Resources:
       DefinitionUri: ptarmigan/scraperStepFunc/StepFunc.json
       Role: arn:aws:iam::878292117449:role/stepFunctionLambdaRole
       Type: EXPRESS
-#      Tags:
-#        - Key: auto-delete
-#          Value: no
+      Tags:
+        auto-delete: no
+
       Events:
         HttpPost:
           Type: Api # More info about API    db = database.database(tableName) Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -186,12 +211,5 @@ Resources:
       Runtime: python3.8
       Policies:
         - AmazonDynamoDBFullAccess
-
-
-
-
-
-
-
-
-
+      Tags:
+        auto-delete: no

@@ -74,6 +74,13 @@ def lambda_handler(event, context):
             'body': json.dumps('Error updating Content file')
         }
     # else return success json
+    lambdaClient = boto3.client('lambda')
+    response = lambdaClient.invoke(
+        FunctionName='arn:aws:lambda:eu-west-1:878292117449:function:getStockPrice',
+        InvocationType='Event',
+        LogType='None'
+    )
+
     return {
         'statusCode': 200,
         'body': json.dumps('Successfully Updated the Content to scrape.')
