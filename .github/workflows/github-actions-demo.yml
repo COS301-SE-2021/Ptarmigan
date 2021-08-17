@@ -33,7 +33,7 @@ jobs:
            run: pip3 --version
          - name: Install Pip Dependencies
            run: |
-              pip install boto3
+              pip install ./backend/ServerlessApplication/tests/requirements.txt
           
          - name: Unit Testing
            working-directory: ./backend/ServerlessApplication/
