@@ -85,16 +85,39 @@ $(document).ready(function () {
 
 
         if($(this).text() == 'Yes') {
-            $(this).text('No')
-            $(this).removeClass("btn-success")
-            $(this).addClass("btn-danger");
+            var params = {
+                GroupName: 'Admin', /* required */
+                UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
+                Username: $(this).parent().parent().find(".Username").text() /* required */
+            };
+            cognitoidentityserviceprovider.adminAddUserToGroup(params, function(err, data) {
+                if (err) console.log(err, err.stack); // an error occurred
+                else{
+                  console.log(data);           // successful response
+                  $(this).text('No')
+                  $(this).removeClass("btn-success")
+                  $(this).addClass("btn-danger");
+                }
+            });
         }
         else {
-            $(this).text('Yes')
-            $(this).removeClass("btn-danger")
-            $(this).addClass("btn-success");
+            var params = {
+              GroupName: 'STRING_VALUE', /* required */
+              UserPoolId: 'STRING_VALUE', /* required */
+              Username: 'STRING_VALUE' /* required */
+            };
+            cognitoidentityserviceprovider.adminRemoveUserFromGroup(params, function(err, data) {
+              if (err) console.log(err, err.stack); // an error occurred
+              else{
+                  console.log(data);           // successful response
+                  $(this).text('Yes')
+                  $(this).removeClass("btn-danger")
+                  $(this).addClass("btn-success");
+              }
+            });
+
         }
-        })
+    })
 
     //Logout
 
