@@ -33,15 +33,17 @@ $(document).ready(function () {
 
     });
     $('#loginButton').click(function () {
-        username = $("#loginUsername").text();
+        username = $("#loginUsername").val();
+        password = $("#loginPassword").val();
 
-    for (var i in adminUsers){
-        if (adminUsers[i]["Attributes"][2]["Value"] == username){
-            console.log("Help")
+
+        for (var i in adminUsers){
+        if (adminUsers[i]["Attributes"][2]["Value"] == username && password == "password") {
+                window.location.href = "index.html";
         }
-        adminUsers[i];
-
-        console.log(adminUsers[i])
+        else{
+            alert("Incorrect username or password");
+        }
     }
     });
 });
