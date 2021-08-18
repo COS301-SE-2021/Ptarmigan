@@ -31,8 +31,7 @@ Coding Standard - https://drive.google.com/file/d/19sleDvF-3E9Qy9sWzLPK5y9BuABeA
 GitHub Project Board - 
 https://github.com/COS301-SE-2021/Ptarmigan/projects/1?add_cards_query=is%3Aopen
 https://github.com/orgs/COS301-SE-2021/teams/one-more-byte
-
-Project Management - (Link required)
+scrum board- https://github.com/COS301-SE-2021/Ptarmigan/projects/2
 
 User manual - https://drive.google.com/file/d/1nNGanfCFOQ8M5m454dCeIOAvOhfOpl2X/view?usp=sharing
 
