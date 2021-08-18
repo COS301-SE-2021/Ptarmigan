@@ -66,6 +66,7 @@ jobs:
           run: sam build --use-container
        
         - name: local build sam
+          working-directory: ./backend/ServerlessApplication
           run: sam local start-api
           
         - name: Install Pip Dependencies
