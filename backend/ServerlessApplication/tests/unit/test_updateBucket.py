@@ -7,12 +7,12 @@ from ptarmigan.scraper.UpdateBucket import database
 class TestClass(TestCase):
 
     def setUp(self):
-        self.delete_test_input = {"body": json.dumps({"content": "IBM"})}
+        self.update_test_input = {"body": json.dumps({"content": "Tencent"})}
         self.delete_invalid_input = {"body": {"context": "IBM"}}
 
     @patch('ptarmigan.scraper.UpdateBucket.app.uploadBucketList')
     @patch('ptarmigan.scraper.UpdateBucket.app.getBucketList')
-    @patch('ptarmigan.scraper.UpdateBucket.database.__init__')
+    @patch('ptarmigan.scraper.UpdateBucket.app.database')
     def test_if_item_is_updated(self, mockDb, mock_BucketList,mock_Upload):
         mockDb = "yes"
         mock_Upload.return_value = True
@@ -25,6 +25,5 @@ class TestClass(TestCase):
             'body': json.dumps('Successfully Updated the Content to scrape.')
         }
 
-        testReturn = (app.lambda_handler(self.delete_test_input, ""))
-        print(testReturn)
+        testReturn = (app.lambda_handler(self.update_test_input, ""))
         assert testReturn == expected
