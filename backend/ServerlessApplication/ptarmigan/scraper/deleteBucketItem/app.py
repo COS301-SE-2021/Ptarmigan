@@ -69,6 +69,6 @@ def lambda_handler(event, context):
         }
     else:
         return {
-            'statusCode': 400,
+            'statusCode': 200,
             'body': json.dumps('Item not found.')
         }
