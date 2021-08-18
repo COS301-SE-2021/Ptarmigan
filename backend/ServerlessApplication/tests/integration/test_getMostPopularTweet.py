@@ -16,7 +16,7 @@ def fixture_event():
 
 class TestGetMostPopularTweet(unittest.TestCase):
     def test_get_most_popular_tweet_valid_inputs(self):
-        api_url = "http://localhost:3000/senthisize/getMostPopularTweet"
+        api_url = "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/senthisize/getMostPopularTweet"
         response = requests.post(api_url, json=fixture_event())
         response.json()
         print(response)
@@ -24,7 +24,7 @@ class TestGetMostPopularTweet(unittest.TestCase):
         assert response.status_code == 200
 
     def test_get_most_popular_tweet_invalid_inputs(self):
-        api_url = "http://localhost:3000/senthisize/getMostPopularTweet"
+        api_url = "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/senthisize/getMostPopularTweet"
         response = requests.post(api_url, json={})
         response.json()
         print(response)
