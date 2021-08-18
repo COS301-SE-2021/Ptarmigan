@@ -32,6 +32,19 @@ class SideMenu extends StatelessWidget {
 
   List<DrawerListTile> changeFeedsTo(List<Feed> feedList) {
     List<DrawerListTile> object;
+
+    if (feedList == null) {
+      return null;
+    }
+
+    for (int i = 0; i < feedList.length; i++) {
+      DrawerListTile ob = new DrawerListTile();
+      ob.title = feedList[0].feedName;
+      ob.svgSrc = "assets/icons/menu_tran.svg";
+      object.add(ob);
+    }
+
+    return object;
   }
 
   @override
@@ -75,7 +88,9 @@ class SideMenu extends StatelessWidget {
               ])
             ]),
           ),
-          DrawerListTile(
+          // Column(children: null //changeFeedsTo(feedsSub),
+          //  )
+          /*   DrawerListTile(
             title: "Bitcoin",
             svgSrc: "assets/icons/menu_tran.svg",
             press: () {},
@@ -104,7 +119,7 @@ class SideMenu extends StatelessWidget {
             title: "Volkwagen",
             svgSrc: "assets/icons/menu_tran.svg",
             press: () {},
-          ),
+          ), */
         ],
       ),
     );

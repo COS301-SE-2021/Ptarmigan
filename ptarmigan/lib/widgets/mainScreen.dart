@@ -179,7 +179,10 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: context.read<MenuController>().scaffoldKey,
-      drawer: SideMenu(),
+      drawer: SideMenu(
+        feeds: _feeds,
+        feedsSub: _feedsSub,
+      ),
       body: SafeArea(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
