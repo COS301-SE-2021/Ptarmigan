@@ -10,8 +10,8 @@ class TestClass(TestCase):
         self.empty_Json_input = {}
 
 
-    @patch('ptarmigan.scraper.deleteBucketItem.app.getBucketList')
-    def test_if_item_is_deleted(self,mock_BucketList):
+    @patch('ptarmigan.scraper.returnBucketList.app.getBucketList')
+    def test_if_item_is_returned(self,mock_BucketList):
         mock_BucketList.return_value = bytes(json.dumps({"Scrape-until": 1628659921.2764487,
                                         "scrape-detail": [{"content": "Bitcoin"}, {"content": "Microsoft"},
                                                           {"content": "IBM"}, {"content": "Tesla"},

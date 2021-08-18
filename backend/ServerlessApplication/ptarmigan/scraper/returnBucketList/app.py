@@ -4,7 +4,6 @@ import boto3
 
 def lambda_handler(event, context):
     filedata = getBucketList()
-
     filecontents = (filedata.decode('utf-8'))
     filecontents = json.loads(filecontents)
 
