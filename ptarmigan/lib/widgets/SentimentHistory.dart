@@ -43,6 +43,8 @@ class SentimentHistory extends StatelessWidget {
     print("KONO: " + feedIdentifier);
     List<Todo> updatedTodos = await Amplify.DataStore.query(Todo.classType,
         where: Todo.NAME.eq(feedIdentifier));
+    print("KONO2: " + updatedTodos.length.toString());
+
     todos = updatedTodos;
     feedTitle = feedIdentifier;
 
@@ -53,6 +55,14 @@ class SentimentHistory extends StatelessWidget {
 
   String colorPicker(String a) {
     return "";
+  }
+
+  Future<void> Delete(String name) async {
+    List<Todo> deleteTodos = await Amplify.DataStore.query(Todo.classType,
+        where: Todo.NAME.ne(name));
+
+    for (int i = 0; i < deleteTodos.length; i++)
+      await Amplify.DataStore.delete(deleteTodos[i]);
   }
 
   void convertToGraph(List<Todo> entry) {
@@ -84,7 +94,7 @@ class SentimentHistory extends StatelessWidget {
     var feedChoice = Provider.of<FeedChanger>(context).getFeedChoice;
     feedChoice = feedChoice;
     bocko(feedChoice);
-
+    Delete(feedChoice);
     return Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(

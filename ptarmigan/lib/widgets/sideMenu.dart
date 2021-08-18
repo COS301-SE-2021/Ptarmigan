@@ -5,6 +5,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ptarmigan/widgets/SentimentHistory.dart';
 import 'responsive.dart';
 import 'package:ptarmigan/widgets/feed_items.dart';
 import 'package:ptarmigan/models/ModelProvider.dart';
@@ -196,6 +197,14 @@ class DrawerListTile extends StatelessWidget {
     todos = updatedFeeds;
   }
 
+  Future<void> Delete() async {
+    List<Todo> deleteTodos = await Amplify.DataStore.query(Todo.classType,
+        where: Todo.NAME.ne(this.title));
+
+    for (int i = 0; i < deleteTodos.length; i++)
+      await Amplify.DataStore.delete(deleteTodos[i]);
+  }
+
   void PopulateDisplay(List<Todo> a) {
     for (int i = 0; i < 1; i++) {
       SentimentHistoryItem newItem = new SentimentHistoryItem();
@@ -216,14 +225,16 @@ class DrawerListTile extends StatelessWidget {
       Provider.of<FeedChanger>(context, listen: false).changeFeed(this.title);
     }
 
+    String myTitle = this.title;
     Future<FeedSentiment> _updateFeedPosts(String feedName) async {
-      // Amplify.DataStore.clear();
+      Amplify.DataStore.clear();
+      Delete();
       //demoRecentFiles = [];
       // String a =
       //     '[{"BeginDate": 1623005418000, "EndDate": 1623610218000, "IntervalData": 0}, {"BeginDate": 1623610218000, "EndDate": 1624215018000, "IntervalData": 0}, {"BeginDate": 1624215018000, "EndDate": 1624819818000, "IntervalData": 0}, {"BeginDate": 1624819818000, "EndDate": 1625424618000, "IntervalData": 0}, {"BeginDate": 1625424618000, "EndDate": 1626029418000, "IntervalData": 0}, {"BeginDate": 1626029418000, "EndDate": 1626634218000, "IntervalData": 0}, {"BeginDate": 1626634218000, "EndDate": 1627239018000, "IntervalData": 0}, {"BeginDate": 1627239018000, "EndDate": 1627843818000, "IntervalData": 0}, {"BeginDate": 1627843818000, "EndDate": 1628448618000, "IntervalData": 0.06540074664700189}, {"BeginDate": 1628448618000, "EndDate": 1629053418000, "IntervalData": 0}]';
       // final parsed = jsonDecode(a).cast<Map<String, dynamic>>();
 
-      /*     final response2 = await http.post(
+      final response2 = await http.post(
           Uri.parse(
               'https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/senthisize/getGraphSentiment'),
           headers: <String, String>{
@@ -235,7 +246,7 @@ class DrawerListTile extends StatelessWidget {
             "CompanyName": feedName
           }));
       print("-----------");
-      print(response2.body); 
+      print(response2.body);
 
       //  if (lastUpdated == 1623005418)
       //lastUpdated = (DateTime.now().millisecondsSinceEpoch / 1000).toInt();
@@ -278,7 +289,7 @@ class DrawerListTile extends StatelessWidget {
           );
 
           try {
-            //  Amplify.DataStore.save(newTodo);
+            Amplify.DataStore.save(newTodo);
 
             // Navigator.of(context).pop();
           } catch (e) {
@@ -292,7 +303,7 @@ class DrawerListTile extends StatelessWidget {
         print(response2.statusCode);
         throw Exception('Failed to create post.');
       }
-      */
+
       /* DateTime tester = DateTime.fromMillisecondsSinceEpoch(test1[0].beginDate);
       tester.toIso8601String();
 
@@ -324,20 +335,6 @@ class DrawerListTile extends StatelessWidget {
     }
 
     return ListTile(
-      onTap: () {
-        //  demoRecentFiles = [];
-        _changeFeed();
-        print("TIGGER1");
-
-        _updateFeedPosts(this.title);
-        //   print("TIGGER2");
-
-        //   rocko();
-        //    print("TIGGER3");
-
-        //PopulateDisplay(todos);
-        //   print("TIGGER4");
-      },
       horizontalTitleGap: 0.0,
       leading: SvgPicture.asset(
         svgSrc,
@@ -348,6 +345,20 @@ class DrawerListTile extends StatelessWidget {
         title,
         style: TextStyle(color: Colors.white54),
       ),
+      onTap: () {
+        //  demoRecentFiles = [];
+        _changeFeed();
+        print("TIGGER1");
+
+        _updateFeedPosts(myTitle);
+        //   print("TIGGER2");
+        SentimentHistory().fetchNewTodos(myTitle);
+        //   rocko();
+        //    print("TIGGER3");
+
+        //PopulateDisplay(todos);
+        //   print("TIGGER4");
+      },
     );
   }
 }
