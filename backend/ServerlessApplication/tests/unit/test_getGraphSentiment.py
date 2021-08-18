@@ -1,6 +1,6 @@
 import json
 import pytest
-
+import unittest
 from ptarmigan.synthesize.getGraphSentiment import app
 
 @pytest.fixture()
@@ -12,7 +12,7 @@ def fixture_event():
             "CompanyName": "Tesla"
         }}
 
-class TestGetGraphSentiment:
+class TestGetGraphSentiment(unittest.TestCase):
     def test_get_sentiment_graph(self):
         testReturn = app.lambda_handler(fixture_event, "")
         print("some")
