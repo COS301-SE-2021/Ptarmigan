@@ -10,7 +10,7 @@ def fixture_event():
     return { "content" : "IBM" }
 
 class Test_TwitterScraperReturn(unittest.TestCase):
-    def test_Twitter_Scraper_return_success (self):
+    def test_Update_bucket_return_success (self):
         api_url = "http://localhost:3000/scraper/UpdateBucket"
         response = requests.post(api_url, json=fixture_event())
         response.json()
@@ -18,7 +18,7 @@ class Test_TwitterScraperReturn(unittest.TestCase):
 
         assert response.status_code == 200
 
-    def test_Twitter_Scraper_return_success (self):
+    def test_Update_Bucket_return_Invalid_Input (self):
         api_url = "http://localhost:3000/scraper/UpdateBucket"
         response = requests.post(api_url, json={})
         response.json()
