@@ -31,7 +31,7 @@ jobs:
       
       - name: Install flutter
         run: |
-         flutter pub get,
+         flutter pub get ,
          working-directory: ./ptarmigan/
       # Runs a set of commands using the runners shell
       - name: Run Unit and Integration tests
