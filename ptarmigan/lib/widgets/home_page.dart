@@ -145,7 +145,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => TodosPage()));
+                                          builder: (context) => TwitterScreen(
+                                              1426541125498810368)));
                                 },
                                 style: ButtonStyle(
                                   shape:
