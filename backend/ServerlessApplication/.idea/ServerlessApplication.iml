@@ -28,7 +28,8 @@
                   <option value="NAMED_IAM" />
                 </list>
               </option>
-              <option name="stackName" value="ptarmiganbigstacky" />
+              <option name="stackName" value="ptarmiganbackend" />
+              <option name="useContainer" value="true" />
             </DeploySamConfig>
           </value>
         </entry>

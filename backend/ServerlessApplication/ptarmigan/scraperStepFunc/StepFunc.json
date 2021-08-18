@@ -1,0 +1,88 @@
+{
+  "Comment": "This is your state machine",
+  "StartAt": "Pass Scraper Content",
+  "States": {
+    "Pass Scraper Content": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "OutputPath": "$.Payload",
+      "Parameters": {
+        "FunctionName": "arn:aws:lambda:eu-west-1:878292117449:function:ptarmiganbackend-bucketInput-Tx84OWTemfc1"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException"
+          ],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 6,
+          "BackoffRate": 2
+        }
+      ],
+      "Next": "Map"
+    },
+    "Map": {
+      "Type": "Map",
+      "Iterator": {
+        "StartAt": "Twitter Scraper",
+        "States": {
+          "Twitter Scraper": {
+            "Type": "Task",
+            "Resource": "arn:aws:states:::lambda:invoke",
+            "OutputPath": "$.Payload",
+            "Parameters": {
+              "Payload.$": "$",
+              "FunctionName": "arn:aws:lambda:eu-west-1:878292117449:function:ptarmiganbackend-twitterScraper-FUYVrtRDd62N"
+            },
+            "Retry": [
+              {
+                "ErrorEquals": [
+                  "Lambda.ServiceException",
+                  "Lambda.AWSLambdaException",
+                  "Lambda.SdkClientException"
+                ],
+                "IntervalSeconds": 2,
+                "MaxAttempts": 6,
+                "BackoffRate": 2
+              }
+            ],
+            "Next": "Sentiment Analysis"
+          },
+          "Sentiment Analysis": {
+            "Type": "Task",
+            "Resource": "arn:aws:states:::lambda:invoke",
+            "OutputPath": "$.Payload",
+            "Parameters": {
+              "Payload.$": "$",
+              "FunctionName": "arn:aws:lambda:eu-west-1:878292117449:function:ptarmiganbackend-comprehend-vmDIZQkwuIr9"
+            },
+            "Retry": [
+              {
+                "ErrorEquals": [
+                  "Lambda.ServiceException",
+                  "Lambda.AWSLambdaException",
+                  "Lambda.SdkClientException"
+                ],
+                "IntervalSeconds": 2,
+                "MaxAttempts": 6,
+                "BackoffRate": 2
+              }
+            ],
+            "End": true
+          }
+        }
+      },
+      "Next": "Success",
+      "ItemsPath": "$.scrape-detail",
+      "Parameters": {
+        "Scrape-until.$": "$.Scrape-until",
+        "content.$": "$$.Map.Item.Value"
+      }
+    },
+    "Success": {
+      "Type": "Succeed"
+    }
+  }
+}

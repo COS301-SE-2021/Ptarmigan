@@ -3,7 +3,9 @@ from pprint import pprint
 import boto3
 from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Key
+import os
 import json
+
 
 # import requests
 def calculateSentiment(content):
@@ -21,16 +23,18 @@ def calculateSentiment(content):
             sentiment = -1
 
         runningSentiment = runningSentiment + (weight * sentiment)
+    if totalVotes == 0:
+        return 0
+    return (runningSentiment / totalVotes)
 
-    return (runningSentiment/totalVotes)
 
 def dbReturn(event):
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('Test')
+    tableName = event["CompanyName"]
+    table = dynamodb.Table(tableName)
 
     response = table.scan(
-        FilterExpression=Key('Tweet_Id').gt(1) & Key('TimeStamp').between(event["BeginDate"], event["EndDate"]) & Key(
-            'CompanyName').eq(event["CompanyName"])
+        FilterExpression=Key('Tweet_Id').gt(1) & Key('TimeStamp').between(event["BeginDate"], event["EndDate"])
     )
 
     return response
@@ -38,25 +42,22 @@ def dbReturn(event):
 
 def lambda_handler(event, context):
     try:
+        event = json.loads(event["body"])
         response = dbReturn(event)
-
         print(response)
 
         calculation = calculateSentiment(response["Items"])
 
         return {
             "statusCode": 200,
-            "body": calculation
+            "body": json.dumps(calculation)
         }
 
     except:
         return {
             "statusCode": 400,
-            "body": "Parameters not found in DB"
+            "body": json.dumps("Invalid Inputs")
         }
-
-
-
 
 # //{
 #   "BeginDate" : 1623005418000,
