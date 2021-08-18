@@ -177,6 +177,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Amplify.DataStore.clear();
     return Scaffold(
       key: context.read<MenuController>().scaffoldKey,
       drawer: SideMenu(
@@ -192,7 +193,10 @@ class _MainScreenState extends State<MainScreen> {
               Expanded(
                 // default flex = 1
                 // and it takes 1/6 part of the screen
-                child: SideMenu(),
+                child: SideMenu(
+                  feeds: _feeds,
+                  feedsSub: _feedsSub,
+                ),
               ),
             Expanded(
               // It takes 5/6 part of the screen

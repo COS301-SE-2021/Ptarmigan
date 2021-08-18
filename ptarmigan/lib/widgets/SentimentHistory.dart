@@ -57,7 +57,7 @@ class SentimentHistory extends StatelessWidget {
 
   void convertToGraph(List<Todo> entry) {
     SentimentHistoryItem newItem = new SentimentHistoryItem();
-
+    demoRecentFiles = [];
     for (int i = 0; i < entry.length; i++) {
       print("plick");
       list.add(new DataPoint<DateTime>(
@@ -82,7 +82,7 @@ class SentimentHistory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var feedChoice = Provider.of<FeedChanger>(context).getFeedChoice;
-    feedChoice = "Bitcoin";
+    feedChoice = feedChoice;
     bocko(feedChoice);
 
     return Container(

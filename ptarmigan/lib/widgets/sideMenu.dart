@@ -1,5 +1,6 @@
 // @dart=2.9
 
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -19,19 +20,21 @@ import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:http/http.dart' as http;
 import 'package:ptarmigan/feedSentiment.dart';
+import '/models/SentimentHistoryItem.dart';
 
 class SideMenu extends StatelessWidget {
-  final List<Todo> todos;
-  final List<Feed> feeds;
+  List<Todo> todos;
+  List<Feed> feeds;
   final List<Feed> feedsSub;
   final pageViewController = PageController();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final String title;
+  StreamSubscription _subscription;
 
   SideMenu({this.todos, this.feeds, this.feedsSub, this.title});
 
   List<DrawerListTile> changeFeedsTo(List<Feed> feedList) {
-    List<DrawerListTile> object;
+    List<DrawerListTile> object = [];
 
     if (feedList == null) {
       return null;
@@ -39,7 +42,7 @@ class SideMenu extends StatelessWidget {
 
     for (int i = 0; i < feedList.length; i++) {
       DrawerListTile ob = new DrawerListTile();
-      ob.title = feedList[0].feedName;
+      ob.title = feedList[i].feedName;
       ob.svgSrc = "assets/icons/menu_tran.svg";
       object.add(ob);
     }
@@ -47,9 +50,29 @@ class SideMenu extends StatelessWidget {
     return object;
   }
 
+  rocko() async {
+    _subscription = Amplify.DataStore.observe(Feed.classType).listen((event) {
+      fetchNewTodos();
+    });
+
+    await fetchNewTodos();
+  }
+
+  Future<void> fetchNewTodos() async {
+    print("BOOOOOOOOR: ");
+    List<Feed> updatedFeeds = await Amplify.DataStore.query(Feed.classType,
+        where: Feed.SUBSCRIBEDTO.eq(0));
+
+    feeds = updatedFeeds;
+
+    //print("VACO: " + todos.elementAt(0).name);
+  }
+
   @override
   Widget build(BuildContext context) {
-    Amplify.DataStore.clear();
+    print("++++++++++++++++++++++++++++++");
+    print(feeds[0].feedName);
+    // Amplify.DataStore.clear();
 
     return Drawer(
       child: ListView(
@@ -88,7 +111,7 @@ class SideMenu extends StatelessWidget {
               ])
             ]),
           ),
-          // Column(children: null //changeFeedsTo(feedsSub),
+          Column(children: changeFeedsTo(feedsSub)),
           //  )
           /*   DrawerListTile(
             title: "Bitcoin",
@@ -133,9 +156,59 @@ class DrawerListTile extends StatelessWidget {
     String this.svgSrc,
     VoidCallback this.press,
   });
-
   String title, svgSrc;
   VoidCallback press;
+
+  final pageViewController = PageController();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  StreamSubscription _subscription;
+  List<Todo> todos;
+
+  List<DrawerListTile> changeFeedsTo(List<Feed> feedList) {
+    List<DrawerListTile> object = [];
+
+    if (feedList == null) {
+      return null;
+    }
+
+    for (int i = 0; i < feedList.length; i++) {
+      DrawerListTile ob = new DrawerListTile();
+      ob.title = feedList[i].feedName;
+      ob.svgSrc = "assets/icons/menu_tran.svg";
+      object.add(ob);
+    }
+
+    return object;
+  }
+
+  rocko() async {
+    _subscription = Amplify.DataStore.observe(Todo.classType).listen((event) {
+      fetchNewTodos();
+    });
+
+    await fetchNewTodos();
+  }
+
+  Future<void> fetchNewTodos() async {
+    List<Todo> updatedFeeds = await Amplify.DataStore.query(Todo.classType,
+        where: Todo.NAME.eq(this.title));
+    print("ALEX");
+    todos = updatedFeeds;
+  }
+
+  void PopulateDisplay(List<Todo> a) {
+    for (int i = 0; i < 1; i++) {
+      SentimentHistoryItem newItem = new SentimentHistoryItem();
+      newItem.icon = "assets/icons/Negative.svg";
+      newItem.title = "dasdad"; //todos[i].date.toString();
+      newItem.date = "%69";
+      //todos[i].description;
+      newItem.size = "0";
+
+      print("PINGED!!!!!!!!!!!!!!!!!!!");
+      demoRecentFiles.add(newItem);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,12 +217,13 @@ class DrawerListTile extends StatelessWidget {
     }
 
     Future<FeedSentiment> _updateFeedPosts(String feedName) async {
-      //Amplify.DataStore.clear();
+      // Amplify.DataStore.clear();
+      //demoRecentFiles = [];
       // String a =
       //     '[{"BeginDate": 1623005418000, "EndDate": 1623610218000, "IntervalData": 0}, {"BeginDate": 1623610218000, "EndDate": 1624215018000, "IntervalData": 0}, {"BeginDate": 1624215018000, "EndDate": 1624819818000, "IntervalData": 0}, {"BeginDate": 1624819818000, "EndDate": 1625424618000, "IntervalData": 0}, {"BeginDate": 1625424618000, "EndDate": 1626029418000, "IntervalData": 0}, {"BeginDate": 1626029418000, "EndDate": 1626634218000, "IntervalData": 0}, {"BeginDate": 1626634218000, "EndDate": 1627239018000, "IntervalData": 0}, {"BeginDate": 1627239018000, "EndDate": 1627843818000, "IntervalData": 0}, {"BeginDate": 1627843818000, "EndDate": 1628448618000, "IntervalData": 0.06540074664700189}, {"BeginDate": 1628448618000, "EndDate": 1629053418000, "IntervalData": 0}]';
       // final parsed = jsonDecode(a).cast<Map<String, dynamic>>();
 
-      final response2 = await http.post(
+      /*     final response2 = await http.post(
           Uri.parse(
               'https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/senthisize/getGraphSentiment'),
           headers: <String, String>{
@@ -161,7 +235,7 @@ class DrawerListTile extends StatelessWidget {
             "CompanyName": feedName
           }));
       print("-----------");
-      print(response2.body);
+      print(response2.body); 
 
       //  if (lastUpdated == 1623005418)
       //lastUpdated = (DateTime.now().millisecondsSinceEpoch / 1000).toInt();
@@ -178,11 +252,10 @@ class DrawerListTile extends StatelessWidget {
             response.map((i) => FeedSentiment.fromJson(i)));
 
         for (int i = 0; i < test1.length; i++) {
-          print(
-              "----------------------------------------------------------------");
-          print(DateTime.fromMillisecondsSinceEpoch(test1[i].beginDate)
-              .toIso8601String()
-              .substring(0, 10));
+          //  print("----------------------------------------------------------------");
+          //   print(DateTime.fromMillisecondsSinceEpoch(test1[i].beginDate)
+          //       .toIso8601String()
+          //      .substring(0, 10));
 
           int len = test1[i].intervalData.toString().indexOf(".") + 1;
           TemporalDate a = TemporalDate.fromString(
@@ -205,7 +278,7 @@ class DrawerListTile extends StatelessWidget {
           );
 
           try {
-            Amplify.DataStore.save(newTodo);
+            //  Amplify.DataStore.save(newTodo);
 
             // Navigator.of(context).pop();
           } catch (e) {
@@ -219,7 +292,7 @@ class DrawerListTile extends StatelessWidget {
         print(response2.statusCode);
         throw Exception('Failed to create post.');
       }
-
+      */
       /* DateTime tester = DateTime.fromMillisecondsSinceEpoch(test1[0].beginDate);
       tester.toIso8601String();
 
@@ -252,9 +325,18 @@ class DrawerListTile extends StatelessWidget {
 
     return ListTile(
       onTap: () {
+        //  demoRecentFiles = [];
         _changeFeed();
+        print("TIGGER1");
 
-        _updateFeedPosts(title);
+        _updateFeedPosts(this.title);
+        //   print("TIGGER2");
+
+        //   rocko();
+        //    print("TIGGER3");
+
+        //PopulateDisplay(todos);
+        //   print("TIGGER4");
       },
       horizontalTitleGap: 0.0,
       leading: SvgPicture.asset(
