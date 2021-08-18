@@ -26,7 +26,7 @@ One More Byte SRS Demo 3 - https://docs.google.com/document/d/15Zy4a-H1pjXuL5FvJ
 
 Demo2 Video - https://drive.google.com/file/d/1eR1-LJsdPGZUbrEi949NXnkD0zIGisOS/view?usp=sharing
 
-Coding Standard - https://drive.google.com/file/d/1oBwUDbI_35n6cnec50-yjROyxu043Vg6/view?usp=sharing
+Coding Standard - https://drive.google.com/file/d/19sleDvF-3E9Qy9sWzLPK5y9BuABeAajc/view?usp=sharing
 
 GitHub Project Board - 
 https://github.com/COS301-SE-2021/Ptarmigan/projects/1?add_cards_query=is%3Aopen
@@ -34,7 +34,7 @@ https://github.com/orgs/COS301-SE-2021/teams/one-more-byte
 
 Project Management - (Link required)
 
-User manual - (Link required)
+User manual - https://docs.google.com/document/d/1y9FjzFqw49LxXsAUf1uLWqie6RlbjId5JtPkISFnuqw/edit?usp=sharing
 
 Technical installation manual - (Link required)
 
