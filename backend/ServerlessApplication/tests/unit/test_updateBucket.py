@@ -56,3 +56,22 @@ class TestClass(TestCase):
 
         testReturn = (app.lambda_handler(self.delete_invalid_input, ""))
         assert testReturn == expected
+
+    @patch('ptarmigan.scraper.UpdateBucket.app.uploadBucketList')
+    @patch('ptarmigan.scraper.UpdateBucket.app.getBucketList')
+    @patch('ptarmigan.scraper.UpdateBucket.app.database')
+    def test_if_item_is_updated(self, mockDb, mock_BucketList, mock_Upload):
+        mockDb = "yes"
+        mock_Upload.return_value = False
+        mock_BucketList.return_value = bytes(json.dumps({"Scrape-until": 1628659921.2764487,
+                                                         "scrape-detail": [{"content": "Bitcoin"},
+                                                                           {"content": "Microsoft"},
+                                                                           {"content": "IBM"}, {"content": "Tesla"},
+                                                                           {"content": "Apple"}]}).encode('UTF-8'))
+        expected = {
+            'statusCode': 500,
+            'body': json.dumps('Error updating Content file')
+        }
+
+        testReturn = (app.lambda_handler(self.update_test_input, ""))
+        assert testReturn == expected
