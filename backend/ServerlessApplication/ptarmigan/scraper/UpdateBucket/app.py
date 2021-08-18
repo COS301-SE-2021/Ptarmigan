@@ -80,7 +80,7 @@ def lambda_handler(event, context):
     for i in replaceContent:
         if i['content'] == update:
             return {
-                'statusCode': 400,
+                'statusCode': 200,
                 'body': json.dumps('Item is already in the file')
             }
     replaceLine = '{"content": "' + update + '"}'
