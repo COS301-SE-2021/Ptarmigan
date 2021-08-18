@@ -37,7 +37,7 @@ class database:
             )
             #print("Table Did not exist")
         except self.dynamodbClient.exceptions.ResourceInUseException:
-            #print("The DB Already exists")
+            print("The DB Already exists")
             # do something here as you require
 
         #print("Something")
