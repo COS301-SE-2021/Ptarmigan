@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5c84a0cb-3919-4206-be28-1a11af42aa4e" name="Changes" comment="Implemented update button for the scraper function">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1wAFU6MAHRToHkhRXW20Lk2T7II" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5c84a0cb-3919-4206-be28-1a11af42aa4e" name="Changes" comment="" />
+      <created>1627893502900</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1627893502900</updated>
+      <workItem from="1627893504282" duration="17590000" />
+    </task>
+    <task id="LOCAL-00001" summary="Initial setup and inclution of the header link including bootstrap styles">
+      <created>1627893727808</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1627893727808</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added boilerplate of BS">
+      <created>1627893884276</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1627893884276</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added boilerplate of BS">
+      <created>1627898083651</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1627898083651</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added boilerplate of BS">
+      <created>1627898404395</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1627898404395</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added boilerplate of BS for Navbar">
+      <created>1627898651840</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1627898651840</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Made Adjustments to the Nav">
+      <created>1627899758924</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1627899758924</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Changed name of the navbar">
+      <created>1627899989868</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1627899989868</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Imported FontAwesome">
+      <created>1627900057757</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1627900057757</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added icon">
+      <created>1627900339525</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1627900339525</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Made changes to the nav bar">
+      <created>1627900941328</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1627900941328</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Added numbser of users">
+      <created>1627901727609</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1627901727609</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Changed bgcolors">
+      <created>1627902369448</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1627902369448</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Added table">
+      <created>1627904656594</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1627904656594</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Added hover">
+      <created>1627905600045</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1627905600045</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Fixed Jquery">
+      <created>1627907367844</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1627907367844</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Added text to progress bar">
+      <created>1627908499001</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1627908499001</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Updated Tags of the table">
+      <created>1627908576830</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1627908576830</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Added a button to the table">
+      <created>1627908823869</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1627908823869</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Updated remove function and class names">
+      <created>1627909136644</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1627909136644</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Added ref to json">
+      <created>1627909213436</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1627909213436</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Remove table row on click">
+      <created>1627910672364</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1627910672364</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Updated a remove on click function">
+      <created>1627910906936</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1627910906936</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Update class names">
+      <created>1627910924476</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1627910924476</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Changed names in the template">
+      <created>1627996490530</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1627996490530</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial setup and inclution of the header link including bootstrap styles" />
+    <MESSAGE value="Added boilerplate of BS" />
+    <MESSAGE value="Added boilerplate of BS for Navbar" />
+    <MESSAGE value="Made Adjustments to the Nav" />
+    <MESSAGE value="Changed name of the navbar" />
+    <MESSAGE value="Imported FontAwesome" />
+    <MESSAGE value="Added icon" />
+    <MESSAGE value="Made changes to the nav bar" />
+    <MESSAGE value="Added numbser of users" />
+    <MESSAGE value="Changed bgcolors" />
+    <MESSAGE value="Added new div to view the flags" />
+    <MESSAGE value="Added table" />
+    <MESSAGE value="Added hover" />
+    <MESSAGE value="Fixed Jquery" />
+    <MESSAGE value="Added text to progress bar" />
+    <MESSAGE value="Updated Tags of the table" />
+    <MESSAGE value="Added a button to the table" />
+    <MESSAGE value="Added function to update table" />
+    <MESSAGE value="Updated remove function and class names" />
+    <MESSAGE value="Added ref to json" />
+    <MESSAGE value="Remove table row on click" />
+    <MESSAGE value="Updated a remove on click function" />
+    <MESSAGE value="Update class names" />
+    <MESSAGE value="Changed names in the template" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed names in the template" />
+  </component>
+</project>
