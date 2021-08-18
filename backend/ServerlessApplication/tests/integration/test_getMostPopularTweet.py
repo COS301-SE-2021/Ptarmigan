@@ -14,8 +14,8 @@ def fixture_event():
             "CompanyName": "Tesla"
         }
 
-class TestGetGraphSentiment:
-    def test_get_sentiment_graph_valid_inputs(self):
+class TestGetMostPopularTweet(unittest.TestCase):
+    def test_get_most_popular_tweet_valid_inputs(self):
         api_url = "http://localhost:3000/senthisize/getMostPopularTweet"
         response = requests.post(api_url, json=fixture_event())
         response.json()
@@ -23,7 +23,7 @@ class TestGetGraphSentiment:
 
         assert response.status_code == 200
 
-    def test_get_sentiment_graph_invalid_inputs(self):
+    def test_get_most_popular_tweet_invalid_inputs(self):
         api_url = "http://localhost:3000/senthisize/getMostPopularTweet"
         response = requests.post(api_url, json={})
         response.json()

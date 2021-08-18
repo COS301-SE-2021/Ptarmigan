@@ -14,7 +14,7 @@ def fixture_event():
     "CompanyName": "Microsoft"
 }
 
-class TestGetGraphSentiment:
+class TestGetGraphSentiment(unittest.TestCase):
     def test_get_sentiment_graph_valid_inputs(self):
         api_url = "http://localhost:3000/senthisize/getGraphSentiment"
         response = requests.post(api_url, json=fixture_event())
