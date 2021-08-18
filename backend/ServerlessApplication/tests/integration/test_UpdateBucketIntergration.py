@@ -7,10 +7,10 @@ import requests
 baseUrl = "https://localhost:3000"
 
 def fixture_event():
-    return { "content" : "IBM" }
+    return {"content": "IBM"}
 
 class Test_TwitterScraperReturn(unittest.TestCase):
-    def test_Update_bucket_return_success (self):
+    def test_Update_bucket_return_success(self):
         api_url = "http://localhost:3000/scraper/UpdateBucket"
         response = requests.post(api_url, json=fixture_event())
         response.json()
