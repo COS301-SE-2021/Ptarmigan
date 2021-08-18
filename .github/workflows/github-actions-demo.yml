@@ -64,18 +64,21 @@ jobs:
         - name: Build Sam
           working-directory: ./backend/ServerlessApplication
           run: sam build --use-container
-       
-        - name: local build sam
-          working-directory: ./backend/ServerlessApplication
-          run: sam local start-api
-          
         - name: Install Pip Dependencies
           run: |
             pip3 install pytest
+            
+        - name: local build sam
+          working-directory: ./backend/ServerlessApplication
+          run: |
+            sam local start-api
+            python -m pytest tests/integration/
+          
         
-        - name: Integration Testing
-          working-directory: ./backend/ServerlessApplication/
-          run: python -m pytest tests/integration/
+        
+#         - name: Integration Testing
+#           working-directory: ./backend/ServerlessApplication/
+#           run: python -m pytest tests/integration/
 
        
   
