@@ -1,7 +1,6 @@
 import json
-
 import boto3
-from ptarmigan.scraper.UpdateBucket import database
+import database
 # Creating functions to to replace s3 calls
 def getBucketList():
     s3client = boto3.client('s3')
