@@ -34,7 +34,7 @@ https://github.com/orgs/COS301-SE-2021/teams/one-more-byte
 
 Project Management - (Link required)
 
-User manual - https://docs.google.com/document/d/1y9FjzFqw49LxXsAUf1uLWqie6RlbjId5JtPkISFnuqw/edit?usp=sharing
+User manual - https://drive.google.com/file/d/1nNGanfCFOQ8M5m454dCeIOAvOhfOpl2X/view?usp=sharing
 
 Technical installation manual - (Link required)
 
