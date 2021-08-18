@@ -71,7 +71,7 @@ jobs:
         
         - name: deploy to aws
           working-directory: ./backend/ServerlessApplication
-          run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-hello-world --s3-bucket ptarmiganbackend --capabilities CAPABILITY_IAM --region eu-west-1 
+          run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name ptarmiganbackend --s3-bucket ptarmiganbackend --capabilities CAPABILITY_IAM --region eu-west-1 
           
 #         - name: local build sam
 #           working-directory: ./backend/ServerlessApplication
