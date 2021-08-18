@@ -1,4 +1,5 @@
 var adminUsers
+let userpoolid = " eu-west-1_zaO5WLSMT"
 
 $(document).ready(function () {
 
@@ -9,7 +10,7 @@ $(document).ready(function () {
     var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({apiVersion: '2016-04-18'});
 
     var params = {
-        UserPoolId: 'eu-west-1_gM8mCo99w', /* required */ // actual pool eu-west-1_gM8mCo99w //Test pool eu-west-1_nn8eU3DXM
+        UserPoolId: userpoolid, /* required */ // actual pool eu-west-1_gM8mCo99w //Test pool eu-west-1_nn8eU3DXM
         AttributesToGet: [],
         Filter: '',
         Limit: '50'
@@ -18,7 +19,7 @@ $(document).ready(function () {
 
     var paramsAdminUsers = {
         GroupName: 'Admin', /* required */
-        UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
+        UserPoolId: userpoolid, /* required */
         Limit: '50',
 
     };

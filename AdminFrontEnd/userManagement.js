@@ -1,3 +1,5 @@
+
+
 function addCompanyToTable(name){
     let content = `<tr>
             <td scope="row" class="companyName">${name}</td>

@@ -5,6 +5,8 @@ AWS.config.credentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: 'eu
 });
 var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({apiVersion: '2016-04-18'});
 
+let userpoolid = " eu-west-1_zaO5WLSMT"
+
 function setUsers(numberOfUsers){
     $("#numberOfUsers").text(numberOfUsers)
 }
@@ -75,7 +77,7 @@ $(document).ready(function () {
     $('#userTable').on('click', '.removeOnClick', function() {
         username = $(this).parent().parent().find(".Username").text()
         console.log(username + " hello this is the username")
-        var paramsDeleteUser = {UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
+        var paramsDeleteUser = {UserPoolId: userpoolid, /* required */
         Username: username /* required */
         };
         cognitoidentityserviceprovider.adminDeleteUser(paramsDeleteUser, function(err, data) {
@@ -95,7 +97,7 @@ $(document).ready(function () {
             username = $(this).parent().parent().find(".Username").text()
             var params = {
                 GroupName: 'Admin', /* required */
-                UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
+                UserPoolId: userpoolid, /* required */
                 Username: username /* required */
             };
             cognitoidentityserviceprovider.adminAddUserToGroup(params, function (err, data) {
@@ -114,7 +116,7 @@ $(document).ready(function () {
             username =$(this).parent().parent().find(".Username").text()
             var params = {
               GroupName: 'Admin', /* required */
-              UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
+              UserPoolId: userpoolid, /* required */
               Username: username /* required */
             };
             cognitoidentityserviceprovider.adminRemoveUserFromGroup(params, function(err, data) {
@@ -141,7 +143,7 @@ $(document).ready(function () {
 
         //initalize cognito service
     var params = {
-        UserPoolId: 'eu-west-1_gM8mCo99w', /* required */ // actual pool eu-west-1_gM8mCo99w //Test pool eu-west-1_nn8eU3DXM
+        UserPoolId: userpoolid, /* required */ // actual pool eu-west-1_gM8mCo99w //Test pool eu-west-1_nn8eU3DXM
         Filter: '',
         Limit: '50',
         AttributesToGet: ['email']
@@ -159,7 +161,7 @@ $(document).ready(function () {
 
                 var paramsAdminUsers = {
                   GroupName: 'Admin', /* required */
-                  UserPoolId: 'eu-west-1_gM8mCo99w', /* required */
+                  UserPoolId: userpoolid, /* required */
                   Limit: '50'
                 };
                 cognitoidentityserviceprovider.listUsersInGroup(paramsAdminUsers, function(err, data) {
