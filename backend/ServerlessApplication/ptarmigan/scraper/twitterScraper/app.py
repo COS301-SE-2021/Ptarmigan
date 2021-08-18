@@ -24,7 +24,7 @@ def scraper_handler(event, context):
         scrape_since = int(event['Scrape-until'])
     except:
         return {
-            'statusCode': 200,
+            'statusCode': 400,
             'body': json.dumps("invalid input")
         }
 
