@@ -54,11 +54,7 @@ def lambda_handler(event, context):
         update = update['content']
     except:
         return {
-            "isBase64Encoded": False,
             'statusCode': 400,
-            "headers": {
-                "Content-Type": "application/json"
-            },
             'body': json.dumps('Bad Request - invalid JSON input')
         }
 
