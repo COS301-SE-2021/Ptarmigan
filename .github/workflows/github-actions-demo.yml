@@ -67,7 +67,14 @@ jobs:
           
         - name: Install Pip Dependencies
           run: |
-            pip3 install pytest
+            pip3 install pytest  
+            pip3 install boto3
+            pip3 install ujson
+            pip3 install pymongo
+            pip3 install requests
+            pip3 install git+https://github.com/JustAnotherArchivist/snscrape.git
+            pip3 install pandas
+            pip3 install moto
         
         - name: deploy to aws
           working-directory: ./backend/ServerlessApplication
