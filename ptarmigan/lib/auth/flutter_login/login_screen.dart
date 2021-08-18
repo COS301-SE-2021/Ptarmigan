@@ -98,7 +98,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     _initState();
-    print("====Amplify configure finished=====");
+    print("====Amplify configure finished====");
     return FlutterLogin(
       title: 'Welcome',
       onLogin: _onLogin,
