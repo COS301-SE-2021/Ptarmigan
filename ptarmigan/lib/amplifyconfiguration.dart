@@ -40,15 +40,15 @@ const amplifyconfig = ''' {
                 "CredentialsProvider": {
                     "CognitoIdentity": {
                         "Default": {
-                            "PoolId": "eu-west-1:5c966d13-0216-4546-b8cf-df082965aced",
+                            "PoolId": "eu-west-1:a82f369a-4f45-4f86-9cba-a196513fbe91",
                             "Region": "eu-west-1"
                         }
                     }
                 },
                 "CognitoUserPool": {
                     "Default": {
-                        "PoolId": "eu-west-1_gM8mCo99w",
-                        "AppClientId": "3df2qnjks8rd8j4kpm0idhfl41",
+                        "PoolId": "eu-west-1_TWPQfb9SE",
+                        "AppClientId": "25a14qki0tb71kp3m7udp2hpt7",
                         "Region": "eu-west-1"
                     }
                 },

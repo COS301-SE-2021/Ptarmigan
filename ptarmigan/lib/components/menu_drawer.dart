@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ptarmigan/widgets/home_page.dart';
+import 'package:ptarmigan/widgets/stock_screen.dart';
+import 'package:ptarmigan/widgets/todos_page.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({
@@ -17,17 +20,26 @@ class MenuDrawer extends StatelessWidget {
           DrawerListTile(
             title: "Dashboard",
             svgSrc: "assets/icons/menu_dashbord.svg",
-            press: () {},
+            press: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DashboardScreen()));
+            },
           ),
           DrawerListTile(
             title: "Insights",
             svgSrc: "assets/icons/menu_tran.svg",
-            press: () {},
+            press: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => TodosPage()));
+            },
           ),
           DrawerListTile(
             title: "Stocks",
             svgSrc: "assets/icons/menu_task.svg",
-            press: () {},
+            press: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => StockScreen()));
+            },
           ),
           DrawerListTile(
             title: "Settings",

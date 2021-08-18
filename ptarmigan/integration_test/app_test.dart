@@ -1,15 +1,12 @@
 //@dart=2.9
 //flutter drive --driver=test_driver/integration_test_driver.dart --target=integration_test/app_test.dart
-import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 // The application under test.
 import 'package:ptarmigan/main.dart' as app;
-import 'package:ptarmigan/widgets/home_page.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
