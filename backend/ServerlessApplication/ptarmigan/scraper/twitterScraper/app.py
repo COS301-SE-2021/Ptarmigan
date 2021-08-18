@@ -19,8 +19,15 @@ def return_tweet_list(content,scrapeTimeframe):
     return tweets_list
 
 def scraper_handler(event, context):
-    content = event['content']['content']
-    scrape_since = int(event['Scrape-until'])
+    try:
+        content = event['content']['content']
+        scrape_since = int(event['Scrape-until'])
+    except:
+        return {
+            'statusCode': 200,
+            'body': json.dumps("invalid input")
+        }
+
     scrape_timestamp = datetime.datetime.fromtimestamp(scrape_since)
     scrape_dateformat = scrape_timestamp.strftime('%Y-%m-%d')
 

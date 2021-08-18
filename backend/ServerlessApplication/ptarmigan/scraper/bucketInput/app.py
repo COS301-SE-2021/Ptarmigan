@@ -3,17 +3,7 @@ import boto3
 import time
 
 def lambda_handler(event, context):
-    s3client = boto3.client('s3')
-
-    bucketname = 'stepfunctestbucket'
-    file_to_read = 'scrapeContent.json'
-
-    fileobj = s3client.get_object(
-        Bucket=bucketname,
-        Key=file_to_read
-    )
-
-    filedata = fileobj['Body'].read()
+    filedata = getBucketList()
     contents = (filedata.decode('utf-8'))
     contents = json.loads(contents)
 
@@ -23,14 +13,48 @@ def lambda_handler(event, context):
 
     uploadByteStream = bytes(json.dumps(updated).encode('UTF-8'))
 
+    flag = uploadBucketList(uploadByteStream)
+    if flag:
+        return contents
+    else:
+        return {
+            'statusCode': 500,
+            'body': json.dumps('Error updating Content file')
+        }
+
+
+def getBucketList():
+    s3client = boto3.client('s3')
+
+    bucketname = 'stepfunctestbucket'
+    file_to_read = 'scrapeContent.json'
+
+    # try read file from bucket
+    try:
+        fileobj = s3client.get_object(
+            Bucket=bucketname,
+            Key=file_to_read
+        )
+    except:
+        return {
+            'statusCode': 500,
+            'body': json.dumps("Cannot find file within bucket")
+        }
+
+    filedata = fileobj['Body'].read()
+    return filedata
+
+def uploadBucketList(uploadByteStream):
+    s3client = boto3.client('s3')
+
+    bucketname = 'stepfunctestbucket'
+    file_to_read = 'scrapeContent.json'
+
     try:
         s3client.put_object(
             Bucket=bucketname,
             Key=file_to_read,
             Body=uploadByteStream)
+        return True
     except:
-        return {
-            'statusCode': 500,
-            'body': json.dumps('Error updating Content file')
-        }
-    return contents
+        return False
