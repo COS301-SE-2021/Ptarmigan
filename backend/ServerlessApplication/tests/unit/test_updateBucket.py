@@ -2,7 +2,6 @@ import json
 from unittest import TestCase
 from unittest.mock import patch
 from ptarmigan.scraper.UpdateBucket import app
-from ptarmigan.scraper.UpdateBucket import database
 
 class TestClass(TestCase):
 
