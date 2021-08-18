@@ -279,8 +279,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       \n For any enquiries please contact us via our email: 
                       onemorebytecos301@gmail.com
 
-This code is open source and is available on GitHub: 
-github.com/COS301-SE-2021/Ptarmigan
+                            This code is open source and is available on GitHub: 
+                            github.com/COS301-SE-2021/Ptarmigan
                     """,
                         textAlign: TextAlign.center,
                       ))
@@ -365,7 +365,9 @@ github.com/COS301-SE-2021/Ptarmigan
       .toList();
 
   Future<void> _initFeedInterests() async {
+    print("FETCHING FEED IMAGES");
     feedimage = await generator.fetchImages();
+    if (feedimage == null) feedimage = ["Apple"];
 
     // if (feedimage != null) {
     /*for (var i = 0; i < feedimage.length; i++) {
