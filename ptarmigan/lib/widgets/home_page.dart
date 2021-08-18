@@ -65,7 +65,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           shadowColor: secondaryColor,
           title: Text('Dashboard'),
           actions: [
-            /*MaterialButton(
+            MaterialButton(
                 onPressed: () {
                   Amplify.Auth.signOut().then((_) {
                     Navigator.pushReplacementNamed(context, '/login');
@@ -74,7 +74,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 child: Icon(
                   Icons.logout,
                   color: Colors.white,
-                ))*/
+                ))
           ],
         ),
         //Drawer

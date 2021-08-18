@@ -58,11 +58,21 @@ void main() {
       await tester.pumpAndSettle();
 
       tester.takeException();
-      await tester.tap(find.text("Stock"));
+      await tester.tap(find.text("Stocks"));
       await tester.pumpAndSettle();
 
-      expect(find.text("Historical stock data:"), findsOneWidget);
+      expect(find.text("Historical stock data"), findsOneWidget);
     });
+
+    /*testWidgets(
+        "Stock screen: insure atleast one row of datatable2 is displayed.",
+        (WidgetTester tester) async {
+      app.main();
+      await tester.pumpAndSettle();
+
+      expect(find, matcher)
+
+    });*/
 
     /*testWidgets('Dashboard displays correctly', (WidgetTester tester) async {
       runApp(DashboardScreen());
