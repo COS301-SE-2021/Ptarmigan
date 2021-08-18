@@ -16,7 +16,7 @@ def fixture_event():
 
 class TestGetSentimentPeriod(unittest.TestCase):
     def test_get_sentiment_period_valid_inputs(self):
-        api_url = "http://localhost:3000/senthisize/getSentimentPeriod"
+        api_url = "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/senthisize/getSentimentPeriod"
         response = requests.post(api_url, json=fixture_event())
         response.json()
         print(response)
@@ -24,7 +24,7 @@ class TestGetSentimentPeriod(unittest.TestCase):
         assert response.status_code == 200
 
     def test_get_sentiment_period_invalid_inputs(self):
-        api_url = "http://localhost:3000/senthisize/getSentimentPeriod"
+        api_url = "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/senthisize/getSentimentPeriod"
         response = requests.post(api_url, json={})
         response.json()
         print(response)
