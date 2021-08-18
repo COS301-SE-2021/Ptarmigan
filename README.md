@@ -22,9 +22,9 @@ Functional Requirements (SRS)(Demo1) - https://drive.google.com/file/d/19WwLKUhM
 
 Architectural Requirements (SRS)(Demo2) - https://drive.google.com/file/d/1WgmJn7oOvWL5iq4N2S4zspZ63Wo2MBzt/view?usp=sharing
 
-One More Byte SRS Demo 3 - https://docs.google.com/document/d/15Zy4a-H1pjXuL5FvJBpOXc2DAY68Cz8JghRB1QtK_Ws/edit?usp=sharing
-
 Demo2 Video - https://drive.google.com/file/d/1eR1-LJsdPGZUbrEi949NXnkD0zIGisOS/view?usp=sharing
+
+One More Byte SRS Demo 3 - https://docs.google.com/document/d/15Zy4a-H1pjXuL5FvJBpOXc2DAY68Cz8JghRB1QtK_Ws/edit?usp=sharing
 
 Coding Standard - https://drive.google.com/file/d/19sleDvF-3E9Qy9sWzLPK5y9BuABeAajc/view?usp=sharing
 
@@ -36,8 +36,6 @@ scrum board- https://github.com/COS301-SE-2021/Ptarmigan/projects/2
 User manual - https://drive.google.com/file/d/1nNGanfCFOQ8M5m454dCeIOAvOhfOpl2X/view?usp=sharing
 
 Technical installation manual - (Link required)
-
-SRS document - (Link required)
 
 Team members - 
 
