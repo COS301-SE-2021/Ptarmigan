@@ -73,7 +73,7 @@ class TestClass(TestCase):
 
     def test_IfScrapetReturnsInvalidInput(self):
         expected = {
-            'statusCode': 200,
+            'statusCode': 400,
             'body': json.dumps("invalid input")
         }
         testReturn = (app.scraper_handler(json.loads(self.invalidInputContext), ""))
