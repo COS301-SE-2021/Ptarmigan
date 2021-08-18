@@ -3,7 +3,14 @@ import boto3
 
 
 def lambda_handler(event, context):
-    return returnListFromS3()
+
+    filedata = returnListFromS3()
+    filecontents = json.loads((filedata.decode('utf-8')))
+
+    return {
+        'statusCode': 200,
+        'body': json.dumps(filecontents)
+    }
 
 def returnListFromS3():
     try:
@@ -16,11 +23,7 @@ def returnListFromS3():
         )
 
         filedata = fileobj['Body'].read()
-        filecontents = json.loads((filedata.decode('utf-8')))
-        return {
-            'statusCode': 200,
-            'body': json.dumps(filecontents)
-        }
+        return filedata
     except:
         return {
             'statusCode': 404,
