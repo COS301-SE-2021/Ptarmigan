@@ -1,4 +1,3 @@
-
 // @dart=2.9
 
 import 'dart:async';
@@ -16,14 +15,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 // amplify configuration and models that should have been generated for you
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
-
-
-
-
-
-
-
-
+import 'package:ptarmigan/widgets/todos_page.dart';
 
 class FeedItemsAdmin extends StatelessWidget {
   final double iconSize = 24.0;

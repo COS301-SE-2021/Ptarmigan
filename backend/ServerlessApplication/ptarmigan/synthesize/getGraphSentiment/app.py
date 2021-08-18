@@ -1,8 +1,10 @@
 import json
+import os
 import time
 import boto3
 from boto3.dynamodb.conditions import Key
 import json
+
 
 # import requests
 def calculateSentiment(content):
@@ -21,28 +23,31 @@ def calculateSentiment(content):
 
         runningSentiment = runningSentiment + (weight * sentiment)
 
-    return (runningSentiment/totalVotes)
+    return (runningSentiment / totalVotes)
+
 
 #
 def getInterval(interval):
     if interval == "Second":
-        return 1000
+        return 1
     if interval == "Minute":
-        return 60*1000
+        return 60
     if interval == "Hour":
-        return 60*60*1000
+        return 60 * 60
     if interval == "Day":
-        return 60*60*24*1000
+        return 60 * 60 * 24
     if interval == "Week":
-        return 60*60*24*7*1000
+        return 60 * 60 * 24 * 7
     if interval == "Month":
-        return 60 * 60 * 24 * 30 * 1000
+        return 60 * 60 * 24 * 30
     if interval == "Year":
-        return 60 * 60 * 24 * 365 * 1000
+        return 60 * 60 * 24 * 365
+
 
 def dbReturn(event, beginDate, endDate):
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('Test')
+    tableName = event["CompanyName"]
+    table = dynamodb.Table(tableName)
 
     response = table.scan(
         FilterExpression=Key('Tweet_Id').gt(1) & Key('TimeStamp').between(beginDate, endDate) & Key('CompanyName').eq(
@@ -51,9 +56,17 @@ def dbReturn(event, beginDate, endDate):
 
     return response
 
+
 def lambda_handler(event, context):
     print(event)
+
     try:
+        if "body" in event:
+            event = json.loads(event["body"])
+
+        else:
+            event = event
+
         cName = event["CompanyName"]
         print(cName)
         interval = event["Interval"]
@@ -64,9 +77,9 @@ def lambda_handler(event, context):
     except:
         return {
             "statusCode": 400,
-            "body": {
+            "body": json.dumps({
                 "Error": "Invalid Inputs"
-            }
+            })
         }
 
     interval = getInterval(event["Interval"])
@@ -77,13 +90,13 @@ def lambda_handler(event, context):
     table = dynamodb.Table('Test')
 
     returnObject = {
-        "CompanyName": "Tesla",
+        "CompanyName": cName,
         "Interval": interval,
         "Data": []
     }
 
-
-    while beginDate < int(time.time()*1000):
+    while beginDate < int(time.time()):
+        print("Something")
         try:
             response = dbReturn(event, beginDate, endDate)
 
@@ -100,7 +113,7 @@ def lambda_handler(event, context):
             returnObject["Data"].append({
                 "BeginDate": beginDate,
                 "EndDate": endDate,
-                "IntervalData": 0
+                "IntervalData": 0.0
             })
 
         beginDate = endDate
@@ -108,6 +121,7 @@ def lambda_handler(event, context):
 
     return {
         "statusCode": 200,
-        "body":  returnObject
+        "body": json.dumps(returnObject),
+        "isBase64Encoded": False
     }
 

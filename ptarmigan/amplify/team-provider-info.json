@@ -1,16 +1,15 @@
 {
   "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-ptarmigan-staging-92311-authRole",
-      "UnauthRoleArn": "arn:aws:iam::878292117449:role/amplify-ptarmigan-staging-92311-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::878292117449:role/amplify-ptarmigan-staging-92311-authRole",
-      "Region": "eu-west-2",
-      "DeploymentBucketName": "amplify-ptarmigan-staging-92311-deployment",
-      "UnauthRoleName": "amplify-ptarmigan-staging-92311-unauthRole",
-      "StackName": "amplify-ptarmigan-staging-92311",
-      "StackId": "arn:aws:cloudformation:eu-west-2:878292117449:stack/amplify-ptarmigan-staging-92311/26ad19b0-c384-11eb-bb6c-0ac1364244c2",
-      "AmplifyAppId": "d18omf0bna9cgn",
-      "AuthTriggerTemplateURL": ""
+      "AuthRoleName": "amplify-ptarmigan-staging-122449-authRole",
+      "UnauthRoleArn": "arn:aws:iam::878292117449:role/amplify-ptarmigan-staging-122449-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::878292117449:role/amplify-ptarmigan-staging-122449-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-ptarmigan-staging-122449-deployment",
+      "UnauthRoleName": "amplify-ptarmigan-staging-122449-unauthRole",
+      "StackName": "amplify-ptarmigan-staging-122449",
+      "StackId": "arn:aws:cloudformation:eu-west-1:878292117449:stack/amplify-ptarmigan-staging-122449/cc458e00-f455-11eb-84f2-02be32ac58eb",
+      "AmplifyAppId": "da7ien4i9sknj"
     },
     "categories": {
       "auth": {

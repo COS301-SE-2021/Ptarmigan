@@ -1,6 +1,6 @@
 type Feed @model @auth(rules: [{allow: public}]) {
   id: ID!
-  feedName: String!
+  feedName: String
   tags: String
   description: String
   subscribedTo: Int
@@ -8,8 +8,8 @@ type Feed @model @auth(rules: [{allow: public}]) {
 
 type Todo @model @auth(rules: [{allow: public}]) {
   id: ID!
-  name: String!
+  name: String
   description: String
-  isComplete: Boolean
+  date: AWSDate
 }
  
