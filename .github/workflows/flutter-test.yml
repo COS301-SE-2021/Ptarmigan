@@ -22,11 +22,18 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
+      - uses: actions/flutter@v2
       # Runs a single command using the runners shell
+      
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '2.0.2'
+          channel: 'stable'  # or: 'dev' or 'beta'
+      
       - name: Install flutter
         run: | 
+          flutter pub get,
           working-directory: ./ptarmigan/
       # Runs a set of commands using the runners shell
       - name: Run Unit and Integration tests
-        run: flutter run
+        run: flutter test
