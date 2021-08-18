@@ -64,9 +64,9 @@ class TodosList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var feedChoice = Provider.of<FeedChanger>(context).getFeedChoice;
+    //var feedChoice = Provider.of<FeedChanger>(context).getFeedChoice;
 
-    bocko(feedChoice);
+    // bocko(feedChoice);
 
     print('\n======================');
     print(todos.toString());

@@ -7,6 +7,7 @@ import 'widgets/mainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:ptarmigan/services/feed_changer.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
             create: (context) => MenuController(),
           ),
+          ChangeNotifierProvider.value(value: FeedChanger())
         ],
         child: MainScreen(),
       ),
