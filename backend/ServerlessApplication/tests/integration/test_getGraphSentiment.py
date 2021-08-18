@@ -5,18 +5,29 @@ import unittest
 from ptarmigan.comprehend import app
 import requests
 
-baseUrl = "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com"
+baseUrl = "https://localhost:3000"
 
 def fixture_event():
-    return {"body" : {
-            "BeginDate": 1623005418000,
-            "Interval": "Week",
-            "CompanyName": "Tesla"
-        }}
+    return {
+    "BeginDate": 1628554586,
+    "Interval": "Day",
+    "CompanyName": "Microsoft"
+}
 
 class TestGetGraphSentiment:
-    def test_get_sentiment_graph(self):
-        url = baseUrl + "/Prod/senthisize/getGraphSentiment"
-        res = requests.get(url, params=fixture_event())
-        print(res)
-        assert res.status_code == 200
+    def test_get_sentiment_graph_valid_inputs(self):
+        api_url = "http://localhost:3000/senthisize/getGraphSentiment"
+        response = requests.post(api_url, json=fixture_event())
+        response.json()
+        print(response)
+
+        assert response.status_code == 200
+
+    def test_get_sentiment_graph_invalid_inputs(self):
+        api_url = "http://localhost:3000/senthisize/getGraphSentiment"
+        response = requests.post(api_url, json={})
+        response.json()
+        print(response)
+
+        assert response.status_code == 400
+
