@@ -99,7 +99,7 @@ def lambda_handler(event, context):
         }
 
     try:
-        database.database(update)
+        database(update)
     except:
         return {
             'statusCode': 500,
@@ -142,5 +142,3 @@ def lambda_handler(event, context):
             'statusCode': 500,
             'body': json.dumps('Error updating Content file')
         }
-
-
