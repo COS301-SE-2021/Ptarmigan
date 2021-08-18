@@ -35,7 +35,7 @@ scrum board- https://github.com/COS301-SE-2021/Ptarmigan/projects/2
 
 User manual - https://drive.google.com/file/d/1nNGanfCFOQ8M5m454dCeIOAvOhfOpl2X/view?usp=sharing
 
-Technical installation manual - https://drive.google.com/file/d/1UVUGzdQuRPagwdEnCxzGxmoZSjzmXG6r/view?usp=sharing
+Technical installation manual - https://drive.google.com/file/d/1JnSTuwu2qICxz-pSDoEQpRu6KVRWWcLr/view?usp=sharing
 
 Team members - 
 
