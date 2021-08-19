@@ -26,7 +26,7 @@ Demo2 Video - https://drive.google.com/file/d/1eR1-LJsdPGZUbrEi949NXnkD0zIGisOS/
 
 One More Byte SRS Demo 3 - https://docs.google.com/document/d/15Zy4a-H1pjXuL5FvJBpOXc2DAY68Cz8JghRB1QtK_Ws/edit?usp=sharing
 
-Coding Standard - https://drive.google.com/file/d/19sleDvF-3E9Qy9sWzLPK5y9BuABeAajc/view?usp=sharing
+Coding Standard - https://drive.google.com/file/d/1YJ83VbPnAKQfxMXDSZKFG8SauMy9DBBV/view?usp=sharing
 
 GitHub Project Board - 
 https://github.com/COS301-SE-2021/Ptarmigan/projects/1?add_cards_query=is%3Aopen
