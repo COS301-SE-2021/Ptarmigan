@@ -39,7 +39,8 @@ class SideMenu extends StatelessWidget {
 
   List<DrawerListTile> changeFeedsTo(List<Feed> feedList) {
     List<DrawerListTile> object = [];
-
+    print("=====FEED LIST ===========");
+    print(feedList);
     if (feedList == null) {
       return null;
     }
@@ -228,7 +229,9 @@ class DrawerListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("feed changer function in sideMenu called");
     void _changeFeed() {
+      print("feed changer function in sideMenu called");
       Provider.of<FeedChanger>(context, listen: false).changeFeed(this.title);
       Provider.of<ListChanger>(context, listen: false)
           .changeList(SentimentHistory().list);
@@ -298,6 +301,7 @@ class DrawerListTile extends StatelessWidget {
           );
 
           try {
+            print("Attempting to save to datastore");
             Amplify.DataStore.save(newTodo);
 
             // Navigator.of(context).pop();

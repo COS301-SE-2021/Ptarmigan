@@ -11,7 +11,7 @@ import 'stockHistory.dart';
 
 import 'storageDetails.dart';
 
-class DashboardScreen extends StatelessWidget {
+class InsightsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

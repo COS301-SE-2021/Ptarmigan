@@ -41,19 +41,21 @@ class _MainScreenState extends State<MainScreen> {
   List<Todo> _todos;
   String _feedTitle;
 
-  final AmplifyDataStore _dataStorePlugin =
-      AmplifyDataStore(modelProvider: ModelProvider.instance);
+  //final AmplifyDataStore _dataStorePlugin =
+  // AmplifyDataStore(modelProvider: ModelProvider.instance);
 
-  final AmplifyAPI _apiPlugin = AmplifyAPI();
-  final AmplifyAuthCognito _authPlugin = AmplifyAuthCognito();
+//  final AmplifyAPI _apiPlugin = AmplifyAPI();
+  //final AmplifyAuthCognito _authPlugin = AmplifyAuthCognito();
 
   @override
   void initState() {
+    print("Initializing mainScreen.dart ----");
     _isLoading = true;
     _todos = [];
     _feeds = [];
     _feedsSub = [];
-    _initializeApp();
+
+    _initializeTemp();
     super.initState();
   }
 
@@ -68,9 +70,14 @@ class _MainScreenState extends State<MainScreen> {
     super.dispose();
   }
 
+  Future<void> _initializeTemp() async {
+    await _initializeApp();
+  }
+
   Future<void> _initializeApp() async {
     // configure Amplify
-    await _configureAmplify();
+
+    //await _configureAmplify();
 
     // listen for updates to Todo entries by passing the Todo classType to
     // Amplify.DataStore.observe() and when an update event occurs, fetch the
@@ -97,9 +104,9 @@ class _MainScreenState extends State<MainScreen> {
     await _fetchSubFeeds();
     // after both configuring Amplify and fetching Todo entries, update loading
     // ui state to loaded state
-    setState(() {
-      _isLoading = false;
-    });
+    //setState(() {
+    //  _isLoading = false;
+    // });
   }
 
   //---------------------------------------------------------------------
@@ -111,9 +118,9 @@ class _MainScreenState extends State<MainScreen> {
       //await Amplify.addPlugins([_dataStorePlugin]);
 
       await Amplify.addPlugins([
-        _dataStorePlugin,
-        _apiPlugin,
-        _authPlugin,
+        // _dataStorePlugin,
+        // _apiPlugin,
+        //  _authPlugin,
       ]);
       // configure Amplify
       //
@@ -204,7 +211,7 @@ class _MainScreenState extends State<MainScreen> {
             Expanded(
               // It takes 5/6 part of the screen
               flex: 5,
-              child: DashboardScreen(),
+              child: InsightsScreen(),
             ),
           ],
         ),
