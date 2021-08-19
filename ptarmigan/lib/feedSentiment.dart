@@ -1,7 +1,7 @@
 class FeedSentiment {
-  final String beginDate;
-  final String endDate;
-  final String intervalData;
+  final int beginDate;
+  final int endDate;
+  final double intervalData;
 
   FeedSentiment({
     required this.beginDate,
@@ -11,9 +11,9 @@ class FeedSentiment {
 
   factory FeedSentiment.fromJson(Map<String, dynamic> json) {
     return FeedSentiment(
-      beginDate: json['beginDate'] as String,
-      endDate: json['endDate'] as String,
-      intervalData: json['intervalData'] as String,
+      beginDate: json['BeginDate'] as int,
+      endDate: json['EndDate'] as int,
+      intervalData: json['IntervalData'] as double,
     );
   }
 }

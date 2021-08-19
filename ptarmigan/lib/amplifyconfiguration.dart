@@ -35,6 +35,12 @@ const amplifyconfig = ''' {
                         "Region": "eu-west-1",
                         "AuthMode": "AWS_IAM",
                         "ClientDatabasePrefix": "Ptarmigan_AWS_IAM"
+                    },
+                    "Ptarmigan_AMAZON_COGNITO_USER_POOLS": {
+                        "ApiUrl": "https://6mdpm2tiijbx5jxsfjcekazodm.appsync-api.eu-west-1.amazonaws.com/graphql",
+                        "Region": "eu-west-1",
+                        "AuthMode": "AMAZON_COGNITO_USER_POOLS",
+                        "ClientDatabasePrefix": "Ptarmigan_AMAZON_COGNITO_USER_POOLS"
                     }
                 },
                 "CredentialsProvider": {

@@ -1,39 +1,134 @@
 // @dart=2.9
 
 import 'dart:async';
+import 'package:ptarmigan/widgets/SentimentHistory.dart';
+
+import '../../../constants.dart';
+
 // flutter and ui libraries
-import 'package:amplify_auth_cognito/method_channel_auth_cognito.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // amplify packages we will need to use
-import 'package:amplify_flutter/amplify.dart';
-import 'package:amplify_datastore/amplify_datastore.dart';
 import 'package:provider/provider.dart';
-import 'package:ptarmigan/models/ModelProvider.dart';
-import 'package:ptarmigan/widgets/feeds_list_admin.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 // amplify configuration and models that should have been generated for you
-import 'package:amplify_api/amplify_api.dart';
-import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:bezier_chart/bezier_chart.dart';
 //for feeds go to feeds_list.dart
+import 'package:ptarmigan/services/list_changer.dart';
 
 class Graph extends StatefulWidget {
-  List<Feed> feeds;
-  Graph({this.feeds});
-
   @override
   _GraphState createState() => _GraphState();
 }
 
 class _GraphState extends State<Graph> {
+  List<DataPoint<dynamic>> list = [];
+
   Widget build(BuildContext context) {
+    List listChoice = Provider.of<ListChanger>(context).getList;
     final fromDate = DateTime(2021, 06, 15);
     final toDate = DateTime.now();
 
     final date1 = DateTime.now().subtract(Duration(days: 2));
     final date2 = DateTime.now().subtract(Duration(days: 3));
 
+    return Container(
+      //Grapg Container
+      height: 240,
+      decoration: BoxDecoration(
+        color: secondaryColor,
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+      ),
+      padding: EdgeInsets.only(
+        left: 0.0,
+        right: 0.0,
+        top: 40,
+        bottom: 0,
+      ),
+      child: Container(
+        width: 800,
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(
+              Radius.circular(18),
+            ),
+            color: Colors.black45),
+        child: Padding(
+          padding:
+              const EdgeInsets.only(right: 0.0, left: 0.0, top: 0, bottom: 20),
+          child: BezierChart(
+            fromDate: fromDate,
+            bezierChartScale: BezierChartScale.WEEKLY,
+            toDate: toDate,
+            selectedDate: toDate,
+            series: [
+              BezierLine(
+                lineColor: Colors.green,
+                lineStrokeWidth: 2.0,
+                //   label: "Dutysdas",
+                onMissingValue: (dateTime) {
+                  if (dateTime.day.isEven) {
+                    return 50;
+                  }
+                  return 50;
+                },
+                data: //listChoice, //graphPoints
+                    [
+                  DataPoint<DateTime>(
+                      value: 50,
+                      xAxis: DateTime.now().subtract(Duration(days: 14))),
+                  DataPoint<DateTime>(
+                      value: 50,
+                      xAxis: DateTime.now().subtract(Duration(days: 13))),
+                  DataPoint<DateTime>(
+                      value: 50,
+                      xAxis: DateTime.now().subtract(Duration(days: 12))),
+                  DataPoint<DateTime>(
+                      value: 50,
+                      xAxis: DateTime.now().subtract(Duration(days: 11))),
+                  DataPoint<DateTime>(
+                      value: 50,
+                      xAxis: DateTime.now().subtract(Duration(days: 10))),
+                  DataPoint<DateTime>(
+                      value: 45,
+                      xAxis: DateTime.now().subtract(Duration(days: 9))),
+                  DataPoint<DateTime>(
+                      value: 48,
+                      xAxis: DateTime.now().subtract(Duration(days: 8))),
+                  DataPoint<DateTime>(
+                      value: 56,
+                      xAxis: DateTime.now().subtract(Duration(days: 7))),
+                  DataPoint<DateTime>(
+                      value: 54,
+                      xAxis: DateTime.now().subtract(Duration(days: 6))),
+                  DataPoint<DateTime>(
+                      value: 44,
+                      xAxis: DateTime.now().subtract(Duration(days: 5))),
+                  DataPoint<DateTime>(
+                      value: 48,
+                      xAxis: DateTime.now().subtract(Duration(days: 4))),
+                  DataPoint<DateTime>(
+                      value: 50,
+                      xAxis: DateTime.now().subtract(Duration(days: 3))),
+                  DataPoint<DateTime>(
+                      value: 53,
+                      xAxis: DateTime.now().subtract(Duration(days: 2))),
+                  DataPoint<DateTime>(
+                      value: 50,
+                      xAxis: DateTime.now().subtract(Duration(days: 1))),
+                ],
+              ),
+            ],
+            config: BezierChartConfig(
+              verticalIndicatorStrokeWidth: 3.0,
+              verticalIndicatorColor: Colors.black26,
+              showVerticalIndicator: true,
+              verticalIndicatorFixedPosition: false,
+              footerHeight: 50.0,
+            ),
+          ),
+        ),
+      ),
+    );
+/*
     return Center(
         child: AspectRatio(
             aspectRatio: 1.90,
@@ -72,11 +167,12 @@ class _GraphState extends State<Graph> {
                     verticalIndicatorColor: Colors.white,
                     showVerticalIndicator: true,
                     verticalIndicatorFixedPosition: false,
-                    backgroundColor: Colors.amber, // Color(0xff232d37),
                     footerHeight: 30.0,
                   ),
                 ),
               ),
             )));
+  }*/
+//}
   }
 }

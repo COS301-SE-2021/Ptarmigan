@@ -9,161 +9,161 @@ Parameters:
   unauthRoleArn:
     Type: String
 
-  
 
-    
+
+
   identityPoolName:
     Type: String
-  
-            
-  
+
+
+
   allowUnauthenticatedIdentities:
     Type: String
-            
+
   resourceNameTruncated:
     Type: String
-  
-            
+
+
   userPoolName:
     Type: String
-  
-            
-        
+
+
+
   autoVerifiedAttributes:
     Type: CommaDelimitedList
-      
+
   mfaConfiguration:
     Type: String
-  
-            
-        
+
+
+
   mfaTypes:
     Type: CommaDelimitedList
-      
+
   smsAuthenticationMessage:
     Type: String
-  
-            
+
+
   smsVerificationMessage:
     Type: String
-  
-            
+
+
   emailVerificationSubject:
     Type: String
-  
-            
+
+
   emailVerificationMessage:
     Type: String
-  
-            
-  
+
+
+
   defaultPasswordPolicy:
     Type: String
-            
-    
+
+
   passwordPolicyMinLength:
     Type: Number
-          
-        
+
+
   passwordPolicyCharacters:
     Type: CommaDelimitedList
-      
-        
+
+
   requiredAttributes:
     Type: CommaDelimitedList
-      
-        
+
+
   aliasAttributes:
     Type: CommaDelimitedList
-      
-  
+
+
   userpoolClientGenerateSecret:
     Type: String
-            
-    
+
+
   userpoolClientRefreshTokenValidity:
     Type: Number
-          
-        
+
+
   userpoolClientWriteAttributes:
     Type: CommaDelimitedList
-      
-        
+
+
   userpoolClientReadAttributes:
     Type: CommaDelimitedList
-      
+
   userpoolClientLambdaRole:
     Type: String
-  
-            
-  
+
+
+
   userpoolClientSetAttributes:
     Type: String
-            
+
   sharedId:
     Type: String
-  
-            
+
+
   resourceName:
     Type: String
-  
-            
+
+
   authSelections:
     Type: String
-  
-            
-            
-            
+
+
+
+
   serviceName:
     Type: String
-  
-            
-        
+
+
+
   usernameAttributes:
     Type: CommaDelimitedList
-      
+
   useDefault:
     Type: String
-  
-            
-  
+
+
+
   userPoolGroups:
     Type: String
-            
-        
+
+
   userPoolGroupList:
     Type: CommaDelimitedList
-      
-  
+
+
   adminQueries:
     Type: String
-            
-            
-  
+
+
+
   thirdPartyAuth:
     Type: String
-            
-        
+
+
   authProviders:
     Type: CommaDelimitedList
-      
-  
+
+
   usernameCaseSensitive:
     Type: String
-            
-        
+
+
   dependsOn:
     Type: CommaDelimitedList
-      
+
 Conditions:
   ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
-  
+
   ShouldOutputAppClientSecrets: !Equals [!Ref userpoolClientGenerateSecret, true ]
-  
+
 
 Resources:
-  
-  
+
+
   # BEGIN SNS ROLE RESOURCE
   SNSRole:
   # Created to allow the UserPool SMS Config to publish via the Simple Notification Service during MFA Process
@@ -201,30 +201,30 @@ Resources:
     UpdateReplacePolicy: Retain
     Properties:
       UserPoolName: !If [ShouldNotCreateEnvResources, !Ref userPoolName, !Join ['',[!Ref userPoolName, '-', !Ref env]]]
-      
-      
+
+
       UsernameConfiguration:
         CaseSensitive: false
-      
+
       Schema:
-        
+
         -
           Name: email
           Required: true
           Mutable: true
-        
-      
-      
-      
+
+
+
+
       AutoVerifiedAttributes:
-      
+
         - email
-      
-      
-      
+
+
+
       EmailVerificationMessage: !Ref emailVerificationMessage
       EmailVerificationSubject: !Ref emailVerificationSubject
-      
+
       Policies:
         PasswordPolicy:
           MinimumLength: !Ref passwordPolicyMinLength
@@ -232,25 +232,25 @@ Resources:
           RequireNumbers: true
           RequireSymbols: true
           RequireUppercase: true
-      
+
       UsernameAttributes: !Ref usernameAttributes
-      
-      
+
+
       MfaConfiguration: !Ref mfaConfiguration
       SmsVerificationMessage: !Ref smsVerificationMessage
       SmsAuthenticationMessage: !Ref smsAuthenticationMessage
       SmsConfiguration:
         SnsCallerArn: !GetAtt SNSRole.Arn
         ExternalId: ptarmic81c2684_role_external_id
-    
-  
+
+
   UserPoolClientWeb:
   # Created provide application access to user pool
   # Depends on UserPool for ID reference
     Type: "AWS::Cognito::UserPoolClient"
     Properties:
       ClientName: ptarmic81c2684_app_clientWeb
-      
+
       RefreshTokenValidity: !Ref userpoolClientRefreshTokenValidity
       UserPoolId: !Ref UserPool
     DependsOn: UserPool
@@ -260,7 +260,7 @@ Resources:
     Type: "AWS::Cognito::UserPoolClient"
     Properties:
       ClientName: ptarmic81c2684_app_client
-      
+
       GenerateSecret: !Ref userpoolClientGenerateSecret
       RefreshTokenValidity: !Ref userpoolClientRefreshTokenValidity
       UserPoolId: !Ref UserPool
@@ -367,22 +367,22 @@ Resources:
       clientId: !Ref UserPoolClient
       userpoolId: !Ref UserPool
     DependsOn: UserPoolClientLogPolicy
-  
 
-  
-  
 
-  
-    
+
+
+
+
+
   # BEGIN IDENTITY POOL RESOURCES
-  
+
 
   IdentityPool:
   # Always created
     Type: AWS::Cognito::IdentityPool
     Properties:
       IdentityPoolName: !If [ShouldNotCreateEnvResources, 'testAuthIdentityPool', !Join ['',['testAuthIdentityPool', '__', !Ref env]]]
-      
+
       CognitoIdentityProviders:
         - ClientId:  !Ref UserPoolClient
           ProviderName: !Sub
@@ -392,12 +392,12 @@ Resources:
           ProviderName: !Sub
             - cognito-idp.${region}.amazonaws.com/${client}
             - { region: !Ref "AWS::Region",  client: !Ref UserPool}
-            
+
       AllowUnauthenticatedIdentities: !Ref allowUnauthenticatedIdentities
-      
-    
+
+
     DependsOn: UserPoolClientInputs
-    
+
 
   IdentityPoolRoleMap:
   # Created to map Auth and Unauth roles to the identity pool
@@ -409,19 +409,19 @@ Resources:
           unauthenticated: !Ref unauthRoleArn
           authenticated: !Ref authRoleArn
     DependsOn: IdentityPool
-  
+
 
 Outputs :
-  
+
   IdentityPoolId:
     Value: !Ref 'IdentityPool'
     Description:  Id for the identity pool
   IdentityPoolName:
     Value: !GetAtt IdentityPool.Name
-  
-  
-  
-  
+
+
+
+
   UserPoolId:
     Value: !Ref 'UserPool'
     Description:  Id for the user pool
@@ -439,11 +439,3 @@ Outputs :
   AppClientSecret:
     Value: !GetAtt UserPoolClientInputs.appSecret
     Condition: ShouldOutputAppClientSecrets
-  
-  
-  
-  
-  
-  
-  
-  

@@ -29,6 +29,7 @@ class FeedsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Amplify.DataStore.clear();
     print('|||||||||||||||||FEED LIST IS BUILDING||||||||||||||||||||||||');
     return Container(
       alignment: Alignment.center,
