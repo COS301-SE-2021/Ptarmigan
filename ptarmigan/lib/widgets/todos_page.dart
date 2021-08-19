@@ -18,6 +18,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 // amplify configuration and models that should have been generated for you
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:bezier_chart/bezier_chart.dart';
+import 'dart:convert';
 
 class TodosPage extends StatefulWidget {
   @override
@@ -28,7 +30,7 @@ class _TodosPageState extends State<TodosPage> {
   List<Todo> todos;
   List<Feed> _feeds;
   List<Feed> _feedsSub;
-
+  String currentFeedSelected = " ";
   bool _isLoading;
   bool isSignUpComplete;
   StreamSubscription _subscription;
@@ -37,12 +39,13 @@ class _TodosPageState extends State<TodosPage> {
   StreamSubscription _subscriptionTodoUpdate;
 
   List<Todo> _todos;
+  String _feedTitle;
 
-  final AmplifyDataStore _dataStorePlugin =
-      AmplifyDataStore(modelProvider: ModelProvider.instance);
+  //final AmplifyDataStore _dataStorePlugin =
+   //   AmplifyDataStore(modelProvider: ModelProvider.instance);
 
-  final AmplifyAPI _apiPlugin = AmplifyAPI();
-  final AmplifyAuthCognito _authPlugin = AmplifyAuthCognito();
+ // final AmplifyAPI _apiPlugin = AmplifyAPI();
+ // final AmplifyAuthCognito _authPlugin = AmplifyAuthCognito();
 
   @override
   void initState() {
@@ -67,7 +70,7 @@ class _TodosPageState extends State<TodosPage> {
 
   Future<void> _initializeApp() async {
     // configure Amplify
-    await _configureAmplify();
+    //await _configureAmplify();
 
     // listen for updates to Todo entries by passing the Todo classType to
     // Amplify.DataStore.observe() and when an update event occurs, fetch the
@@ -102,7 +105,7 @@ class _TodosPageState extends State<TodosPage> {
   //---------------------------------------------------------------------
   //Beginning of signing in flow
 
-  Future<void> _configureAmplify() async {
+  /*Future<void> _configureAmplify() async {
     try {
       // add Amplify plugins
       //await Amplify.addPlugins([_dataStorePlugin]);
@@ -121,7 +124,7 @@ class _TodosPageState extends State<TodosPage> {
       // but this will be sufficient for the purposes of this tutorial
       print('An error occurred while configuring Amplify: $e');
     }
-  }
+  }*/
 
   Future<void> _fetchTodos() async {
     try {
@@ -178,17 +181,89 @@ class _TodosPageState extends State<TodosPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Insight Posts"),
-        backgroundColor: Colors.teal,
+        backgroundColor: Color(0xff07424B),
       ),
       //body: Center(child: CircularProgressIndicator()),
       body: _isLoading
           ? Center(child: CircularProgressIndicator())
           : TodosList(todos: _todos),
-      drawer: 
-      FeedsList(
+      drawer: FeedsList(
         feeds: _feeds,
         feedsSub: _feedsSub,
       ),
     );
   }
+}
+
+void _bottomSheetMore(context, points) {
+  String responseBody =
+      '[{"BeginDate": 1623005418000,"EndDate": 1623610218000,"IntervalData": 1.0}]';
+
+  // parsePhotos(responseBody);
+  final fromDate = DateTime(2021, 05, 22);
+  final toDate = DateTime.now();
+  final date1 = DateTime.now().subtract(Duration(days: 2));
+  final date2 = DateTime.now().subtract(Duration(days: 3));
+
+  final List<DataPoint<DateTime>> graphPoints = points;
+
+  showModalBottomSheet(
+    context: context,
+    builder: (builder) {
+      return new Container(
+        height: 240,
+        padding: EdgeInsets.only(
+          left: 5.0,
+          right: 5.0,
+          top: 0,
+          bottom: 0,
+        ),
+        decoration: new BoxDecoration(
+          color: Color(0xff232d37),
+        ),
+        child: Center(
+            child: Container(
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(18),
+              ),
+              color: Color(0xff232d37)),
+          child: Padding(
+            padding: const EdgeInsets.only(
+                right: 12.0, left: 12.0, top: 0, bottom: 20),
+            child: BezierChart(
+              fromDate: fromDate,
+              bezierChartScale: BezierChartScale.WEEKLY,
+              toDate: toDate,
+              selectedDate: toDate,
+              series: [
+                BezierLine(
+                  lineColor:
+                      Colors.white, //Color(0xffff8811), //Color(0xff02d39a),
+                  lineStrokeWidth: 2.0,
+                  label: "Duty",
+                  onMissingValue: (dateTime) {
+                    if (dateTime.day.isEven) {
+                      return 10.0;
+                    }
+                    return 5.0;
+                  },
+                  data: //graphPoints
+                      const [],
+                ),
+              ],
+              config: BezierChartConfig(
+                verticalIndicatorStrokeWidth: 3.0,
+                verticalIndicatorColor: Colors.black26,
+                showVerticalIndicator: true,
+                verticalIndicatorFixedPosition: false,
+                backgroundColor: Color(0xff232d37),
+                footerHeight: 50.0,
+              ),
+            ),
+          ),
+        )),
+      );
+    },
+  );
 }

@@ -1,8 +1,9 @@
-
 import boto3
 
 def batchSentiment(items):
     print(len(items))
+    print("Items")
+    print(items)
 
     newItems = []
     languages = []
@@ -28,11 +29,10 @@ def batchSentiment(items):
 
         if len(newItems):
             doneItems.append(getSentimentBatch(newItems, j))
-            newItems= []
+            newItems = []
 
     print(doneItems)
     return doneItems
-
 
 
 def getSentimentBatch(batchArray, lang):
@@ -57,15 +57,13 @@ def getSentimentBatch(batchArray, lang):
     return batchArray
 
 
-
-
-
-
 def lambda_twitterComprehend(event, context):
     dbClient = boto3.resource("dynamodb")
     processedData = batchSentiment(event)
+
+    # db.writeToDB(processedData)
     try:
-        # db.writeToDB(processedData)
+
         putItem = []
         tableName = event['0']["Company"]
         for item in processedData[0]:
@@ -80,7 +78,6 @@ def lambda_twitterComprehend(event, context):
                         'TimeStamp': int(item["date"]),
                         'CompanyName': item["Company"]
                     }
-
                 }
             }
             putItem.append(newItem)
@@ -93,13 +90,11 @@ def lambda_twitterComprehend(event, context):
             }
         )
     except:
-        {
+        return {
             "statusCode": 200,
-            "body": "No tweets scraped, successful execution"
+            "body": "No tweets scraped"
         }
     return {
-            "statusCode": 200,
-            "body": "This task was successful"
-            }
-
-
+        "statusCode": 200,
+        "body": "This task was successful"
+    }
