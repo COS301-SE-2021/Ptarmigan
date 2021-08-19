@@ -1,88 +1,100 @@
-import json
 import boto3
+
+def batchSentiment(items):
+    print(len(items))
+    print("Items")
+    print(items)
+
+    newItems = []
+    languages = []
+    doneItems = []
+
+    for j in items:
+        if items[j]['lang'] not in languages:
+            languages.append(items[j]['lang'])
+
+    print("languages: ", languages)
+
+    for j in languages:
+        print(j)
+        for i in items:
+            if items[i]["lang"] == j:
+                newItems.append(items[i])
+                print("asdf")
+
+            if len(newItems) == 25:
+                print("Len is above 25")
+                doneItems.append(getSentimentBatch(newItems, j))
+                newItems = []
+
+        if len(newItems):
+            doneItems.append(getSentimentBatch(newItems, j))
+            newItems = []
+
+    print(doneItems)
+    return doneItems
+
+
+def getSentimentBatch(batchArray, lang):
+    print("Getting sentiment")
+    comprehend = boto3.client("comprehend")
+    textList = []
+    for i in batchArray:
+        print(i)
+        textList.append(i["Text"])
+
+    response = comprehend.batch_detect_sentiment(
+        TextList=textList,
+        LanguageCode='en'
+    )
+
+    print("Res", response)
+
+    for i in response["ResultList"]:
+        batchArray[i["Index"]]["Sentiment"] = i["Sentiment"]
+        # print("DOne ", batchArray[i["Index"]])
+    # Remember to remove sentimens with errors
+    return batchArray
 
 
 def lambda_twitterComprehend(event, context):
     dbClient = boto3.resource("dynamodb")
+    processedData = batchSentiment(event)
 
-    table = dbClient.Table('Test')
+    # db.writeToDB(processedData)
+    try:
 
-    comprehend = boto3.client("comprehend")
-
-    print(event)
-
-    for item in event:
-        response = comprehend.detect_sentiment(Text=event[item]["Text"], LanguageCode=event[item]["lang"])
-        event[item]["sentiment"] = response["Sentiment"]
-
-        table.put_item(
-            Item={
-                'Tweet_Id': int(event[item]["Tweet Id"]),
-                'Text': event[item]["Text"],
-                'lang': event[item]["lang"],
-                'Weight': str(event[item]["Weight"]),
-                'Sentiment': event[item]["sentiment"],
-                'TimeStamp': event[item]["date"],
-                'CompanyName': event[item]["CompanyName"]
-            })
-
-        # TODO: write code...
-        # TODO: write code...
-
-    # response = comprehend.detect_sentiment(Text=event["Text"], LanguageCode=event["lang"])
-    # event["sentiment"] = response["Sentiment"]
-
-    # table.put_item(
-    # Item={
-    #     'Tweet_Id': str(event["Tweet Id"]),
-    #     'Text': event["Text"],
-    #     'lang': event["lang"],
-    #     'Weight': str(event["Weight"]),
-    #     'Sentiment': event["sentiment"]
-    #     })
-
-    # returnObject["currentIndex"] = returnObject["currentIndex"] + 1
-
-    # if returnObject["currentIndex"] == returnObject["eventLength"]:
-    #     returnObject["done"] = "true"
-
-    # TODO: write code...
-
-    return {
-            "statusCode": 200,
-            "body": "This task was successfull"
+        putItem = []
+        tableName = event['0']["Company"]
+        for item in processedData[0]:
+            newItem = {
+                'PutRequest': {
+                    'Item': {
+                        'Tweet_Id': int(item["Tweet Id"]),
+                        'Text': item["Text"],
+                        'lang': item["lang"],
+                        'Weight': str(item["Weight"]),
+                        'Sentiment': item["Sentiment"],
+                        'TimeStamp': int(item["date"]),
+                        'CompanyName': item["Company"]
+                    }
+                }
             }
+            putItem.append(newItem)
 
-# import json
-# import boto3
+        print("PutItems ", putItem)
 
-# def lambda_twitterComprehend(event, context):
-#     print(event["content"])
-#     returnObject = event
-#     event = event["content"][str(event["currentIndex"])]
-#     dbClient = boto3.resource("dynamodb")
-
-#     table = dbClient.Table('Twitter_Sentiment_Data')
-
-#     comprehend = boto3.client("comprehend")
-
-#     response = comprehend.detect_sentiment(Text=event["Text"], LanguageCode=event["lang"])
-#     event["sentiment"] = response["Sentiment"]
-
-#     # table.put_item(
-#     # Item={
-#     #     'Tweet_Id': str(event["Tweet Id"]),
-#     #     'Text': event["Text"],
-#     #     'lang': event["lang"],
-#     #     'Weight': str(event["Weight"]),
-#     #     'Sentiment': event["sentiment"]
-#     #     })
-
-#     returnObject["currentIndex"] = returnObject["currentIndex"] + 1
-
-#     if returnObject["currentIndex"] == returnObject["eventLength"]:
-#         returnObject["done"] = "true"
-
-#         # TODO: write code...
-
-#     return returnObject
+        dbClient.batch_write_item(
+            RequestItems={
+                tableName: putItem
+            }
+        )
+    except:
+        return {
+            "statusCode": 200,
+            "body": "No tweets scraped"
+        }
+    return {
+        "statusCode": 200,
+        "body": "This task was successful"
+    }
