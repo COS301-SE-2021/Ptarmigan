@@ -86,8 +86,6 @@ class _StockScreenState extends State<StockScreen> {
                 icon: Icon(Icons.business), label: "Insights"),
             BottomNavigationBarItem(icon: Icon(Icons.grade), label: "Stocks"),
           ],
-         
-         
           selectedItemColor: Colors.amber[800],
           onTap: _OnItemTapped,
         ));
@@ -143,7 +141,7 @@ class _StockScreenState extends State<StockScreen> {
             ],
           ),
         ),
-        DataCell(Text(printStockPrice(index))),
+        DataCell(Text("\$" + printStockPrice(index))),
         //DataCell(Text(("#"))),
       ],
     );

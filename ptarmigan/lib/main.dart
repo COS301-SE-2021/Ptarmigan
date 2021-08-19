@@ -11,6 +11,7 @@ import 'package:amplify_datastore/amplify_datastore.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:ptarmigan/auth/flutter_login/confirm_reset.dart';
 import 'package:ptarmigan/auth/flutter_login/confirm_screen.dart';
 import 'package:ptarmigan/services/feed_changer.dart';
 import 'package:ptarmigan/widgets/home_page.dart';
@@ -73,6 +74,14 @@ class MyApp extends StatelessWidget {
                 return PageRouteBuilder(
                   pageBuilder: (_, __, ___) =>
                       ConfirmScreen(data: settings.arguments as LoginData),
+                  transitionsBuilder: (_, __, ___, child) => child,
+                );
+              }
+              if (settings.name == '/confirm-reset') {
+                print("Navigator push : /CONFIRM");
+                return PageRouteBuilder(
+                  pageBuilder: (_, __, ___) =>
+                      ConfirmResetScreen(data: settings.arguments as LoginData),
                   transitionsBuilder: (_, __, ___, child) => child,
                 );
               }

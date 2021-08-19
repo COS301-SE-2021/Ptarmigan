@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:flutter_login/flutter_login.dart';
+import 'package:ptarmigan/constants.dart';
 import 'package:ptarmigan/models/ModelProvider.dart';
 
 import '../../amplifyconfiguration.dart';
@@ -104,8 +105,9 @@ class _LoginState extends State<Login> {
       onRecoverPassword: (String email) => _onRecoverPassword(context, email),
       onSignup: _onSignup,
       theme: LoginTheme(
-        primaryColor: Theme.of(context).primaryColor,
-      ),
+          primaryColor: Theme.of(context).primaryColor,
+          accentColor: Colors.white,
+          textFieldStyle: TextStyle(color: Colors.white)),
       onSubmitAnimationCompleted: () {
         //print("Pushing replacement choice : " + _data.name);
         Navigator.of(context).pushReplacementNamed(

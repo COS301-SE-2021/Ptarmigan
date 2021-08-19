@@ -65,7 +65,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           shadowColor: secondaryColor,
           title: Text('Dashboard'),
           actions: [
-            /*MaterialButton(
+            MaterialButton(
                 onPressed: () {
                   Amplify.Auth.signOut().then((_) {
                     Navigator.pushReplacementNamed(context, '/login');
@@ -74,7 +74,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 child: Icon(
                   Icons.logout,
                   color: Colors.white,
-                ))*/
+                ))
           ],
         ),
         //Drawer
@@ -145,7 +145,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => TodosPage()));
+                                          builder: (context) => TwitterScreen(
+                                              "1426541125498810368")));
                                 },
                                 style: ButtonStyle(
                                   shape:
@@ -210,57 +211,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   style: TextStyle(fontSize: 30),
                 ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                  color: secondaryColor,
-                  child: CarouselSlider.builder(
-                    itemCount: feedimage.length,
-                    options: CarouselOptions(
-                      autoPlay: true,
-                      aspectRatio: 2.0,
-                      enlargeCenterPage: true,
-                    ),
-                    itemBuilder: (context, index, realIdx) {
-                      return Container(
-                          child: Center(
-                        child: Stack(children: [
-                          Image.network(
-                              "https://logo.clearbit.com/" +
-                                  feedimage[index] +
-                                  ".com",
-                              fit: BoxFit.cover,
-                              width: 1000),
-                          Positioned(
-                            bottom: 0.0,
-                            left: 0.0,
-                            right: 0.0,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color.fromARGB(200, 0, 0, 0),
-                                    Color.fromARGB(0, 0, 0, 0)
-                                  ],
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter,
-                                ),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  vertical: 10.0, horizontal: 20.0),
-                              child: Text(
-                                feedimage[index],
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ]),
-                      ));
-                    },
-                  ),
-                ),
+                    padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                    color: secondaryColor,
+                    child: itemGenerator()),
                 Text(
                   "About us :",
                   textAlign: TextAlign.center,
@@ -279,8 +232,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       \n For any enquiries please contact us via our email: 
                       onemorebytecos301@gmail.com
 
-This code is open source and is available on GitHub: 
-github.com/COS301-SE-2021/Ptarmigan
+                            This code is open source and is available on GitHub: 
+                            github.com/COS301-SE-2021/Ptarmigan
                     """,
                         textAlign: TextAlign.center,
                       ))
@@ -299,6 +252,59 @@ github.com/COS301-SE-2021/Ptarmigan
           selectedItemColor: Colors.amber[800],
           onTap: _OnItemTapped,
         ));
+  }
+
+  Widget itemGenerator() {
+    if (feedimage != null) {
+      return CarouselSlider.builder(
+        itemCount: feedimage.length,
+        options: CarouselOptions(
+          autoPlay: true,
+          aspectRatio: 2.0,
+          enlargeCenterPage: true,
+        ),
+        itemBuilder: (context, index, realIdx) {
+          return Container(
+              child: Center(
+            child: Stack(children: [
+              Image.network(
+                  "https://logo.clearbit.com/" + feedimage[index] + ".com",
+                  fit: BoxFit.cover,
+                  width: 1000),
+              Positioned(
+                bottom: 0.0,
+                left: 0.0,
+                right: 0.0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Color.fromARGB(200, 0, 0, 0),
+                        Color.fromARGB(0, 0, 0, 0)
+                      ],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                    ),
+                  ),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                  child: Text(
+                    feedimage[index],
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ]),
+          ));
+        },
+      );
+    } else {
+      return (Text("No feed images provided"));
+    }
   }
 
   void _OnItemTapped(int index) {
@@ -365,7 +371,9 @@ github.com/COS301-SE-2021/Ptarmigan
       .toList();
 
   Future<void> _initFeedInterests() async {
+    print("FETCHING FEED IMAGES");
     feedimage = await generator.fetchImages();
+    if (feedimage == null) feedimage = ["Apple"];
 
     // if (feedimage != null) {
     /*for (var i = 0; i < feedimage.length; i++) {

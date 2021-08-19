@@ -9,63 +9,64 @@
     },
     {
       "name": "amplify_analytics_plugin_interface",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/amplify_analytics_plugin_interface-0.1.5",
+
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/amplify_analytics_plugin_interface-0.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.7"
+      "languageVersion": "2.12"
     },
     {
       "name": "amplify_api",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/amplify_api-0.1.5",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/amplify_api-0.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.7"
+      "languageVersion": "2.12"
     },
     {
       "name": "amplify_api_plugin_interface",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/amplify_api_plugin_interface-0.1.5",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/amplify_api_plugin_interface-0.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.7"
+      "languageVersion": "2.12"
     },
     {
       "name": "amplify_auth_cognito",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/amplify_auth_cognito-0.1.5",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/amplify_auth_cognito-0.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.7"
+      "languageVersion": "2.12"
     },
     {
       "name": "amplify_auth_plugin_interface",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/amplify_auth_plugin_interface-0.1.5",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/amplify_auth_plugin_interface-0.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.7"
+      "languageVersion": "2.12"
     },
     {
       "name": "amplify_core",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/amplify_core-0.1.5",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/amplify_core-0.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.7"
+      "languageVersion": "2.12"
     },
     {
       "name": "amplify_datastore",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/amplify_datastore-0.1.5",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/amplify_datastore-0.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.7"
+      "languageVersion": "2.12"
     },
     {
       "name": "amplify_datastore_plugin_interface",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/amplify_datastore_plugin_interface-0.1.5",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/amplify_datastore_plugin_interface-0.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.7"
+      "languageVersion": "2.12"
     },
     {
       "name": "amplify_flutter",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/amplify_flutter-0.1.5",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/amplify_flutter-0.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.7"
+      "languageVersion": "2.12"
     },
     {
       "name": "amplify_storage_plugin_interface",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/amplify_storage_plugin_interface-0.1.5",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/amplify_storage_plugin_interface-0.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.7"
+      "languageVersion": "2.12"
     },
     {
       "name": "analyzer",
@@ -75,7 +76,7 @@
     },
     {
       "name": "another_flushbar",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/another_flushbar-1.10.22",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/another_flushbar-1.10.24",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -87,7 +88,7 @@
     },
     {
       "name": "args",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/args-2.1.1",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/args-2.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -111,7 +112,7 @@
     },
     {
       "name": "build",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/build-2.0.2",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/build-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -129,31 +130,31 @@
     },
     {
       "name": "build_resolvers",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/build_resolvers-2.0.3",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/build_resolvers-2.0.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "build_runner",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/build_runner-2.0.4",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/build_runner-2.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "build_runner_core",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/build_runner_core-7.0.0",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/build_runner_core-7.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "built_collection",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/built_collection-5.0.0",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/built_collection-5.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "built_value",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/built_value-8.0.6",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/built_value-8.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -183,7 +184,7 @@
     },
     {
       "name": "cli_util",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/cli_util-0.3.0",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/cli_util-0.3.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -195,7 +196,7 @@
     },
     {
       "name": "code_builder",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/code_builder-4.0.0",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/code_builder-4.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -207,7 +208,7 @@
     },
     {
       "name": "convert",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/convert-3.0.0",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/convert-3.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -231,7 +232,7 @@
     },
     {
       "name": "dart_style",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/dart_style-2.0.1",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/dart_style-2.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -243,9 +244,9 @@
     },
     {
       "name": "date_time_format",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/date_time_format-1.1.1+1",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/date_time_format-2.0.1",
       "packageUri": "lib/",
-      "languageVersion": "2.7"
+      "languageVersion": "2.12"
     },
     {
       "name": "equatable",
@@ -279,7 +280,7 @@
     },
     {
       "name": "fl_chart",
-      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/fl_chart-0.36.2",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/fl_chart-0.36.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -327,7 +328,7 @@
     },
     {
       "name": "frontend_server_client",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/frontend_server_client-2.1.0",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/frontend_server_client-2.1.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -374,6 +375,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "integration_test",
+      "rootUri": "file:///C:/src/flutter/packages/integration_test",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "intl",
       "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/intl-0.16.1",
       "packageUri": "lib/",
@@ -381,7 +388,7 @@
     },
     {
       "name": "io",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/io-1.0.0",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/io-1.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -429,7 +436,7 @@
     },
     {
       "name": "mockito",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/mockito-5.0.9",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/mockito-5.0.14",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -441,7 +448,7 @@
     },
     {
       "name": "node_preamble",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/node_preamble-2.0.0",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/node_preamble-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -501,7 +508,7 @@
     },
     {
       "name": "pedantic",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.0",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/pedantic-1.11.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -519,7 +526,7 @@
     },
     {
       "name": "plugin_platform_interface",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-2.0.0",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/plugin_platform_interface-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -561,7 +568,7 @@
     },
     {
       "name": "shelf",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/shelf-1.1.4",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/shelf-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -573,7 +580,8 @@
     },
     {
       "name": "shelf_static",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/shelf_static-1.0.0",
+
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/shelf_static-1.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -603,7 +611,7 @@
     },
     {
       "name": "source_gen",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/source_gen-1.0.1",
+      "rootUri": "file:///C:/Users/lukeb/AppData/Local/Pub/Cache/hosted/pub.dartlang.org/source_gen-1.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -812,9 +820,7 @@
       "languageVersion": "2.12"
     }
   ],
-
-  "generated": "2021-06-21T04:25:43.884409Z",
-
+  "generated": "2021-08-18T18:36:21.601082Z",
   "generator": "pub",
   "generatorVersion": "2.13.0"
 }
