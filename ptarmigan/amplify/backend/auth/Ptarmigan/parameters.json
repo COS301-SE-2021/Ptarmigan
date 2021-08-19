@@ -1,7 +1,7 @@
 {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "ptarmidf5de66d",
+    "resourceNameTruncated": "ptarmic81c2684",
     "userPoolName": "Ptarmigan",
     "autoVerifiedAttributes": [
         "email"
@@ -12,7 +12,7 @@
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "Ptarmigan - Forgot password code: {####}",
+    "emailVerificationSubject": "Forgot password code: {####}",
     "emailVerificationMessage": "Forgot password code: {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
@@ -30,9 +30,9 @@
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "Ptarmidf5de66d_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "Ptarmic81c2684_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "df5de66d",
+    "sharedId": "c81c2684",
     "resourceName": "Ptarmigan",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {

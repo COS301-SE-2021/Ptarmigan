@@ -15,4 +15,67 @@ source_md5 = ""
 packagetype = "Zip"
 functions = ["getGraphSentiment", "getSentimentPeriod"]
 
+[function_build_definitions.dfd42228-ce7c-45ce-a552-8b758fabc3d7]
+codeuri = "/home/reinier/Documents/GitHub/Ptarmigan/backend/ServerlessApplication/ptarmigan/scraper/bucketInput"
+runtime = "python3.8"
+source_md5 = ""
+packagetype = "Zip"
+functions = ["bucketInput"]
+
+[function_build_definitions.37698364-a8b3-4827-b2f6-b0aca46bc30c]
+codeuri = "/home/reinier/Documents/GitHub/Ptarmigan/backend/ServerlessApplication/ptarmigan/scraper/twitterScraper"
+runtime = "python3.8"
+source_md5 = ""
+packagetype = "Zip"
+functions = ["twitterScraper"]
+
+[function_build_definitions.a5bd8836-0b4a-4c69-b923-e20ccd638f55]
+codeuri = "/home/reinier/Documents/GitHub/Ptarmigan/backend/ServerlessApplication/ptarmigan/scraper/UpdateBucket"
+runtime = "python3.8"
+source_md5 = ""
+packagetype = "Zip"
+functions = ["UpdateBucket"]
+
+[function_build_definitions.9c8f4954-0f9a-4586-a124-467a888365fb]
+codeuri = "/home/reinier/Documents/GitHub/Ptarmigan/backend/ServerlessApplication/ptarmigan/scraper/deleteBucketItem"
+runtime = "python3.8"
+source_md5 = ""
+packagetype = "Zip"
+functions = ["deleteBucketItem"]
+
+[function_build_definitions.a84ba2dc-dbb5-48de-b3cd-06ae3f2a5ce2]
+codeuri = "/home/reinier/Documents/GitHub/Ptarmigan/backend/ServerlessApplication/ptarmigan/admin/tweetManagement/getTweetById"
+runtime = "python3.8"
+source_md5 = ""
+packagetype = "Zip"
+functions = ["getTweetById"]
+
+[function_build_definitions.5f20a934-b4b8-4b05-a05c-c86aa85fde59]
+codeuri = "/home/reinier/Documents/GitHub/Ptarmigan/backend/ServerlessApplication/ptarmigan/scraper/returnBucketList"
+runtime = "python3.8"
+source_md5 = ""
+packagetype = "Zip"
+functions = ["returnBucketList"]
+
+[function_build_definitions.de9c758b-fbc0-432c-91fb-10fa32452144]
+codeuri = "/home/reinier/Documents/GitHub/Ptarmigan/backend/ServerlessApplication/ptarmigan/synthesize/getMostPopularTweet"
+runtime = "python3.8"
+source_md5 = ""
+packagetype = "Zip"
+functions = ["getMostPopularTweet"]
+
+[function_build_definitions.5ccba32f-728b-44d2-a8b1-86908aa33df3]
+codeuri = "/home/reinier/Documents/GitHub/Ptarmigan/backend/ServerlessApplication/ptarmigan/stocks/getStockPrice"
+runtime = "python3.8"
+source_md5 = ""
+packagetype = "Zip"
+functions = ["getStockPrice"]
+
+[function_build_definitions.8491eed0-9afc-41a0-b5a6-c1f6393f993d]
+codeuri = "/home/reinier/Documents/GitHub/Ptarmigan/backend/ServerlessApplication/ptarmigan/stocks/returnStockPriceList"
+runtime = "python3.8"
+source_md5 = ""
+packagetype = "Zip"
+functions = ["returnStockPriceList"]
+
 [layer_build_definitions]

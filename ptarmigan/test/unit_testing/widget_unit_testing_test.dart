@@ -151,7 +151,7 @@ void main() {
     back.expect(back.find.byType(Card), back.findsOneWidget);
   });
 
-  back.testWidgets("Test whether a todo item is dipslayed correctly",
+  /*back.testWidgets("Test whether a todo item is dipslayed correctly",
       (WidgetTester tester) async {
     Todo todoItem = new Todo(
       id: "Test_todo_id",
@@ -162,7 +162,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(home: TodoItem(todo: todoItem)));
 
     back.expect(back.find.byType(Card), back.findsOneWidget);
-  });
+  });*/
 
   back.testWidgets("Test whether the add todo page functions properly",
       (WidgetTester tester) async {
