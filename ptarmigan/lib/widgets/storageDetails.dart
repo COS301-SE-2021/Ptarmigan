@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:ptarmigan/services/feed_changer.dart';
 
 import '../../../constants.dart';
 import 'StockAndSentimentValues.dart';
+import 'SentimentHistory.dart';
+import 'package:provider/provider.dart';
+
 import 'graph.dart';
 
 class StorageDetails extends StatelessWidget {
   const StorageDetails({
     Key? key,
   }) : super(key: key);
+
+  String setTitle(String a) {
+    return a;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +29,7 @@ class StorageDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Bitcoin",
+            Provider.of<FeedChanger>(context, listen: false).getFeedChoice,
             style: TextStyle(
               fontSize: 36,
               fontWeight: FontWeight.w500,

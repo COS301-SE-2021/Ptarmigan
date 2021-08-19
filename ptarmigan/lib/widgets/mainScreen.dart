@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:amplify_datastore/amplify_datastore.dart';
 import 'package:provider/provider.dart';
+import 'package:ptarmigan/services/feed_changer.dart';
 import 'package:ptarmigan/amplifyconfiguration.dart';
 import 'package:ptarmigan/models/ModelProvider.dart';
 import 'sideMenu.dart';
@@ -177,6 +178,8 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<FeedChanger>(context, listen: false).changeFeed("Bitcoin");
+
     // Amplify.DataStore.clear();
     return Scaffold(
       key: context.read<MenuController>().scaffoldKey,

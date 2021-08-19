@@ -54,7 +54,16 @@ class SentimentHistory extends StatelessWidget {
   }
 
   String colorPicker(String a) {
-    return "";
+    String colorIcon = "assets/icons/Negative.svg";
+
+    if (a.compareTo("30%") < 0) {
+      colorIcon = "assets/icons/Negative.svg";
+    } else if (a.compareTo("67%") < 0) {
+      colorIcon = "assets/icons/Medium.svg";
+    } else if (a.compareTo("67") > 0) {
+      colorIcon = "assets/icons/Postive.svg";
+    }
+    return colorIcon;
   }
 
   Future<void> Delete(String name) async {
@@ -77,7 +86,7 @@ class SentimentHistory extends StatelessWidget {
 
       //convert to SentimentHistoryItem
       SentimentHistoryItem newItem = new SentimentHistoryItem();
-      newItem.icon = "assets/icons/Negative.svg";
+      newItem.icon = colorPicker(todos[i].description);
       newItem.title = todos[i].date.toString();
       newItem.date = todos[i].description;
       newItem.size = "0";
@@ -94,7 +103,7 @@ class SentimentHistory extends StatelessWidget {
     var feedChoice = Provider.of<FeedChanger>(context).getFeedChoice;
     feedChoice = feedChoice;
     bocko(feedChoice);
-    Delete(feedChoice);
+    //   Delete(feedChoice);
     return Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(

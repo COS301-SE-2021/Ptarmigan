@@ -37,7 +37,7 @@ class StockAndSentimentValues extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int tester = 90;
+    int tester = 50;
 
     return Container(
       padding: EdgeInsets.all(defaultPadding),
@@ -60,7 +60,7 @@ class StockAndSentimentValues extends StatelessWidget {
           ),
           Text(""),
           Text(
-            "Current Stock Price:  " + "R160.43",
+            "Current Stock Price:  " + "",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),

@@ -15,6 +15,8 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:amplify_datastore/amplify_datastore.dart';
 import 'package:ptarmigan/services/feed_changer.dart';
+import 'package:ptarmigan/services/list_changer.dart';
+
 import 'package:ptarmigan/models/ModelProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:amplify_api/amplify_api.dart';
@@ -22,6 +24,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:http/http.dart' as http;
 import 'package:ptarmigan/feedSentiment.dart';
 import '/models/SentimentHistoryItem.dart';
+import 'package:ptarmigan/widgets/add_feed_form.dart';
 
 class SideMenu extends StatelessWidget {
   List<Todo> todos;
@@ -105,7 +108,12 @@ class SideMenu extends StatelessWidget {
                       vertical: 1 / (Responsive.isMobile(context) ? 2 : 1),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AddFeedForm(feeds: feeds)));
+                  },
                   icon: Icon(Icons.add),
                   label: Text("Add New  "),
                 ),
@@ -193,7 +201,6 @@ class DrawerListTile extends StatelessWidget {
   Future<void> fetchNewTodos() async {
     List<Todo> updatedFeeds = await Amplify.DataStore.query(Todo.classType,
         where: Todo.NAME.eq(this.title));
-    print("ALEX");
     todos = updatedFeeds;
   }
 
@@ -223,6 +230,8 @@ class DrawerListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     void _changeFeed() {
       Provider.of<FeedChanger>(context, listen: false).changeFeed(this.title);
+      Provider.of<ListChanger>(context, listen: false)
+          .changeList(SentimentHistory().list);
     }
 
     String myTitle = this.title;
@@ -241,8 +250,8 @@ class DrawerListTile extends StatelessWidget {
             'Content-Type': 'application/json; charset=UTF-8',
           },
           body: jsonEncode({
-            "BeginDate": 1623005418, //lastUpdated //replace for newest
-            "Interval": "Week",
+            "BeginDate": 1627858371, //lastUpdated //replace for newest
+            "Interval": "Day",
             "CompanyName": feedName
           }));
       print("-----------");
@@ -353,6 +362,7 @@ class DrawerListTile extends StatelessWidget {
         _updateFeedPosts(myTitle);
         //   print("TIGGER2");
         SentimentHistory().fetchNewTodos(myTitle);
+
         //   rocko();
         //    print("TIGGER3");
 

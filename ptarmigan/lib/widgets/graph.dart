@@ -1,6 +1,8 @@
 // @dart=2.9
 
 import 'dart:async';
+import 'package:ptarmigan/widgets/SentimentHistory.dart';
+
 import '../../../constants.dart';
 
 // flutter and ui libraries
@@ -11,6 +13,7 @@ import 'package:provider/provider.dart';
 // amplify configuration and models that should have been generated for you
 import 'package:bezier_chart/bezier_chart.dart';
 //for feeds go to feeds_list.dart
+import 'package:ptarmigan/services/list_changer.dart';
 
 class Graph extends StatefulWidget {
   @override
@@ -18,7 +21,10 @@ class Graph extends StatefulWidget {
 }
 
 class _GraphState extends State<Graph> {
+  List<DataPoint<dynamic>> list = [];
+
   Widget build(BuildContext context) {
+    List listChoice = Provider.of<ListChanger>(context).getList;
     final fromDate = DateTime(2021, 06, 15);
     final toDate = DateTime.now();
 
@@ -60,36 +66,54 @@ class _GraphState extends State<Graph> {
                 //   label: "Dutysdas",
                 onMissingValue: (dateTime) {
                   if (dateTime.day.isEven) {
-                    return 0.0;
+                    return 50;
                   }
-                  return 0.0;
+                  return 50;
                 },
-                data: //list, //graphPoints
+                data: //listChoice, //graphPoints
                     [
                   DataPoint<DateTime>(
-                      value: 10,
-                      xAxis: DateTime.now().subtract(Duration(days: 2))),
-                  DataPoint<DateTime>(
-                      value: 130,
-                      xAxis: DateTime.now().subtract(Duration(days: 3))),
+                      value: 50,
+                      xAxis: DateTime.now().subtract(Duration(days: 14))),
                   DataPoint<DateTime>(
                       value: 50,
-                      xAxis: DateTime.now().subtract(Duration(days: 4))),
+                      xAxis: DateTime.now().subtract(Duration(days: 13))),
                   DataPoint<DateTime>(
-                      value: 150,
-                      xAxis: DateTime.now().subtract(Duration(days: 2))),
+                      value: 50,
+                      xAxis: DateTime.now().subtract(Duration(days: 12))),
                   DataPoint<DateTime>(
-                      value: 75,
-                      xAxis: DateTime.now().subtract(Duration(days: 2))),
+                      value: 50,
+                      xAxis: DateTime.now().subtract(Duration(days: 11))),
                   DataPoint<DateTime>(
-                      value: 0,
-                      xAxis: DateTime.now().subtract(Duration(days: 2))),
-                  DataPoint<DateTime>(
-                      value: 5,
-                      xAxis: DateTime.now().subtract(Duration(days: 2))),
+                      value: 50,
+                      xAxis: DateTime.now().subtract(Duration(days: 10))),
                   DataPoint<DateTime>(
                       value: 45,
+                      xAxis: DateTime.now().subtract(Duration(days: 9))),
+                  DataPoint<DateTime>(
+                      value: 48,
+                      xAxis: DateTime.now().subtract(Duration(days: 8))),
+                  DataPoint<DateTime>(
+                      value: 56,
+                      xAxis: DateTime.now().subtract(Duration(days: 7))),
+                  DataPoint<DateTime>(
+                      value: 54,
+                      xAxis: DateTime.now().subtract(Duration(days: 6))),
+                  DataPoint<DateTime>(
+                      value: 44,
+                      xAxis: DateTime.now().subtract(Duration(days: 5))),
+                  DataPoint<DateTime>(
+                      value: 48,
+                      xAxis: DateTime.now().subtract(Duration(days: 4))),
+                  DataPoint<DateTime>(
+                      value: 50,
+                      xAxis: DateTime.now().subtract(Duration(days: 3))),
+                  DataPoint<DateTime>(
+                      value: 53,
                       xAxis: DateTime.now().subtract(Duration(days: 2))),
+                  DataPoint<DateTime>(
+                      value: 50,
+                      xAxis: DateTime.now().subtract(Duration(days: 1))),
                 ],
               ),
             ],
