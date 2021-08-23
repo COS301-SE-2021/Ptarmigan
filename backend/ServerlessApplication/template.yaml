@@ -38,6 +38,15 @@ Resources:
             Path: /senthisize/getMostPopularTweet
             Method: post
 
+  writeDayIntoDB:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/synthesize/writeDayIntoDB
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Policies:
+        - AmazonDynamoDBFullAccess
+
 
 
   getGraphSentiment:
