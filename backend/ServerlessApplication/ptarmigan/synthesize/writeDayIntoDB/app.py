@@ -54,6 +54,7 @@ def writeIntoDb(date, company, stock, sentiment):
 
 def lambda_handler(event, context):
     # getAllFromDate(int(time.time())-86400, int(time.time()), "Tesla")
+    companyName = "Microsoft"
 
     # TODO: Implement with actual data current implementation is for testing purposes only.
     currentTime = int(time.time())
@@ -62,13 +63,13 @@ def lambda_handler(event, context):
 
     currentTime = currentTime - timeFromMidnight
 
-    sentiment = getAllFromDate(currentTime-86400, currentTime, "Tesla")
+    sentiment = getAllFromDate(currentTime-86400, currentTime, companyName)
 
     updatedTime = currentTime
 
     for i in range(10):
         updatedTime = updatedTime - 86400
-        sentiment = getAllFromDate(updatedTime - 86400, updatedTime, "Tesla")
-        writeIntoDb(updatedTime, "Tesla", 706.5, sentiment)
+        sentiment = getAllFromDate(updatedTime - 86400, updatedTime, companyName)
+        writeIntoDb(updatedTime, companyName, 706.5, sentiment)
 
     # return (writeIntoDb(currentTime, "Tesla", 706.5, sentiment))["ResponseMetadata"]

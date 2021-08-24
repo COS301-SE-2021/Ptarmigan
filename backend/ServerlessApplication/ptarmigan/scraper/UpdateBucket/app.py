@@ -119,13 +119,19 @@ def LambdaInvokeStocks():
 
 def lambda_handler(event, context):
     # read context from passed json argument
+
     try:
-        update = json.loads(event['body'])
+        if "body" in event:
+            update = json.loads(event["body"])
+
+        else:
+            update = event
+        # update = json.loads(event['body'])
         update = update['content']
     except:
         return {
             'statusCode': 400,
-            'body': json.dumps('Bad Request - invalid JSON input')
+            'body': json.dumps('Bad Request - invalid JSON input12')
         }
 
     try:
