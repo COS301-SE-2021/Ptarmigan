@@ -46,6 +46,7 @@
       <option name="presentableId" value="Default" />
       <updated>1627893502900</updated>
       <workItem from="1627893504282" duration="17590000" />
+      <workItem from="1629787073010" duration="129000" />
     </task>
     <task id="LOCAL-00001" summary="Initial setup and inclution of the header link including bootstrap styles">
       <created>1627893727808</created>
@@ -231,6 +232,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial setup and inclution of the header link including bootstrap styles" />

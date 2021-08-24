@@ -35,7 +35,16 @@ def getAllFromDate(beginDate, endDate, companyName):
 
     return calculateSentiment(response["Items"])
 
+def writeIntoDb(date, ):
+    print()
+
 
 def lambda_handler(event, context):
+    # getAllFromDate(int(time.time())-86400, int(time.time()), "Tesla")
+    currentTime = int(time.time())
 
-    print (getAllFromDate(int(time.time())-86400, int(time.time()), "Tesla"))
+    timeFromMidnight = currentTime % 86400
+
+    currentTime = currentTime - timeFromMidnight
+
+    getAllFromDate(currentTime-86400, currentTime, "Tesla")
