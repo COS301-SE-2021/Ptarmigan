@@ -35,16 +35,40 @@ def getAllFromDate(beginDate, endDate, companyName):
 
     return calculateSentiment(response["Items"])
 
-def writeIntoDb(date, ):
-    print()
+def writeIntoDb(date, company, stock, sentiment):
+    company = company+"Daily"
+
+
+    dynamodb = boto3.resource('dynamodb')
+
+    table = dynamodb.Table(company)
+    response = table.put_item(
+        Item={
+            "TimeStamp": date,
+            "Sentiment": str(sentiment),
+            "Stock": str(stock)
+        }
+    )
+    return response
 
 
 def lambda_handler(event, context):
     # getAllFromDate(int(time.time())-86400, int(time.time()), "Tesla")
+
+    # TODO: Implement with actual data current implementation is for testing purposes only.
     currentTime = int(time.time())
 
     timeFromMidnight = currentTime % 86400
 
     currentTime = currentTime - timeFromMidnight
 
-    getAllFromDate(currentTime-86400, currentTime, "Tesla")
+    sentiment = getAllFromDate(currentTime-86400, currentTime, "Tesla")
+
+    updatedTime = currentTime
+
+    # for i in range(10):
+    #     updatedTime = updatedTime - 86400
+    #     sentiment = getAllFromDate(updatedTime - 86400, updatedTime, "Tesla")
+    #     writeIntoDb(updatedTime, "Tesla", 706.5, sentiment)
+
+    return (writeIntoDb(currentTime, "Tesla", 706.5, sentiment))["ResponseMetadata"]
