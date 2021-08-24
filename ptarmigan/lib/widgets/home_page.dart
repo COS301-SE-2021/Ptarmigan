@@ -14,6 +14,7 @@ import 'package:ptarmigan/constants.dart';
 import 'package:ptarmigan/models/Feed.dart';
 import 'package:ptarmigan/models/Todo.dart';
 import 'package:ptarmigan/services/feed_image_generator.dart';
+import 'package:ptarmigan/services/popular_tweet_generator.dart';
 import 'package:ptarmigan/settings/application_settings.dart';
 import 'package:ptarmigan/widgets/Settings_page.dart';
 import 'package:ptarmigan/widgets/dashboard_screen.dart';
@@ -29,6 +30,7 @@ var feedimage;
 var feedImageLink;
 
 FeedImageGenerator generator = FeedImageGenerator();
+PopularTweetGenerator tweetGenerator = PopularTweetGenerator();
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -183,12 +185,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   "Click here for the tweet!",
                                   textAlign: TextAlign.center,
                                 ),
-                                onPressed: () {
+                                onPressed: () async {
+                                  var tweetID = await getTweetID();
+
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => TwitterScreen(
-                                              "1426541125498810368")));
+                                          builder: (context) =>
+                                              TwitterScreen(tweetID)));
                                 },
                                 style: ButtonStyle(
                                   shape:
@@ -433,6 +437,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   List getFeedImages() {
     return feedimage;
+  }
+
+  Future<String> getTweetID() async {
+    return await tweetGenerator.generateTwitterPageID(feedimage);
   }
 
   /* Future<void> _fetchTodos() async {
