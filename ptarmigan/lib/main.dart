@@ -109,9 +109,9 @@ class MyApp extends StatelessWidget {
             ),
             title: 'Amplified Todo',
             //home: TodosPage(),
-            //home: Login(),
+            home: Login(),
             //initialRoute: '/login',
-            initialRoute: pastFirstLaunch == false ? '/login' : '/',
+            //initialRoute: pastFirstLaunch == false ? '/login' : '/',
             // ignore: missing_return
             onGenerateRoute: (settings) {
               if (settings.name == '/confirm') {

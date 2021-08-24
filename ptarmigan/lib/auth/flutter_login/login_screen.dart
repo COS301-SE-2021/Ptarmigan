@@ -26,10 +26,11 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   LoginData _data;
   bool _isSignedIn = false;
+  bool signUpUsedLast = false;
 
   Future<String> _onLogin(LoginData data) async {
     print("--LOGIN--" + data.name);
-
+    signUpUsedLast = false;
     try {
       await Amplify.Auth.signOut();
       final res = await Amplify.Auth.signIn(
@@ -71,6 +72,7 @@ class _LoginState extends State<Login> {
   }
 
   Future<String> _onSignup(LoginData data) async {
+    signUpUsedLast = true;
     try {
       print("attempting sign up" + data.name);
       await Amplify.Auth.signUp(
@@ -110,7 +112,7 @@ class _LoginState extends State<Login> {
       onSubmitAnimationCompleted: () {
         //print("Pushing replacement choice : " + _data.name);
         Navigator.of(context).pushReplacementNamed(
-          _isSignedIn ? '/home' : '/confirm',
+          _isSignedIn ? (!signUpUsedLast ? '/confirm' : '/home') : '/confirm',
           arguments: _data,
         );
       },
