@@ -66,9 +66,9 @@ def lambda_handler(event, context):
 
     updatedTime = currentTime
 
-    # for i in range(10):
-    #     updatedTime = updatedTime - 86400
-    #     sentiment = getAllFromDate(updatedTime - 86400, updatedTime, "Tesla")
-    #     writeIntoDb(updatedTime, "Tesla", 706.5, sentiment)
+    for i in range(10):
+        updatedTime = updatedTime - 86400
+        sentiment = getAllFromDate(updatedTime - 86400, updatedTime, "Tesla")
+        writeIntoDb(updatedTime, "Tesla", 706.5, sentiment)
 
-    return (writeIntoDb(currentTime, "Tesla", 706.5, sentiment))["ResponseMetadata"]
+    # return (writeIntoDb(currentTime, "Tesla", 706.5, sentiment))["ResponseMetadata"]
