@@ -24,22 +24,23 @@ def lambda_handler(event, context):
         body = event
 
 
-    list = dbGetDay(event["company"]+"Daily", event["beginDate"])["Items"]
+    list = dbGetDay(body["company"]+"Daily", body["beginDate"])["Items"]
+
 
     returnItems = []
 
     for i in list:
         returnItems.append({
-            "TimeStamp" : i["TimeStamp"],
-            "Sentiment" : float(i["Sentiment"]),
-            "Stock" : float(i["Stock"])
+            "TimeStamp" : str(i["TimeStamp"]),
+            "Sentiment" : str(float(i["Sentiment"])),
+            "Stock" : i["Stock"]
         })
 
     print(returnItems)
 
     return {
         'statusCode': 200,
-        'body': returnItems
+        'body': json.dumps(returnItems)
     }
 
 
