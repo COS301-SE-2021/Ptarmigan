@@ -78,4 +78,11 @@ source_md5 = ""
 packagetype = "Zip"
 functions = ["writeDayIntoDB"]
 
+[function_build_definitions.65c5b77e-4142-429b-bfb9-ccba9d696010]
+codeuri = "/home/reinier/Documents/GitHub/Ptarmigan/backend/ServerlessApplication/ptarmigan/synthesize/getDailySentiment"
+runtime = "python3.8"
+source_md5 = ""
+packagetype = "Zip"
+functions = ["getDailySentiment"]
+
 [layer_build_definitions]
