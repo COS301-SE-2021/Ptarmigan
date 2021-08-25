@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5c84a0cb-3919-4206-be28-1a11af42aa4e" name="Changes" comment="Implemented update button for the scraper function">
+      <change afterPath="$PROJECT_DIR$/script/amazon-cognito-identity.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/script/amazon-cognito-identity.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/script/aws-cognito-sdk.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/script/aws-cognito-sdk.min.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/script/aws-sdk-2.487.0.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/script/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/script/jquery.min.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/login.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +44,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -45,6 +60,7 @@
       <option name="presentableId" value="Default" />
       <updated>1627893502900</updated>
       <workItem from="1627893504282" duration="17590000" />
+      <workItem from="1629885514454" duration="5634000" />
     </task>
     <task id="LOCAL-00001" summary="Initial setup and inclution of the header link including bootstrap styles">
       <created>1627893727808</created>
@@ -230,6 +246,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial setup and inclution of the header link including bootstrap styles" />
