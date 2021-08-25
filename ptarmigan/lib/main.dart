@@ -123,7 +123,6 @@ class MyApp extends StatelessWidget {
                 );
               }
               if (settings.name == '/confirm-reset') {
-                print("Navigator push : /CONFIRM");
                 return PageRouteBuilder(
                   pageBuilder: (_, __, ___) =>
                       ConfirmResetScreen(data: settings.arguments as LoginData),

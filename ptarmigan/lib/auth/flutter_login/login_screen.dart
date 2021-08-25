@@ -50,6 +50,8 @@ class _LoginState extends State<Login> {
         return "Sign in failed, please enter a correct password";
       }
       if (e.message.contains("User not found in the system.")) return e.message;
+
+      return "Sign in failed.";
       //await Amplify.Auth.signOut();   /////////////////////////////////////////MAKE SHIFT SOLUTION ---- NEEDS FIXING
       //return '${e.message} - ${e.recoverySuggestion}';
     }
@@ -110,9 +112,11 @@ class _LoginState extends State<Login> {
           accentColor: Colors.white,
           textFieldStyle: TextStyle(color: Colors.white)),
       onSubmitAnimationCompleted: () {
-        //print("Pushing replacement choice : " + _data.name);
+        
+        print("-----------Login/signup button pressed.--------");
+        print(_isSignedIn);
         Navigator.of(context).pushReplacementNamed(
-          _isSignedIn ? (!signUpUsedLast ? '/confirm' : '/home') : '/confirm',
+          _isSignedIn ? '/home' : '/confirm',
           arguments: _data,
         );
       },

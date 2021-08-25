@@ -26,20 +26,31 @@ class PopularTweetGenerator {
   Future<TweetJson> fetchTweet(String stock) async {
     print("Calling Tweet generator.");
 
+    var doubleBeginDate =
+        (DateTime.now().subtract(Duration(days: 3)).millisecondsSinceEpoch) /
+            1000;
+    var doubleEndDate = (DateTime.now().millisecondsSinceEpoch) / 1000;
+
+    int beginDate = doubleBeginDate.round();
+    int endDate = doubleEndDate.round();
+
+    print("BeginDate : " + beginDate.toString());
+    print("EndDate : " + endDate.toString());
     //print("calling api for feed list ");
     final response = await client.post(
       Uri.parse(
           "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/senthisize/getMostPopularTweet"),
       body: (jsonEncode(<String, dynamic>{
-        "BeginDate": 1628564655,
-        "EndDate": 1628659505,
+        "BeginDate": beginDate,
+        "EndDate": endDate,
         "CompanyName": stock
       })),
     );
     print("Finished API call");
     //print(response.body);
     if (response.statusCode != 200) {
-      throw Exception("API is not responding/ API Timed out");
+      print(response.body);
+      throw Exception("Weighted tweet API is not responding/ API Timed out.");
       //return ["N/A"];
     }
     var res = TweetJson.fromJson(jsonDecode(response.body));

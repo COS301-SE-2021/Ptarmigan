@@ -26,9 +26,6 @@ import 'package:social_embed_webview/platforms/twitter.dart';
 import 'package:social_embed_webview/social_embed_webview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-var feedimage;
-var feedImageLink;
-
 FeedImageGenerator generator = FeedImageGenerator();
 PopularTweetGenerator tweetGenerator = PopularTweetGenerator();
 
@@ -40,7 +37,9 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   late AuthUser _user;
   late bool _isLoading;
-
+  var feedimage;
+  var feedImageLink;
+  Widget _carousel = CircularProgressIndicator();
   /*late List<Todo> todos;
   late List<Feed> _feeds;
   late List<Feed> _feedsSub;
@@ -259,7 +258,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 Container(
                     padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
                     color: secondaryColor,
-                    child: itemGenerator()),
+                    child: _carousel),
                 Text(
                   "About us :",
                   textAlign: TextAlign.center,
@@ -349,6 +348,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
         },
       );
     } else {
+      print("Feed image is null.");
+      print(feedimage.toString());
       return (Text("No feed images provided"));
     }
   }
@@ -416,9 +417,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ))
       .toList();
 
-  Future<void> _initFeedInterests() async {
+  void _initFeedInterests() {
     print("FETCHING FEED IMAGES");
-    feedimage = await generator.fetchImages();
+    generator.fetchImages().then((value) => {
+          print("BOOM... state change"),
+          setState(() {
+            feedimage = value;
+            _carousel = itemGenerator();
+          })
+        });
+
     if (feedimage == null) feedimage = ["Apple"];
 
     // if (feedimage != null) {

@@ -136,7 +136,7 @@ class _StockScreenState extends State<StockScreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-                child: Text(feedimage[index]),
+                child: Text(feedList[index]),
               ),
             ],
           ),

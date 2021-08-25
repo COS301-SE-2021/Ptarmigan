@@ -23,13 +23,13 @@ class FeedImageGenerator {
   Client client = Client();
 
   Future<List> fetchImages() async {
-    //print("calling api for feed list ");
+    print("calling api for feed list ");
     final response = await client.post(Uri.parse(
         "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/scraper/returnBucketList"));
 
     //print(response.body);
     if (response.statusCode != 200) {
-      throw Exception("API is not responding/ API Timed out");
+      throw Exception("BucketList API is not responding/ API Timed out");
       return ["N/A"];
     }
     var res = FeedImage.fromJson(jsonDecode(response.body));
@@ -37,7 +37,7 @@ class FeedImageGenerator {
     //print(res.contents[1]);
 
     var temp = jsonEncode(res.contents);
-    //print("temp : " + temp);
+    print("temp : " + temp);
 
     var finalContents = jsonDecode(temp);
     //print(finalContents[1]);
