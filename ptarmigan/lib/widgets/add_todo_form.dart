@@ -15,12 +15,10 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
-
 class AddTodoForm extends StatefulWidget {
   @override
   _AddTodoFormState createState() => _AddTodoFormState();
 }
-
 
 class _AddTodoFormState extends State<AddTodoForm> {
   final _nameController = TextEditingController();
@@ -34,9 +32,9 @@ class _AddTodoFormState extends State<AddTodoForm> {
     // create a new Todo from the form values
     // `isComplete` is also required, but should start false in a new Todo
     Todo newTodo = Todo(
-        name: name,
-        description: description.isNotEmpty ? description : null,
-        isComplete: false);
+      name: name,
+      description: description.isNotEmpty ? description : null,
+    );
 
     try {
       // to write data to DataStore, we simply pass an instance of a model to

@@ -2,3 +2,4 @@ requests
 ujson
 pymongo
 marshmallow
+pytest
