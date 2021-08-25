@@ -16,31 +16,39 @@ def dbGetDay(tableName, startDate):
 
 def lambda_handler(event, context):
     """This function will return a simple day stock along with the sentiment of a day """
-    body = {}
-    if "body" in event:
-        body = json.loads(event["body"])
+    try:
+        body = {}
+        if "body" in event:
+            body = json.loads(event["body"])
 
-    else:
-        body = event
-
-
-    list = dbGetDay(body["company"]+"Daily", body["beginDate"])["Items"]
+        else:
+            body = event
 
 
-    returnItems = []
+        list = dbGetDay(body["company"]+"Daily", body["beginDate"])["Items"]
 
-    for i in list:
-        returnItems.append({
-            "TimeStamp" : str(i["TimeStamp"]),
-            "Sentiment" : str(float(i["Sentiment"])),
-            "Stock" : i["Stock"]
-        })
 
-    print(returnItems)
+        returnItems = []
 
-    return {
-        'statusCode': 200,
-        'body': json.dumps(returnItems)
-    }
+        for i in list:
+            returnItems.append({
+                "TimeStamp" : str(i["TimeStamp"]),
+                "Sentiment" : str(float(i["Sentiment"])),
+                "Stock" : i["Stock"]
+            })
+
+        print(returnItems)
+
+        return {
+            'statusCode': 200,
+            'body': json.dumps(returnItems)
+        }
+    except:
+        print(returnItems)
+
+        return {
+            'statusCode': 400,
+            'body': json.dumps("Invalid input")
+        }
 
 
