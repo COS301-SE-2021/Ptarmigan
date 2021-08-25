@@ -44,8 +44,6 @@ def lambda_handler(event, context):
             'body': json.dumps(returnItems)
         }
     except:
-        print(returnItems)
-
         return {
             'statusCode': 400,
             'body': json.dumps("Invalid input")
