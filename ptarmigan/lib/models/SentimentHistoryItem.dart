@@ -5,3 +5,6 @@ class SentimentHistoryItem {
 }
 
 List demoRecentFiles = [];
+
+String currentSentiment = "";
+String currentStock = "";

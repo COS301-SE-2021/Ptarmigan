@@ -29,9 +29,9 @@ class StorageDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            Provider.of<FeedChanger>(context, listen: false).getFeedChoice,
+            Provider.of<FeedChanger>(context, listen: true).getFeedChoice,
             style: TextStyle(
-              fontSize: 36,
+              fontSize: 32,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -45,13 +45,7 @@ class StorageDetails extends StatelessWidget {
           ),
           SizedBox(),
           Graph(),
-          StockAndSentimentValues(
-            svgSrc: "assets/icons/folder.svg",
-            title: "Other Files",
-            amountOfFiles: "1.3GB",
-            numOfFiles: 1328,
-            percentage: 10,
-          ),
+          StockAndSentimentValues(),
         ],
       ),
     );
