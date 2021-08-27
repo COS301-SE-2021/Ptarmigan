@@ -1,7 +1,7 @@
 import boto3
 import time
 from boto3.dynamodb.conditions import Key
-
+import requests
 
 def calculateSentiment(content):
     totalVotes = 0
@@ -51,6 +51,9 @@ def writeIntoDb(date, company, stock, sentiment):
     )
     return response
 
+def getStockPrice(date,company):
+    requestUrl = f"https://api.polygon.io/v3/reference/tickers?market=stocks&search={company} &active=true&sort=ticker&order=asc&limit=10&apiKey=PNqoXU3luX7smsggLGPacHd8JnKZkDMV"
+    requestReturn = requests.get(requestUrl)
 
 def lambda_handler(event, context):
     # getAllFromDate(int(time.time())-86400, int(time.time()), "Tesla")
