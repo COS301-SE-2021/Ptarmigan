@@ -121,7 +121,6 @@ def lambda_handler(event, context):
     for i in range(10):
         updatedTime = updatedTime - 86400
         sentiment = getAllFromDate(updatedTime - 86400, updatedTime, companyName)
-
         stock = getStockPrice(updatedTime,stockList,ticker)
         writeIntoDb(updatedTime, companyName, 706.5, sentiment)
 
