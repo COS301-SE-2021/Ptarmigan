@@ -3,6 +3,8 @@ import time
 from boto3.dynamodb.conditions import Key
 import requests
 import json
+from datetime import datetime
+
 
 def calculateSentiment(content):
     totalVotes = 0
@@ -53,20 +55,25 @@ def writeIntoDb(date, company, stock, sentiment):
     return response
 
 def getStockPrice(date,ticker):
+    formatDate = datetime.fromtimestamp(date)
+    formatDate = formatDate.strftime("%Y-%m-%d")
     requestUrl = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=VDLMI3ZNV3LSSLDZ"
     requestReturn = requests.get(requestUrl)
     requestResults = json.loads(requestReturn.text)
     if not requestResults['Time Series (Daily)']:
         # pull crypto symblo from ticker
-        crypto = stuff[2:5]
+        crypto = ticker[2:5]
         # add appropriate field to list
         requestUrlCrypto = f"https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency={crypto}&to_currency=USD&apikey=VDLMI3ZNV3LSSLDZ"
         requestReturnCrypto = requests.get(requestUrlCrypto)
         requestResultsCrypto = json.loads(requestReturnCrypto.text)
+        requestResults = (requestResultsCrypto['Realtime Currency Exchange Rate'])['5. Exchange Rate']
     else:
         # add appropriate field to list
-        requestResults = requestResults['Global Quote']
-        listPrices.append(requestResults['08. previous close'])
+        requestResults = requestResults['Time Series (Daily)']
+        requestResults = requestResults[formatDate]
+        requestResults = requestResults['4. close']
+    return formatDate
 
 
 def getTicker(company):
@@ -100,7 +107,7 @@ def lambda_handler(event, context):
         updatedTime = updatedTime - 86400
         sentiment = getAllFromDate(updatedTime - 86400, updatedTime, companyName)
         ticker = getTicker(companyName)
-        stock = getStockPrice(date,ticker)
+        stock = getStockPrice(updatedTime,ticker)
         writeIntoDb(updatedTime, companyName, 706.5, sentiment)
 
     # return (writeIntoDb(currentTime, "Tesla", 706.5, sentiment))["ResponseMetadata"]
