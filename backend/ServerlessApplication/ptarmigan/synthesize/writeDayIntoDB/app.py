@@ -63,17 +63,19 @@ def getStockPrice(date,ticker):
     if not requestResults['Time Series (Daily)']:
         # pull crypto symblo from ticker
         crypto = ticker[2:5]
-        # add appropriate field to list
+        # https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo example return of api used below
         requestUrlCrypto = f"https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency={crypto}&to_currency=USD&apikey=VDLMI3ZNV3LSSLDZ"
         requestReturnCrypto = requests.get(requestUrlCrypto)
         requestResultsCrypto = json.loads(requestReturnCrypto.text)
         requestResults = (requestResultsCrypto['Realtime Currency Exchange Rate'])['5. Exchange Rate']
     else:
-        # add appropriate field to list
         requestResults = requestResults['Time Series (Daily)']
-        requestResults = requestResults[formatDate]
+        try:
+            requestResults = requestResults[formatDate]
+        except:
+            return ("No stock data for this date yet")
         requestResults = requestResults['4. close']
-    return formatDate
+    return requestResults
 
 
 def getTicker(company):
