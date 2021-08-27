@@ -55,25 +55,33 @@ def writeIntoDb(date, company, stock, sentiment):
     return response
 
 def getStockPrice(date,ticker):
+    #get date from timestamp into format "2021-08-24"
     formatDate = datetime.fromtimestamp(date)
     formatDate = formatDate.strftime("%Y-%m-%d")
+
+    # https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo example return of api used below
     requestUrl = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker}&apikey=VDLMI3ZNV3LSSLDZ"
+
     requestReturn = requests.get(requestUrl)
     requestResults = json.loads(requestReturn.text)
+    #check if there was a return if not curr exchange api
     if not requestResults['Time Series (Daily)']:
         # pull crypto symblo from ticker
-        crypto = ticker[2:5]
-        # https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo example return of api used below
+        crypto = ticker[2:5] # this should be in format X:BTCUSD - pulling the BTC
+    # https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=CNY&apikey=demo example return
         requestUrlCrypto = f"https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency={crypto}&to_currency=USD&apikey=VDLMI3ZNV3LSSLDZ"
         requestReturnCrypto = requests.get(requestUrlCrypto)
         requestResultsCrypto = json.loads(requestReturnCrypto.text)
         requestResults = (requestResultsCrypto['Realtime Currency Exchange Rate'])['5. Exchange Rate']
     else:
+        #if did return move into item time series
         requestResults = requestResults['Time Series (Daily)']
+        #try get the date
         try:
             requestResults = requestResults[formatDate]
         except:
             return ("No stock data for this date yet")
+        #get close of the date
         requestResults = requestResults['4. close']
     return requestResults
 
