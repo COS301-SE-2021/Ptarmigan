@@ -54,16 +54,11 @@ def writeIntoDb(date, company, stock, sentiment):
     )
     return response
 
-def getStockPrice(date,ticker):
+def getStockPrice(date,requestResults,ticker):
     #get date from timestamp into format "2021-08-24"
     formatDate = datetime.fromtimestamp(date)
     formatDate = formatDate.strftime("%Y-%m-%d")
 
-    # https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo example return of api used below
-    requestUrl = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker}&apikey=VDLMI3ZNV3LSSLDZ"
-
-    requestReturn = requests.get(requestUrl)
-    requestResults = json.loads(requestReturn.text)
     #check if there was a return if not curr exchange api
     if not requestResults['Time Series (Daily)']:
         # pull crypto symblo from ticker
@@ -85,6 +80,14 @@ def getStockPrice(date,ticker):
         requestResults = requestResults['4. close']
     return requestResults
 
+def getStockList(ticker):
+    # https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo example return of api used below
+    requestUrl = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={ticker}&apikey=VDLMI3ZNV3LSSLDZ"
+
+    requestReturn = requests.get(requestUrl)
+    requestResults = json.loads(requestReturn.text)
+
+    return requestResults
 
 def getTicker(company):
     requestUrl = f"https://api.polygon.io/v3/reference/tickers?market=stocks&search={company} &active=true&sort=ticker&order=asc&limit=10&apiKey=PNqoXU3luX7smsggLGPacHd8JnKZkDMV"
@@ -113,11 +116,13 @@ def lambda_handler(event, context):
 
     updatedTime = currentTime
 
+    ticker = getTicker(companyName)
+    stockList = getStockList(ticker)
     for i in range(10):
         updatedTime = updatedTime - 86400
         sentiment = getAllFromDate(updatedTime - 86400, updatedTime, companyName)
-        ticker = getTicker(companyName)
-        stock = getStockPrice(updatedTime,ticker)
+
+        stock = getStockPrice(updatedTime,stockList,ticker)
         writeIntoDb(updatedTime, companyName, 706.5, sentiment)
 
     # return (writeIntoDb(currentTime, "Tesla", 706.5, sentiment))["ResponseMetadata"]
