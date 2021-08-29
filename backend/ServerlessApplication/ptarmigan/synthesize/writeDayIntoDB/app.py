@@ -61,13 +61,12 @@ def getStockPrice(date,requestResults,ticker):
 
     #check if there was a return if not curr exchange api
     if not requestResults['Time Series (Daily)']:
-        # pull crypto symblo from ticker
-        crypto = ticker[2:5] # this should be in format X:BTCUSD - pulling the BTC
-    # https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=CNY&apikey=demo example return
-        requestUrlCrypto = f"https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency={crypto}&to_currency=USD&apikey=VDLMI3ZNV3LSSLDZ"
-        requestReturnCrypto = requests.get(requestUrlCrypto)
-        requestResultsCrypto = json.loads(requestReturnCrypto.text)
-        requestResults = (requestResultsCrypto['Realtime Currency Exchange Rate'])['5. Exchange Rate']
+        requestResults = requestResults['Time Series (Digital Currency Daily)']
+        try:
+            requestResults = requestResults[formatDate]
+        except:
+            return("No exchange rate data for this date")
+        requestResults = requestResults['4b. close (USD)']
     else:
         #if did return move into item time series
         requestResults = requestResults['Time Series (Daily)']
@@ -86,6 +85,14 @@ def getStockList(ticker):
 
     requestReturn = requests.get(requestUrl)
     requestResults = json.loads(requestReturn.text)
+
+    if not requestResults['Time Series (Daily)']:
+        # pull crypto symblo from ticker
+        crypto = ticker[2:5] # this should be in format X:BTCUSD - pulling the BTC
+    # https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=BTC&market=USD&apikey=VDLMI3ZNV3LSSLDZ example return
+        requestUrlCrypto = f"https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol={crypto}&market=USD&apikey=VDLMI3ZNV3LSSLDZ"
+        requestReturnCrypto = requests.get(requestUrlCrypto)
+        requestResults = json.loads(requestReturnCrypto.text)
 
     return requestResults
 
