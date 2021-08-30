@@ -55,3 +55,39 @@
 <script src="./script/amazon-cognito-identity.min.js"></script>
 <script src ="login.js"></script>
 
+<script>
+    function signInButton(){
+        var authenticationData = {
+            Username: document.getElementById("inputUsername").value,
+            Username: document.getElementById("inputUsername").value,
+        };
+
+        var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+
+        var poolData = {
+            UserPoolId : _config.cognito.userPoolId,
+            ClientId : _config.cognito.clientId,
+        };
+
+        var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+        var userData = {
+            Username ; document.getElementById("inputUsername").value,
+            Pool : userPool;
+        };
+
+        var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+        cognitoUser.authenticationUser(authenticationDetails);
+
+        cognitoUser.authenticationUser(authenticationDetails, {
+            onSuccess: fnction(result){
+            var accessToken = result.getAccessToken().getJwtToken();
+            console.log(accessToken);
+            },
+            onFailure: function(err){
+                    alert(err.message || JSON.stringify(err));
+            },
+            });
+    }
+
+</script>
