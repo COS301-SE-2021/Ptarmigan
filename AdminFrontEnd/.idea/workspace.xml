@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5c84a0cb-3919-4206-be28-1a11af42aa4e" name="Changes" comment="added proper login">
-      <change afterPath="$PROJECT_DIR$/script/amazon-cognito-identity.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/amazon-cognito-identity.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/aws-cognito-sdk.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/aws-cognito-sdk.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/aws-sdk-2.487.0.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/jquery.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/jquery.min.map" afterDir="false" />
+    <list default="true" id="5c84a0cb-3919-4206-be28-1a11af42aa4e" name="Changes" comment="Update">
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userManagement.html" beforeDir="false" afterPath="$PROJECT_DIR$/userManagement.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +25,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/index.html" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1wAFU6MAHRToHkhRXW20Lk2T7II" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -237,7 +234,42 @@
       <option name="project" value="LOCAL" />
       <updated>1629892140338</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Update">
+      <created>1630330974655</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1630330974655</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Update">
+      <created>1630331057792</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1630331057792</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Update">
+      <created>1630331214848</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1630331214848</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Update">
+      <created>1630331292535</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1630331292535</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Update">
+      <created>1630331540500</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1630331540500</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,7 +288,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Initial setup and inclution of the header link including bootstrap styles" />
     <MESSAGE value="Added boilerplate of BS" />
     <MESSAGE value="Added boilerplate of BS for Navbar" />
     <MESSAGE value="Made Adjustments to the Nav" />
@@ -281,6 +312,7 @@
     <MESSAGE value="Update class names" />
     <MESSAGE value="Changed names in the template" />
     <MESSAGE value="added proper login" />
-    <option name="LAST_COMMIT_MESSAGE" value="added proper login" />
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
   </component>
 </project>
