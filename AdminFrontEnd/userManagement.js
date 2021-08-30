@@ -16,7 +16,25 @@ $('#logoutCompany').click(function () {
     window.location.href = "login.html";
 });
 
+var typingTimer;                //timer identifier
+var doneTypingInterval = 1000;  //time in ms, 5 second for example
+
 $(document).ready(function () {
+    $("#companyNameInput").on('keyup', function () {
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(doneTyping, doneTypingInterval);
+    });
+
+//on keydown, clear the countdown
+    $("#companyNameInput").on('keydown', function () {
+        clearTimeout(typingTimer);
+    });
+
+//user is "finished typing," do something
+    function doneTyping () {
+        console.log("Somethibg")
+    }
+
     //This will populate the company table with elements from the db
     let getBucketItemsURL = "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/scraper/returnBucketList"
 
