@@ -1,7 +1,7 @@
 class FeedSentiment {
   final String beginDate;
 //  final int endDate;
-  final String intervalData;
+  String intervalData;
 
   FeedSentiment({
     required this.beginDate,

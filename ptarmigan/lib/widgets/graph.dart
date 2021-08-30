@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:amplify_datastore/amplify_datastore.dart';
+import 'package:ptarmigan/feedSentiment.dart';
 import 'package:ptarmigan/widgets/SentimentHistory.dart';
 
 import '../../../constants.dart';
@@ -18,19 +19,23 @@ import 'package:bezier_chart/bezier_chart.dart';
 import 'package:ptarmigan/services/list_changer.dart';
 import '/models/SentimentHistoryItem.dart';
 import 'package:ptarmigan/widgets/todo_item.dart';
-import 'package:ptarmigan/FeedSentiment.dart';
+import 'package:ptarmigan/FeedSentiment.dart' as FeedSent;
 import 'package:http/http.dart' as http;
 import '../models/Todo.dart';
+import 'package:ptarmigan/services/feed_changer.dart';
+import '../models/Feed.dart';
 
 class Graph extends StatefulWidget {
   @override
   _GraphState createState() => _GraphState();
 }
 
-class _GraphState extends State<Graph> {
-  List<DataPoint<dynamic>> list = [];
+List<Todo> todosGraph = [];
 
-  Future<void> fetchNewTodos(var feedIdentifier) async {
+List<DataPoint<dynamic>> list = [];
+
+class _GraphState extends State<Graph> {
+  Future<String> fetchNewTodos(var feedIdentifier) async {
     try {
       //  Amplify.DataStore.clear();
       //  Delete();
@@ -38,14 +43,15 @@ class _GraphState extends State<Graph> {
       // String a =
       //     '[{"BeginDate": 1623005418000, "EndDate": 1623610218000, "IntervalData": 0}, {"BeginDate": 1623610218000, "EndDate": 1624215018000, "IntervalData": 0}, {"BeginDate": 1624215018000, "EndDate": 1624819818000, "IntervalData": 0}, {"BeginDate": 1624819818000, "EndDate": 1625424618000, "IntervalData": 0}, {"BeginDate": 1625424618000, "EndDate": 1626029418000, "IntervalData": 0}, {"BeginDate": 1626029418000, "EndDate": 1626634218000, "IntervalData": 0}, {"BeginDate": 1626634218000, "EndDate": 1627239018000, "IntervalData": 0}, {"BeginDate": 1627239018000, "EndDate": 1627843818000, "IntervalData": 0}, {"BeginDate": 1627843818000, "EndDate": 1628448618000, "IntervalData": 0.06540074664700189}, {"BeginDate": 1628448618000, "EndDate": 1629053418000, "IntervalData": 0}]';
       // final parsed = jsonDecode(a).cast<Map<String, dynamic>>();
-
+      print("PPPPPEEEEEEEEEEEEEEEEEGGGGGGGGGGGG");
       final response2 = await http.post(
           Uri.parse(
               'https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/senthisize/getDailySentiment'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
-          body: jsonEncode({"company": "Tesla", "beginDate": 1628899200}));
+          body:
+              jsonEncode({"company": feedIdentifier, "beginDate": 1628899200}));
 
       if (response2.statusCode == 200) {
         print(response2.body);
@@ -57,7 +63,35 @@ class _GraphState extends State<Graph> {
         //  List<FeedSentiment> sentimentFeed = List<FeedSentiment.fromJson(map));
         List<FeedSentiment> test1 = List<FeedSentiment>.from(
             response.map((i) => FeedSentiment.fromJson(i)));
-        convertToGraph(test1);
+
+        todosGraph = [];
+        for (int i = 0; i < test1.length; i++) {
+          int len = test1[i].intervalData.toString().indexOf(".") + 1;
+          TemporalDate a = TemporalDate.fromString(
+              DateTime.fromMillisecondsSinceEpoch(
+                      int.parse(test1[i].beginDate) * 1000)
+                  .toIso8601String()
+                  .substring(0, 10));
+
+          if (double.parse(test1[i].intervalData) < 0) {
+            len = len - 1;
+          }
+          print("ooooooooooooooooooooooooooooo");
+          print((((test1[i].intervalData)).toString().substring(0, len) + "%")
+              .toString());
+
+          Todo newTodo = Todo(
+            name: "Tesla",
+            description: ((double.parse(test1[i].intervalData) * 50) + 50)
+                .toString()
+                .substring(0, 2),
+
+            date:
+                a, //TemporalDate.fromMillisecondsSinceEpoch(test1[0].beginDate);
+          );
+          todosGraph.add(newTodo);
+        }
+        //convertToGraph(test1);
       } else {
         // If the server did not return a 201 CREATED response,
         // then throw an exception.
@@ -67,16 +101,18 @@ class _GraphState extends State<Graph> {
     } catch (e) {
       print('An error occurred while querying Todos: $e');
     }
+
+    return "found";
   }
 
-  void convertToGraph(List<FeedSentiment> entry) {
+  void convertToGraph(List<Todo> entry) {
     SentimentHistoryItem newItem = new SentimentHistoryItem();
-    demoRecentFiles = [];
+    list = [];
     for (int i = 0; i < entry.length; i++) {
-      print("plick");
+      print("plick: " + (double.parse(entry[i].description)).toString());
       list.add(new DataPoint<DateTime>(
-        value: double.parse(entry[i].intervalData),
-        xAxis: DateTime.parse(entry[i].beginDate.toString()),
+        value: (double.parse(entry[i].description)),
+        xAxis: DateTime.parse(entry[i].date.toString()),
       )); //DateTime.parse(entry[i].date.toString())));
 
     }
@@ -88,15 +124,23 @@ class _GraphState extends State<Graph> {
   //build---------------------------------------------------------------
 
   Widget build(BuildContext context) => FutureBuilder(
-      future: fetchNewTodos("Tesla"),
+      future: fetchNewTodos(Provider.of<FeedChanger>(context)
+          .getFeedChoice), //Provider.of<FeedChanger>(context).getFeedChoice),
+
       builder: (context, snapshot) {
         final fromDate = DateTime(2021, 06, 15);
         final toDate = DateTime.now();
 
         final date1 = DateTime.now().subtract(Duration(days: 2));
         final date2 = DateTime.now().subtract(Duration(days: 3));
+        fetchNewTodos(Provider.of<FeedChanger>(context).getFeedChoice);
+        convertToGraph(todosGraph);
 
-        if (snapshot.hasData == false) {
+        for (int i = 0; i < list.length; i++) {
+          print("PORK: " + list[i].value.toString());
+        }
+
+        if (snapshot.hasData == true) {
           return Container(
             //Grapg Container
             height: 240,
@@ -130,57 +174,52 @@ class _GraphState extends State<Graph> {
                       lineColor: Colors.green,
                       lineStrokeWidth: 2.0,
                       //   label: "Dutysdas",
-                      onMissingValue: (dateTime) {
-                        if (dateTime.day.isEven) {
-                          return 50;
-                        }
-                        return 50;
-                      },
+
                       data: list,
-                      /*    [
-                  DataPoint<DateTime>(
-                      value: 50,
-                      xAxis: DateTime.now().subtract(Duration(days: 14))),
-                  DataPoint<DateTime>(
-                      value: 50,
-                      xAxis: DateTime.now().subtract(Duration(days: 13))),
-                  DataPoint<DateTime>(
-                      value: 50,
-                      xAxis: DateTime.now().subtract(Duration(days: 12))),
-                  DataPoint<DateTime>(
-                      value: 50,
-                      xAxis: DateTime.now().subtract(Duration(days: 11))),
-                  DataPoint<DateTime>(
-                      value: 50,
-                      xAxis: DateTime.now().subtract(Duration(days: 10))),
-                  DataPoint<DateTime>(
-                      value: 45,
-                      xAxis: DateTime.now().subtract(Duration(days: 9))),
-                  DataPoint<DateTime>(
-                      value: 48,
-                      xAxis: DateTime.now().subtract(Duration(days: 8))),
-                  DataPoint<DateTime>(
-                      value: 56,
-                      xAxis: DateTime.now().subtract(Duration(days: 7))),
-                  DataPoint<DateTime>(
-                      value: 54,
-                      xAxis: DateTime.now().subtract(Duration(days: 6))),
-                  DataPoint<DateTime>(
-                      value: 44,
-                      xAxis: DateTime.now().subtract(Duration(days: 5))),
-                  DataPoint<DateTime>(
-                      value: 48,
-                      xAxis: DateTime.now().subtract(Duration(days: 4))),
-                  DataPoint<DateTime>(
-                      value: 50,
-                      xAxis: DateTime.now().subtract(Duration(days: 3))),
-                  DataPoint<DateTime>(
-                      value: 53,
-                      xAxis: DateTime.now().subtract(Duration(days: 2))),
-                  DataPoint<DateTime>(
-                      value: 50,
-                      xAxis: DateTime.now().subtract(Duration(days: 1))),
-                ], */
+                      /*     [
+                        DataPoint<DateTime>(
+                            value: 50,
+                            xAxis: DateTime.now().subtract(Duration(days: 14))),
+                        DataPoint<DateTime>(
+                            value: 50,
+                            xAxis: DateTime.now().subtract(Duration(days: 13))),
+                        DataPoint<DateTime>(
+                            value: 50,
+                            xAxis: DateTime.now().subtract(Duration(days: 12))),
+                        DataPoint<DateTime>(
+                            value: 50,
+                            xAxis: DateTime.now().subtract(Duration(days: 11))),
+                        DataPoint<DateTime>(
+                            value: 50,
+                            xAxis: DateTime.now().subtract(Duration(days: 10))),
+                        DataPoint<DateTime>(
+                            value: 45,
+                            xAxis: DateTime.now().subtract(Duration(days: 9))),
+                        DataPoint<DateTime>(
+                            value: 48,
+                            xAxis: DateTime.now().subtract(Duration(days: 8))),
+                        DataPoint<DateTime>(
+                            value: 56,
+                            xAxis: DateTime.now().subtract(Duration(days: 7))),
+                        DataPoint<DateTime>(
+                            value: 54,
+                            xAxis: DateTime.now().subtract(Duration(days: 6))),
+                        DataPoint<DateTime>(
+                            value: 44,
+                            xAxis: DateTime.now().subtract(Duration(days: 5))),
+                        DataPoint<DateTime>(
+                            value: 48,
+                            xAxis: DateTime.now().subtract(Duration(days: 4))),
+                        DataPoint<DateTime>(
+                            value: 50,
+                            xAxis: DateTime.now().subtract(Duration(days: 3))),
+                        DataPoint<DateTime>(
+                            value: 53,
+                            xAxis: DateTime.now().subtract(Duration(days: 2))),
+                        DataPoint<DateTime>(
+                            value: 50,
+                            xAxis: DateTime.now().subtract(Duration(days: 1))),
+                      ],*/
                     ),
                   ],
                   config: BezierChartConfig(
