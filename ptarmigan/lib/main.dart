@@ -1,6 +1,6 @@
 // @dart=2.9
 // dart async library we will refer to when setting up real time updates
-
+/*
 import '/constants.dart';
 import 'controllers/MenuController.dart';
 import 'widgets/mainScreen.dart';
@@ -39,23 +39,11 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-}
-
-
-
-
-
-
-
-
-
-
-
-
+}*/
 
 //import 'dart:async';
 // flutter and ui libraries
-/*import 'package:amplify_auth_cognito/method_channel_auth_cognito.dart';
+import 'package:amplify_auth_cognito/method_channel_auth_cognito.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // amplify packages we will need to use
@@ -75,18 +63,21 @@ import 'amplifyconfiguration.dart';
 
 import 'auth/flutter_login/login_screen.dart';
 import 'constants.dart';
+import 'controllers/MenuController.dart';
 import 'models/ModelProvider.dart';
 import 'models/Todo.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+
+import 'services/list_changer.dart';
 
 final ValueNotifier feedID = ValueNotifier("");
 
 //final AmplifyDataStore _dataStorePlugin =
 // AmplifyDataStore(modelProvider: ModelProvider.instance);
 
-final AmplifyAPI _apiPlugin = AmplifyAPI();
-final AmplifyAuthCognito _authPlugin = AmplifyAuthCognito();
+//final AmplifyAPI _apiPlugin = AmplifyAPI();
+//final AmplifyAuthCognito _authPlugin = AmplifyAuthCognito();
 //List<Todo> todos;
 //List<Feed> _feeds;
 //List<Feed> _feedsSub;
@@ -103,9 +94,11 @@ class MyApp extends StatelessWidget {
     //_configureAmplify();
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider.value(
-            value: FeedChanger(),
+          ChangeNotifierProvider(
+            create: (context) => MenuController(),
           ),
+          ChangeNotifierProvider.value(value: FeedChanger()),
+          ChangeNotifierProvider.value(value: ListChanger())
         ],
         child: MaterialApp(
             theme: ThemeData.dark().copyWith(

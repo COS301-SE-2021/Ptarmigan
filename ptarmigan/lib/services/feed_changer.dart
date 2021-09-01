@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-
 class FeedChanger extends ChangeNotifier {
   var _feedChoice = "";
 
@@ -8,9 +7,9 @@ class FeedChanger extends ChangeNotifier {
     return _feedChoice;
   }
 
-  void changeFeed(String a) {
+  Future<void> changeFeed(String a) async {
     _feedChoice = a;
 
-    notifyListeners();
+    //notifyListeners();
   }
 }
