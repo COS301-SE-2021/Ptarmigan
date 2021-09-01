@@ -152,7 +152,7 @@ class SideMenu extends StatelessWidget {
             svgSrc: "assets/icons/menu_tran.svg",
             press: () {},
           ), */
-        )
+        ),
       ]),
     );
     // );

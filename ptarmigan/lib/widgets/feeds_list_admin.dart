@@ -16,20 +16,9 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:amplify_api/amplify_api.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
-
-
-
-
-
-
-
-
-
 class FeedsListAdmin extends StatelessWidget {
   final List<Todo> todos;
   final List<Feed> feeds;
-
-  
 
   final pageViewController = PageController();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -39,20 +28,18 @@ class FeedsListAdmin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 280,
+      //  width: 280,
       height: double.infinity,
       color: Colors.white,
       child: Stack(
         children: [
           Container(
-              child: feeds.length >= 1
-                  ? ListView(
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                      scrollDirection: Axis.vertical,
-                      children: feeds
-                          .map((feeds) => FeedItemsAdmin(feed: feeds))
-                          .toList())
-                  : Center(child: Text(''))),
+            child: Padding(
+                padding: EdgeInsets.fromLTRB(0, 220, 0, 0),
+                child: Row(
+                  children: [Text("Bob")],
+                )),
+          ),
         ],
       ),
     );
