@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:ptarmigan/services/feed_changer.dart';
 import 'package:ptarmigan/services/list_changer.dart';
+import 'package:ptarmigan/widgets/entry_widget.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider.value(value: FeedChanger()),
           ChangeNotifierProvider.value(value: ListChanger())
         ],
-        child: MainScreen(),
+        child: EntryScreen(), //MainScreen(),
       ),
     );
   }
