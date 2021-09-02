@@ -6,7 +6,7 @@ function addCompanyToTable(name){
                 <button type="button" class="btn btn-danger removeOnClick">Delete</button>
             </th>
             <th scope="col">
-                <button type="button" class="btn btn-success">View</button>
+                <button type="button" class="btn btn-success viewClick">View</button>
             </th>
         </tr>`
     $("#companyTable").prepend(content)
@@ -45,7 +45,6 @@ $('#parameterTable').on('click', '.removeOnClick', function(e){
     $(this).closest('tr').remove()
 })
 
-
 function addAdditionalParametersToList(){
     let value = $("#additionalScrapeParameters").val()
     if (value == ""){
@@ -61,6 +60,16 @@ function addAdditionalParametersToList(){
     $("#additionalScrapeParameters").val("")
 
 }
+
+// View button populates the parameter table, ticker symbol and Company name
+
+$('#companyTable').on('click', '.viewClick', function() {
+    let companyName = $(this).parent().parent().find("td").text()
+    addCompanyTickerToDropdown(ticker, companyName, index)
+    loadTickerSymbols()
+    addAdditionalParametersToList()
+});
+
 
 //logout
 
