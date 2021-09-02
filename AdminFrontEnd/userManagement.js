@@ -51,7 +51,8 @@ function addAdditionalParametersToList(){
     if (value == ""){
         alert("Please enter data into the input box")
     }
-    tableRow = `<tr>
+    tableRow = `
+        <tr>
             <td scope="row" class="parameterName">${value}</td>
             <th scope="col">
                 <button type="button" class="btn btn-danger removeOnClick">Delete</button>
@@ -59,16 +60,28 @@ function addAdditionalParametersToList(){
         </tr>`
     $("#parameterTable").prepend(tableRow)
     $("#additionalScrapeParameters").val("")
-
 }
 
 function getFormDataFromPage(){
     let companyName = $("#companyNameInput").val()
     let tickerSymbol = $("#tickerDropDown").val()
 
-    let additionalParameters
+    let additionalParameters = []
+    $(".parameterName").each(function (){
+        additionalParameters.push($(this).text())
+    })
 
-    console.log(companyName + tickerSymbol)
+    jsonObj = {
+        content: companyName,
+        Ticker: tickerSymbol,
+        Associated1: additionalParameters[0]
+    }
+
+    console.log(jsonObj)
+
+
+
+    console.log(companyName + tickerSymbol + additionalParameters)
 
 
 }
@@ -127,7 +140,6 @@ $(document).ready(function () {
 
     //Add event listener to the dynamically created events
     $('#companyTable').on('click', '.removeOnClick', function() {
-        console.log("CLICK")
         $(this).addClass("disabled")
         companyName = $(this).parent().parent().find("td").text()
         // $(this).parent().parent().remove()
