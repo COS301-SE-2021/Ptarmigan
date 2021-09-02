@@ -39,15 +39,18 @@ function clearDropdown(){
 }
 
 function addAdditionalParametersToList(){
-
-    value = $("#additionalScrapeParameters").val()
+    let value = $("#additionalScrapeParameters").val()
+    if (value == ""){
+        alert("Please enter data into the input box")
+    }
     tableRow = `<tr>
-            <td scope="row" class="parameterName">${name}</td>
+            <td scope="row" class="parameterName">${value}</td>
             <th scope="col">
                 <button type="button" class="btn btn-danger removeOnClick">Delete</button>
             </th>
         </tr>`
     $("#parameterTable").prepend(tableRow)
+    $("#additionalScrapeParameters").val("")
 
 }
 
