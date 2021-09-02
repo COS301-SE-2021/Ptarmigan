@@ -104,7 +104,18 @@ $('#companyTable').on('click', '.viewClick', function() {
     let companyName = $(this).parent().parent().find("td").text()
     $('#companyNameInput').val(companyName)
     // loadTickerSymbols()
-    $('#tickerDropDown').val('AAPL')
+
+    companySearch = $("#companyNameInput").val()
+    link = `https://api.polygon.io/v3/reference/tickers?search=${companySearch}&active=true&sort=ticker&order=asc&limit=10&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp`
+    $.get(link, data =>{
+        console.log(data)
+        for (i = 0; i < data.results.length; i++){
+            console.log(data.results[i]["ticker"])
+            addCompanyTickerToDropdown(data.results[i]["ticker"], data.results[i]["name"], i)
+        }
+        $('#tickerDropDown').val('AAPL')
+
+    })
 
     let value = $("#additionalScrapeParameters").val()
     tableRow = `
