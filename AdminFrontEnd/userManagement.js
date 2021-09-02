@@ -15,22 +15,28 @@ function addCompanyToTable(name){
 function addCompanyTickerToDropdown(ticker, name, index){
     dropDownItem = `
         <option value="${index}">
-            <div class="companyTickerSymbol">${ticker}</div>
+            <div class="companyTickerSymbol">${ticker} - </div>
             <div>${name}</div>
         </option>`
     $("#tickerDropDown").append(dropDownItem)
 }
 
 function loadTickerSymbols(){
-    link = "https://api.polygon.io/v3/reference/tickers?search=Apple&active=true&sort=ticker&order=asc&limit=10&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp"
+    clearDropdown()
+    companySearch = $("#companyNameInput").val()
+    link = `https://api.polygon.io/v3/reference/tickers?search=${companySearch}&active=true&sort=ticker&order=asc&limit=10&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp`
     $.get(link, data =>{
         console.log(data)
         for (i = 0; i < data.results.length; i++){
             console.log(data.results[i]["ticker"])
-            addCompanyTickerToDropdown(data.results[i]["ticker"], data.results[i]["name"])
+            addCompanyTickerToDropdown(data.results[i]["ticker"], data.results[i]["name"], i)
         }
     })
-    addCompanyTickerToDropdown("", "", 1)
+}
+
+
+function clearDropdown(){
+    $("#tickerDropDown").html(`<option value="0">Choose...</option>`)
 }
 
 //logout
