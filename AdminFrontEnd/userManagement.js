@@ -92,10 +92,13 @@ function submitForm(){
 // View button populates the parameter table, ticker symbol and Company name
 
 $('#companyTable').on('click', '.viewClick', function() {
+
+
     let companyName = $(this).parent().parent().find("td").text()
-    addCompanyTickerToDropdown(ticker, companyName, index)
-    loadTickerSymbols()
-    addAdditionalParametersToList()
+    addCompanyTickerToDropdown('ticker', companyName, 1)
+    $('#tickerDropDown').val('ticker')
+    // loadTickerSymbols()
+    // addAdditionalParametersToList()
 });
 
 
