@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5c84a0cb-3919-4206-be28-1a11af42aa4e" name="Changes" comment="Update">
+    <list default="true" id="5c84a0cb-3919-4206-be28-1a11af42aa4e" name="Changes" comment="Delete table row Parameters">
       <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userManagement.html" beforeDir="false" afterPath="$PROJECT_DIR$/userManagement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userManagement.js" beforeDir="false" afterPath="$PROJECT_DIR$/userManagement.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +23,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="backend" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
@@ -41,6 +45,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
@@ -58,6 +63,8 @@
       <updated>1627893502900</updated>
       <workItem from="1627893504282" duration="17590000" />
       <workItem from="1629885514454" duration="6004000" />
+      <workItem from="1630606024955" duration="1185000" />
+      <workItem from="1630612661420" duration="668000" />
     </task>
     <task id="LOCAL-00001" summary="Initial setup and inclution of the header link including bootstrap styles">
       <created>1627893727808</created>
@@ -269,7 +276,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630331540500</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Delete table row Parameters">
+      <created>1630607070154</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1630607070154</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -288,7 +302,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added boilerplate of BS" />
     <MESSAGE value="Added boilerplate of BS for Navbar" />
     <MESSAGE value="Made Adjustments to the Nav" />
     <MESSAGE value="Changed name of the navbar" />
@@ -313,6 +326,7 @@
     <MESSAGE value="Changed names in the template" />
     <MESSAGE value="added proper login" />
     <MESSAGE value="Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+    <MESSAGE value="Delete table row Parameters" />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete table row Parameters" />
   </component>
 </project>
