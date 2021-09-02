@@ -1,10 +1,12 @@
 
-
 function addCompanyToTable(name){
     let content = `<tr>
             <td scope="row" class="companyName">${name}</td>
             <th scope="col">
                 <button type="button" class="btn btn-danger removeOnClick">Delete</button>
+            </th>
+            <th scope="col">
+                <button type="button" class="btn btn-success">View</button>
             </th>
         </tr>`
     $("#companyTable").prepend(content)
