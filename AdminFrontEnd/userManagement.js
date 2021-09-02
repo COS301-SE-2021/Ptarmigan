@@ -34,9 +34,21 @@ function loadTickerSymbols(){
     })
 }
 
-
 function clearDropdown(){
     $("#tickerDropDown").html(`<option value="0">Choose...</option>`)
+}
+
+function addAdditionalParametersToList(){
+
+    value = $("#additionalScrapeParameters").val()
+    tableRow = `<tr>
+            <td scope="row" class="parameterName">${name}</td>
+            <th scope="col">
+                <button type="button" class="btn btn-danger removeOnClick">Delete</button>
+            </th>
+        </tr>`
+    $("#parameterTable").prepend(tableRow)
+
 }
 
 //logout
@@ -49,6 +61,10 @@ var typingTimer;                //timer identifier
 var doneTypingInterval = 1000;  //time in ms, 5 second for example
 
 $(document).ready(function () {
+    $("#addParameterButton").click(function(){
+        addAdditionalParametersToList()
+    })
+
     $("#companyNameInput").on('keyup', function () {
         clearTimeout(typingTimer);
         typingTimer = setTimeout(doneTyping, doneTypingInterval);
