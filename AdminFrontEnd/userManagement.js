@@ -70,6 +70,14 @@ function getFormDataFromPage(){
         additionalParameters.push($(this).text())
     })
 
+    if (additionalParameters.length <= 3){
+        for (i=0; i <= 4-additionalParameters.length; i++){
+            additionalParameters.push(null)
+        }
+    }
+
+    console.log(additionalParameters.length)
+
     jsonObj = {
         content: companyName,
         Ticker: tickerSymbol,
@@ -78,10 +86,7 @@ function getFormDataFromPage(){
         Associated3: additionalParameters[2]
     }
 
-    console.log(jsonObj)
-
-
-
+    console.log(jsonObj)+
     console.log(companyName + tickerSymbol + additionalParameters)
 
 
