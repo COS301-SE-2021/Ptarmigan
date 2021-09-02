@@ -10,6 +10,29 @@ function addCompanyToTable(name){
     $("#companyTable").prepend(content)
 }
 
+//add Company ticker to list of suggestions
+
+function addCompanyTickerToDropdown(ticker, name, index){
+    dropDownItem = `
+        <option value="${index}">
+            <div class="companyTickerSymbol">${ticker}</div>
+            <div>${name}</div>
+        </option>`
+    $("#tickerDropDown").append(dropDownItem)
+}
+
+function loadTickerSymbols(){
+    link = "https://api.polygon.io/v3/reference/tickers?search=Apple&active=true&sort=ticker&order=asc&limit=10&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp"
+    $.get(link, data =>{
+        console.log(data)
+        for (i = 0; i < data.results.length; i++){
+            console.log(data.results[i]["ticker"])
+            addCompanyTickerToDropdown(data.results[i]["ticker"], data.results[i]["name"])
+        }
+    })
+    addCompanyTickerToDropdown("", "", 1)
+}
+
 //logout
 
 $('#logoutCompany').click(function () {
@@ -33,6 +56,7 @@ $(document).ready(function () {
 //user is "finished typing," do something
     function doneTyping () {
         console.log("Somethibg")
+        loadTickerSymbols()
     }
 
     //This will populate the company table with elements from the db
