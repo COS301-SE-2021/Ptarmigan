@@ -110,7 +110,7 @@ def getTicker(company):
 
 def lambda_handler(event, context):
     # getAllFromDate(int(time.time())-86400, int(time.time()), "Tesla")
-    companyName = "Microsoft"
+    companyName = "Tesla"
 
     # TODO: Implement with actual data current implementation is for testing purposes only.
     currentTime = int(time.time())
@@ -125,6 +125,8 @@ def lambda_handler(event, context):
 
     ticker = getTicker(companyName)
     stockList = getStockList(ticker)
+
+    updatedTime = updatedTime-(86400*10)
     for i in range(10):
         updatedTime = updatedTime - 86400
         sentiment = getAllFromDate(updatedTime - 86400, updatedTime, companyName)
