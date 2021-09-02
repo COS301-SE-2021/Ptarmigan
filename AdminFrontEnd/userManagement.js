@@ -102,9 +102,21 @@ $('#companyTable').on('click', '.viewClick', function() {
 
 
     let companyName = $(this).parent().parent().find("td").text()
-    addCompanyTickerToDropdown('ticker', "", 1)
     $('#companyNameInput').val(companyName)
-    $('#tickerDropDown').val('ticker')
+    // loadTickerSymbols()
+    $('#tickerDropDown').val('AAPL')
+
+    let value = $("#additionalScrapeParameters").val()
+    tableRow = `
+        <tr>
+            <td scope="row" class="parameterName">Ipad</td>
+            <th scope="col">
+                <button type="button" class="btn btn-danger removeOnClick">Delete</button>
+            </th>
+        </tr>`
+    $("#parameterTable").prepend(tableRow)
+    $("#additionalScrapeParameters").val("")
+
     // loadTickerSymbols()
     // addAdditionalParametersToList()
 });
