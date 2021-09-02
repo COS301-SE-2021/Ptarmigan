@@ -38,6 +38,12 @@ function clearDropdown(){
     $("#tickerDropDown").html(`<option value="0">Choose...</option>`)
 }
 
+//Remove parameter from table
+$('#parameterTable').on('click', '.removeOnClick', function(e){
+    $(this).closest('tr').remove()
+})
+
+
 function addAdditionalParametersToList(){
     let value = $("#additionalScrapeParameters").val()
     if (value == ""){
