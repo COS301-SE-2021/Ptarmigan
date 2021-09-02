@@ -74,7 +74,9 @@ function getFormDataFromPage(){
     jsonObj = {
         content: companyName,
         Ticker: tickerSymbol,
-        Associated1: additionalParameters[0]
+        Associated1: additionalParameters[0],
+        Associated2: additionalParameters[1],
+        Associated3: additionalParameters[2]
     }
 
     console.log(jsonObj)
