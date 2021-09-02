@@ -14,7 +14,7 @@ function addCompanyToTable(name){
 
 function addCompanyTickerToDropdown(ticker, name, index){
     dropDownItem = `
-        <option value="${index}">
+        <option value="${ticker}">
             <div class="companyTickerSymbol">${ticker} - </div>
             <div>${name}</div>
         </option>`
@@ -60,6 +60,21 @@ function addAdditionalParametersToList(){
 
 }
 
+function getFormDataFromPage(){
+    let companyName = $("#companyNameInput").val()
+    let tickerSymbol = $("#tickerDropDown").val()
+
+    let additionalParameters
+
+    console.log(companyName + tickerSymbol)
+
+
+}
+
+function submitForm(){
+    getFormDataFromPage()
+}
+
 //logout
 
 $('#logoutCompany').click(function () {
@@ -72,6 +87,10 @@ var doneTypingInterval = 1000;  //time in ms, 5 second for example
 $(document).ready(function () {
     $("#addParameterButton").click(function(){
         addAdditionalParametersToList()
+    })
+
+    $("#submitFormButton").click(function(){
+        submitForm()
     })
 
     $("#companyNameInput").on('keyup', function () {
