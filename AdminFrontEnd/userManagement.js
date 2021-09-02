@@ -95,7 +95,8 @@ $('#companyTable').on('click', '.viewClick', function() {
 
 
     let companyName = $(this).parent().parent().find("td").text()
-    addCompanyTickerToDropdown('ticker', companyName, 1)
+    addCompanyTickerToDropdown('ticker', "", 1)
+    $('#companyNameInput').val(companyName)
     $('#tickerDropDown').val('ticker')
     // loadTickerSymbols()
     // addAdditionalParametersToList()
