@@ -111,6 +111,7 @@ def getStockList(ticker):
 def lambda_handler(event, context):
     # getAllFromDate(int(time.time())-86400, int(time.time()), "Tesla")
     companyName = "Tesla"
+    ticker = "TSL"
 
     # TODO: Implement with actual data current implementation is for testing purposes only.
     currentTime = int(time.time())
@@ -123,7 +124,7 @@ def lambda_handler(event, context):
 
     updatedTime = currentTime
 
-    ticker = getTicker(companyName)
+    # ticker = getTicker(companyName)
     stockList = getStockList(ticker)
 
     updatedTime = updatedTime-(86400*10)
