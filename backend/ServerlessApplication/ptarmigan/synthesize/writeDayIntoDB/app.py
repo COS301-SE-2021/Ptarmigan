@@ -88,7 +88,7 @@ def getStockList(ticker):
 
     if not requestResults['Time Series (Daily)']:
         # pull crypto symblo from ticker
-        crypto = ticker[2:5] # this should be in format X:BTCUSD - pulling the BTC
+        # crypto = ticker[2:5] # this should be in format X:BTCUSD - pulling the BTC
     # https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=BTC&market=USD&apikey=VDLMI3ZNV3LSSLDZ example return
         requestUrlCrypto = f"https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol={crypto}&market=USD&apikey=VDLMI3ZNV3LSSLDZ"
         requestReturnCrypto = requests.get(requestUrlCrypto)
