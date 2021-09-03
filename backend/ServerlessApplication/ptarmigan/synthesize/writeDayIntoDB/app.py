@@ -88,29 +88,43 @@ def getStockList(ticker):
 
     if not requestResults['Time Series (Daily)']:
         # pull crypto symblo from ticker
-        crypto = ticker[2:5] # this should be in format X:BTCUSD - pulling the BTC
+        # crypto = ticker[2:5] # this should be in format X:BTCUSD - pulling the BTC
     # https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=BTC&market=USD&apikey=VDLMI3ZNV3LSSLDZ example return
-        requestUrlCrypto = f"https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol={crypto}&market=USD&apikey=VDLMI3ZNV3LSSLDZ"
+        requestUrlCrypto = f"https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol={ticker}&market=USD&apikey=VDLMI3ZNV3LSSLDZ"
         requestReturnCrypto = requests.get(requestUrlCrypto)
         requestResults = json.loads(requestReturnCrypto.text)
 
     return requestResults
 
-def getTicker(company):
-    requestUrl = f"https://api.polygon.io/v3/reference/tickers?market=stocks&search={company} &active=true&sort=ticker&order=asc&limit=10&apiKey=PNqoXU3luX7smsggLGPacHd8JnKZkDMV"
-    requestReturn = requests.get(requestUrl)
-    requestReturn = json.loads(requestReturn.text)
-    requestResults = requestReturn['results']
-    if requestResults == None:
-        requestUrlCrypto = f"https://api.polygon.io/v3/reference/tickers?market=crypto&search={company} Dollar&order=asc&limit=10&apiKey=PNqoXU3luX7smsggLGPacHd8JnKZkDMV"
+def getSentimentOnAGivenDay(unixTimeStamp, tickerSymbol):
+    dt = datetime.fromtimestamp(
+        unixTimeStamp
+    ).strftime('%Y-%m-%d')
+    try:
+        print(dt)
+        requestUrlCrypto = f"https://api.polygon.io/v1/open-close/{tickerSymbol}/{dt}?adjusted=true&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp"
         requestReturnCrypto = requests.get(requestUrlCrypto)
-        requestReturnCrypto = json.loads(requestReturnCrypto.text)
-        requestResults = requestReturnCrypto['results']
-    return (requestResults[0]['ticker'])
+        requestResults = json.loads(requestReturnCrypto.text)
+        return requestResults
+    except:
+        print("Unable to get Data")
+
+# def getTicker(company):
+#     requestUrl = f"https://api.polygon.io/v3/reference/tickers?market=stocks&search={company} &active=true&sort=ticker&order=asc&limit=10&apiKey=PNqoXU3luX7smsggLGPacHd8JnKZkDMV"
+#     requestReturn = requests.get(requestUrl)
+#     requestReturn = json.loads(requestReturn.text)
+#     requestResults = requestReturn['results']
+#     if requestResults == None:
+#         requestUrlCrypto = f"https://api.polygon.io/v3/reference/tickers?market=crypto&search={company} Dollar&order=asc&limit=10&apiKey=PNqoXU3luX7smsggLGPacHd8JnKZkDMV"
+#         requestReturnCrypto = requests.get(requestUrlCrypto)
+#         requestReturnCrypto = json.loads(requestReturnCrypto.text)
+#         requestResults = requestReturnCrypto['results']
+#     return (requestResults[0]['ticker'])
 
 def lambda_handler(event, context):
     # getAllFromDate(int(time.time())-86400, int(time.time()), "Tesla")
     companyName = "Tesla"
+    ticker = "TSLA"
 
     # TODO: Implement with actual data current implementation is for testing purposes only.
     currentTime = int(time.time())
@@ -123,14 +137,16 @@ def lambda_handler(event, context):
 
     updatedTime = currentTime
 
-    ticker = getTicker(companyName)
-    stockList = getStockList(ticker)
+    # ticker = getTicker(companyName)
+    stockList = getSentimentOnAGivenDay(updatedTime, ticker)
+    stockPrice = stockList["close"]
+    print(stockPrice)
 
-    updatedTime = updatedTime-(86400*10)
-    for i in range(10):
-        updatedTime = updatedTime - 86400
-        sentiment = getAllFromDate(updatedTime - 86400, updatedTime, companyName)
-        stock = getStockPrice(updatedTime,stockList,ticker)
-        writeIntoDb(updatedTime, companyName, 706.5, sentiment)
+    # updatedTime = updatedTime-(86400*10)
+    # for i in range(5):
+    #     updatedTime = updatedTime - 86400
+    #     sentiment = getAllFromDate(updatedTime - 86400, updatedTime, companyName)
+    #     stock = getStockPrice(updatedTime,stockList,ticker)
+    #     writeIntoDb(updatedTime, companyName, 706.5, sentiment)
 
     # return (writeIntoDb(currentTime, "Tesla", 706.5, sentiment))["ResponseMetadata"]
