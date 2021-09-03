@@ -96,6 +96,19 @@ def getStockList(ticker):
 
     return requestResults
 
+def getSentimentOnAGivenDay(unixTimeStamp, tickerSymbol):
+    dt = datetime.fromtimestamp(
+        unixTimeStamp
+    ).strftime('%Y-%m-%d')
+    try:
+        print(dt)
+        requestUrlCrypto = f"https://api.polygon.io/v1/open-close/{tickerSymbol}/{dt}?adjusted=true&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp"
+        requestReturnCrypto = requests.get(requestUrlCrypto)
+        requestResults = json.loads(requestReturnCrypto.text)
+        return requestResults
+    except:
+        print("Unable to get Data")
+
 # def getTicker(company):
 #     requestUrl = f"https://api.polygon.io/v3/reference/tickers?market=stocks&search={company} &active=true&sort=ticker&order=asc&limit=10&apiKey=PNqoXU3luX7smsggLGPacHd8JnKZkDMV"
 #     requestReturn = requests.get(requestUrl)
@@ -111,7 +124,7 @@ def getStockList(ticker):
 def lambda_handler(event, context):
     # getAllFromDate(int(time.time())-86400, int(time.time()), "Tesla")
     companyName = "Tesla"
-    ticker = "TSL"
+    ticker = "TSLA"
 
     # TODO: Implement with actual data current implementation is for testing purposes only.
     currentTime = int(time.time())
@@ -125,13 +138,15 @@ def lambda_handler(event, context):
     updatedTime = currentTime
 
     # ticker = getTicker(companyName)
-    stockList = getStockList(ticker)
+    stockList = getSentimentOnAGivenDay(updatedTime, ticker)
+    stockPrice = stockList["close"]
+    print(stockPrice)
 
-    updatedTime = updatedTime-(86400*10)
-    for i in range(10):
-        updatedTime = updatedTime - 86400
-        sentiment = getAllFromDate(updatedTime - 86400, updatedTime, companyName)
-        stock = getStockPrice(updatedTime,stockList,ticker)
-        writeIntoDb(updatedTime, companyName, 706.5, sentiment)
+    # updatedTime = updatedTime-(86400*10)
+    # for i in range(5):
+    #     updatedTime = updatedTime - 86400
+    #     sentiment = getAllFromDate(updatedTime - 86400, updatedTime, companyName)
+    #     stock = getStockPrice(updatedTime,stockList,ticker)
+    #     writeIntoDb(updatedTime, companyName, 706.5, sentiment)
 
     # return (writeIntoDb(currentTime, "Tesla", 706.5, sentiment))["ResponseMetadata"]
