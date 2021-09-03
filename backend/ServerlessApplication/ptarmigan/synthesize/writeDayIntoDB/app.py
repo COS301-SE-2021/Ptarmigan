@@ -96,17 +96,17 @@ def getStockList(ticker):
 
     return requestResults
 
-def getTicker(company):
-    requestUrl = f"https://api.polygon.io/v3/reference/tickers?market=stocks&search={company} &active=true&sort=ticker&order=asc&limit=10&apiKey=PNqoXU3luX7smsggLGPacHd8JnKZkDMV"
-    requestReturn = requests.get(requestUrl)
-    requestReturn = json.loads(requestReturn.text)
-    requestResults = requestReturn['results']
-    if requestResults == None:
-        requestUrlCrypto = f"https://api.polygon.io/v3/reference/tickers?market=crypto&search={company} Dollar&order=asc&limit=10&apiKey=PNqoXU3luX7smsggLGPacHd8JnKZkDMV"
-        requestReturnCrypto = requests.get(requestUrlCrypto)
-        requestReturnCrypto = json.loads(requestReturnCrypto.text)
-        requestResults = requestReturnCrypto['results']
-    return (requestResults[0]['ticker'])
+# def getTicker(company):
+#     requestUrl = f"https://api.polygon.io/v3/reference/tickers?market=stocks&search={company} &active=true&sort=ticker&order=asc&limit=10&apiKey=PNqoXU3luX7smsggLGPacHd8JnKZkDMV"
+#     requestReturn = requests.get(requestUrl)
+#     requestReturn = json.loads(requestReturn.text)
+#     requestResults = requestReturn['results']
+#     if requestResults == None:
+#         requestUrlCrypto = f"https://api.polygon.io/v3/reference/tickers?market=crypto&search={company} Dollar&order=asc&limit=10&apiKey=PNqoXU3luX7smsggLGPacHd8JnKZkDMV"
+#         requestReturnCrypto = requests.get(requestUrlCrypto)
+#         requestReturnCrypto = json.loads(requestReturnCrypto.text)
+#         requestResults = requestReturnCrypto['results']
+#     return (requestResults[0]['ticker'])
 
 def lambda_handler(event, context):
     # getAllFromDate(int(time.time())-86400, int(time.time()), "Tesla")
