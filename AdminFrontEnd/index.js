@@ -136,10 +136,10 @@ $(document).ready(function () {
                   console.log("Unable to change user status ")
               }
               else{
-                  console.log("USer Added as admin");
                     button.text('Yes')
                     button.removeClass("btn-danger")
                     button.addClass("btn-success");// successful response
+                    alert("User added as Admin. Database will need time to update.");
               }
             });
         }
