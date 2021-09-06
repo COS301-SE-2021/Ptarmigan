@@ -38,7 +38,9 @@ function logIn() {
         // $("#loader").show();
         cognitoUser.authenticateUser(authenticationDetails, {
             onSuccess: function (result) {
-                // alert('Logged in!');
+                console.log(result);
+                var adminLogger = "Shrek";
+                sessionStorage.setItem("favoriteMovie", adminLogger);
                 window.location.href = "index.html";
                 return
                 switchToLoggedInView();

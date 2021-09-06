@@ -7,6 +7,8 @@ var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({api
 
 let userpoolid = "eu-west-1_TWPQfb9SE"
 
+console.log(sessionStorage.getItem("favoriteMovie"))
+
 function setUsers(numberOfUsers){
     $("#numberOfUsers").text(numberOfUsers)
 }

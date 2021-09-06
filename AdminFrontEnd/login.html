@@ -71,23 +71,23 @@
 
         var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
         var userData = {
-            Username ; document.getElementById("inputUsername").value,
-            Pool : userPool;
+            Username : document.getElementById("inputUsername").value,
+            Pool : userPool
         };
 
         var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
 
         cognitoUser.authenticationUser(authenticationDetails);
 
-        cognitoUser.authenticationUser(authenticationDetails, {
-            onSuccess: fnction(result){
-            var accessToken = result.getAccessToken().getJwtToken();
-            console.log(accessToken);
-            },
-            onFailure: function(err){
-                    alert(err.message || JSON.stringify(err));
-            },
-            });
+        // cognitoUser.authenticationUser(authenticationDetails, {
+        //     onSuccess: fnction(result){
+        //     var accessToken = result.getAccessToken().getJwtToken();
+        //     console.log(accessToken);
+        //     },
+        //     onFailure: function(err){
+        //             alert(err.message || JSON.stringify(err));
+        //     },
+        //     });
     }
 
 </script>
