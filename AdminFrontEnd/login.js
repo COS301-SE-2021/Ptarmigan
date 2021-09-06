@@ -39,7 +39,7 @@ function logIn() {
         cognitoUser.authenticateUser(authenticationDetails, {
             onSuccess: function (result) {
                 console.log(result);
-                var adminLogger = "Shrek";
+                var adminLogger = result.idToken.payload.email;
                 sessionStorage.setItem("favoriteMovie", adminLogger);
                 window.location.href = "index.html";
                 return
