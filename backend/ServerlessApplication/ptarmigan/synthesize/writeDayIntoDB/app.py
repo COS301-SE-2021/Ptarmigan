@@ -96,7 +96,7 @@ def getStockList(ticker):
 
     return requestResults
 
-def getSentimentOnAGivenDay(unixTimeStamp, tickerSymbol):
+def getStockPriceOnAGivenDay(unixTimeStamp, tickerSymbol):
     dt = datetime.fromtimestamp(
         unixTimeStamp
     ).strftime('%Y-%m-%d')
@@ -108,6 +108,9 @@ def getSentimentOnAGivenDay(unixTimeStamp, tickerSymbol):
         return requestResults
     except:
         print("Unable to get Data")
+
+def checkIfTableExist(tableName):
+    print("Checking if the table exists")
 
 # def getTicker(company):
 #     requestUrl = f"https://api.polygon.io/v3/reference/tickers?market=stocks&search={company} &active=true&sort=ticker&order=asc&limit=10&apiKey=PNqoXU3luX7smsggLGPacHd8JnKZkDMV"
@@ -132,21 +135,22 @@ def lambda_handler(event, context):
     timeFromMidnight = currentTime % 86400
 
     currentTime = currentTime - timeFromMidnight
+    currentTime = currentTime - (86400*2)
 
     sentiment = getAllFromDate(currentTime-86400, currentTime, companyName)
 
     updatedTime = currentTime
 
     # ticker = getTicker(companyName)
-    stockList = getSentimentOnAGivenDay(updatedTime, ticker)
-    stockPrice = stockList["close"]
-    print(stockPrice)
+    stockList = getStockPriceOnAGivenDay(updatedTime, ticker)
+    # stockPrice = stockList["close"]
+    print(stockList["close"])
 
-    # updatedTime = updatedTime-(86400*10)
-    # for i in range(5):
-    #     updatedTime = updatedTime - 86400
-    #     sentiment = getAllFromDate(updatedTime - 86400, updatedTime, companyName)
-    #     stock = getStockPrice(updatedTime,stockList,ticker)
-    #     writeIntoDb(updatedTime, companyName, 706.5, sentiment)
+    updatedTime = updatedTime-(86400*10)
+    for i in range(5):
+        updatedTime = updatedTime - 86400
+        sentiment = getAllFromDate(updatedTime - 86400, updatedTime, companyName)
+        stock = getStockPrice(updatedTime,stockList,ticker)
+        writeIntoDb(updatedTime, companyName, 706.5, sentiment)
 
     # return (writeIntoDb(currentTime, "Tesla", 706.5, sentiment))["ResponseMetadata"]
