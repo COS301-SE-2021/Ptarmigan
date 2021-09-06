@@ -1,14 +1,137 @@
 
-
 function addCompanyToTable(name){
     let content = `<tr>
             <td scope="row" class="companyName">${name}</td>
             <th scope="col">
                 <button type="button" class="btn btn-danger removeOnClick">Delete</button>
             </th>
+            <th scope="col">
+                <button type="button" class="btn btn-success viewClick">View</button>
+            </th>
         </tr>`
     $("#companyTable").prepend(content)
 }
+
+//add Company ticker to list of suggestions
+
+function addCompanyTickerToDropdown(ticker, name, index){
+    dropDownItem = `
+        <option value="${ticker}">
+            <div class="companyTickerSymbol">${ticker} - </div>
+            <div>${name}</div>
+        </option>`
+    $("#tickerDropDown").append(dropDownItem)
+}
+
+function loadTickerSymbols(){
+    clearDropdown()
+    companySearch = $("#companyNameInput").val()
+    link = `https://api.polygon.io/v3/reference/tickers?search=${companySearch}&active=true&sort=ticker&order=asc&limit=10&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp`
+    $.get(link, data =>{
+        console.log(data)
+        for (i = 0; i < data.results.length; i++){
+            console.log(data.results[i]["ticker"])
+            addCompanyTickerToDropdown(data.results[i]["ticker"], data.results[i]["name"], i)
+        }
+    })
+}
+
+function clearDropdown(){
+    $("#tickerDropDown").html(`<option value="0">Choose...</option>`)
+}
+
+//Remove parameter from table
+$('#parameterTable').on('click', '.removeOnClick', function(e){
+    $(this).closest('tr').remove()
+})
+
+function addAdditionalParametersToList(){
+    let value = $("#additionalScrapeParameters").val()
+    if (value == ""){
+        alert("Please enter data into the input box")
+    }
+    tableRow = `
+        <tr>
+            <td scope="row" class="parameterName">${value}</td>
+            <th scope="col">
+                <button type="button" class="btn btn-danger removeOnClick">Delete</button>
+            </th>
+        </tr>`
+    $("#parameterTable").prepend(tableRow)
+    $("#additionalScrapeParameters").val("")
+}
+
+function getFormDataFromPage(){
+    let companyName = $("#companyNameInput").val()
+    let tickerSymbol = $("#tickerDropDown").val()
+
+    let additionalParameters = []
+    $(".parameterName").each(function (){
+        additionalParameters.push($(this).text())
+    })
+
+    if (additionalParameters.length <= 3){
+        for (i=0; i <= 4-additionalParameters.length; i++){
+            additionalParameters.push(null)
+        }
+    }
+
+    console.log(additionalParameters.length)
+
+    jsonObj = {
+        content: companyName,
+        Ticker: tickerSymbol,
+        Associated1: additionalParameters[0],
+        Associated2: additionalParameters[1],
+        Associated3: additionalParameters[2]
+    }
+
+    console.log(jsonObj)+
+    console.log(companyName + tickerSymbol + additionalParameters)
+
+
+}
+
+function submitForm(){
+    getFormDataFromPage()
+}
+
+// View button populates the parameter table, ticker symbol and Company name
+
+$('#companyTable').on('click', '.viewClick', function() {
+
+
+    let companyName = $(this).parent().parent().find("td").text()
+    $('#companyNameInput').val(companyName)
+    // loadTickerSymbols()
+
+    companySearch = $("#companyNameInput").val()
+    link = `https://api.polygon.io/v3/reference/tickers?search=${companySearch}&active=true&sort=ticker&order=asc&limit=10&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp`
+    $.get(link, data =>{
+        console.log(data)
+        for (i = 0; i < data.results.length; i++){
+            console.log(data.results[i]["ticker"])
+            addCompanyTickerToDropdown(data.results[i]["ticker"], data.results[i]["name"], i)
+        }
+        $('#tickerDropDown').val('AAPL')
+
+    })
+
+    let value = $("#additionalScrapeParameters").val()
+    tableRow = `
+        <tr>
+            <td scope="row" class="parameterName">Ipad</td>
+            <th scope="col">
+                <button type="button" class="btn btn-danger removeOnClick">Delete</button>
+            </th>
+        </tr>`
+    $("#parameterTable").prepend(tableRow)
+    $("#additionalScrapeParameters").val("")
+
+    // loadTickerSymbols()
+    // addAdditionalParametersToList()
+});
+
 
 //logout
 
@@ -20,6 +143,14 @@ var typingTimer;                //timer identifier
 var doneTypingInterval = 1000;  //time in ms, 5 second for example
 
 $(document).ready(function () {
+    $("#addParameterButton").click(function(){
+        addAdditionalParametersToList()
+    })
+
+    $("#submitFormButton").click(function(){
+        submitForm()
+    })
+
     $("#companyNameInput").on('keyup', function () {
         clearTimeout(typingTimer);
         typingTimer = setTimeout(doneTyping, doneTypingInterval);
@@ -33,6 +164,7 @@ $(document).ready(function () {
 //user is "finished typing," do something
     function doneTyping () {
         console.log("Somethibg")
+        loadTickerSymbols()
     }
 
     //This will populate the company table with elements from the db
@@ -51,7 +183,6 @@ $(document).ready(function () {
 
     //Add event listener to the dynamically created events
     $('#companyTable').on('click', '.removeOnClick', function() {
-        console.log("CLICK")
         $(this).addClass("disabled")
         companyName = $(this).parent().parent().find("td").text()
         // $(this).parent().parent().remove()

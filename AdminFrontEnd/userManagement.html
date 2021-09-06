@@ -41,19 +41,16 @@
     <h1 class="display-3 text-light">Company names</h1>
     <div class="row bg-dark p-2 rounded">
         <div class="container text-light">
-            <form>
+            <div>
                 <div class="form-group">
                     <label for="companyNameInput">Company Name</label>
                     <input type="text" class="form-control" id="companyNameInput" placeholder="Enter Company Name">
                 </div>
                 <div class="form-row align-items-center">
                     <div class="col-auto my-1">
-                        <label class="mr-sm-2" for="inlineFormCustomSelect">Ticker Symbol</label>
-                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                        <label class="mr-sm-2" for="tickerDropDown">Ticker Symbol</label>
+                        <select class="custom-select mr-sm-2" id="tickerDropDown">
                             <option selected>Choose...</option>
-                            <option value="1">TSLA</option>
-                            <option value="2">PPLE</option>
-                            <option value="3">APPL</option>
                         </select>
                     </div>
                 </div>
@@ -61,7 +58,7 @@
                     <label for="additionalScrapeParameters">Additional scrape parameters</label>
                     <div class="input-group">
                     <input type="text" class="form-control" id="additionalScrapeParameters" placeholder="Enter Parameter">
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button class="btn btn-primary" id="addParameterButton">Add</button>
                     </div>
                 </div>
                 <h3 class="display-5 text-light">Existing parameters</h3>
@@ -79,8 +76,8 @@
                         </tbody>
                     </table>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+                <button class="btn btn-primary" id="submitFormButton">Submit</button>
+            </div>
         </div>
         <div class="col-sm ">
             <form class="form-inline my-2 my-lg-0 float-right">
