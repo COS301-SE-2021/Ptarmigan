@@ -97,21 +97,71 @@ def getStockList(ticker):
     return requestResults
 
 def getStockPriceOnAGivenDay(unixTimeStamp, tickerSymbol):
+
+    date = datetime.fromtimestamp(
+        unixTimeStamp
+    )
+
+    day = date.weekday()
+    if day == 5 or day == 6 :
+        unixTimeStamp = unixTimeStamp-((day-4)*86400)
+
     dt = datetime.fromtimestamp(
         unixTimeStamp
     ).strftime('%Y-%m-%d')
+
+    print(day)
     try:
         print(dt)
         requestUrlCrypto = f"https://api.polygon.io/v1/open-close/{tickerSymbol}/{dt}?adjusted=true&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp"
         requestReturnCrypto = requests.get(requestUrlCrypto)
         requestResults = json.loads(requestReturnCrypto.text)
-        return requestResults
+        print(requestResults)
+        try:
+            return requestResults["close"]
+        except:
+            return requestResults["error"]
+
     except:
         print("Unable to get Data")
+        return "error"
 
 def checkIfTableExist(tableName):
     print("Checking if the table exists")
 
+def catchUp(len, companyName, ticker):
+    currentTime = int(time.time())
+
+    timeFromMidnight = currentTime % 86400
+
+    currentTime = currentTime - timeFromMidnight
+    currentTime = currentTime - (86400)
+
+    # sentiment = getAllFromDate(currentTime-86400, currentTime, companyName)
+
+    updatedTime = currentTime
+
+    # ticker = getTicker(companyName)
+    # stockList = getStockPriceOnAGivenDay(updatedTime, ticker)
+    # stockPrice = stockList["close"]
+    # print(stockList)
+
+    updatedTime = updatedTime
+    for i in range(len):
+        updatedTime = updatedTime - 86400
+        sentiment = getAllFromDate(updatedTime - 86400, updatedTime, companyName)
+        # stock = getStockPrice(updatedTime, stockList, ticker)
+        stockPrice = getStockPriceOnAGivenDay(updatedTime, ticker)
+
+        if stockPrice == "You've exceeded the maximum requests per minute, please wait or upgrade your subscription to continue. https://polygon.io/pricing":
+            print("Exeeding max usage")
+            time.sleep(60)
+            stockPrice = getStockPriceOnAGivenDay(updatedTime, ticker)
+
+
+        res = writeIntoDb(updatedTime, companyName, stockPrice, sentiment)
+        print(res)
+        print("Number: ", i)
 # def getTicker(company):
 #     requestUrl = f"https://api.polygon.io/v3/reference/tickers?market=stocks&search={company} &active=true&sort=ticker&order=asc&limit=10&apiKey=PNqoXU3luX7smsggLGPacHd8JnKZkDMV"
 #     requestReturn = requests.get(requestUrl)
@@ -124,33 +174,18 @@ def checkIfTableExist(tableName):
 #         requestResults = requestReturnCrypto['results']
 #     return (requestResults[0]['ticker'])
 
+def oneItem(len, companyName, ticker):
+    print()
+
 def lambda_handler(event, context):
     # getAllFromDate(int(time.time())-86400, int(time.time()), "Tesla")
     companyName = "Tesla"
     ticker = "TSLA"
 
     # TODO: Implement with actual data current implementation is for testing purposes only.
-    currentTime = int(time.time())
 
-    timeFromMidnight = currentTime % 86400
-
-    currentTime = currentTime - timeFromMidnight
-    currentTime = currentTime - (86400*2)
-
-    sentiment = getAllFromDate(currentTime-86400, currentTime, companyName)
-
-    updatedTime = currentTime
-
-    # ticker = getTicker(companyName)
-    stockList = getStockPriceOnAGivenDay(updatedTime, ticker)
-    # stockPrice = stockList["close"]
-    print(stockList["close"])
-
-    updatedTime = updatedTime-(86400*10)
-    for i in range(5):
-        updatedTime = updatedTime - 86400
-        sentiment = getAllFromDate(updatedTime - 86400, updatedTime, companyName)
-        stock = getStockPrice(updatedTime,stockList,ticker)
-        writeIntoDb(updatedTime, companyName, 706.5, sentiment)
+        # if res["ResponseMetadata"]["ResponseMetadata"] != 200:
+        #     print(res)
+        #     return "ERROR"
 
     # return (writeIntoDb(currentTime, "Tesla", 706.5, sentiment))["ResponseMetadata"]
