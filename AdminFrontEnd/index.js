@@ -16,7 +16,7 @@ function setUsers(numberOfUsers){
 //Adding username to the navbar
 
 function addingUsername(){
-
+    $("#username").html(sessionStorage.getItem("username"))
 }
 
 
@@ -76,6 +76,7 @@ function userTable(users,adminUsers){
 
 
 $(document).ready(function () {
+    addingUsername()
     //initalize credentials
     // userPool = 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902'
     // AWS.config.region = 'eu-west-1'; // Region

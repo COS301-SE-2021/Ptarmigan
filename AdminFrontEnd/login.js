@@ -40,7 +40,7 @@ function logIn() {
             onSuccess: function (result) {
                 console.log(result);
                 var adminLogger = result.idToken.payload.email;
-                sessionStorage.setItem("favoriteMovie", adminLogger);
+                sessionStorage.setItem("username", adminLogger);
                 window.location.href = "index.html";
                 return
                 switchToLoggedInView();
