@@ -13,6 +13,14 @@ function setUsers(numberOfUsers){
     $("#numberOfUsers").text(numberOfUsers)
 }
 
+//Adding username to the navbar
+
+function addingUsername(){
+
+}
+
+
+
 function addUserToTable(user,adminFlag){
     console.log(user)
     if (adminFlag == false)
