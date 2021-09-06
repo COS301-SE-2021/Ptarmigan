@@ -126,8 +126,34 @@ def getStockPriceOnAGivenDay(unixTimeStamp, tickerSymbol):
         print("Unable to get Data")
         return "error"
 
-def checkIfTableExist(tableName):
-    print("Checking if the table exists")
+def checkIfTableExist(companyName):
+    tableName = companyName
+    dynamodbClient = boto3.client('dynamodb')
+    try:
+        response = dynamodbClient.create_table(
+            AttributeDefinitions=[
+                {
+                    'AttributeName': 'TimeStamp',
+                    'AttributeType': 'N',
+                }
+            ],
+            KeySchema=[
+                {
+                    'AttributeName': 'TimeStamp',
+                    'KeyType': 'HASH',
+                }
+            ],
+            ProvisionedThroughput={
+                'ReadCapacityUnits': 5,
+                'WriteCapacityUnits': 5,
+            },
+            TableName=(tableName + "Daily")
+        )
+        return False
+
+    except dynamodbClient.exceptions.ResourceInUseException:
+        print("The Table Already exists")
+        return True
 
 def catchUp(len, companyName, ticker):
     currentTime = int(time.time())
@@ -148,6 +174,7 @@ def catchUp(len, companyName, ticker):
 
     updatedTime = updatedTime
     for i in range(len):
+
         updatedTime = updatedTime - 86400
         sentiment = getAllFromDate(updatedTime - 86400, updatedTime, companyName)
         # stock = getStockPrice(updatedTime, stockList, ticker)
@@ -174,16 +201,40 @@ def catchUp(len, companyName, ticker):
 #         requestResults = requestReturnCrypto['results']
 #     return (requestResults[0]['ticker'])
 
-def oneItem(len, companyName, ticker):
-    print()
+def oneItem(companyName, ticker):
+    currentTime = int(time.time())
+
+    timeFromMidnight = currentTime % 86400
+
+    currentTime = currentTime - timeFromMidnight
+    currentTime = currentTime
+
+    # sentiment = getAllFromDate(currentTime-86400, currentTime, companyName)
+
+    updatedTime = currentTime
+    updatedTime = updatedTime - 86400
+    sentiment = getAllFromDate(updatedTime - 86400, currentTime, companyName)
+    # stock = getStockPrice(updatedTime, stockList, ticker)
+    stockPrice = getStockPriceOnAGivenDay(updatedTime, ticker)
+    if stockPrice == "You've exceeded the maximum requests per minute, please wait or upgrade your subscription to continue. https://polygon.io/pricing":
+        print("Exeeding max usage")
+        time.sleep(60)
+        stockPrice = getStockPriceOnAGivenDay(updatedTime, ticker)
+
+    res = writeIntoDb(updatedTime, companyName, stockPrice, sentiment)
+    print(res)
 
 def lambda_handler(event, context):
     # getAllFromDate(int(time.time())-86400, int(time.time()), "Tesla")
-    companyName = "Tesla"
-    ticker = "TSLA"
+    companyName = "IBM"
+    ticker = "IBM"
 
     # TODO: Implement with actual data current implementation is for testing purposes only.
-
+    catch = checkIfTableExist(companyName)
+    if catch == False:
+        catchUp(5, companyName, ticker)
+    else:
+        oneItem(companyName, ticker)
         # if res["ResponseMetadata"]["ResponseMetadata"] != 200:
         #     print(res)
         #     return "ERROR"
