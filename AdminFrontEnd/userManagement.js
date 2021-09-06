@@ -12,6 +12,11 @@ function addCompanyToTable(name){
     $("#companyTable").prepend(content)
 }
 
+//Add username to navbar
+function addingUsername(){
+    $("#username").html(sessionStorage.getItem("username"))
+}
+
 //add Company ticker to list of suggestions
 
 function addCompanyTickerToDropdown(ticker, name, index){
@@ -143,6 +148,8 @@ var typingTimer;                //timer identifier
 var doneTypingInterval = 1000;  //time in ms, 5 second for example
 
 $(document).ready(function () {
+    addingUsername()
+
     $("#addParameterButton").click(function(){
         addAdditionalParametersToList()
     })
