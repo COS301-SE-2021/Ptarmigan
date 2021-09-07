@@ -13,6 +13,7 @@ import 'package:ptarmigan/components/menu_drawer.dart';
 import 'package:ptarmigan/constants.dart';
 import 'package:ptarmigan/models/Feed.dart';
 import 'package:ptarmigan/models/Todo.dart';
+import 'package:ptarmigan/services/feedFileManager.dart';
 import 'package:ptarmigan/services/feed_image_generator.dart';
 import 'package:ptarmigan/services/popular_tweet_generator.dart';
 import 'package:ptarmigan/settings/application_settings.dart';
@@ -28,6 +29,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 FeedImageGenerator generator = FeedImageGenerator();
 PopularTweetGenerator tweetGenerator = PopularTweetGenerator();
+late FeedFileManager manager;
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -57,6 +59,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     print("Home page loaded.");
     _initFeedInterests();
+    //manager = new FeedFileManager(feedimage);
     print("-=-=-=-=-=-=-=-=-=-=-=-=-");
     _isLoading = true;
 
@@ -419,11 +422,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   void _initFeedInterests() {
     print("FETCHING FEED IMAGES");
+    manager = new FeedFileManager();
+
     generator.fetchImages().then((value) => {
           print("BOOM... state change"),
           setState(() {
-            feedimage = value;
+            //feedimage = value; //Straight from api
+            manager.setFeedList(value);  //updating file to feed list
             _carousel = itemGenerator();
+            feedimage = value; //Making the api CALL anyways, might as well use the values returned here
           })
         });
 
