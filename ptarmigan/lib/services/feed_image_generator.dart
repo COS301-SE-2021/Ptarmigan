@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 
 import 'package:http/http.dart' show Client;
+import 'package:path_provider/path_provider.dart';
 import 'package:ptarmigan/models/Feed.dart';
 
 class FeedImage {
@@ -30,7 +32,7 @@ class FeedImageGenerator {
     //print(response.body);
     if (response.statusCode != 200) {
       throw Exception("BucketList API is not responding/ API Timed out");
-      return ["N/A"];
+      // return ["N/A"];
     }
     var res = FeedImage.fromJson(jsonDecode(response.body));
     //if (response.statusCode == 200) {
@@ -40,7 +42,6 @@ class FeedImageGenerator {
     print("temp : " + temp);
 
     var finalContents = jsonDecode(temp);
-    //print(finalContents[1]);
 
     for (var i = 0; i < finalContents.length; i++) {
       String hold = finalContents[i].toString();
@@ -55,4 +56,6 @@ class FeedImageGenerator {
     //  throw Exception("Failed to fetch images");
     //}
   }
+
+ 
 }
