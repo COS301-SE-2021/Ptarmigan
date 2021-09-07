@@ -13,7 +13,7 @@ import 'package:ptarmigan/components/menu_drawer.dart';
 import 'package:ptarmigan/constants.dart';
 import 'package:ptarmigan/models/Feed.dart';
 import 'package:ptarmigan/models/Todo.dart';
-import 'package:ptarmigan/services/feedFileManager.dart';
+import 'package:ptarmigan/services/feed_file_manager.dart';
 import 'package:ptarmigan/services/feed_image_generator.dart';
 import 'package:ptarmigan/services/popular_tweet_generator.dart';
 import 'package:ptarmigan/settings/application_settings.dart';
@@ -427,10 +427,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
     generator.fetchImages().then((value) => {
           print("BOOM... state change"),
           setState(() {
+            feedimage =
+                value; //Making the api CALL anyways, might as well use the values returned here
             //feedimage = value; //Straight from api
-            manager.setFeedList(value);  //updating file to feed list
+            manager.setFeedList(value); //updating file to feed list
             _carousel = itemGenerator();
-            feedimage = value; //Making the api CALL anyways, might as well use the values returned here
           })
         });
 

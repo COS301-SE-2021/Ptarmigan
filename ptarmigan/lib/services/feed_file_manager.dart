@@ -9,16 +9,59 @@ class FeedFileManager {
 
   //constructor
   FeedFileManager() {
+    print("FFM Constructor");
     nameAndSubscription = Map();
-    _initFeedMap();
+    _initFile();
+
     //this.feeds = feeds;
 
     //_initFeedMap();
   }
 
+  _initFile() async {
+    print("Init file");
+    final file = await _localFile;
+
+    _initFeedMap();
+  }
+
+  void _initFeedFile() async {
+    final file = await _localFile;
+    print("Init feed file.");
+    //print(await file.readAsString());
+
+    //await createFile().then((value) => {_initFeedMap()});
+
+    if (await file.readAsString() == "") //empty
+    {
+      print("file was empty. Calling create file.");
+      await createFile().then((value) => {_initFeedMap()});
+    }
+
+    updateFeedsFile();
+    _initFeedMap();
+  }
+
+  void _initFeedMap() async {
+    print("init Feed Map");
+
+    final file = await _localFile; // might have to add await
+    List lines = await file.readAsLines();
+
+    for (int i = 0; i < lines.length; i++) {
+      print("lines : " + lines[i]);
+      List tempListOfNamesAndStatus = seperateLine(lines[i]);
+
+      nameAndSubscription[tempListOfNamesAndStatus[0]] =
+          tempListOfNamesAndStatus[1];
+    }
+    print(nameAndSubscription.toString());
+  }
+
   void setFeedList(List feeds) {
+    print("Set feed list.");
     this.feeds = feeds;
-    _resetFile(); //YOOOOOOO TAKE THIS SHIT OUT BRUHHHHH
+    //_resetFile(); //YOOOOOOO TAKE THIS SHIT OUT BRUHHHHH
     _initFeedFile();
   }
 
@@ -41,7 +84,9 @@ class FeedFileManager {
   Future<File> get _localFile async {
     final path = await _localPath;
     //return File('$path/lib/services/_data/feedList.txt');
-    return File('$path/feedList.txt');
+    File tempFile = File('$path/feedList.txt');
+    if (tempFile.existsSync() == false) tempFile.createSync();
+    return tempFile;
   }
 
   void _resetFile() async {
@@ -51,36 +96,9 @@ class FeedFileManager {
     file.writeAsString("");
   }
 
-  void _initFeedFile() async {
-    final file = await _localFile;
-    print("Init feed file.");
-    print(await file.readAsString());
-    if (await file.readAsString() == "") //empty
-    {
-      await createFile().then((value) => {_initFeedMap()});
-    } else {
-      updateFeedsFile();
-      _initFeedMap();
-    }
-  }
-
-  void _initFeedMap() async {
-    print("initFeeds");
-
-    final file = await _localFile; // might have to add await
-    List lines = await file.readAsLines();
-
-    for (int i = 0; i < lines.length; i++) {
-      print("lines : " + lines[i]);
-      List tempListOfNamesAndStatus = seperateLine(lines[i]);
-
-      nameAndSubscription[tempListOfNamesAndStatus[0]] =
-          tempListOfNamesAndStatus[1];
-    }
-    print(nameAndSubscription.toString());
-  }
-
-  Map getNamesAndSubMap() {
+  Future<Map> getNamesAndSubMap() async {
+    print("NameANDSubscription.");
+    print(nameAndSubscription);
     return nameAndSubscription;
   }
 
@@ -92,17 +110,21 @@ class FeedFileManager {
   }
 
   void updateFeedsFile() async {
+    print("Update feeds file");
     final file = await _localFile;
     var lines;
     bool changed = false;
     String holdFileContents = await file.readAsString();
-    _initFeedMap(); //Might be redundant
+    //_initFeedMap(); //Might be redundant
     for (var v in feeds) {
+      print("$nameAndSubscription in updateFeedsFile");
       if (nameAndSubscription.containsKey(v) == false) {
         nameAndSubscription[v] == "False"; //add feed that was not in map.
         changed = true;
       }
     }
+    print("$nameAndSubscription in updateFeedsFile");
+
     if (changed) mapToFile(nameAndSubscription);
   }
 
@@ -113,6 +135,7 @@ class FeedFileManager {
       var tempValue = feedMap[v];
       toFile += "$v,$tempValue\n";
     }
+    print("ADDING FOLLOWING TO FILE : \n $toFile");
     file.writeAsString(toFile);
   }
 
@@ -127,13 +150,12 @@ class FeedFileManager {
     file.writeAsString(holdString);
   }
 
-  List getFeedList() {
+  Future<List> getFeedList() async {
     List temporaryFeedList = [];
     for (var v in nameAndSubscription.keys) {
       temporaryFeedList.add(v);
     }
-    print("getFeedList called.");
-    print(getFeedList().toString());
+
     return temporaryFeedList;
   }
 

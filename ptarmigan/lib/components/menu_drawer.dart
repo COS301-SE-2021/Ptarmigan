@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ptarmigan/widgets/feed_selector_screen.dart';
 import 'package:ptarmigan/widgets/home_page.dart';
 import 'package:ptarmigan/widgets/stock_screen.dart';
 import 'package:ptarmigan/widgets/todos_page.dart';
@@ -42,9 +43,14 @@ class MenuDrawer extends StatelessWidget {
             },
           ),
           DrawerListTile(
-            title: "Settings",
+            title: "Feed selector",
             svgSrc: "assets/icons/menu_setting.svg",
-            press: () {},
+            press: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => FeedSelectorScreen()));
+            },
           ),
         ],
       ),
