@@ -124,6 +124,7 @@ def getStockPriceOnAGivenDay(unixTimeStamp, tickerSymbol):
 
     except:
         print("Unable to get Data")
+        raise Exception("Unable to get Data, The day might not be available")
         return "error"
 
 def checkIfTableExist(companyName):
@@ -226,15 +227,42 @@ def oneItem(companyName, ticker):
 
 def lambda_handler(event, context):
     # getAllFromDate(int(time.time())-86400, int(time.time()), "Tesla")
-    companyName = "IBM"
-    ticker = "IBM"
+    companyName = ""
+    ticker = ""
+    try:
+        body = {}
+        if "body" in event:
+            body = json.loads(event["body"])
+        else:
+            body = event
+
+        companyName = body["companyName"]
+        ticker = body["ticker"]
+
+    except:
+        return {
+            'statusCode': 400,
+            'body': json.dumps("Invalid input")
+        }
+
+    companyName = "Tesla"
+    ticker = "TSLA"
 
     # TODO: Implement with actual data current implementation is for testing purposes only.
-    catch = checkIfTableExist(companyName)
-    if catch == False:
-        catchUp(5, companyName, ticker)
-    else:
-        oneItem(companyName, ticker)
+
+    stockPrice = getStockPrice(updatedTime, results, ticker)
+
+    # try:
+    #     catch = checkIfTableExist(companyName)
+    #     if catch == False:
+    #         catchUp(5, companyName, ticker)
+    #     else:
+    #         oneItem(companyName, ticker)
+    # except:
+    #     return {
+    #         'statusCode': 400,
+    #         'body': json.dumps("Data not available at this time")
+    #     }
         # if res["ResponseMetadata"]["ResponseMetadata"] != 200:
         #     print(res)
         #     return "ERROR"
