@@ -93,12 +93,18 @@ function getFormDataFromPage(){
 
     console.log(jsonObj)+
     console.log(companyName + tickerSymbol + additionalParameters)
-
+    return jsonObj
 
 }
 
 function submitForm(){
-    getFormDataFromPage()
+    jsonObj = getFormDataFromPage()
+    // console.log(jsonObj)
+    updateTableBucket(jsonObj)
+}
+
+function updateTableBucket(object){
+    console.log(object)
 }
 
 // View button populates the parameter table, ticker symbol and Company name
