@@ -20,9 +20,10 @@ class FeedFileManager {
 
   _initFile() async {
     print("Init file");
-    final file = await _localFile;
+    final file =
+        await _localFile; //Need this since _localFile has check to see if file exists
 
-    _initFeedMap();
+    _localFile.then((value) => {_initFeedMap(value)});
   }
 
   void _initFeedFile() async {
@@ -35,27 +36,30 @@ class FeedFileManager {
     if (await file.readAsString() == "") //empty
     {
       print("file was empty. Calling create file.");
-      await createFile().then((value) => {_initFeedMap()});
+      await createFile().then((value) => {_initFeedMap(file)});
     }
 
     updateFeedsFile();
-    _initFeedMap();
+    _initFeedMap(file);
   }
 
-  void _initFeedMap() async {
-    print("init Feed Map");
+  void _initFeedMap(File file) async {
+    if (initFeedMapComplete == false) {
+      print("init Feed Map");
 
-    final file = await _localFile; // might have to add await
-    List lines = await file.readAsLines();
+      final file = await _localFile; // might have to add await
+      List lines = file.readAsLinesSync();
 
-    for (int i = 0; i < lines.length; i++) {
-      print("lines : " + lines[i]);
-      List tempListOfNamesAndStatus = seperateLine(lines[i]);
+      for (int i = 0; i < lines.length; i++) {
+        print("lines : " + lines[i]);
+        List tempListOfNamesAndStatus = seperateLine(lines[i]);
 
-      nameAndSubscription[tempListOfNamesAndStatus[0]] =
-          tempListOfNamesAndStatus[1];
+        nameAndSubscription[tempListOfNamesAndStatus[0]] =
+            tempListOfNamesAndStatus[1];
+      }
+      print(nameAndSubscription.toString());
+      initFeedMapComplete = true;
     }
-    print(nameAndSubscription.toString());
   }
 
   void setFeedList(List feeds) {

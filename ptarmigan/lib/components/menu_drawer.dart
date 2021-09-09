@@ -49,7 +49,7 @@ class MenuDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => FeedSelectorScreen()));
+                      builder: (context) => FeedSelectorScreen(manager)));
             },
           ),
         ],
