@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5c84a0cb-3919-4206-be28-1a11af42aa4e" name="Changes" comment="Update">
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userManagement.js" beforeDir="false" afterPath="$PROJECT_DIR$/userManagement.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +56,7 @@
       <updated>1627893502900</updated>
       <workItem from="1627893504282" duration="17590000" />
       <workItem from="1629885514454" duration="6004000" />
+      <workItem from="1631191026727" duration="2618000" />
     </task>
     <task id="LOCAL-00001" summary="Initial setup and inclution of the header link including bootstrap styles">
       <created>1627893727808</created>

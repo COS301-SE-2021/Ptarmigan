@@ -86,13 +86,25 @@ function getFormDataFromPage(){
     jsonObj = {
         content: companyName,
         Ticker: tickerSymbol,
-        Associated1: additionalParameters[0],
-        Associated2: additionalParameters[1],
-        Associated3: additionalParameters[2]
+        // Associated1: additionalParameters[0],
+        // Associated2: additionalParameters[1],
+        // Associated3: additionalParameters[2]
+    }
+
+    if (additionalParameters[0] != null) {
+        jsonObj["Associated1"] = additionalParameters[0];
+    }
+    if (additionalParameters[1] != null) {
+        jsonObj["Associated2"] = additionalParameters[0];
+    }
+    if (additionalParameters[2] != null) {
+        jsonObj["Associated3"] = additionalParameters[0];
     }
 
     console.log(jsonObj)+
     console.log(companyName + tickerSymbol + additionalParameters)
+
+
     return jsonObj
 
 }
@@ -100,11 +112,42 @@ function getFormDataFromPage(){
 function submitForm(){
     jsonObj = getFormDataFromPage()
     // console.log(jsonObj)
+    deleteFromBucket(jsonObj.content)
     updateTableBucket(jsonObj)
+
 }
 
 function updateTableBucket(object){
-    console.log(object)
+    let content = object
+    updateBucketcall = "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/scraper/UpdateBucket"
+    $.post(updateBucketcall, JSON.stringify(content), function(result){
+        console.log(result)
+        addCompanyToTable(object.content)
+    })
+        .fail(function (value){
+            alert("Unable to add Company to list")
+            $("#myInput").val("")
+
+        })
+
+    $(this).removeClass("disabled")
+}
+
+function deleteFromBucket(obj){
+    companyName = obj.content
+    $(this).addClass("disabled")
+    companyName = $(this).parent().parent().find("td").text()
+    // $(this).parent().parent().remove()
+    let row = this
+    //    TODO: Add call to the Api
+    updateBucketcall = "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/scraper/deleteBucketItem"
+    $.post(updateBucketcall, JSON.stringify({"content": companyName}), function(result){
+        console.log(result)
+        $(row).parent().parent().remove()
+    })
+        .fail(function (value){
+            alert("Unable to remove company from bucket")
+        })
 }
 
 // View button populates the parameter table, ticker symbol and Company name
