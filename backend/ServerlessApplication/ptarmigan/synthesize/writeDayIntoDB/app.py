@@ -4,6 +4,7 @@ from boto3.dynamodb.conditions import Key
 import requests
 import json
 from datetime import datetime
+import yfinance as yf
 
 
 def calculateSentiment(content):
@@ -112,15 +113,18 @@ def getStockPriceOnAGivenDay(unixTimeStamp, tickerSymbol):
 
     print(day)
     try:
-        print(dt)
-        requestUrlCrypto = f"https://api.polygon.io/v1/open-close/{tickerSymbol}/{dt}?adjusted=true&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp"
-        requestReturnCrypto = requests.get(requestUrlCrypto)
-        requestResults = json.loads(requestReturnCrypto.text)
-        print(requestResults)
+        # print(dt)
+        # requestUrlCrypto = f"https://api.polygon.io/v1/open-close/{tickerSymbol}/{dt}?adjusted=true&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp"
+        # requestReturnCrypto = requests.get(requestUrlCrypto)
+        # requestResults = json.loads(requestReturnCrypto.text)
+        # print(requestResults)
+
+        requestResults = yf.download("TSLA", start="2021-09-01", end="2021-09-08")
+
         try:
-            return requestResults["close"]
+            return requestResults["Close"][0]
         except:
-            return requestResults["error"]
+            return "Error occured"
 
     except:
         print("Unable to get Data")
@@ -229,6 +233,8 @@ def lambda_handler(event, context):
     # getAllFromDate(int(time.time())-86400, int(time.time()), "Tesla")
     companyName = ""
     ticker = ""
+    companyName = "Tesla"
+    ticker = "TSLA"
     try:
         body = {}
         if "body" in event:
@@ -245,12 +251,11 @@ def lambda_handler(event, context):
             'body': json.dumps("Invalid input")
         }
 
-    companyName = "Tesla"
-    ticker = "TSLA"
+
 
     # TODO: Implement with actual data current implementation is for testing purposes only.
 
-    stockPrice = getStockPrice(updatedTime, results, ticker)
+    # stockPrice = getStockPrice(updatedTime, results, ticker)
 
     # try:
     #     catch = checkIfTableExist(companyName)
