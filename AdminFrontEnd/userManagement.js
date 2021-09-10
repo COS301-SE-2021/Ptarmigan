@@ -104,6 +104,9 @@ function getFormDataFromPage(){
     console.log(jsonObj)+
     console.log(companyName + tickerSymbol + additionalParameters)
 
+    $("#companyNameInput").val("")
+    $("#tickerDropDown").val("Choose..")
+    $("#parameterTable").html("")
 
     return jsonObj
 
@@ -148,6 +151,14 @@ function deleteFromBucket(obj){
         .fail(function (value){
             alert("Unable to remove company from bucket")
         })
+}
+
+function viewCompanyDetails(companyName){
+    let getBucketItemsURL = "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/scraper/returnBucketList"
+    $.post(getBucketItemsURL, {}, function(result){
+        console.log(result)
+    });
+
 }
 
 // View button populates the parameter table, ticker symbol and Company name
@@ -198,6 +209,7 @@ var doneTypingInterval = 1000;  //time in ms, 5 second for example
 
 $(document).ready(function () {
     addingUsername()
+    viewCompanyDetails("Bitcoin")
 
     $("#addParameterButton").click(function(){
         addAdditionalParametersToList()
