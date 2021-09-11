@@ -104,14 +104,17 @@ def getStockPriceOnAGivenDay(unixTimeStamp, tickerSymbol):
     )
 
     day = date.weekday()
-    if day == 5 or day == 6 :
+    if day == 5 or day == 6:
         unixTimeStamp = unixTimeStamp-((day-4)*86400)
 
     dt = datetime.fromtimestamp(
         unixTimeStamp
     ).strftime('%Y-%m-%d')
 
-    print(day)
+    endDate = datetime.fromtimestamp(
+        unixTimeStamp+86400
+    ).strftime('%Y-%m-%d')
+    print(dt)
     try:
         # print(dt)
         # requestUrlCrypto = f"https://api.polygon.io/v1/open-close/{tickerSymbol}/{dt}?adjusted=true&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp"
@@ -119,10 +122,11 @@ def getStockPriceOnAGivenDay(unixTimeStamp, tickerSymbol):
         # requestResults = json.loads(requestReturnCrypto.text)
         # print(requestResults)
 
-        requestResults = yf.download("TSLA", start="2021-09-01", end="2021-09-08")
+        requestResults = yf.download(tickerSymbol, start=endDate, end=endDate)
 
         try:
-            return requestResults["Close"][0]
+            print(requestResults["Close"][0])
+            return int(requestResults["Close"][0])
         except:
             return "Error occured"
 
@@ -235,6 +239,7 @@ def lambda_handler(event, context):
     ticker = ""
     companyName = "Tesla"
     ticker = "TSLA"
+
     try:
         body = {}
         if "body" in event:
@@ -251,7 +256,17 @@ def lambda_handler(event, context):
             'body': json.dumps("Invalid input")
         }
 
+if __name__ == '__main__':
+    # yf.ticker("TSLA")
+    # print(time.today())
+    # data = yf.download("TSLA", "SPY")
+    companyName = ""
+    ticker = ""
+    companyName = "Tesla"
+    ticker = "TSLA"
 
+    # getStockPriceOnAGivenDay(1631350955-86400*2, ticker)
+    oneItem(companyName, ticker)
 
     # TODO: Implement with actual data current implementation is for testing purposes only.
 
