@@ -10,7 +10,7 @@ def return_tweet_list(content, since, until):
     # Using TwitterSearchScraper to scrape data and append tweets to list
     # ["ar", "hi", "ko", "zh-TW", "ja", "zh", "de", "pt", "en", "it", "fr", "es"]
     for i, tweet in enumerate(snscrape.modules.twitter.TwitterSearchScraper(
-            content + " min_faves:100" + " lang:ar OR lang:hi OR lang:ko OR lang:zh OR lang:ja OR lang:de OR lang:pt OR lang:en OR lang:it OR lang:fr OR lang:es since_time:" + since + " until_time:" + until).get_items()):
+            content + " min_faves:100" + " lang:ar OR lang:hi OR lang:ko OR lang:zh OR lang:ja OR lang:de OR lang:pt OR lang:en OR lang:it OR lang:fr OR lang:es since_time:" + str(since) + " until_time:" + str(until)).get_items()):
         if i >= 100:
             break
         tweets_list.append([str(tweet.id), tweet.content, tweet.retweetCount,
@@ -25,7 +25,7 @@ def return_associated_list(content, since, until):
     # Using TwitterSearchScraper to scrape data and append tweets to list
     # ["ar", "hi", "ko", "zh-TW", "ja", "zh", "de", "pt", "en", "it", "fr", "es"]
     for i, tweet in enumerate(snscrape.modules.twitter.TwitterSearchScraper(
-            content + " min_faves:100" + " lang:ar OR lang:hi OR lang:ko OR lang:zh OR lang:ja OR lang:de OR lang:pt OR lang:en OR lang:it OR lang:fr OR lang:es since_time:" + since + " until_time:" + until).get_items()):
+            content + " min_faves:100" + " lang:ar OR lang:hi OR lang:ko OR lang:zh OR lang:ja OR lang:de OR lang:pt OR lang:en OR lang:it OR lang:fr OR lang:es since_time:" + str(since) + " until_time:" + str(until)).get_items()):
         if i >= 25:
             break
         tweets_list.append([str(tweet.id), tweet.content, tweet.retweetCount,
