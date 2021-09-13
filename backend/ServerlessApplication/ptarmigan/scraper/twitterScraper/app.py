@@ -49,8 +49,8 @@ def scraper_handler(event, context):
 
     # call helper function
     tweets_list = return_tweet_list(content, scrape_since, scrape_until)
-
-    if event['content']['Associated1']:
+    eventContent = event['content']
+    if 'Associated1' in eventContent:
         AssList1 = return_associated_list(content, scrape_since, scrape_until)
         tweets_list.extend(AssList1)
     if event['content']['Associated2']:
