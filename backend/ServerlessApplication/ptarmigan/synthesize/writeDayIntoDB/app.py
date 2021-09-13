@@ -4,6 +4,7 @@ from boto3.dynamodb.conditions import Key
 import requests
 import json
 from datetime import datetime
+import yfinance as yf
 
 
 def calculateSentiment(content):
@@ -96,19 +97,107 @@ def getStockList(ticker):
 
     return requestResults
 
-def getSentimentOnAGivenDay(unixTimeStamp, tickerSymbol):
+def getStockPriceOnAGivenDay(unixTimeStamp, tickerSymbol):
+
+    date = datetime.fromtimestamp(
+        unixTimeStamp
+    )
+
+    day = date.weekday()
+    if day == 5 or day == 6:
+        unixTimeStamp = unixTimeStamp-((day-4)*86400)
+
     dt = datetime.fromtimestamp(
         unixTimeStamp
     ).strftime('%Y-%m-%d')
+
+    endDate = datetime.fromtimestamp(
+        unixTimeStamp+86400
+    ).strftime('%Y-%m-%d')
+    print(dt)
     try:
-        print(dt)
-        requestUrlCrypto = f"https://api.polygon.io/v1/open-close/{tickerSymbol}/{dt}?adjusted=true&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp"
-        requestReturnCrypto = requests.get(requestUrlCrypto)
-        requestResults = json.loads(requestReturnCrypto.text)
-        return requestResults
+        # print(dt)
+        # requestUrlCrypto = f"https://api.polygon.io/v1/open-close/{tickerSymbol}/{dt}?adjusted=true&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp"
+        # requestReturnCrypto = requests.get(requestUrlCrypto)
+        # requestResults = json.loads(requestReturnCrypto.text)
+        # print(requestResults)
+
+        requestResults = yf.download(tickerSymbol, start=endDate, end=endDate)
+
+        try:
+            print(requestResults["Close"][0])
+            return int(requestResults["Close"][0])
+        except:
+            return "Error occured"
+
     except:
         print("Unable to get Data")
+        raise Exception("Unable to get Data, The day might not be available")
+        return "error"
 
+def checkIfTableExist(companyName):
+    tableName = companyName
+    dynamodbClient = boto3.client('dynamodb')
+    try:
+        response = dynamodbClient.create_table(
+            AttributeDefinitions=[
+                {
+                    'AttributeName': 'TimeStamp',
+                    'AttributeType': 'N',
+                }
+            ],
+            KeySchema=[
+                {
+                    'AttributeName': 'TimeStamp',
+                    'KeyType': 'HASH',
+                }
+            ],
+            ProvisionedThroughput={
+                'ReadCapacityUnits': 5,
+                'WriteCapacityUnits': 5,
+            },
+            TableName=(tableName + "Daily")
+        )
+        return False
+
+    except dynamodbClient.exceptions.ResourceInUseException:
+        print("The Table Already exists")
+        return True
+
+def catchUp(len, companyName, ticker):
+    currentTime = int(time.time())
+
+    timeFromMidnight = currentTime % 86400
+
+    currentTime = currentTime - timeFromMidnight
+    currentTime = currentTime - (86400)
+
+    # sentiment = getAllFromDate(currentTime-86400, currentTime, companyName)
+
+    updatedTime = currentTime
+
+    # ticker = getTicker(companyName)
+    # stockList = getStockPriceOnAGivenDay(updatedTime, ticker)
+    # stockPrice = stockList["close"]
+    # print(stockList)
+
+    updatedTime = updatedTime
+    for i in range(len):
+
+        updatedTime = updatedTime - 86400
+        sentiment = getAllFromDate(updatedTime - 86400, updatedTime, companyName)
+        # stock = getStockPrice(updatedTime, stockList, ticker)
+        stockPrice = getStockPriceOnAGivenDay(updatedTime, ticker)
+
+        if stockPrice == "You've exceeded the maximum requests per minute, please wait or upgrade your subscription to continue. https://polygon.io/pricing":
+            print("Exeeding max usage")
+            time.sleep(60)
+            stockPrice = getStockPriceOnAGivenDay(updatedTime, ticker)
+
+
+        res = writeIntoDb(updatedTime, companyName, stockPrice, sentiment)
+        print(res)
+        print("Number: ", i)
 # def getTicker(company):
 #     requestUrl = f"https://api.polygon.io/v3/reference/tickers?market=stocks&search={company} &active=true&sort=ticker&order=asc&limit=10&apiKey=PNqoXU3luX7smsggLGPacHd8JnKZkDMV"
 #     requestReturn = requests.get(requestUrl)
@@ -121,32 +210,81 @@ def getSentimentOnAGivenDay(unixTimeStamp, tickerSymbol):
 #         requestResults = requestReturnCrypto['results']
 #     return (requestResults[0]['ticker'])
 
-def lambda_handler(event, context):
-    # getAllFromDate(int(time.time())-86400, int(time.time()), "Tesla")
-    companyName = "Tesla"
-    ticker = "TSLA"
-
-    # TODO: Implement with actual data current implementation is for testing purposes only.
+def oneItem(companyName, ticker):
     currentTime = int(time.time())
 
     timeFromMidnight = currentTime % 86400
 
     currentTime = currentTime - timeFromMidnight
+    currentTime = currentTime
 
-    sentiment = getAllFromDate(currentTime-86400, currentTime, companyName)
+    # sentiment = getAllFromDate(currentTime-86400, currentTime, companyName)
 
     updatedTime = currentTime
+    updatedTime = updatedTime - 86400
+    sentiment = getAllFromDate(updatedTime - 86400, currentTime, companyName)
+    # stock = getStockPrice(updatedTime, stockList, ticker)
+    stockPrice = getStockPriceOnAGivenDay(updatedTime, ticker)
+    if stockPrice == "You've exceeded the maximum requests per minute, please wait or upgrade your subscription to continue. https://polygon.io/pricing":
+        print("Exeeding max usage")
+        time.sleep(60)
+        stockPrice = getStockPriceOnAGivenDay(updatedTime, ticker)
 
-    # ticker = getTicker(companyName)
-    stockList = getSentimentOnAGivenDay(updatedTime, ticker)
-    stockPrice = stockList["close"]
-    print(stockPrice)
+    res = writeIntoDb(updatedTime, companyName, stockPrice, sentiment)
+    print(res)
 
-    # updatedTime = updatedTime-(86400*10)
-    # for i in range(5):
-    #     updatedTime = updatedTime - 86400
-    #     sentiment = getAllFromDate(updatedTime - 86400, updatedTime, companyName)
-    #     stock = getStockPrice(updatedTime,stockList,ticker)
-    #     writeIntoDb(updatedTime, companyName, 706.5, sentiment)
+def lambda_handler(event, context):
+    # getAllFromDate(int(time.time())-86400, int(time.time()), "Tesla")
+    companyName = ""
+    ticker = ""
+    companyName = "Tesla"
+    ticker = "TSLA"
+
+    try:
+        body = {}
+        if "body" in event:
+            body = json.loads(event["body"])
+        else:
+            body = event
+
+        companyName = body["companyName"]
+        ticker = body["ticker"]
+
+    except:
+        return {
+            'statusCode': 400,
+            'body': json.dumps("Invalid input")
+        }
+
+if __name__ == '__main__':
+    # yf.ticker("TSLA")
+    # print(time.today())
+    # data = yf.download("TSLA", "SPY")
+    companyName = ""
+    ticker = ""
+    companyName = "Tesla"
+    ticker = "TSLA"
+
+    # getStockPriceOnAGivenDay(1631350955-86400*2, ticker)
+    oneItem(companyName, ticker)
+
+    # TODO: Implement with actual data current implementation is for testing purposes only.
+
+    # stockPrice = getStockPrice(updatedTime, results, ticker)
+
+    # try:
+    #     catch = checkIfTableExist(companyName)
+    #     if catch == False:
+    #         catchUp(5, companyName, ticker)
+    #     else:
+    #         oneItem(companyName, ticker)
+    # except:
+    #     return {
+    #         'statusCode': 400,
+    #         'body': json.dumps("Data not available at this time")
+    #     }
+        # if res["ResponseMetadata"]["ResponseMetadata"] != 200:
+        #     print(res)
+        #     return "ERROR"
 
     # return (writeIntoDb(currentTime, "Tesla", 706.5, sentiment))["ResponseMetadata"]
