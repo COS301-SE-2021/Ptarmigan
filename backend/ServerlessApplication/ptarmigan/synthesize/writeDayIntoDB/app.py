@@ -237,8 +237,6 @@ def lambda_handler(event, context):
     # getAllFromDate(int(time.time())-86400, int(time.time()), "Tesla")
     companyName = ""
     ticker = ""
-    companyName = "Tesla"
-    ticker = "TSLA"
 
     try:
         body = {}
@@ -256,35 +254,28 @@ def lambda_handler(event, context):
             'body': json.dumps("Invalid input")
         }
 
+    table = checkIfTableExist(companyName)
+
+    print(table)
+
+    if not table:
+        catchUp(10, companyName, ticker)
+        print("The table did not exist")
+
+    else:
+        insert = oneItem(companyName, ticker)
+        print("The table did exist and one item was entered into the db")
+
+    return {
+        'statusCode': 200,
+        'body': json.dumps("Success!")
+    }
+
 if __name__ == '__main__':
-    # yf.ticker("TSLA")
-    # print(time.today())
-    # data = yf.download("TSLA", "SPY")
-    companyName = ""
-    ticker = ""
-    companyName = "Tesla"
-    ticker = "TSLA"
+    body = {
+        "companyName": "Tesla",
+        "ticker": "TSLA"
+    }
+    print(lambda_handler(body, ""))
 
-    # getStockPriceOnAGivenDay(1631350955-86400*2, ticker)
-    oneItem(companyName, ticker)
 
-    # TODO: Implement with actual data current implementation is for testing purposes only.
-
-    # stockPrice = getStockPrice(updatedTime, results, ticker)
-
-    # try:
-    #     catch = checkIfTableExist(companyName)
-    #     if catch == False:
-    #         catchUp(5, companyName, ticker)
-    #     else:
-    #         oneItem(companyName, ticker)
-    # except:
-    #     return {
-    #         'statusCode': 400,
-    #         'body': json.dumps("Data not available at this time")
-    #     }
-        # if res["ResponseMetadata"]["ResponseMetadata"] != 200:
-        #     print(res)
-        #     return "ERROR"
-
-    # return (writeIntoDb(currentTime, "Tesla", 706.5, sentiment))["ResponseMetadata"]
