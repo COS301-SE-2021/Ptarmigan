@@ -162,14 +162,14 @@ def lambda_handler(event, context):
                 'body': json.dumps('Item is already in the file')
             }
 
-    if updateContent['Associated3']:
+    if 'Associated3' in updateContent:
         replaceLine = '{"content": "' + update + '", "Ticker": "' + Ticker + '","Associated1": "' + updateContent[
             'Associated1'] + '", "Associated2": "' + updateContent['Associated2'] + '", "Associated3": "' + \
                       updateContent['Associated3'] + '"}'
-    elif updateContent['Associated2']:
+    elif 'Associated2' in updateContent:
         replaceLine = '{"content": "' + update + '", "Ticker": "' + Ticker + '", "Associated1": "' + updateContent[
             'Associated1'] + '", "Associated2": "' + updateContent['Associated2'] + '"}'
-    elif updateContent['Associated1']:
+    elif 'Associated1' in updateContent:
         replaceLine = '{"content": "' + update + '", "Ticker": "' + Ticker + '", "Associated1": "' + updateContent[
             'Associated1'] + '"}'
     else:
