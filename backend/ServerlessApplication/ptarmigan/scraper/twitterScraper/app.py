@@ -53,10 +53,10 @@ def scraper_handler(event, context):
     if 'Associated1' in eventContent:
         AssList1 = return_associated_list(content, scrape_since, scrape_until)
         tweets_list.extend(AssList1)
-    if event['content']['Associated2']:
+    if 'Associated2' in eventContent:
         AssList2 = return_associated_list(content, scrape_since, scrape_until)
         tweets_list.extend(AssList2)
-    if event['content']['Associated3']:
+    if 'Associated3' in eventContent:
         AssList3 = return_associated_list(content, scrape_since, scrape_until)
         tweets_list.extend(AssList3)
 
