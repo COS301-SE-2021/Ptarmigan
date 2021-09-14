@@ -154,6 +154,7 @@ function deleteFromBucket(obj){
 }
 
 function viewCompanyDetails(companyName){
+    console.log("Getting company details")
     let getBucketItemsURL = "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/scraper/returnBucketList"
     $.post(getBucketItemsURL, {}, function(result){
         console.log(result)
@@ -170,7 +171,7 @@ $('#companyTable').on('click', '.viewClick', function() {
     $('#companyNameInput').val(companyName)
     // loadTickerSymbols()
 
-    companySearch = $("#companyNameInput").val()
+    let companySearch = $("#companyNameInput").val()
     link = `https://api.polygon.io/v3/reference/tickers?search=${companySearch}&active=true&sort=ticker&order=asc&limit=10&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp`
     $.get(link, data =>{
         console.log(data)
