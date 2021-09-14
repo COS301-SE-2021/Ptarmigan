@@ -17,6 +17,7 @@ class FeedSelectorScreen extends StatefulWidget {
 
 class _FeedSelectorScreenState extends State<FeedSelectorScreen> {
   late List feedList;
+  late List fullFeedList;
   late List feedListBool;
   Map feedMap = Map();
   FeedFileManager manager;
@@ -52,29 +53,42 @@ class _FeedSelectorScreenState extends State<FeedSelectorScreen> {
     print("replaceBody called.");
     //print(feedListBool);
     return Container(
-        child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Container(
-              color: bgColor,
-              height: 500,
-              width: MediaQuery.of(context).size.width,
-              child: DataTable2(
-                columnSpacing: defaultPadding,
-                minWidth: 400,
-                columns: [
-                  DataColumn(
-                    label: Text("Stock name"),
-                  ),
-                  DataColumn(
-                    label: Text("Subscribed"),
-                  ),
-                ],
-                rows: List.generate(
-                  feedMap.length,
-                  (index) => recentFileDataRow(index),
+        child: Column(children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          TextField(
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(), hintText: "Search..."),
+              onChanged: (text) {
+                updateFeedList(text);
+              }),
+        ],
+      ),
+      SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Container(
+            color: bgColor,
+            height: 500,
+            width: MediaQuery.of(context).size.width,
+            child: DataTable2(
+              columnSpacing: defaultPadding,
+              minWidth: 400,
+              columns: [
+                DataColumn(
+                  label: Text("Stock name"),
                 ),
+                DataColumn(
+                  label: Text("Subscribed"),
+                ),
+              ],
+              rows: List.generate(
+                feedMap.length,
+                (index) => recentFileDataRow(index),
               ),
-            )));
+            ),
+          ))
+    ]));
   }
 
   DataRow recentFileDataRow(int index) {
@@ -122,6 +136,7 @@ class _FeedSelectorScreenState extends State<FeedSelectorScreen> {
             print("Value : $value");
             feedMap = value;
             feedList = value.keys.toList();
+            fullFeedList = feedList;
           }),
           getFeedListBool(value.values.toList()).then((value) => {
                 setState(() {
@@ -154,5 +169,23 @@ class _FeedSelectorScreenState extends State<FeedSelectorScreen> {
       }
     }
     return tempfeedListBool;
+  }
+
+  void updateFeedList(String topic) {
+    feedList = searchFeedList(topic);
+    _body = replaceBody();
+  }
+
+  List searchFeedList(String topic) {
+    if (topic.isEmpty)
+      return fullFeedList;
+    else {
+      List tempFeedList = [];
+      for (var i = 0; i < fullFeedList.length; i++) {
+        String feedHolder = fullFeedList[i];
+        if (feedHolder.contains(topic)) tempFeedList.add(fullFeedList[i]);
+      }
+      return tempFeedList;
+    }
   }
 }
