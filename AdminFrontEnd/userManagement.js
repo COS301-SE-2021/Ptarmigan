@@ -159,7 +159,6 @@ function viewCompanyDetails(companyName){
     $.post(getBucketItemsURL, {}, function(result){
         console.log(result)
     });
-
 }
 
 // View button populates the parameter table, ticker symbol and Company name

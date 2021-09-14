@@ -1,4 +1,9 @@
 class Output{
     printItem(company){}
-    removeItem(){}
+    removeItem(){
+        console.log("Removed Item")
+    }
+    doesExist(){
+        console.log("This Object Does Exist")
+    }
 }

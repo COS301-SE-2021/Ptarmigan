@@ -40,26 +40,49 @@ class Service extends ServiceInterface{
         let requestUrlAdd = this.url + extentionAdd;
         console.log('updating companies')
 
-        let extentionRemove = "scraper/deleteBucketItem";
-        let requestUrlRemove = this.url + extentionRemove;
-
         this.removeCompanies(company)
-        $.post(requestUrlAdd, JSON.stringify(company), function(result){
+        return $.post(requestUrlAdd, JSON.stringify(company), function(result){
             console.log("Removed And Updated")
             console.log(result)
+            return true
+        }).fail(res => {
+            return false
         })
     }
 
     removeCompanies(company){
+
+        let ret
         let extentionRemove = "scraper/deleteBucketItem";
         let requestUrlRemove = this.url + extentionRemove;
 
-        $.post(requestUrlRemove, JSON.stringify(company), function(result){
-            console.log(result)
-        }).fail((results) => {
-            console.log("Company Is Not in the list")
-            // return false
-        })
+        $.ajax({
+            type: "POST",
+            url: requestUrlRemove,
+            async: false,
+            data: JSON.stringify(company),
+            success: function(result) {
+                console.log(result)
+                ret = true
+                return true
+            },
+            error: (result) =>{
+                ret = false
+                return false
+            }
+        });
+        //
+        // let ret = await $.post(requestUrlRemove, JSON.stringify(company), function(result){
+        //     console.log(result)
+        //     return true
+        // }).fail((results) => {
+        //     console.log("Company Is Not in the list")
+        //     return false
+        //     // return false
+        // })
+
+        console.log(ret)
+        return ret
     }
 }
 

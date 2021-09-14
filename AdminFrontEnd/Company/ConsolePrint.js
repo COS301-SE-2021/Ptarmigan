@@ -9,8 +9,4 @@ class ConsolePrint extends Output{
         console.log("Ticker:", company.companyJSON.Ticker)
     }
     removeItem(){}
-
-    doesExist(){
-        console.log("This Object Does Exist")
-    }
 }
