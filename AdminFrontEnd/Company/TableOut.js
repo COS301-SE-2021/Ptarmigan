@@ -17,5 +17,13 @@ class TableOut extends Output{
         $(tableId).prepend(content)
         console.log("Printing")
     }
-    removeItem(company){}
+    removeItem(company){
+        let tableId = "#" + this.tableId;
+        let location = $("td:contains(company.companyJSON.content)")
+
+        // console.log(location)
+
+        location.parent().remove()
+
+    }
 }
