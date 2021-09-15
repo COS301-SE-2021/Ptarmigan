@@ -21,11 +21,6 @@ class TableOut extends Output{
         let rowId = "#" + company.companyJSON.content;
         console.log(company.companyJSON.content)
         $(rowId).remove()
-
-        // console.log(location)
-
-        // location.parent().remove()
-
     }
 
     viewSingleCompany(company){
