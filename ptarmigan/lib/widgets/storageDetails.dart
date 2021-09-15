@@ -47,7 +47,13 @@ class StorageDetails extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
               child: ElevatedButton(
-                  onPressed: null,
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          _buildPopupDialog(context),
+                    );
+                  },
                   child: Text(
                     "Send snapshot",
                     style: TextStyle(color: Colors.white),
@@ -67,4 +73,43 @@ class StorageDetails extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _buildPopupDialog(BuildContext context) {
+  return new AlertDialog(
+    title: const Text('Send Snapshot'),
+    insetPadding: EdgeInsets.fromLTRB(1, 1, 1, 1),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text("Recipients email address:"),
+        TextField(),
+        Padding(
+            child: Text("Comment:"),
+            padding: EdgeInsets.fromLTRB(10, 20, 10, 10)),
+        TextField(),
+      ],
+    ),
+    actions: <Widget>[
+      new ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: const Text(
+          'Close',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      new ElevatedButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: const Text(
+          'Send',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    ],
+  );
 }
