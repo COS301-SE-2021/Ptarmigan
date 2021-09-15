@@ -50,26 +50,34 @@ class _FeedSelectorScreenState extends State<FeedSelectorScreen> {
   }
 
   Widget replaceBody() {
+    int len = feedList.length;
+    print("Feed list lenght = $len");
     print("replaceBody called.");
     //print(feedListBool);
     return Container(
         child: Column(children: [
+      SizedBox(height: defaultPadding),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          TextField(
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(), hintText: "Search..."),
-              onChanged: (text) {
-                updateFeedList(text);
-              }),
+          Container(
+            alignment: Alignment.center,
+            width: 200,
+            height: 50,
+            child: TextField(
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(), hintText: "Search..."),
+                onChanged: (text) {
+                  updateFeedList(text);
+                }),
+          )
         ],
       ),
       SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Container(
             color: bgColor,
-            height: 500,
+            height: 400,
             width: MediaQuery.of(context).size.width,
             child: DataTable2(
               columnSpacing: defaultPadding,
@@ -92,39 +100,101 @@ class _FeedSelectorScreenState extends State<FeedSelectorScreen> {
   }
 
   DataRow recentFileDataRow(int index) {
-    return DataRow(
-      cells: [
-        DataCell(
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-                child: Text(feedList[index]),
+    print("Index :$index");
+    print(feedList);
+    if (feedList.isEmpty)
+      return DataRow(
+          cells: [DataCell(Text("No results found")), DataCell((Text("")))]);
+    else if (feedList.length == 1) {
+      if (index == 0)
+        return DataRow(
+          cells: [
+            DataCell(
+              Row(
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: defaultPadding),
+                    child: Text(feedList[index]),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-        DataCell(Row(
-          children: [
-            Text("Subscribe : "),
-            Checkbox(
-                value: feedListBool[index],
-                onChanged: (bool? value) {
-                  setState(() {
-                    print("Index #$index clicked");
-                    this.feedListBool[index] = value;
-                    _body = replaceBody();
-                  });
-                  changeSubscribed(feedList[index]);
-                })
+            ),
+            DataCell(Row(
+              children: [
+                Text("Subscribe : "),
+                Checkbox(
+                    value: feedListBool[index],
+                    onChanged: (bool? value) {
+                      setState(() {
+                        print("Index #$index clicked");
+                        this.feedListBool[index] = value;
+                        _body = replaceBody();
+                      });
+                      changeSubscribed(feedList[index]);
+                    })
+              ],
+            )),
+            //DataCell(Text(("#"))),
           ],
-        )),
-        //DataCell(Text(("#"))),
-      ],
-    );
+        );
+      else
+        return DataRow(
+          cells: [
+            DataCell(
+              Row(
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: defaultPadding),
+                    child: Text(""),
+                  ),
+                ],
+              ),
+            ),
+            DataCell(Row(
+              children: [
+                Text(""),
+              ],
+            )),
+            //DataCell(Text(("#"))),
+          ],
+        );
+    } else
+      return DataRow(
+        cells: [
+          DataCell(
+            Row(
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: defaultPadding),
+                  child: Text(feedList[index]),
+                ),
+              ],
+            ),
+          ),
+          DataCell(Row(
+            children: [
+              Text("Subscribe : "),
+              Checkbox(
+                  value: feedListBool[index],
+                  onChanged: (bool? value) {
+                    setState(() {
+                      print("Index #$index clicked");
+                      this.feedListBool[index] = value;
+                      _body = replaceBody();
+                    });
+                    changeSubscribed(feedList[index]);
+                  })
+            ],
+          )),
+          //DataCell(Text(("#"))),
+        ],
+      );
   }
 
-  void changeSubscribed(String topic) {
+  Future<void> changeSubscribed(String topic) async {
     print("Change subscribed on $topic called");
     manager.changeSubscribed(topic);
   }
@@ -177,14 +247,23 @@ class _FeedSelectorScreenState extends State<FeedSelectorScreen> {
   }
 
   List searchFeedList(String topic) {
-    if (topic.isEmpty)
+    print("Sorting topic : $topic");
+    if (topic.isEmpty) {
+      getFeedListBool(feedMap.values.toList())
+          .then((value) => feedListBool = value);
       return fullFeedList;
-    else {
+    } else {
+      List tempBoolList = [];
       List tempFeedList = [];
       for (var i = 0; i < fullFeedList.length; i++) {
         String feedHolder = fullFeedList[i];
-        if (feedHolder.contains(topic)) tempFeedList.add(fullFeedList[i]);
+        feedHolder = feedHolder.toLowerCase();
+        topic = topic.toLowerCase();
+        if (feedHolder.contains(topic.trim())) {
+          tempFeedList.add(fullFeedList[i]);
+        }
       }
+      print("Updated feed list = $tempFeedList");
       return tempFeedList;
     }
   }

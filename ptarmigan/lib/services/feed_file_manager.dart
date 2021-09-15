@@ -36,11 +36,11 @@ class FeedFileManager {
     if (await file.readAsString() == "") //empty
     {
       print("file was empty. Calling create file.");
-      await createFile().then((value) => {_initFeedMap(file)});
+      await createFile().then((value) async => {_initFeedMap(value)});
     }
 
     updateFeedsFile();
-    _initFeedMap(file);
+    if (initFeedMapComplete == false) _initFeedMap(file);
   }
 
   void _initFeedMap(File file) async {
@@ -64,9 +64,12 @@ class FeedFileManager {
 
   void setFeedList(List feeds) {
     print("Set feed list.");
+
     this.feeds = feeds;
+    print("Feedslist = $feeds");
     //_resetFile(); //YOOOOOOO TAKE THIS SHIT OUT BRUHHHHH
-    _initFeedFile();
+    //_initFeedFile();
+    updateFeedsFile();
   }
 
   Future<File> writeFeeds(List feeds) async {
@@ -123,7 +126,9 @@ class FeedFileManager {
     for (var v in feeds) {
       print("$nameAndSubscription in updateFeedsFile");
       if (nameAndSubscription.containsKey(v) == false) {
-        nameAndSubscription[v] == "False"; //add feed that was not in map.
+        nameAndSubscription.putIfAbsent(v, () => "False");
+        // nameAndSubscription[v] == "False"; //add feed that was not in map.
+        print("Updated nameandsub = $v");
         changed = true;
       }
     }
@@ -143,8 +148,8 @@ class FeedFileManager {
     file.writeAsString(toFile);
   }
 
-  Future<void> createFile() async {
-    print("File did not exist, creating file.");
+  Future<File> createFile() async {
+    print("File was empty.");
     final file = await _localFile;
     String holdString = "";
     for (int i = 0; i < feeds.length; i++) {
@@ -152,6 +157,8 @@ class FeedFileManager {
       holdString += (feeds[i] + ",False\n");
     }
     file.writeAsString(holdString);
+
+    return file;
   }
 
   Future<List> getFeedList() async {

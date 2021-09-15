@@ -47,7 +47,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // amplify packages we will need to use
 import 'package:amplify_flutter/amplify.dart';
-import 'package:amplify_datastore/amplify_datastore.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -72,8 +71,7 @@ import 'services/list_changer.dart';
 
 final ValueNotifier feedID = ValueNotifier("");
 
-//final AmplifyDataStore _dataStorePlugin =
-// AmplifyDataStore(modelProvider: ModelProvider.instance);
+
 
 //final AmplifyAPI _apiPlugin = AmplifyAPI();
 //final AmplifyAuthCognito _authPlugin = AmplifyAuthCognito();

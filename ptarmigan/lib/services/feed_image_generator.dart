@@ -45,7 +45,7 @@ class FeedImageGenerator {
 
     for (var i = 0; i < finalContents.length; i++) {
       String hold = finalContents[i].toString();
-      hold = hold.substring(10, hold.length - 1);
+      hold = hold.substring(10, hold.indexOf(','));
       hold = hold.trim();
       finalContents[i] = hold;
     }
@@ -56,6 +56,4 @@ class FeedImageGenerator {
     //  throw Exception("Failed to fetch images");
     //}
   }
-
- 
 }
