@@ -23,6 +23,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: ^0.4.0+9
+  firebase_analytics: ^5.0.2
+  cloud_firestore: ^0.12.9+5
+  
   amplify_flutter: <1.0.0
   amplify_datastore: <1.0.0
   amplify_api: <1.0.0

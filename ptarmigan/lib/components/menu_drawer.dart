@@ -52,6 +52,16 @@ class MenuDrawer extends StatelessWidget {
                       builder: (context) => FeedSelectorScreen(manager)));
             },
           ),
+          DrawerListTile(
+            title: "Snapshot Inbox",
+            svgSrc: "assets/icons/menu_task.svg",
+            press: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => FeedSelectorScreen(manager)));
+            },
+          ),
         ],
       ),
     );
