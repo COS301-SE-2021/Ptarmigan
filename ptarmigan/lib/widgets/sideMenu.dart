@@ -55,15 +55,15 @@ class SideMenu extends StatelessWidget {
     return object;
   }
 
-  /* rocko() async {
+  rocko() async {
     _subscription = Amplify.DataStore.observe(Feed.classType).listen((event) {
       fetchNewTodos();
     });
 
     await fetchNewTodos();
-  } */
+  }
 
-/*  Future<void> fetchNewTodos() async {
+  Future<void> fetchNewTodos() async {
     print("BOOOOOOOOR: ");
     List<Feed> updatedFeeds = await Amplify.DataStore.query(Feed.classType,
         where: Feed.SUBSCRIBEDTO.eq(0));
@@ -71,56 +71,57 @@ class SideMenu extends StatelessWidget {
     feeds = updatedFeeds;
 
     //print("VACO: " + todos.elementAt(0).name);
-  } */
+  }
 
   @override
   Widget build(BuildContext context) {
     print("++++++++++++++++++++++++++++++");
-    //print(feeds[0].feedName);
+    print(feeds[0].feedName);
     // Amplify.DataStore.clear();
 
     return Drawer(
-      child: ListView(children: [
-        DrawerHeader(
-          child: Column(children: [
-            Row(children: [Text("Ptarmigan", style: TextStyle(fontSize: 30))]),
-            Row(
-              children: [
-                Text(
-                  "Feeds",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white60,
-                  ),
-                  textAlign: TextAlign.left,
-                )
-              ],
-            ),
-            Row(children: [
-              ElevatedButton.icon(
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.green,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 1 * 1.5,
-                    vertical: 1 / (Responsive.isMobile(context) ? 2 : 1),
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AddFeedForm(feeds: feeds)));
-                },
-                icon: Icon(Icons.add),
-                label: Text("Add New  "),
+      child: ListView(
+        children: [
+          DrawerHeader(
+            child: Column(children: [
+              Row(children: [
+                Text("Ptarmigan", style: TextStyle(fontSize: 30))
+              ]),
+              Row(
+                children: [
+                  Text(
+                    "Feeds",
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white60,
+                    ),
+                    textAlign: TextAlign.left,
+                  )
+                ],
               ),
-            ])
-          ]),
-        ),
-        Column(
-          children: changeFeedsTo(
-              [new Feed(feedName: "Bitcoin"), new Feed(feedName: "Tesla")]),
+              Row(children: [
+                ElevatedButton.icon(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 1 * 1.5,
+                      vertical: 1 / (Responsive.isMobile(context) ? 2 : 1),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AddFeedForm(feeds: feeds)));
+                  },
+                  icon: Icon(Icons.add),
+                  label: Text("Add New  "),
+                ),
+              ])
+            ]),
+          ),
+          Column(children: changeFeedsTo(feedsSub)),
           //  )
           /*   DrawerListTile(
             title: "Bitcoin",
@@ -152,10 +153,9 @@ class SideMenu extends StatelessWidget {
             svgSrc: "assets/icons/menu_tran.svg",
             press: () {},
           ), */
-        ),
-      ]),
+        ],
+      ),
     );
-    // );
   }
 }
 
@@ -191,13 +191,13 @@ class DrawerListTile extends StatelessWidget {
     return object;
   }
 
-  /* rocko() async {
+  rocko() async {
     _subscription = Amplify.DataStore.observe(Todo.classType).listen((event) {
       fetchNewTodos();
     });
 
     await fetchNewTodos();
-  } */
+  }
 
   Future<void> fetchNewTodos() async {
     List<Todo> updatedFeeds = await Amplify.DataStore.query(Todo.classType,
@@ -239,8 +239,8 @@ class DrawerListTile extends StatelessWidget {
 
     String myTitle = this.title;
     Future<FeedSentiment> _updateFeedPosts(String feedName) async {
-      //  Amplify.DataStore.clear();
-      //  Delete();
+      Amplify.DataStore.clear();
+      Delete();
       //demoRecentFiles = [];
       // String a =
       //     '[{"BeginDate": 1623005418000, "EndDate": 1623610218000, "IntervalData": 0}, {"BeginDate": 1623610218000, "EndDate": 1624215018000, "IntervalData": 0}, {"BeginDate": 1624215018000, "EndDate": 1624819818000, "IntervalData": 0}, {"BeginDate": 1624819818000, "EndDate": 1625424618000, "IntervalData": 0}, {"BeginDate": 1625424618000, "EndDate": 1626029418000, "IntervalData": 0}, {"BeginDate": 1626029418000, "EndDate": 1626634218000, "IntervalData": 0}, {"BeginDate": 1626634218000, "EndDate": 1627239018000, "IntervalData": 0}, {"BeginDate": 1627239018000, "EndDate": 1627843818000, "IntervalData": 0}, {"BeginDate": 1627843818000, "EndDate": 1628448618000, "IntervalData": 0.06540074664700189}, {"BeginDate": 1628448618000, "EndDate": 1629053418000, "IntervalData": 0}]';
@@ -248,12 +248,14 @@ class DrawerListTile extends StatelessWidget {
 
       final response2 = await http.post(
           Uri.parse(
-              'https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/senthisize/getDailySentiment'),
+              'https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/senthisize/getGraphSentiment'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
           body: jsonEncode({
-            {"company": "Tesla", "beginDate": 1628899200}
+            "BeginDate": 1627858371, //lastUpdated //replace for newest
+            "Interval": "Day",
+            "CompanyName": feedName
           }));
       print("-----------");
       print(response2.body);
@@ -280,17 +282,16 @@ class DrawerListTile extends StatelessWidget {
 
           int len = test1[i].intervalData.toString().indexOf(".") + 1;
           TemporalDate a = TemporalDate.fromString(
-              DateTime.fromMillisecondsSinceEpoch(
-                      int.parse(test1[i].beginDate) * 1000)
+              DateTime.fromMillisecondsSinceEpoch(test1[i].beginDate * 1000)
                   .toIso8601String()
                   .substring(0, 10));
-          if (double.parse(test1[i].intervalData) < 0) {
+          if (test1[i].intervalData < 0) {
             len = len - 1;
           }
 
           Todo newTodo = Todo(
             name: feedName,
-            description: (double.parse(test1[i].intervalData) * 50 + 50)
+            description: ((test1[i].intervalData) * 50 + 50)
                     .toString()
                     .substring(0, len) +
                 "%",
@@ -301,7 +302,7 @@ class DrawerListTile extends StatelessWidget {
 
           try {
             print("Attempting to save to datastore");
-            // Amplify.DataStore.save(newTodo);
+            Amplify.DataStore.save(newTodo);
 
             // Navigator.of(context).pop();
           } catch (e) {

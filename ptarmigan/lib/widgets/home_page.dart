@@ -1,3 +1,5 @@
+import 'dart:async';
+//import 'dart:html';
 import 'dart:io';
 import 'dart:math';
 
@@ -9,9 +11,13 @@ import 'package:flutter/material.dart';
 import 'package:ptarmigan/components/home_screen_welcome.dart';
 import 'package:ptarmigan/components/menu_drawer.dart';
 import 'package:ptarmigan/constants.dart';
+import 'package:ptarmigan/models/Feed.dart';
+import 'package:ptarmigan/models/Todo.dart';
 import 'package:ptarmigan/services/feed_image_generator.dart';
 import 'package:ptarmigan/settings/application_settings.dart';
 import 'package:ptarmigan/widgets/Settings_page.dart';
+import 'package:ptarmigan/widgets/dashboard_screen.dart';
+import 'package:ptarmigan/widgets/mainScreen.dart';
 import 'package:ptarmigan/widgets/stock_screen.dart';
 import 'package:ptarmigan/widgets/todos_page.dart';
 import 'package:ptarmigan/widgets/twitter_page.dart';
@@ -31,23 +37,59 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   late AuthUser _user;
+  late bool _isLoading;
+
+  /*late List<Todo> todos;
+  late List<Feed> _feeds;
+  late List<Feed> _feedsSub;
+  String currentFeedSelected = " ";
+
+  late StreamSubscription _subscription;
+  late StreamSubscription _subscriptionFeed;
+  late StreamSubscription _subscriptionFeedSub;
+  late StreamSubscription _subscriptionTodoUpdate;
+
+  late List<Todo> _todos;
+  late String _feedTitle;*/
 
   @override
   void initState() {
     print("Home page loaded.");
     _initFeedInterests();
     print("-=-=-=-=-=-=-=-=-=-=-=-=-");
+    _isLoading = true;
 
-    //if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
     super.initState();
-    // Amplify.Auth.getCurrentUser().then((user) {
-    //  setState(() {
-    //   _user = user;
-    // });
-    // }).catchError((error) {
-    //   print(error.message as AuthException);
-    //  });
+    /* if (Amplify.isConfigured == true) {
+      _subscription = Amplify.DataStore.observe(Todo.classType).listen((event) {
+        _fetchTodos();
+      });
+
+      _subscriptionFeed =
+          Amplify.DataStore.observe(Feed.classType).listen((event) {
+        _fetchFeeds();
+      });
+
+      _subscriptionFeedSub =
+          Amplify.DataStore.observe(Feed.classType).listen((event) {
+        _fetchSubFeeds();
+      });
+
+      // fetch Todo entries from DataStore
+      _fetchEverything();
+      // after both configuring Amplify and fetching Todo entries, update loading
+      // ui state to loaded state
+      setState(() {
+        _isLoading = false;
+      });
+    }*/
   }
+
+  /*Future<void> _fetchEverything() async {
+    await _fetchTodos();
+    await _fetchFeeds();
+    await _fetchSubFeeds();
+  }*/
 
   @override
   void dispose() {
@@ -315,7 +357,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         break;
       case 1:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => TodosPage()));
+            context, MaterialPageRoute(builder: (context) => MainScreen()));
         break;
       case 2:
         Navigator.push(
@@ -392,6 +434,56 @@ class _DashboardScreenState extends State<DashboardScreen> {
   List getFeedImages() {
     return feedimage;
   }
+
+  /* Future<void> _fetchTodos() async {
+    try {
+      // query for all Todo entries by passing the Todo classType to
+      // Amplify.DataStore.query()
+      List<Todo> updatedTodos = await Amplify.DataStore.query(Todo.classType);
+
+      // update the ui state to reflect fetched todos
+      setState(() {
+        _todos = updatedTodos;
+      });
+    } catch (e) {
+      print('An error occurred while querying Todos: $e');
+    }
+  }
+
+  Future<void> _fetchFeeds() async {
+    try {
+      // query for all Todo entries by passing the Todo classType to
+      // Amplify.DataStore.query()
+      List<Feed> updatedFeed = await Amplify.DataStore.query(Feed.classType);
+
+      // update the ui state to reflect fetched todos
+      setState(() {
+        _feeds = updatedFeed;
+        print("\n========================\n");
+        print(_feeds.toString());
+      });
+    } catch (e) {
+      print('An error occurred while querying Feeds: $e');
+    }
+  }
+
+  Future<void> _fetchSubFeeds() async {
+    try {
+      // query for all Todo entries by passing the Todo classType to
+      // Amplify.DataStore.query()
+      List<Feed> updatedFeed = await Amplify.DataStore.query(Feed.classType,
+          where: Feed.SUBSCRIBEDTO.eq(0));
+
+      // update the ui state to reflect fetched todos
+      setState(() {
+        _feedsSub = updatedFeed;
+        print("\n==========SUB FEEDS==============\n");
+        print(_feeds.toString());
+      });
+    } catch (e) {
+      print('An error occurred while querying Feeds: $e');
+    }
+  }*/
 }
 
 /*

@@ -89,8 +89,7 @@ class _LoginState extends State<Login> {
 
   Future<void> _initState() async {
     print("ATTEMPTING CONFIG");
-    if (amplifyConfigured == false) {
-      amplifyConfigured = true;
+    if (Amplify.isConfigured == false) {
       await _configureAmplify();
     }
   }
