@@ -35,14 +35,25 @@ class StorageDetails extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          Text(
-            "Sentiment Graph",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color: Colors.white60,
+          Row(children: [
+            Text(
+              "Sentiment Graph",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: Colors.white60,
+              ),
             ),
-          ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
+              child: ElevatedButton(
+                  onPressed: null,
+                  child: Text(
+                    "Send snapshot",
+                    style: TextStyle(color: Colors.white),
+                  )),
+            )
+          ]),
           SizedBox(),
           Graph(),
           StockAndSentimentValues(
