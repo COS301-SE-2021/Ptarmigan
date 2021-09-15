@@ -6,4 +6,5 @@ class Output{
     doesExist(){
         console.log("This Object Does Exist")
     }
+    viewSingleCompany(){}
 }

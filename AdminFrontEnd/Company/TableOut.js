@@ -5,8 +5,8 @@ class TableOut extends Output{
     }
     printItem(company){
         let tableId = "#" + this.tableId;
-        let content = `<tr>
-            <td scope="row" class="companyName">${company.companyJSON.content}</td>
+        let content = `<tr id="${company.companyJSON.content}">
+            <td scope="row" class="companyName" >${company.companyJSON.content}</td>
             <th scope="col">
                 <button type="button" class="btn btn-danger removeOnClick">Delete</button>
             </th>
@@ -18,12 +18,17 @@ class TableOut extends Output{
         console.log("Printing")
     }
     removeItem(company){
-        let tableId = "#" + this.tableId;
-        let location = $("td:contains(company.companyJSON.content)")
+        let rowId = "#" + company.companyJSON.content;
+        console.log(company.companyJSON.content)
+        $(rowId).remove()
 
         // console.log(location)
 
-        location.parent().remove()
+        // location.parent().remove()
 
+    }
+
+    viewSingleCompany(company){
+        console.log("Viewing single company")
     }
 }

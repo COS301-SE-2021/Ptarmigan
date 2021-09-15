@@ -22,12 +22,14 @@ class Proxy extends ServiceInterface {
 
     };
     removeCompanies(company){
-        let res = this.service.removeCompanies(company)
+        // let res = this.service.removeCompanies(company)
+        let res = true;
+
+        console.log("Removing Comapny")
         if (res){
             this.companyOutput.removeItem(company)
-
         }
-        console.log(res + "asdfasdf")
+        // console.log(res + "asdfasdf")
         //Get the company By name First
         // if (this.service.removeCompanies(company)){
         //     this.output.removeItem(company)
@@ -41,15 +43,38 @@ class Proxy extends ServiceInterface {
             comp.printItem(i)
         })
     }
+
+    getCompanies() {
+
+    }
+
+    getCompaniesByName(name){
+        console.log(this.companies)
+
+        for (let i = 0; i < this.companies.length; i++){
+            console.log(i)
+            console.log(this.companies[i].companyJSON.content)
+            if (this.companies[i].companyJSON.content == name){
+                // console.log(i.companyJSON.context)
+                return this.companies[i];
+            }
+        }
+        // this.companies.forEach((i) => {
+        //     if (i.companyJSON.context == name){
+        //         console.log(i.companyJSON.context)
+        //         return i;
+        //     }
+        // })
+
+        console.log("Company does not exist");
+        return null
+    }
 }
 
-proxy = new Proxy( new Service("https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/", ""), new TableOut("companyTable"))
 
-company = {
-    "content": "TestCompany",
-    "Ticker" : "TSLA"
-}
+
+
 //
 // ser.updateCompanies(company);
-proxy.printList()
-proxy.removeCompanies(company)
+
+// proxy.removeCompanies(company)
