@@ -69,6 +69,9 @@ class _FeedSelectorScreenState extends State<FeedSelectorScreen> {
                     border: OutlineInputBorder(), hintText: "Search..."),
                 onChanged: (text) {
                   updateFeedList(text);
+                  setState(() {
+                    _body = replaceBody();
+                  });
                 }),
           )
         ],
@@ -197,6 +200,7 @@ class _FeedSelectorScreenState extends State<FeedSelectorScreen> {
   Future<void> changeSubscribed(String topic) async {
     print("Change subscribed on $topic called");
     manager.changeSubscribed(topic);
+    feedMap = await manager.getNamesAndSubMap();
   }
 
   _initFeedMap() async {
@@ -241,8 +245,23 @@ class _FeedSelectorScreenState extends State<FeedSelectorScreen> {
     return tempfeedListBool;
   }
 
+  List<bool> getCurrentFeedBools(List feedBools) {
+    if (feedBools.isNotEmpty) {
+      List<bool> tempList = [];
+      for (var i = 0; i < feedBools.length; i++) {
+        if (feedMap.containsKey(feedBools[i])) if (feedMap[feedBools[i]] ==
+            "False")
+          tempList.add(false);
+        else if (feedMap[feedBools[i]] == "True") tempList.add(true);
+      }
+      return tempList;
+    } else
+      return [];
+  }
+
   void updateFeedList(String topic) {
     feedList = searchFeedList(topic);
+    feedListBool = getCurrentFeedBools(feedList);
     _body = replaceBody();
   }
 
