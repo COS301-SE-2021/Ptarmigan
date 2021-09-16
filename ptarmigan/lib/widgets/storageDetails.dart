@@ -49,6 +49,7 @@ class StorageDetails extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
               child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: bgColor),
                   onPressed: () {
                     showDialog(
                         context: context,
@@ -60,7 +61,7 @@ class StorageDetails extends StatelessWidget {
                   },
                   child: Text(
                     "Send snapshot",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.amber),
                   )),
             )
           ]),
@@ -123,6 +124,7 @@ class _SnapShotWidget extends State<SnapShotForm> {
 
   Widget build(BuildContext context) {
     return new AlertDialog(
+      backgroundColor: secondaryColor,
       title: const Text('Send Snapshot'),
       insetPadding: EdgeInsets.fromLTRB(1, 1, 1, 1),
       content: new Column(
@@ -143,22 +145,24 @@ class _SnapShotWidget extends State<SnapShotForm> {
       ),
       actions: <Widget>[
         new ElevatedButton(
+          style: ElevatedButton.styleFrom(primary: bgColor),
           onPressed: () {
             Navigator.of(context).pop();
           },
           child: const Text(
             'Close',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.amber),
           ),
         ),
         new ElevatedButton(
+          style: ElevatedButton.styleFrom(primary: bgColor),
           onPressed: () {
             Navigator.of(context).pop();
             _sendSnapShot(myController1.text, myController2.text);
           },
           child: const Text(
             'Send',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.amber),
           ),
         ),
       ],
