@@ -159,43 +159,44 @@ function viewCompanyDetails(companyName){
     $.post(getBucketItemsURL, {}, function(result){
         console.log(result)
     });
+
 }
 
 // View button populates the parameter table, ticker symbol and Company name
 
-$('#companyTable').on('click', '.viewClick', function() {
-
-
-    let companyName = $(this).parent().parent().find("td").text()
-    $('#companyNameInput').val(companyName)
-    // loadTickerSymbols()
-
-    let companySearch = $("#companyNameInput").val()
-    link = `https://api.polygon.io/v3/reference/tickers?search=${companySearch}&active=true&sort=ticker&order=asc&limit=10&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp`
-    $.get(link, data =>{
-        console.log(data)
-        for (i = 0; i < data.results.length; i++){
-            console.log(data.results[i]["ticker"])
-            addCompanyTickerToDropdown(data.results[i]["ticker"], data.results[i]["name"], i)
-        }
-        $('#tickerDropDown').val('AAPL')
-
-    })
-
-    let value = $("#additionalScrapeParameters").val()
-    tableRow = `
-        <tr>
-            <td scope="row" class="parameterName">Ipad</td>
-            <th scope="col">
-                <button type="button" class="btn btn-danger removeOnClick">Delete</button>
-            </th>
-        </tr>`
-    $("#parameterTable").prepend(tableRow)
-    $("#additionalScrapeParameters").val("")
-
-    // loadTickerSymbols()
-    // addAdditionalParametersToList()
-});
+// $('#companyTable').on('click', '.viewClick', function() {
+//
+//
+//     let companyName = $(this).parent().parent().find("td").text()
+//     $('#companyNameInput').val(companyName)
+//     // loadTickerSymbols()
+//
+//     let companySearch = $("#companyNameInput").val()
+//     link = `https://api.polygon.io/v3/reference/tickers?search=${companySearch}&active=true&sort=ticker&order=asc&limit=10&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp`
+//     $.get(link, data =>{
+//         console.log(data)
+//         for (i = 0; i < data.results.length; i++){
+//             console.log(data.results[i]["ticker"])
+//             addCompanyTickerToDropdown(data.results[i]["ticker"], data.results[i]["name"], i)
+//         }
+//         $('#tickerDropDown').val('AAPL')
+//
+//     })
+//
+//     let value = $("#additionalScrapeParameters").val()
+//     tableRow = `
+//         <tr>
+//             <td scope="row" class="parameterName">Ipad</td>
+//             <th scope="col">
+//                 <button type="button" class="btn btn-danger removeOnClick">Delete</button>
+//             </th>
+//         </tr>`
+//     $("#parameterTable").prepend(tableRow)
+//     $("#additionalScrapeParameters").val("")
+//
+//     // loadTickerSymbols()
+//     // addAdditionalParametersToList()
+// });
 
 
 //logout
@@ -207,13 +208,17 @@ $('#logoutCompany').click(function () {
 var typingTimer;                //timer identifier
 var doneTypingInterval = 1000;  //time in ms, 5 second for example
 
-proxy = new Proxy( new Service("https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/", ""), new TableOut("companyTable"))
+tableOut = new TableOut("companyTable");
+proxy = new Proxy( new Service("https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/", ""), tableOut)
 
 $(document).ready(function () {
 
     proxy.printList()
 
-
+    $("#submitFormButton").click(function(){
+        let newCompany = tableOut.getCompanyFromPage()
+        proxy.updateCompanies(newCompany)
+    })
 
     addingUsername()
 //     viewCompanyDetails("Bitcoin")
@@ -222,9 +227,9 @@ $(document).ready(function () {
         addAdditionalParametersToList()
     })
 
-    $("#submitFormButton").click(function(){
-        submitForm()
-    })
+    // $("#submitFormButton").click(function(){
+    //     submitForm()
+    // })
 
     $("#companyNameInput").on('keyup', function () {
         clearTimeout(typingTimer);
@@ -251,6 +256,16 @@ $(document).ready(function () {
         company = proxy.getCompaniesByName(companyName)
         console.log(company)
         proxy.removeCompanies(company)
+
+    });
+
+    $('#companyTable').on('click', '.viewClick', function() {
+        $(this).addClass("disabled")
+        companyName = $(this).parent().parent().find("td").text()
+
+        company = proxy.getCompaniesByName(companyName)
+        console.log(company)
+        proxy.companyOutput.viewSingleCompany(company)
 
     });
 //
