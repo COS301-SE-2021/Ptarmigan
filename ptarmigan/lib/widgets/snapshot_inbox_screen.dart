@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'fire_base_DB.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'snapShot.dart';
+import '../constants.dart';
 
 void main() => runApp(App());
 
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'To-Do List', home: TodoList());
+    return MaterialApp(title: 'Snapshot Inbox', home: TodoList());
   }
 }
 
@@ -21,15 +22,20 @@ class _TodoListState extends State<TodoList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('To-Do List')),
+      appBar: AppBar(
+        title: Text('Snapshot Inbox'),
+        backgroundColor: bgColor,
+      ),
       body: _getSnapshots(),
     );
   }
 
   // Display Add Task Dialog
 
-  void _handleSnapshotSubmission(String value, String sent, String stoc) {
+  void _handleSnapshotSubmission(
+      String title, String value, String sent, String stoc) {
     var task = <String, dynamic>{
+      'stocktitle': title,
       'content': value,
       'sentiment': sent,
       'stock': stoc,
@@ -76,6 +82,9 @@ class _TodoListState extends State<TodoList> {
             return ListView.builder(
               padding: const EdgeInsets.all(10.0),
               itemBuilder: (BuildContext context, int index) => SnapShot(
+                  time:
+                      (snapshot.data!.documents[index]['timestamp']).toString(),
+                  stockTitle: snapshot.data!.documents[index]['stocktitle'],
                   to: snapshot.data!.documents[index]['to'],
                   from: snapshot.data!.documents[index]['from'],
                   content: snapshot.data!.documents[index]['content'],
@@ -83,7 +92,7 @@ class _TodoListState extends State<TodoList> {
                   stockPrice: snapshot.data!.documents[index]['stock'],
                   id: snapshot.data!.documents[index].documentID,
                   update: _updateTask,
-                  delete: _deleteTask),
+                  delete: _deleteSnapshot),
               itemCount: snapshot.data!.documents.length,
             );
           } else {

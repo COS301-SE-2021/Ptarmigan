@@ -85,6 +85,7 @@ void _sendSnapShot(String email, String comment) async {
   print("PING: " + a.username);
 
   var task = <String, dynamic>{
+    'stocktitle': "Bitcoin",
     'to': email,
     'from': Singleton().userEmail,
     'content': comment,
