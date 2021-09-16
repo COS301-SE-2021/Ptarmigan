@@ -7,6 +7,8 @@ import 'SentimentHistory.dart';
 import 'package:provider/provider.dart';
 import 'fire_Base_DB.dart';
 import 'graph.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'singletonGlobal.dart';
 
 class StorageDetails extends StatelessWidget {
   const StorageDetails({
@@ -77,10 +79,14 @@ class StorageDetails extends StatelessWidget {
   }
 }
 
-void _sendSnapShot(String email, String comment) {
+void _sendSnapShot(String email, String comment) async {
+  AuthUser a = await AmplifyAuthCognito().getCurrentUser();
+
+  print("PING: " + a.username);
+
   var task = <String, dynamic>{
     'to': email,
-    'from': "mehard",
+    'from': Singleton().userEmail,
     'content': comment,
     'sentiment': "50hard",
     'stock': "50hard",

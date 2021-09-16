@@ -4,6 +4,7 @@ import 'package:ptarmigan/widgets/feed_selector_screen.dart';
 import 'package:ptarmigan/widgets/home_page.dart';
 import 'package:ptarmigan/widgets/stock_screen.dart';
 import 'package:ptarmigan/widgets/todos_page.dart';
+import 'package:ptarmigan/widgets/snapshot_inbox_screen.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({
@@ -57,9 +58,7 @@ class MenuDrawer extends StatelessWidget {
             svgSrc: "assets/icons/menu_task.svg",
             press: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => FeedSelectorScreen(manager)));
+                  context, MaterialPageRoute(builder: (context) => TodoList()));
             },
           ),
         ],
