@@ -51,7 +51,7 @@ class InsightsScreen extends StatelessWidget {
                     child: StorageDetails(),
                   ),
               ],
-            )
+            ),
           ],
         ),
       ),
