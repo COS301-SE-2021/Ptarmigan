@@ -19,7 +19,7 @@ class Proxy extends ServiceInterface {
     }
 
     updateCompanies(company){
-
+        this.service.updateCompanies(company)
     };
     removeCompanies(company){
         // let res = this.service.removeCompanies(company)

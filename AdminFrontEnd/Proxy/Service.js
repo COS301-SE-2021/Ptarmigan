@@ -41,7 +41,7 @@ class Service extends ServiceInterface{
         console.log('updating companies')
 
         this.removeCompanies(company)
-        return $.post(requestUrlAdd, JSON.stringify(company), function(result){
+        return $.post(requestUrlAdd, JSON.stringify(company.companyJSON), function(result){
             console.log("Removed And Updated")
             console.log(result)
             return true
@@ -60,7 +60,7 @@ class Service extends ServiceInterface{
             type: "POST",
             url: requestUrlRemove,
             async: false,
-            data: JSON.stringify(company),
+            data: JSON.stringify(company.companyJSON),
             success: function(result) {
                 console.log(result)
                 ret = true
@@ -68,6 +68,7 @@ class Service extends ServiceInterface{
             },
             error: (result) =>{
                 ret = false
+                console.log(result)
                 return false
             }
         });
