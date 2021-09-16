@@ -46,7 +46,8 @@ class SnapShot extends StatelessWidget {
                       child: Text(
                           (DateTime.fromMillisecondsSinceEpoch(int.parse(time))
                               .toString()
-                              .substring(0, 10))),
+                              .substring(0, 10)),
+                          style: TextStyle(color: Colors.amber)),
                     )
                   ]),
                   Row(children: [
