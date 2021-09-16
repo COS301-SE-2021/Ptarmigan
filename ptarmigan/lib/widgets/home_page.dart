@@ -364,8 +364,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
         //  MaterialPageRoute(builder: (context) => DashboardScreen()));
         break;
       case 1:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MainScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => MainScreen(manager)));
         break;
       case 2:
         Navigator.push(

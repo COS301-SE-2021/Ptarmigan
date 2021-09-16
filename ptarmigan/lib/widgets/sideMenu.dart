@@ -282,16 +282,17 @@ class DrawerListTile extends StatelessWidget {
 
           int len = test1[i].intervalData.toString().indexOf(".") + 1;
           TemporalDate a = TemporalDate.fromString(
-              DateTime.fromMillisecondsSinceEpoch(test1[i].beginDate * 1000)
+              DateTime.fromMillisecondsSinceEpoch(
+                      (test1[i].beginDate as int) * 1000)
                   .toIso8601String()
                   .substring(0, 10));
-          if (test1[i].intervalData < 0) {
+          if ((test1[i].intervalData as int) < 0) {
             len = len - 1;
           }
 
           Todo newTodo = Todo(
             name: feedName,
-            description: ((test1[i].intervalData) * 50 + 50)
+            description: ((test1[i].intervalData as int) * 50 + 50)
                     .toString()
                     .substring(0, len) +
                 "%",
