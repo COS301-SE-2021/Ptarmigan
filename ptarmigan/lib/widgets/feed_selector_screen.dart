@@ -58,8 +58,11 @@ class _FeedSelectorScreenState extends State<FeedSelectorScreen> {
         child: Column(children: [
       SizedBox(height: defaultPadding),
       Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          SizedBox(
+            height: 30,
+          ),
           Container(
             alignment: Alignment.center,
             width: 200,
