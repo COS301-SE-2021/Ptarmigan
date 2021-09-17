@@ -63,9 +63,9 @@ def removeFromList(list, item):
 def lambda_handler(event, context):
     """This function will return a simple day stock along with the sentiment of a day """
     try:
-        body = {}
         if "body" in event:
             body = json.loads(event["body"])
+            print(body)
 
         else:
             body = event
@@ -92,7 +92,7 @@ def lambda_handler(event, context):
 
         return {
             'statusCode': 200,
-            'body': returnItems
+            'body': json.dumps(returnItems)
         }
     except:
         return {
