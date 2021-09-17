@@ -215,12 +215,13 @@ $(document).ready(function () {
 
     proxy.printList()
 
+    addingUsername()
+
     $("#submitFormButton").click(function(){
         let newCompany = tableOut.getCompanyFromPage()
         proxy.updateCompanies(newCompany)
     })
 
-    addingUsername()
 //     viewCompanyDetails("Bitcoin")
 //
     $("#addParameterButton").click(function(){
@@ -243,7 +244,7 @@ $(document).ready(function () {
 
 //user is "finished typing," do something
     function doneTyping () {
-        console.log("Somethibg")
+        console.log("Something")
         loadTickerSymbols()
     }
 
