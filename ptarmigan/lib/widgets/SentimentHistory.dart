@@ -62,9 +62,13 @@ class SentimentHistory extends StatelessWidget {
               jsonEncode({"company": feedIdentifier, "beginDate": 1628899200}));
 
       if (response2.statusCode == 200) {
+        print("opeorpeorpsoerps");
         print(response2.body);
-        List<dynamic> response = jsonDecode(response2.body
-            /* .substring(response2.body.indexOf("["), response2.body.length - 1)*/);
+        List<dynamic> response = jsonDecode(response2
+            .body /* .substring(response2.body.indexOf("["), response2.body.length - 1)*/);
+        print("TERAP2424IN: ");
+
+        print(response);
 
         // print("HERE: " + response[0].intervalData.toString());
 
@@ -72,13 +76,13 @@ class SentimentHistory extends StatelessWidget {
         List<FeedSentiment> test1 = List<FeedSentiment>.from(
             response.map((i) => FeedSentiment.fromJson(i)));
 
+        print("REVNO");
         print("HERE: " + test1[0].beginDate.toString());
         todos = [];
         for (int i = 0; i < test1.length; i++) {
           int len = test1[i].intervalData.toString().indexOf(".") + 1;
           TemporalDate a = TemporalDate.fromString(
-              DateTime.fromMillisecondsSinceEpoch(
-                      int.parse(test1[i].beginDate) * 1000)
+              DateTime.fromMillisecondsSinceEpoch(test1[i].beginDate * 1000)
                   .toIso8601String()
                   .substring(0, 10));
 

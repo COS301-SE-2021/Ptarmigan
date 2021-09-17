@@ -1,5 +1,5 @@
 class FeedSentiment {
-  final String beginDate;
+  int beginDate;
 //  final int endDate;
   String intervalData;
 
@@ -11,7 +11,7 @@ class FeedSentiment {
 
   factory FeedSentiment.fromJson(Map<String, dynamic> json) {
     return FeedSentiment(
-      beginDate: json['TimeStamp'] as String,
+      beginDate: json['TimeStamp'] as int,
       //endDate: json['EndDate'] as int,
       intervalData: json['Sentiment'] as String,
     );

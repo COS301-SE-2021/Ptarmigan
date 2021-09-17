@@ -3,7 +3,7 @@
   "packages": [
     {
       "name": "_fe_analyzer_shared",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/_fe_analyzer_shared-25.0.0",
+      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/_fe_analyzer_shared-26.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -69,7 +69,7 @@
     },
     {
       "name": "analyzer",
-      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/analyzer-2.2.0",
+      "rootUri": "file:///C:/Users/user-pc/Documents/dev/flutter/.pub-cache/hosted/pub.dartlang.org/analyzer-2.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -818,7 +818,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-09-15T01:02:49.864981Z",
+  "generated": "2021-09-17T18:25:34.944585Z",
   "generator": "pub",
   "generatorVersion": "2.14.0"
 }

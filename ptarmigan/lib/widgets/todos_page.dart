@@ -156,8 +156,7 @@ class _TodosPageState extends State<TodosPage> {
         for (int i = 0; i < test1.length; i++) {
           int len = test1[i].intervalData.toString().indexOf(".") + 1;
           TemporalDate a = TemporalDate.fromString(
-              DateTime.fromMillisecondsSinceEpoch(
-                      int.parse(test1[i].beginDate) * 1000)
+              DateTime.fromMillisecondsSinceEpoch(test1[i].beginDate * 1000)
                   .toIso8601String()
                   .substring(0, 10));
           if (double.parse(test1[i].intervalData) < 0) {
