@@ -188,5 +188,6 @@ class FeedFileManager {
     } catch (e) {
       print(e);
     }
+    mapToFile(nameAndSubscription);
   }
 }
