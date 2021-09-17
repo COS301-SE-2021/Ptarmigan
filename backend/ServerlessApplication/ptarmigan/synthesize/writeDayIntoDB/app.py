@@ -245,8 +245,8 @@ def lambda_handler(event, context):
         else:
             body = event
 
-        companyName = body["companyName"]
-        ticker = body["ticker"]
+        companyName = body["content"]
+        ticker = body["Ticker"]
 
     except:
         return {
@@ -273,9 +273,10 @@ def lambda_handler(event, context):
 
 if __name__ == '__main__':
     body = {
-        "companyName": "Tesla",
-        "ticker": "TSLA"
-    }
+    "content": "Bitcoin",
+    "Ticker": "BTC",
+    "Associated1": "Coin"
+}
     print(lambda_handler(body, ""))
 
 
