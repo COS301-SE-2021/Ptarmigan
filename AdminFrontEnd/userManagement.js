@@ -95,10 +95,10 @@ function getFormDataFromPage(){
         jsonObj["Associated1"] = additionalParameters[0];
     }
     if (additionalParameters[1] != null) {
-        jsonObj["Associated2"] = additionalParameters[0];
+        jsonObj["Associated2"] = additionalParameters[1];
     }
     if (additionalParameters[2] != null) {
-        jsonObj["Associated3"] = additionalParameters[0];
+        jsonObj["Associated3"] = additionalParameters[2];
     }
 
     console.log(jsonObj)+
@@ -220,6 +220,7 @@ $(document).ready(function () {
     $("#submitFormButton").click(function(){
         let newCompany = tableOut.getCompanyFromPage()
         proxy.updateCompanies(newCompany)
+        tableOut.printItem(newCompany)
     })
 
 //     viewCompanyDetails("Bitcoin")
