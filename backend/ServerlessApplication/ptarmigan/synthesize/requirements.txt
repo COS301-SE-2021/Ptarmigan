@@ -3,4 +3,3 @@ ujson
 pymongo
 marshmallow
 yfinance==0.1.63
-finnhub-python=2.4.4

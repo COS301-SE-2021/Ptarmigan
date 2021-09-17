@@ -5,7 +5,7 @@ import requests
 import json
 from datetime import datetime
 import yfinance as yf
-import finnhub
+
 
 
 def calculateSentiment(content):
@@ -282,14 +282,14 @@ def lambda_handler(event, context):
         'body': json.dumps("Success!")
     }
 
-if __name__ == '__main__':
-    body = {
-        "content": "Tesla",
-        "Ticker": "TSLA",
-        "Associated1": "Coin"
-    }
-    # print(lambda_handler(body, ""))
-    catchUp(5,"Bitcoin", "X:BSVUSD")
+# if __name__ == '__main__':
+#     body = {
+#         "content": "Tesla",
+#         "Ticker": "TSLA",
+#         "Associated1": "Coin"
+#     }
+#     # print(lambda_handler(body, ""))
+#     catchUp(30,"Tesla", "TSLA")
     # currentTime = int(time.time())
     #
     # timeFromMidnight = currentTime % 86400
