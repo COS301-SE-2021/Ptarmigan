@@ -124,6 +124,7 @@ class FeedFileManager {
     String holdFileContents = await file.readAsString();
     //_initFeedMap(); //Might be redundant
     for (var v in feeds) {
+      //Checks to see if there are new feeds to add
       print("$nameAndSubscription in updateFeedsFile");
       if (nameAndSubscription.containsKey(v) == false) {
         nameAndSubscription.putIfAbsent(v, () => "False");
@@ -132,6 +133,13 @@ class FeedFileManager {
         changed = true;
       }
     }
+    List tempList = nameAndSubscription.keys.toList();
+    for (var v in tempList) {
+      if (feeds.contains(v) == false) {
+        nameAndSubscription.remove(v);
+      }
+    }
+
     print("$nameAndSubscription in updateFeedsFile");
 
     if (changed) mapToFile(nameAndSubscription);
