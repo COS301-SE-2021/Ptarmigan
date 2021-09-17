@@ -10,8 +10,8 @@ import 'package:provider/provider.dart';
 import 'package:ptarmigan/services/feed_changer.dart';
 
 class StockAndSentimentValues extends StatelessWidget {
-  String currentSentiment = "";
-  String currentStock = "";
+  String currentSentiment = "0";
+  String currentStock = "0";
 
   Color colorDetermine(int i) {
     Color a = Colors.green;

@@ -175,8 +175,10 @@ class SentimentHistory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var feedChoice = Provider.of<FeedChanger>(context).getFeedChoice;
-    fetchNewTodos(feedChoice);
-    convertToGraph(todos);
+    print("SentimentHistory = $feedChoice");
+    print("SentimentHistory todos = $todos");
+    fetchNewTodos(feedChoice).then((value) => {convertToGraph(todos)});
+    //convertToGraph(todos);
     // bocko(feedChoice);
     //   Delete(feedChoice);
     return Container(

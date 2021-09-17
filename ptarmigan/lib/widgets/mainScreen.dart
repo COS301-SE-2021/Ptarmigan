@@ -105,8 +105,11 @@ class _MainScreenState extends State<MainScreen> {
 
   List<Feed> transformListToSubFeedList(Map feeds) {
     //Takes feed map and returns List<feed> only of subscribed feeds
+    print("feeds = $feeds");
     var tempNameList = feeds.keys.toList();
+    print("Tempnamelist = $tempNameList");
     var tempSubList = feeds.values.toList();
+    print("tempSubList = $tempSubList");
     List<Feed> tempFeedList = [];
     for (var i = 0; i < tempNameList.length; i++) {
       if (tempSubList[i] == "True") {
@@ -119,27 +122,36 @@ class _MainScreenState extends State<MainScreen> {
         tempFeedList.add(temp);
       }
     }
-    return tempFeedList;
+    print("TRANSFORMSUBFEEDLIST RETURN = $tempFeedList");
+    if (tempFeedList.isEmpty)
+      return [new Feed(feedName: "Bitcoin", subscribedTo: 1)];
+    else
+      return tempFeedList;
   }
 
   //Map is <String, String> eg : {"Bitcoin" : "False"}
   List<Feed> transformListToFeedList(Map feeds) {
     // Takes feed map and returns List<feed>
+    print("feeds = $feeds");
     var tempNameList = feeds.keys.toList();
+    print("Tempnamelist = $tempNameList");
     var tempSubList = feeds.values.toList();
+    print("tempSubList = $tempSubList");
     List<Feed> tempFeedList = [];
     for (var i = 0; i < tempNameList.length; i++) {
-      if (tempSubList[i] == "True") {
-        //Only adds subscribed feeds
-        Feed temp = Feed(
-            feedName: tempNameList[i],
-            subscribedTo: getFeedBoolAsInt(
-              tempSubList[i],
-            ));
-        tempFeedList.add(temp);
-      }
+      //Only adds subscribed feeds
+      Feed temp = Feed(
+          feedName: tempNameList[i],
+          subscribedTo: getFeedBoolAsInt(
+            tempSubList[i],
+          ));
+      tempFeedList.add(temp);
     }
-    return tempFeedList;
+    print("TRANSFORMFEEDLIST RETURN = $tempFeedList");
+    if (tempFeedList.isEmpty)
+      return [new Feed(feedName: "Bitcoin", subscribedTo: 1)];
+    else
+      return tempFeedList;
   }
 
   int getFeedBoolAsInt(String value) {

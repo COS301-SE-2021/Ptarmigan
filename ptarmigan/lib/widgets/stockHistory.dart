@@ -63,6 +63,7 @@ class StockHistory extends StatelessWidget {
           body: jsonEncode({"company": "Tesla", "beginDate": 1628899200}));
 
       if (response2.statusCode == 200) {
+        print("Response body in SentimentHistory");
         print(response2.body);
         List<dynamic> response = jsonDecode(response2.body
             /* .substring(response2.body.indexOf("["), response2.body.length - 1)*/);
@@ -102,7 +103,8 @@ class StockHistory extends StatelessWidget {
         // If the server did not return a 201 CREATED response,
         // then throw an exception.
 
-        print(response2.statusCode);
+        print(
+            "Status code in fetchTodos   = " + response2.statusCode.toString());
         throw Exception('Failed to create post.');
       }
     } catch (e) {
@@ -134,6 +136,7 @@ class StockHistory extends StatelessWidget {
   void convertToGraphStock(List<Todo> entry) {
     SentimentHistoryItem newItem = new SentimentHistoryItem();
     demoRecentFiles = [];
+    print("Entry = $entry");
     for (int i = 0; i < entry.length; i++) {
       print("plick");
       list.add(new DataPoint<DateTime>(
