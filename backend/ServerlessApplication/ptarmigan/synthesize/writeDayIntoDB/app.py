@@ -5,6 +5,7 @@ import requests
 import json
 from datetime import datetime
 import yfinance as yf
+import finnhub
 
 
 def calculateSentiment(content):
@@ -116,13 +117,22 @@ def getStockPriceOnAGivenDay(unixTimeStamp, tickerSymbol):
     ).strftime('%Y-%m-%d')
     print(dt)
     try:
-        # print(dt)
-        # requestUrlCrypto = f"https://api.polygon.io/v1/open-close/{tickerSymbol}/{dt}?adjusted=true&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp"
-        # requestReturnCrypto = requests.get(requestUrlCrypto)
-        # requestResults = json.loads(requestReturnCrypto.text)
-        # print(requestResults)
+        if(tickerSymbol[1] == ':'):
+            print("This is not a stock, this is a crypto")
+            print(dt)
+            requestUrlCrypto = f"https://api.polygon.io/v1/open-close/{tickerSymbol}/{dt}?adjusted=true&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp"
+            requestReturnCrypto = requests.get(requestUrlCrypto)
+            requestResults = json.loads(requestReturnCrypto.text)
+            print("Results, ", requestResults)
 
-        requestResults = yf.download(tickerSymbol, start=endDate, end=endDate)
+            if(requestResults["status"] != "OK"):
+                return "Error occured"
+
+            else: return requestResults["close"]
+
+        else:
+            requestResults = yf.download(tickerSymbol, start=endDate, end=endDate)
+            print(requestResults)
 
         try:
             print(requestResults["Close"][0])
@@ -230,6 +240,7 @@ def oneItem(companyName, ticker):
         time.sleep(60)
         stockPrice = getStockPriceOnAGivenDay(updatedTime, ticker)
 
+
     res = writeIntoDb(updatedTime, companyName, stockPrice, sentiment)
     print(res)
 
@@ -273,10 +284,21 @@ def lambda_handler(event, context):
 
 if __name__ == '__main__':
     body = {
-    "content": "Bitcoin",
-    "Ticker": "BTC",
-    "Associated1": "Coin"
-}
-    print(lambda_handler(body, ""))
-
-
+        "content": "Tesla",
+        "Ticker": "TSLA",
+        "Associated1": "Coin"
+    }
+    # print(lambda_handler(body, ""))
+    catchUp(5,"Bitcoin", "X:BSVUSD")
+    # currentTime = int(time.time())
+    #
+    # timeFromMidnight = currentTime % 86400
+    #
+    # currentTime = currentTime - timeFromMidnight
+    # currentTime = currentTime
+    #
+    # # sentiment = getAllFromDate(currentTime-86400, currentTime, companyName)
+    #
+    # updatedTime = currentTime
+    # updatedTime = updatedTime - 86400
+    # print(getStockPriceOnAGivenDay(updatedTime, "X:BSVUSD"))
