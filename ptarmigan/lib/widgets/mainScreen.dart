@@ -289,7 +289,36 @@ class _MainScreenState extends State<MainScreen> {
     Provider.of<FeedChanger>(context, listen: false).changeFeed("Bitcoin");
 
     // Amplify.DataStore.clear();
-    return _body; // _body is a state, when the feedSub and feed are changed _replaceBody is called and the proper page displayed
+    return Scaffold(
+      key: context.read<MenuController>().scaffoldKey,
+      drawer: SideMenu(
+        feeds: _feeds,
+        feedsSub: _feedsSub,
+      ),
+      body: SafeArea(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // We want this side menu only for large screen
+            if (Responsive.isDesktop(context))
+              Expanded(
+                // default flex = 1
+                // and it takes 1/6 part of the screen
+                child: SideMenu(
+                  feeds: _feeds,
+                  feedsSub: _feedsSub,
+                ),
+              ),
+            Expanded(
+              // It takes 5/6 part of the screen
+              flex: 5,
+              child: InsightsScreen(),
+            ),
+          ],
+        ),
+      ),
+    );
+    ; // _body is a state, when the feedSub and feed are changed _replaceBody is called and the proper page displayed
   }
 
   Widget _replaceBody() {

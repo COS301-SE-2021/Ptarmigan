@@ -10,6 +10,6 @@ class FeedChanger extends ChangeNotifier {
   Future<void> changeFeed(String a) async {
     _feedChoice = a;
 
-    //notifyListeners();
+    notifyListeners();
   }
 }

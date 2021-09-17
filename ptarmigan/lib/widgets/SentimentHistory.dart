@@ -94,7 +94,7 @@ class SentimentHistory extends StatelessWidget {
               .toString());
 
           Todo newTodo = Todo(
-            name: "Tesla",
+            name: feedIdentifier,
             description: (double.parse(test1[i].intervalData) * 50 + 50)
                     .toString()
                     .substring(0, 2) +
@@ -170,6 +170,8 @@ class SentimentHistory extends StatelessWidget {
       newItem.size = "0";
 
       demoRecentFiles.add(newItem);
+
+      print("PLESE TRIGGER : ( ");
     }
 
     // SentimentHistoryItem newItem = new SentimentHistoryItem("assets/icons/Negative.svg" ,todos[i].date,todos[i].description, "0");
@@ -177,51 +179,51 @@ class SentimentHistory extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    var feedChoice = Provider.of<FeedChanger>(context).getFeedChoice;
-    print("SentimentHistory = $feedChoice");
-    print("SentimentHistory todos = $todos");
-    fetchNewTodos(feedChoice).then((value) => {convertToGraph(todos)});
-    //convertToGraph(todos);
-    // bocko(feedChoice);
-    //   Delete(feedChoice);
-    return Container(
-      padding: EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
-        color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Sentiment History",
-            style: Theme.of(context).textTheme.subtitle1,
+  Widget build(BuildContext context) => FutureBuilder(
+      future: fetchNewTodos(Provider.of<FeedChanger>(context).getFeedChoice),
+      builder: (context, snapshots) {
+        fetchNewTodos(Provider.of<FeedChanger>(context).getFeedChoice);
+        convertToGraph(todos);
+        //convertToGraph(todos);
+        // bocko(feedChoice);
+        //   Delete(feedChoice);
+        return Container(
+          padding: EdgeInsets.all(defaultPadding),
+          decoration: BoxDecoration(
+            color: secondaryColor,
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
-          SizedBox(
-            width: double.infinity,
-            height: 400,
-            child: DataTable2(
-              columnSpacing: 30,
-              minWidth: 300,
-              columns: [
-                DataColumn(
-                  label: Text("Date"),
-                ),
-                DataColumn(
-                  label: Text("Sentiment"),
-                ),
-              ],
-              rows: List.generate(
-                demoRecentFiles.length,
-                (index) => recentFileDataRow(demoRecentFiles[index]),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Sentiment History",
+                style: Theme.of(context).textTheme.subtitle1,
               ),
-            ),
+              SizedBox(
+                width: double.infinity,
+                height: 400,
+                child: DataTable2(
+                  columnSpacing: 30,
+                  minWidth: 300,
+                  columns: [
+                    DataColumn(
+                      label: Text("Date"),
+                    ),
+                    DataColumn(
+                      label: Text("Sentiment"),
+                    ),
+                  ],
+                  rows: List.generate(
+                    demoRecentFiles.length,
+                    (index) => recentFileDataRow(demoRecentFiles[index]),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
-  }
+        );
+      });
 }
 
 DataRow recentFileDataRow(SentimentHistoryItem fileInfo) {

@@ -72,8 +72,6 @@ import 'services/list_changer.dart';
 
 final ValueNotifier feedID = ValueNotifier("");
 
-
-
 //final AmplifyAPI _apiPlugin = AmplifyAPI();
 //final AmplifyAuthCognito _authPlugin = AmplifyAuthCognito();
 //List<Todo> todos;
@@ -99,6 +97,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider.value(value: ListChanger())
         ],
         child: MaterialApp(
+            debugShowCheckedModeBanner: false,
             theme: ThemeData.dark().copyWith(
               scaffoldBackgroundColor: bgColor,
               textTheme:

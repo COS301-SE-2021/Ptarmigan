@@ -1,5 +1,5 @@
 class FeedStock {
-  final String beginDate;
+  int beginDate;
 //  final int endDate;
   final String stockData;
 
@@ -11,7 +11,7 @@ class FeedStock {
 
   factory FeedStock.fromJson(Map<String, dynamic> json) {
     return FeedStock(
-      beginDate: json['TimeStamp'] as String,
+      beginDate: json['TimeStamp'] as int,
       //endDate: json['EndDate'] as int,
       stockData: json['Stock'] as String,
     );

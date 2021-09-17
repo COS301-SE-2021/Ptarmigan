@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:ptarmigan/models/StockHistoryItem.dart';
 import 'package:ptarmigan/services/FeedStock.dart';
 
 import '/models/SentimentHistoryItem.dart';
@@ -60,13 +61,14 @@ class StockHistory extends StatelessWidget {
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
-          body: jsonEncode({"company": "Tesla", "beginDate": 1628899200}));
+          body:
+              jsonEncode({"company": feedIdentifier, "beginDate": 1628899200}));
 
       if (response2.statusCode == 200) {
         print("Response body in StockHistory");
         print(response2.body);
-        List<dynamic> response = jsonDecode(response2.body
-            /* .substring(response2.body.indexOf("["), response2.body.length - 1)*/);
+        List<dynamic> response = jsonDecode(response2
+            .body /* .substring(response2.body.indexOf("["), response2.body.length - 1)*/);
 
         // print("HERE: " + response[0].intervalData.toString());
 
@@ -79,20 +81,19 @@ class StockHistory extends StatelessWidget {
         for (int i = 0; i < test1.length; i++) {
           int len = test1[i].stockData.toString().indexOf(".") + 1;
           TemporalDate a = TemporalDate.fromString(
-              DateTime.fromMillisecondsSinceEpoch(
-                      int.parse(test1[i].beginDate) * 1000)
+              DateTime.fromMillisecondsSinceEpoch(test1[i].beginDate * 1000)
                   .toIso8601String()
                   .substring(0, 10));
 
           if (double.parse(test1[i].stockData) < 0) {
             len = len - 1;
           }
-          print("ooooooooooooooooooooooooooooo");
-          print((((test1[i].stockData)).toString().substring(0, len) + "%")
-              .toString());
+          print("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+          print(
+              (((test1[i].stockData)).toString().substring(0, len)).toString());
 
           Todo newTodo = Todo(
-            name: "Tesla",
+            name: feedIdentifier,
             description: "R" + (test1[i].stockData),
             date:
                 a, //TemporalDate.fromMillisecondsSinceEpoch(test1[0].beginDate);
@@ -134,8 +135,9 @@ class StockHistory extends StatelessWidget {
   } */
 
   void convertToGraphStock(List<Todo> entry) {
-    SentimentHistoryItem newItem = new SentimentHistoryItem();
-    demoRecentFiles = [];
+    StockHistoryItem newItem = new StockHistoryItem();
+
+    demoRecentFiles2 = [];
     print("Entry = $entry");
     for (int i = 0; i < entry.length; i++) {
       print("plick");
@@ -145,12 +147,12 @@ class StockHistory extends StatelessWidget {
       )); //DateTime.parse(entry[i].date.toString())));
 
       //convert to SentimentHistoryItem
-      SentimentHistoryItem newItem = new SentimentHistoryItem();
+      StockHistoryItem newItem = new StockHistoryItem();
       newItem.title = todos[i].date.toString();
       newItem.date = todos[i].description;
       newItem.size = "0";
 
-      demoRecentFiles.add(newItem);
+      demoRecentFiles2.add(newItem);
     }
 
     // SentimentHistoryItem newItem = new SentimentHistoryItem("assets/icons/Negative.svg" ,todos[i].date,todos[i].description, "0");
@@ -158,55 +160,55 @@ class StockHistory extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    var feedChoice = Provider.of<FeedChanger>(context).getFeedChoice;
-    feedChoice = feedChoice;
-    fetchNewStock("Tesla")
-        .then((value) => {convertToGraphStock(todos)}); // tesla or feedchoice?
-
-    return Container(
-      padding: EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
-        color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Stock History",
-            style: Theme.of(context).textTheme.subtitle1,
+  Widget build(BuildContext context) => FutureBuilder(
+      future: fetchNewStock(Provider.of<FeedChanger>(context).getFeedChoice),
+      builder: (context, snapshots) {
+        fetchNewStock(Provider.of<FeedChanger>(context).getFeedChoice);
+        convertToGraphStock(todos);
+        // convertToGraphStock(todos);
+        //convertToGraph(todos);
+        // bocko(feedChoice);
+        //   Delete(feedChoice);
+        return Container(
+          padding: EdgeInsets.all(defaultPadding),
+          decoration: BoxDecoration(
+            color: secondaryColor,
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
-          SizedBox(
-            height: 400,
-            width: double.infinity,
-            child: DataTable2(
-              columnSpacing: defaultPadding,
-              minWidth: 300,
-              columns: [
-                DataColumn(
-                  label: Text("Date"),
-                ),
-                DataColumn(
-                  label: Text("Price"),
-                ),
-                //  DataColumn(
-                //    label: Text("Size"),
-                // ),
-              ],
-              rows: List.generate(
-                demoRecentFiles.length,
-                (index) => recentFileDataRow(demoRecentFiles[index]),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Stock History",
+                style: Theme.of(context).textTheme.subtitle1,
               ),
-            ),
+              SizedBox(
+                width: double.infinity,
+                height: 400,
+                child: DataTable2(
+                  columnSpacing: 30,
+                  minWidth: 300,
+                  columns: [
+                    DataColumn(
+                      label: Text("Date"),
+                    ),
+                    DataColumn(
+                      label: Text("Stock Price"),
+                    ),
+                  ],
+                  rows: List.generate(
+                    demoRecentFiles2.length,
+                    (index) => recentFileDataRow(demoRecentFiles2[index]),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
-  }
+        );
+      });
 }
 
-DataRow recentFileDataRow(SentimentHistoryItem fileInfo) {
+DataRow recentFileDataRow(StockHistoryItem fileInfo) {
   return DataRow(
     cells: [
       DataCell(
