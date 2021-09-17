@@ -22,8 +22,8 @@ class Proxy extends ServiceInterface {
         this.service.updateCompanies(company)
     };
     removeCompanies(company){
-        // let res = this.service.removeCompanies(company)
-        let res = true;
+        let res = this.service.removeCompanies(company)
+        // let res = true;
 
         console.log("Removing Comapny")
         if (res){
