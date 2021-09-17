@@ -63,7 +63,7 @@ class StockHistory extends StatelessWidget {
           body: jsonEncode({"company": "Tesla", "beginDate": 1628899200}));
 
       if (response2.statusCode == 200) {
-        print("Response body in SentimentHistory");
+        print("Response body in StockHistory");
         print(response2.body);
         List<dynamic> response = jsonDecode(response2.body
             /* .substring(response2.body.indexOf("["), response2.body.length - 1)*/);
@@ -161,8 +161,8 @@ class StockHistory extends StatelessWidget {
   Widget build(BuildContext context) {
     var feedChoice = Provider.of<FeedChanger>(context).getFeedChoice;
     feedChoice = feedChoice;
-    fetchNewStock("Tesla");
-    convertToGraphStock(todos);
+    fetchNewStock("Tesla")
+        .then((value) => {convertToGraphStock(todos)}); // tesla or feedchoice?
 
     return Container(
       padding: EdgeInsets.all(defaultPadding),
