@@ -282,7 +282,7 @@ def lambda_handler(event, context):
         'body': json.dumps("Success!")
     }
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
 #     body = {
 #         "content": "Tesla",
 #         "Ticker": "TSLA",
@@ -290,15 +290,16 @@ def lambda_handler(event, context):
 #     }
 #     # print(lambda_handler(body, ""))
 #     catchUp(30,"Tesla", "TSLA")
-    # currentTime = int(time.time())
-    #
-    # timeFromMidnight = currentTime % 86400
-    #
-    # currentTime = currentTime - timeFromMidnight
-    # currentTime = currentTime
-    #
-    # # sentiment = getAllFromDate(currentTime-86400, currentTime, companyName)
-    #
-    # updatedTime = currentTime
-    # updatedTime = updatedTime - 86400
-    # print(getStockPriceOnAGivenDay(updatedTime, "X:BSVUSD"))
+    currentTime = int(time.time())
+
+    timeFromMidnight = currentTime % 86400
+
+    currentTime = currentTime - timeFromMidnight
+    currentTime = currentTime
+
+    # sentiment = getAllFromDate(currentTime-86400, currentTime, companyName)
+
+    updatedTime = currentTime
+    updatedTime = updatedTime - 86400
+    print(updatedTime)
+    # print(getStockPriceOnAGivenDay(updatedTime, "TSLA"))
