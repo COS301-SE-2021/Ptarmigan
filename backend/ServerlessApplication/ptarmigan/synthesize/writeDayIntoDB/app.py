@@ -233,6 +233,7 @@ def oneItem(companyName, ticker):
     updatedTime = currentTime
     updatedTime = updatedTime - 86400
     sentiment = getAllFromDate(updatedTime - 86400, currentTime, companyName)
+
     # stock = getStockPrice(updatedTime, stockList, ticker)
     stockPrice = getStockPriceOnAGivenDay(updatedTime, ticker)
     if stockPrice == "You've exceeded the maximum requests per minute, please wait or upgrade your subscription to continue. https://polygon.io/pricing":
@@ -243,6 +244,9 @@ def oneItem(companyName, ticker):
 
     res = writeIntoDb(updatedTime, companyName, stockPrice, sentiment)
     print(res)
+    if res["ResponseMetadata"]["HTTPStatusCode"] == 200:
+        return True
+    else: return False
 
 def lambda_handler(event, context):
     # getAllFromDate(int(time.time())-86400, int(time.time()), "Tesla")
@@ -283,6 +287,7 @@ def lambda_handler(event, context):
     }
 
 if __name__ == '__main__':
+    oneItem("Tesla", "TSLA")
 #     body = {
 #         "content": "Tesla",
 #         "Ticker": "TSLA",
@@ -290,16 +295,16 @@ if __name__ == '__main__':
 #     }
 #     # print(lambda_handler(body, ""))
 #     catchUp(30,"Tesla", "TSLA")
-    currentTime = int(time.time())
-
-    timeFromMidnight = currentTime % 86400
-
-    currentTime = currentTime - timeFromMidnight
-    currentTime = currentTime
-
-    # sentiment = getAllFromDate(currentTime-86400, currentTime, companyName)
-
-    updatedTime = currentTime
-    updatedTime = updatedTime - 86400
-    print(updatedTime)
+#     currentTime = int(time.time())
+#
+#     timeFromMidnight = currentTime % 86400
+#
+#     currentTime = currentTime - timeFromMidnight
+#     currentTime = currentTime
+#
+#     # sentiment = getAllFromDate(currentTime-86400, currentTime, companyName)
+#
+#     updatedTime = currentTime
+#     updatedTime = updatedTime - 86400
+#     print(updatedTime)
     # print(getStockPriceOnAGivenDay(updatedTime, "TSLA"))
