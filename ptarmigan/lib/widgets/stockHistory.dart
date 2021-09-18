@@ -163,48 +163,52 @@ class StockHistory extends StatelessWidget {
   Widget build(BuildContext context) => FutureBuilder(
       future: fetchNewStock(Provider.of<FeedChanger>(context).getFeedChoice),
       builder: (context, snapshots) {
-        fetchNewStock(Provider.of<FeedChanger>(context).getFeedChoice);
-        convertToGraphStock(todos);
         // convertToGraphStock(todos);
         //convertToGraph(todos);
         // bocko(feedChoice);
         //   Delete(feedChoice);
-        return Container(
-          padding: EdgeInsets.all(defaultPadding),
-          decoration: BoxDecoration(
-            color: secondaryColor,
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Stock History",
-                style: Theme.of(context).textTheme.subtitle1,
-              ),
-              SizedBox(
-                width: double.infinity,
-                height: 400,
-                child: DataTable2(
-                  columnSpacing: 30,
-                  minWidth: 300,
-                  columns: [
-                    DataColumn(
-                      label: Text("Date"),
+        if (snapshots.hasData == false) {
+          fetchNewStock(Provider.of<FeedChanger>(context).getFeedChoice);
+          convertToGraphStock(todos);
+          return Container(
+            padding: EdgeInsets.all(defaultPadding),
+            decoration: BoxDecoration(
+              color: secondaryColor,
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Stock History",
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  height: 400,
+                  child: DataTable2(
+                    columnSpacing: 30,
+                    minWidth: 300,
+                    columns: [
+                      DataColumn(
+                        label: Text("Date"),
+                      ),
+                      DataColumn(
+                        label: Text("Stock Price"),
+                      ),
+                    ],
+                    rows: List.generate(
+                      demoRecentFiles2.length,
+                      (index) => recentFileDataRow(demoRecentFiles2[index]),
                     ),
-                    DataColumn(
-                      label: Text("Stock Price"),
-                    ),
-                  ],
-                  rows: List.generate(
-                    demoRecentFiles2.length,
-                    (index) => recentFileDataRow(demoRecentFiles2[index]),
                   ),
                 ),
-              ),
-            ],
-          ),
-        );
+              ],
+            ),
+          );
+        } else {
+          return CircularProgressIndicator();
+        }
       });
 }
 
