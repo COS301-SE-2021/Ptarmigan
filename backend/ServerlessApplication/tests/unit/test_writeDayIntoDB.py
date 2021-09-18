@@ -55,7 +55,18 @@ class TestGetDailySentiemnt(unittest.TestCase):
 
         assert expected == actual
 
-    def test_if_oneItem_works(self):
+    @patch('ptarmigan.synthesize.writeDayIntoDB.app.writeIntoDb')
+    @patch('ptarmigan.synthesize.writeDayIntoDB.app.getStockPriceOnAGivenDay')
+    @patch('ptarmigan.synthesize.writeDayIntoDB.app.getAllFromDate')
+    def test_if_oneItem_works_TrueInput(self, mock_sentiment, mock_stockData, mock_dbReturn):
+        mock_dbReturn.return_value = {'ResponseMetadata': {'RequestId': 'I2O5H9IDJJMIU1KVBBPCPLM8C3VV4KQNSO5AEMVJF66Q9ASUAAJG', 'HTTPStatusCode': 200, 'HTTPHeaders': {'server': 'Server', 'date': 'Sat, 18 Sep 2021 11:56:21 GMT', 'content-type': 'application/x-amz-json-1.0', 'content-length': '2', 'connection': 'keep-alive', 'x-amzn-requestid': 'I2O5H9IDJJMIU1KVBBPCPLM8C3VV4KQNSO5AEMVJF66Q9ASUAAJG', 'x-amz-crc32': '2745614147'}, 'RetryAttempts': 0}}
+        mock_stockData.return_value = 759
+        mock_sentiment.return_value = 0
+
+        expected = True
+        actual = app.oneItem("Tesla", "TSLA")
+
+        assert expected == actual
 
 
 
