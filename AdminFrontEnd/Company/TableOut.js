@@ -47,7 +47,7 @@ class TableOut extends Output{
         if (company.companyJSON.Associated2 != null){
             let tableRow = `
             <tr>
-                <td scope="row" class="parameterName">${company.companyJSON.Associated1}</td>
+                <td scope="row" class="parameterName">${company.companyJSON.Associated2}</td>
                 <th scope="col">
                     <button type="button" class="btn btn-danger removeOnClick">Delete</button>
                 </th>
@@ -58,7 +58,7 @@ class TableOut extends Output{
         if (company.companyJSON.Associated3 != null){
             let tableRow = `
             <tr>
-                <td scope="row" class="parameterName">${company.companyJSON.Associated1}</td>
+                <td scope="row" class="parameterName">${company.companyJSON.Associated3}</td>
                 <th scope="col">
                     <button type="button" class="btn btn-danger removeOnClick">Delete</button>
                 </th>
