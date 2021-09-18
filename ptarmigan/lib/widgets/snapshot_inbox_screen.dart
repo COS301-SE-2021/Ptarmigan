@@ -3,8 +3,11 @@ import 'fire_base_DB.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'snapShot.dart';
 import '../constants.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
 void main() => runApp(App());
+
+String emailOfUser = "";
 
 class App extends StatelessWidget {
   @override
@@ -71,10 +74,20 @@ class _TodoListState extends State<TodoList> {
     Database.deleteSnapShot(id);
   }
 
+  void _getUser() async {
+    AuthUser a = await AmplifyAuthCognito().getCurrentUser();
+
+    emailOfUser = a.username;
+  }
+
   Widget _getSnapshots() {
+    _getUser();
+    String email = emailOfUser;
+    print("RINGGER: " + email);
     return StreamBuilder(
         stream: Firestore.instance
             .collection('snapshots')
+            .where('to', isEqualTo: email)
             .orderBy('timestamp', descending: true)
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {

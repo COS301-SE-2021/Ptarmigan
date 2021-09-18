@@ -88,7 +88,7 @@ void _sendSnapShot(String email, String comment) async {
   var task = <String, dynamic>{
     'stocktitle': "Bitcoin",
     'to': email,
-    'from': Singleton().userEmail,
+    'from': a.username,
     'content': comment,
     'sentiment': "50hard",
     'stock': "50hard",
