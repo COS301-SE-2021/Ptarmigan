@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:ptarmigan/amplifyconfiguration.dart';
 import 'package:ptarmigan/auth/flutter_login/login_screen.dart';
 
-
-
 class EntryScreen extends StatefulWidget {
   @override
   _EntryScreenState createState() => _EntryScreenState();

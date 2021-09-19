@@ -4,6 +4,7 @@ import 'package:ptarmigan/widgets/feed_selector_screen.dart';
 import 'package:ptarmigan/widgets/home_page.dart';
 import 'package:ptarmigan/widgets/stock_screen.dart';
 import 'package:ptarmigan/widgets/todos_page.dart';
+import 'package:ptarmigan/widgets/snapshot_inbox_screen.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({
@@ -50,6 +51,14 @@ class MenuDrawer extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) => FeedSelectorScreen(manager)));
+            },
+          ),
+          DrawerListTile(
+            title: "Snapshot Inbox",
+            svgSrc: "assets/icons/menu_task.svg",
+            press: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => TodoList()));
             },
           ),
         ],
