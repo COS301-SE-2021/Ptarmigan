@@ -10,7 +10,7 @@ def lambda_handler(event, context):
     priceList = getPriceList(contentList)
 
     priceDict = {contentList[i]['content']: priceList[i] for i in range(len(contentList))}
-    # return writeToBucket(priceDict)
+    return writeToBucket(priceDict)
 
 
 def getList():
