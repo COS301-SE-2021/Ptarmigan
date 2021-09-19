@@ -51,9 +51,10 @@ One More Byte SRS Demo 4 - https://drive.google.com/file/d/1qlrUVs1xktOmYUcP30b-
 
 Technical installation manual Demo 4 - https://drive.google.com/file/d/1RDO_84GCO8GxoZQy4Eq_lvaUS3dRbuHL/view?usp=sharing
 
-GitHub Project Board Demo 4 - 
+GitHub Project Board Demo 4 - https://github.com/COS301-SE-2021/Ptarmigan/projects/1?add_cards_query=is%3Aopen
+https://github.com/orgs/COS301-SE-2021/teams/one-more-byte
 
-Scrum board Demo 4 - 
+Scrum board Demo 4 - https://github.com/COS301-SE-2021/Ptarmigan/projects/2
 
 Architectural requirements and design Demo 4- 
 
