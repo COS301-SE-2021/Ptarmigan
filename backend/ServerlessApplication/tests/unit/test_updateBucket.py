@@ -13,6 +13,7 @@ class TestClass(TestCase):
     @patch('ptarmigan.scraper.UpdateBucket.app.uploadBucketList')
     @patch('ptarmigan.scraper.UpdateBucket.app.getBucketList')
     @patch('ptarmigan.scraper.UpdateBucket.app.database')
+
     def test_if_item_is_updated(self, mockDb, mock_BucketList,mock_Upload):
         mockDb = "yes"
         mock_Upload.return_value = True
@@ -31,7 +32,8 @@ class TestClass(TestCase):
     @patch('ptarmigan.scraper.UpdateBucket.app.uploadBucketList')
     @patch('ptarmigan.scraper.UpdateBucket.app.getBucketList')
     @patch('ptarmigan.scraper.UpdateBucket.app.database')
-    def test_if_item_is_updated(self, mockDb, mock_BucketList, mock_Upload):
+
+    def test_if_item_already_exists(self, mockDb, mock_BucketList, mock_Upload):
         mockDb = "yes"
         mock_Upload.return_value = True
         mock_BucketList.return_value = bytes(json.dumps({"Scrape-until": 1628659921.2764487,
@@ -59,7 +61,8 @@ class TestClass(TestCase):
     @patch('ptarmigan.scraper.UpdateBucket.app.uploadBucketList')
     @patch('ptarmigan.scraper.UpdateBucket.app.getBucketList')
     @patch('ptarmigan.scraper.UpdateBucket.app.database')
-    def test_if_item_is_updated(self, mockDb, mock_BucketList, mock_Upload):
+    
+    def test_if_error_updating(self, mockDb, mock_BucketList, mock_Upload):
         mockDb = "yes"
         mock_Upload.return_value = False
         mock_BucketList.return_value = bytes(json.dumps({"Scrape-until": 1628659921.2764487,
