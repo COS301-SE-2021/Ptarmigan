@@ -11,7 +11,11 @@ runtime = boto3.client('runtime.sagemaker')
 def lambda_handler(event, context):
     # get company name
     try:
-        company = event['context']
+        if "body" in event:
+            company = json.loads(event["body"]['context'])
+
+        else:
+            company = event['context']
     except:
         return {
         'statusCode': 400,
