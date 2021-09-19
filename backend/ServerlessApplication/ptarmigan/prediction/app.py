@@ -38,3 +38,18 @@ def getSentiment(companyName):
     response = table.scan(FilterExpression=Key('Tweet_Id').gt(1)&Key('TimeStamp').between(endDate, beginDate))
     print(response["Items"])
     return calculateSentiment(response["Items"])
+
+    def calculateSentiment(content):
+        posSum = 0
+    negSum = 0
+    
+    for element in content:
+        weight = int(element["Weight"])
+        if element["Sentiment"] == "POSITIVE":
+            posSum = posSum + weight
+        if element["Sentiment"] == "NEGATIVE":
+            negSum = negSum + weight
+
+    diff = ((posSum - negSum) /1000)
+
+    return (diff)
