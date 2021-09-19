@@ -26,6 +26,11 @@ def lambda_handler(event, context):
         'statusCode': 200,
         'body': json.dumps(prediction)
     }
+
+def get_inputs(companyName):
+    # get all the inputs
+    return output
+    
 def encode_inputs(data): #[increse,monday,POSITIVE]
     encodedArrayOutput = []
     #one hot encode the change
