@@ -21,11 +21,11 @@ class SentimentPredictionGenerator {
   Client client = Client();
   SentimentPredictionGenerator({this.contents});
 
-  Future<Map> fetchPrediction() async {
+  Future<String> fetchPrediction() async {
     print("Attempting to access Prediction API");
     //print("calling api for feed list ");
     final response = await client.post(Uri.parse(
-        "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/stocks/returnStockPriceList")); //Replace url with prediction endpoint
+        "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/prediction")); //Replace url with prediction endpoint
 
     if (response.statusCode != 200) {
       throw Exception("Prediction API is not responding/ API Timed out");
@@ -34,7 +34,8 @@ class SentimentPredictionGenerator {
     print(response.body);
     var code = response.statusCode;
     print(code);
-    Map<String, dynamic> res = jsonDecode(response.body);
+    String res = response.body;
+    // Map<String, dynamic> res = jsonDecode(response.body);
     //if (response.statusCode == 200) {
     //print(res['Bitcoin']);
 

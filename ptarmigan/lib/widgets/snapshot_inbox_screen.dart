@@ -87,7 +87,7 @@ class _TodoListState extends State<TodoList> {
     return StreamBuilder(
         stream: Firestore.instance
             .collection('snapshots')
-            .where('to', isEqualTo: email + " ")
+            .where('to', isEqualTo: email)
             .orderBy('timestamp', descending: true)
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
