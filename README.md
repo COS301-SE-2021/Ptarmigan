@@ -43,7 +43,7 @@ Technical installation manual Demo3- https://drive.google.com/file/d/1JnSTuwu2qI
 
 User manual Demo 4 - https://drive.google.com/file/d/1AVIc5pymo3OHtk37Aw40uWDd3DTL7D_0/view?usp=sharing
 
-Coding Standards Demo 4 -
+Coding Standards Demo 4 - https://drive.google.com/file/d/1oFo3w6Z6S_6q7NjpSiqoWTCxSMQj7MMc/view?usp=sharing
 
 Testing Policy Demo 4 -
 
