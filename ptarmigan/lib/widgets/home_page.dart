@@ -105,7 +105,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     Settings settings = Settings();
     return Scaffold(
         backgroundColor: bgColor,
-        drawer: MenuDrawer(),
+        drawer: MenuDrawer(feedimage, manager),
         appBar: AppBar(
           backgroundColor: bgColor,
           shadowColor: secondaryColor,
@@ -371,9 +371,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => StockScreen(
-                      feedList: feedimage,
-                    )));
+                builder: (context) => StockScreen(feedimage, manager)));
         break;
     }
   }
