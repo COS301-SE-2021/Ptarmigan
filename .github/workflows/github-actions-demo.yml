@@ -38,6 +38,7 @@ jobs:
             pip3 install git+https://github.com/JustAnotherArchivist/snscrape.git
             pip3 install pandas
             pip3 install moto
+            pip3 install yfinance
           
         - name: Unit Testing
           working-directory: ./backend/ServerlessApplication/
