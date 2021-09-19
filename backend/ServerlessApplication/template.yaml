@@ -197,6 +197,27 @@ Resources:
           Properties:
             Path: /stocks/returnStockPriceList
             Method: post
+  
+  prediction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/prediction
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Role: arn:aws:iam::878292117449:role/service-role/getPrediction-role-3napnf1c 
+      Layers:
+        - arn:aws:lambda:eu-west-1:878292117449:layer:requests:1
+        - arn:aws:lambda:eu-west-1:878292117449:layer:PandasLib:1
+        - arn:aws:lambda:eu-west-1:399891621064:layer:AWSLambda-Python38-SciPy1x:29
+        - arn:aws:lambda:eu-west-1:878292117449:layer:YfinanceLib:1
+      Timeout: 300
+
+      Events:
+        HttpPost:
+          Type: Api # More info about API    db = database.database(tableName) Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /prediction
+            Method: post
 
   scraperStepFunction:
     Type: AWS::Serverless::StateMachine
