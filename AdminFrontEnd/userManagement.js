@@ -133,7 +133,8 @@ $(document).ready(function () {
     $("#submitFormButton").click(function(){
         let newCompany = tableOut.getCompanyFromPage()
         proxy.updateCompanies(newCompany)
-        tableOut.printItem(newCompany)
+        $("#companyTable").html("")
+        proxy.printList()
     })
 
 //     viewCompanyDetails("Bitcoin")
@@ -175,7 +176,7 @@ $(document).ready(function () {
     });
 
     $('#companyTable').on('click', '.viewClick', function() {
-        $(this).addClass("disabled")
+        // $(this).addClass("disabled")
         companyName = $(this).parent().parent().find("td").text()
 
         company = proxy.getCompaniesByName(companyName)
