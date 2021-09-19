@@ -5,4 +5,4 @@ requests
 ujson
 pymongo
 marshmallow
-yfinance==0.1.63
+yfinance
