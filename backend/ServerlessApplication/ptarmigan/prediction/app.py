@@ -46,7 +46,7 @@ def get_inputs(companyName,ticker):
     else: # if any other day get the last 2 days avalible 
         todayStock = (requestResults["Close"].iloc[-1])
         yesterdayStock = (requestResults["Close"].iloc[-2])
-        
+
     #assign todays price
     close = todayStock
     #get the %change from yesterday to today
@@ -141,8 +141,8 @@ def getSentiment(companyName):
     print(response["Items"])
     return calculateSentiment(response["Items"])
 
-    def calculateSentiment(content):
-        posSum = 0
+def calculateSentiment(content):
+    posSum = 0
     negSum = 0
     
     for element in content:
@@ -155,3 +155,31 @@ def getSentiment(companyName):
     diff = ((posSum - negSum) /1000)
 
     return (diff)
+
+def get_Ticker(companyName):
+     # get list from s3 Bucket
+    s3client = boto3.client('s3')
+
+    bucketname = 'stepfunctestbucket'
+    file_to_read = 'scrapeContent.json'
+    try:
+        fileobj = s3client.get_object(
+            Bucket=bucketname,
+            Key=file_to_read
+        )
+    except:
+        return {
+            'statusCode': 500,
+            'body': json.dumps("Cannot find file within bucket")
+        }
+    filedata = fileobj['Body'].read()
+
+    filecontents = (filedata.decode('utf-8'))
+    filecontents = json.loads(filecontents)
+
+    listContents = filecontents['scrape-detail']
+
+    for item in listContents:
+        if item['content'] == companyName:
+            return item['Ticker']
+    return["no item found"]
