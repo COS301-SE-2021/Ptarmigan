@@ -2,3 +2,4 @@ requests
 pymongo
 marshmallow
 yfinance==0.1.63
+pandas

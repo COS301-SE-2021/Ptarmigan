@@ -1,6 +1,4 @@
 import json
-import os
-import io
 import boto3
 import datetime
 import time
