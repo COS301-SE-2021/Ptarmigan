@@ -26,7 +26,40 @@ def lambda_handler(event, context):
         'statusCode': 200,
         'body': json.dumps(prediction)
     }
-
+def encode_inputs(data): #[increse,monday,POSITIVE]
+    encodedArrayOutput = []
+    #one hot encode the change
+    if data[0] == "Increase":
+        encodedArrayOutput.extend([0,1,0])
+    elif data[0] == "Decrease":
+        encodedArrayOutput.extend([1,0,0])
+    else: #else neutral
+        encodedArrayOutput.extend([0,0,1])
+        
+    #encode the day
+    if data[1] == "Monday":
+        encodedArrayOutput.extend([0,1,0,0,0,0,0])
+    elif data[1] == "Tuesday":
+        encodedArrayOutput.extend([0,0,0,0,0,1,0])
+    elif data[1] == "Wednesday":
+        encodedArrayOutput.extend([0,0,0,0,0,0,1])
+    elif data[1] == "Thursday":
+        encodedArrayOutput.extend([0,0,0,0,1,0,0])
+    elif data[1] == "Friday":
+        encodedArrayOutput.extend([1,0,0,0,0,0,0])
+    elif data[1] == "Saturday":
+        encodedArrayOutput.extend([0,0,1,0,0,0,0])
+    else: # "Sunday":
+        encodedArrayOutput.extend([0,0,0,1,0,0,0])
+    
+    #encode the sentiment
+    if data[2] == "NEGATIVE":
+        encodedArrayOutput.extend([1,0])
+    else: #positive
+        encodedArrayOutput.extend([0,1])
+        
+    return encodedArrayOutput
+    
 def getSentiment(companyName):
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table(companyName)
