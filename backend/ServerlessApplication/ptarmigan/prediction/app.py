@@ -26,3 +26,15 @@ def lambda_handler(event, context):
         'statusCode': 200,
         'body': json.dumps(prediction)
     }
+
+def getSentiment(companyName):
+    dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table(companyName)
+    
+    beginDate = int(time.time())
+    endDate = tstoday = datetime.datetime.combine(datetime.date.today(), datetime.datetime.min.time())
+    endDate = int(endDate.timestamp())
+    
+    response = table.scan(FilterExpression=Key('Tweet_Id').gt(1)&Key('TimeStamp').between(endDate, beginDate))
+    print(response["Items"])
+    return calculateSentiment(response["Items"])
