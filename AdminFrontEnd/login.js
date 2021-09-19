@@ -4,7 +4,7 @@ let userpoolid = "eu-west-1_7XDVA9p2r"
 
 //=============== AWS IDs ===============
 var userPoolId = "eu-west-1_7XDVA9p2r";
-var clientId = '7k7pnkdkvtp2bu0lkigkiu9n5k';
+var clientId = '2vmdk228m93vb6ksecad7vjqsa';
 var region = 'eu-west-1';
 var identityPoolId = 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902';
 //=============== AWS IDs ===============
@@ -19,13 +19,13 @@ var poolData = {
 };
 
 function logIn() {
-
+    console.log("Logging in")
     if (!$('#loginUsername').val() || !$('#loginPassword').val()) {
         alert('Please enter Username and Password!');
     } else {
         var authenticationData = {
             Username: $('#loginUsername').val(),
-            Password: $("#loginPassword").val(),
+            Password: $("#loginPassword").val()
         };
         var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
         userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
@@ -46,7 +46,7 @@ function logIn() {
                 return
                 // switchToLoggedInView();
 
-                idToken = result.getIdToken().getJwtToken();
+                // idToken = result.getIdToken().getJwtToken();
                 // getCognitoIdentityCredentials();
 
 
@@ -80,8 +80,7 @@ $(document).ready(function () {
     var paramsAdminUsers = {
         GroupName: 'Admin', /* required */
         UserPoolId: userpoolid, /* required */
-        Limit: '50',
-
+        Limit: '50'
     };
     // cognitoidentityserviceprovider.listUsersInGroup(paramsAdminUsers, function (err, data) {
     //     if (err) console.log(err, err.stack); // an error occurred
@@ -89,6 +88,7 @@ $(document).ready(function () {
     //         adminData = data;
     //         adminUsers = adminData["Users"];
     //         console.log(adminData)
+    //         console.log("ADMINDATA")
     //     }
     //
     //     console.log("Users in admin group returned");           // successful response
