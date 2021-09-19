@@ -6,9 +6,9 @@ from ptarmigan.scraper.UpdateBucket import app
 class TestClass(TestCase):
 
     def setUp(self):
-        self.update_test_input = {"body": json.dumps({"content": "Tencent"})}
-        self.update_test_input_already_exists = {"body": json.dumps({"content": "IBM"})}
-        self.delete_invalid_input = {"body": {"context": "IBM"}}
+        self.update_test_input = {"body": json.dumps({"content": "Tencent", "Ticker": "TSLA"})}
+        self.update_test_input_already_exists = {"body": json.dumps({"content": "IBM", "Ticker": "TSLA"})}
+        self.delete_invalid_input = {"body": {"context": "IBM", "Ticker": "TSLA"}}
 
     @patch('ptarmigan.scraper.UpdateBucket.app.uploadBucketList')
     @patch('ptarmigan.scraper.UpdateBucket.app.getBucketList')
@@ -18,9 +18,9 @@ class TestClass(TestCase):
         mockDb = "yes"
         mock_Upload.return_value = True
         mock_BucketList.return_value = bytes(json.dumps({"Scrape-until": 1628659921.2764487,
-                                        "scrape-detail": [{"content": "Bitcoin"}, {"content": "Microsoft"},
-                                                          {"content": "IBM"}, {"content": "Tesla"},
-                                                          {"content": "Apple"}]}).encode('UTF-8'))
+                                        "scrape-detail": [{"content": "Bitcoin", "Ticker": "TSLA"}, {"content": "Microsoft","Ticker": "TSLA"},
+                                                          {"content": "IBM", "Ticker": "TSLA"}, {"content": "Tesla", "Ticker": "TSLA"},
+                                                          {"content": "Apple", "Ticker": "TSLA"}]}).encode('UTF-8'))
         expected ={
             'statusCode': 200,
             'body': json.dumps('Successfully Updated the Content to scrape.')

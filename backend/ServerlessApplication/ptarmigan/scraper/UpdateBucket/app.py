@@ -135,7 +135,7 @@ def lambda_handler(event, context):
     except:
         return {
             'statusCode': 400,
-            'body': json.dumps('Bad Request - invalid JSON input12')
+            'body': json.dumps('Bad Request - invalid JSON input')
         }
 
     try:
