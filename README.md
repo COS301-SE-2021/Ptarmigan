@@ -49,7 +49,7 @@ Testing Policy Demo 4 -
 
 One More Byte SRS Demo 4 - https://drive.google.com/file/d/1qlrUVs1xktOmYUcP30b-E_aSDXDPmtAn/view?usp=sharing 
 
-Technical installation manual Demo 4 - 
+Technical installation manual Demo 4 - https://drive.google.com/file/d/1RDO_84GCO8GxoZQy4Eq_lvaUS3dRbuHL/view?usp=sharing
 
 GitHub Project Board Demo 4 - 
 
