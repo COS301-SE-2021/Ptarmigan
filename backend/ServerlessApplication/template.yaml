@@ -236,7 +236,7 @@ Resources:
   dayStepFunction:
     Type: AWS::Serverless::StateMachine
     Properties:
-      DefinitionUri: ptarmigan/scraperStepFunc/dayStepFunc.json
+      DefinitionUri: ptarmigan/dayStepFunc/dayStepFunc.json
       Role: arn:aws:iam::878292117449:role/stepFunctionLambdaRole
       Type: EXPRESS
 
@@ -244,6 +244,6 @@ Resources:
         HttpPost:
           Type: Api # More info about API    db = database.database(tableName) Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /scraperStepFunc/
+            Path: /dayStepFunc/
             Method: post
 #Admin Subsystem
