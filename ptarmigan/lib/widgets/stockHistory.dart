@@ -94,7 +94,7 @@ class StockHistory extends StatelessWidget {
 
           Todo newTodo = Todo(
             name: feedIdentifier,
-            description: "R" + (test1[i].stockData),
+            description: "\$" + (test1[i].stockData),
             date:
                 a, //TemporalDate.fromMillisecondsSinceEpoch(test1[0].beginDate);
           );

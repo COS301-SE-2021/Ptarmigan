@@ -138,14 +138,17 @@ class StockAndSentimentValues extends StatelessWidget {
                 ),
                 Text(""),
                 Text(
-                  "Current Stock Price: R" + currentStock,
+                  "Current Stock Price: \$" + currentStock,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                Text(
-                  "Tomorrow's sentiment prediction: " + tomorrowsSentiment,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                Padding(
+                  padding: EdgeInsets.fromLTRB(1, 2, 1, 1),
+                  child: Text(
+                    "Tomorrow's sentiment prediction: " + tomorrowsSentiment,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),
