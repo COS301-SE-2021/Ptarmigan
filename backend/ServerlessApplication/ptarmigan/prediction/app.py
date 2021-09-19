@@ -59,7 +59,21 @@ def encode_inputs(data): #[increse,monday,POSITIVE]
         encodedArrayOutput.extend([0,1])
         
     return encodedArrayOutput
-    
+
+def get_Prediction(inputArr):
+    print(json.dumps(inputArr))
+    response = runtime.invoke_endpoint(EndpointName=ENDPOINT_NAME,Body=json.dumps([inputArr]))
+    result = json.loads(response['Body'].read().decode())
+    if result[0] == 0:
+        predictionReturn = "Decrease"
+    elif result[0] == 1:
+        predictionReturn = "Increase"
+    elif result[0] == 2:
+        predictionReturn = "Neutral"
+    else:
+        predictionReturn = "Unknown"
+    return predictionReturn
+
 def getSentiment(companyName):
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table(companyName)
