@@ -16,7 +16,7 @@ class Test_UpdateBucketReturn(unittest.TestCase):
         response.json()
         print(response)
 
-        assert response.status_code == 200
+        assert response.status_code == 400
 
     def test_Update_Bucket_return_Invalid_Input (self):
         api_url = "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/scraper/UpdateBucket"
