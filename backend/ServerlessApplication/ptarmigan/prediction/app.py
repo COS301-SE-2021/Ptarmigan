@@ -12,8 +12,8 @@ def lambda_handler(event, context):
     # get company name
     try:
         if "body" in event:
-            body = event['body']
-            company = body['context']
+            company = json.loads(event['body'])
+            company =  company['context']
 
         else:
             company = event['context']
