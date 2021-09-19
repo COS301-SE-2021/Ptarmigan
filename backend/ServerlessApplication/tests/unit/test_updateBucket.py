@@ -37,12 +37,12 @@ class TestClass(TestCase):
         mockDb = "yes"
         mock_Upload.return_value = True
         mock_BucketList.return_value = bytes(json.dumps({"Scrape-until": 1628659921.2764487,
-                                                         "scrape-detail": [{"content": "Bitcoin"},
-                                                                           {"content": "Microsoft"},
-                                                                           {"content": "IBM"}, {"content": "Tesla"},
-                                                                           {"content": "Apple"}]}).encode('UTF-8'))
+                                                         "scrape-detail": [{"content": "Bitcoin", "Ticker": "TSLA"},
+                                                                           {"content": "Microsoft", "Ticker": "TSLA"},
+                                                                           {"content": "IBM","Ticker": "TSLA"}, {"content": "Tesla","Ticker": "TSLA"},
+                                                                           {"content": "Apple","Ticker": "TSLA"}]}).encode('UTF-8'))
         expected = {
-                'statusCode': 400,
+                'statusCode': 200,
                 'body': json.dumps('Item is already in the file')
             }
 
