@@ -60,6 +60,7 @@ def getPriceList(list):
         if not requestResults['Global Quote']:
             # pull crypto symblo from ticker
             # add appropriate field to list
+            Ticker = Ticker[2:5] 
             requestUrlCrypto = f"https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency={Ticker}&to_currency=USD&apikey=VDLMI3ZNV3LSSLDZ"
             requestReturnCrypto = requests.get(requestUrlCrypto)
             apiCalls += 1
