@@ -29,8 +29,44 @@ def lambda_handler(event, context):
 
 def get_inputs(companyName):
     # get all the inputs
-    return output
     
+    #get the stocks for today + yesterday
+    todayStock = 3000
+    yesterdayStock = 2988
+    #assign todays price
+    close = todayStock
+    #get the %change from yesterday to today
+    changePercent = ((todayStock-yesterdayStock)/yesterdayStock)*100 
+    #determine is the change was positive or negative
+    if changePercent > 0.01:
+        change = "Increase"
+    elif changePercent < -0.01:
+        change =  "Decrease"
+    else:
+        change =  "Neutral"
+        
+        
+    #get sentiment of all tweets from today
+    
+    #total their weighs and get difference betweens positive and negative
+    sentimentValue = getSentiment(companyName)
+    #if positive = POSITIVE if neg = NEGATIVE
+    if sentimentValue > 0:
+        sentiment = "POSITIVE"
+    elif sentimentValue < 0:
+        sentiment = "NEGATIVE"
+    else:
+        sentiment = "NEUTRAL"
+    #get the day of the week
+    day = datetime.datetime.today().strftime('%A')
+    
+    
+    categoricalArr = [change,day,sentiment]
+    numericalArr = [close,changePercent,sentimentValue]
+    encodedArr = encode_inputs(categoricalArr)
+    outputArr = encodedArr + numericalArr
+    return outputArr
+
 def encode_inputs(data): #[increse,monday,POSITIVE]
     encodedArrayOutput = []
     #one hot encode the change
