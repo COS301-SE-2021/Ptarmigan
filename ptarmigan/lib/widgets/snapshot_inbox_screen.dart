@@ -87,11 +87,12 @@ class _TodoListState extends State<TodoList> {
     return StreamBuilder(
         stream: Firestore.instance
             .collection('snapshots')
-            .where('to', isEqualTo: email)
+            .where('to', isEqualTo: email + " ")
             .orderBy('timestamp', descending: true)
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
+            print(snapshot.data!.documents.length);
             return ListView.builder(
               padding: const EdgeInsets.all(10.0),
               itemBuilder: (BuildContext context, int index) => SnapShot(

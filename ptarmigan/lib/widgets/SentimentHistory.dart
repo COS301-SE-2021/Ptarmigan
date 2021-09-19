@@ -29,7 +29,7 @@ class SentimentHistory extends StatelessWidget {
   List<DataPoint<dynamic>> list = [];
   List<Todo> todos = [];
   List<Feed> feeds = [];
-  String feedTitle = "Bitcoin";
+  String feedTitle = "Tesla";
 
   SentimentHistory({this.todos, this.feeds});
 

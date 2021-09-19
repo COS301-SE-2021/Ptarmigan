@@ -12,6 +12,7 @@ import 'package:ptarmigan/services/feed_changer.dart';
 class StockAndSentimentValues extends StatelessWidget {
   String currentSentiment = "0";
   String currentStock = "0";
+  String tomorrowsSentiment = "0";
 
   Color colorDetermine(int i) {
     Color a = Colors.green;
@@ -51,8 +52,8 @@ class StockAndSentimentValues extends StatelessWidget {
 
       if (response2.statusCode == 200) {
         print(response2.body);
-        List<dynamic> response = jsonDecode(response2.body
-            /* .substring(response2.body.indexOf("["), response2.body.length - 1)*/);
+        List<dynamic> response = jsonDecode(response2
+            .body /* .substring(response2.body.indexOf("["), response2.body.length - 1)*/);
 
         // print("HERE: " + response[0].intervalData.toString());
 
@@ -60,8 +61,8 @@ class StockAndSentimentValues extends StatelessWidget {
         List<FeedStockSentiment> test1 = List<FeedStockSentiment>.from(
             response.map((i) => FeedStockSentiment.fromJson(i)));
 
-        currentSentiment = test1[0].sentiment;
-        currentStock = test1[0].stock;
+        currentSentiment = test1[test1.length - 1].sentiment;
+        currentStock = test1[test1.length - 1].stock;
 
         print("hobp: " +
             (double.parse(currentSentiment) * 50 + 50)
@@ -134,6 +135,11 @@ class StockAndSentimentValues extends StatelessWidget {
                 Text(""),
                 Text(
                   "Current Stock Price: R" + currentStock,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  "Tomorrow's sentiment prediction: " + tomorrowsSentiment,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

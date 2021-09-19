@@ -25,6 +25,8 @@ import 'package:http/http.dart' as http;
 import 'package:ptarmigan/feedSentiment.dart';
 import '/models/SentimentHistoryItem.dart';
 import 'package:ptarmigan/widgets/add_feed_form.dart';
+import 'package:ptarmigan/widgets/feed_selector_screen.dart';
+import 'package:ptarmigan/services/feed_file_manager.dart';
 
 class SideMenu extends StatelessWidget {
   List<Todo> todos;
@@ -34,8 +36,9 @@ class SideMenu extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final String title;
   StreamSubscription _subscription;
+  final FeedFileManager manager;
 
-  SideMenu({this.todos, this.feeds, this.feedsSub, this.title});
+  SideMenu({this.todos, this.feeds, this.feedsSub, this.title, this.manager});
 
   List<DrawerListTile> changeFeedsTo(List<Feed> feedList) {
     List<DrawerListTile> object = [];
@@ -113,7 +116,7 @@ class SideMenu extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => AddFeedForm(feeds: feeds)));
+                            builder: (context) => FeedSelectorScreen(manager)));
                   },
                   icon: Icon(Icons.add),
                   label: Text("Add New  "),

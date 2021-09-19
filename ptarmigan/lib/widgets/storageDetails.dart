@@ -33,7 +33,7 @@ class StorageDetails extends StatelessWidget {
           Text(
             Provider.of<FeedChanger>(context, listen: true).getFeedChoice,
             style: TextStyle(
-              fontSize: 32,
+              fontSize: 36,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -74,18 +74,18 @@ class StorageDetails extends StatelessWidget {
   }
 }
 
-void _sendSnapShot(String email, String comment) async {
+void _sendSnapShot(String email, String comment, String name) async {
   AuthUser a = await AmplifyAuthCognito().getCurrentUser();
 
-  print("PING: " + a.username);
+  // print("PING: " + a.username);
 
   var task = <String, dynamic>{
-    'stocktitle': "Bitcoin",
+    'stocktitle': name,
     'to': email,
     'from': a.username,
     'content': comment,
-    'sentiment': "50hard",
-    'stock': "50hard",
+    'sentiment': StockAndSentimentValues().currentSentiment,
+    'stock': StockAndSentimentValues().currentStock,
     'timestamp': DateTime.now().millisecondsSinceEpoch
   };
   Database.addSnapShot(task);
@@ -152,7 +152,8 @@ class _SnapShotWidget extends State<SnapShotForm> {
           style: ElevatedButton.styleFrom(primary: bgColor),
           onPressed: () {
             Navigator.of(context).pop();
-            _sendSnapShot(myController1.text, myController2.text);
+            _sendSnapShot(myController1.text, myController2.text,
+                Provider.of<FeedChanger>(context, listen: false).getFeedChoice);
           },
           child: const Text(
             'Send',

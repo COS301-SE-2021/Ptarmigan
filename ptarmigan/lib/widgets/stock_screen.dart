@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:ptarmigan/components/menu_drawer.dart';
 import 'package:ptarmigan/constants.dart';
 import 'package:ptarmigan/services/stock_price_generator.dart';
+import 'package:ptarmigan/widgets/dashboard_screen.dart';
 import 'package:ptarmigan/widgets/todos_page.dart';
 import 'package:http/http.dart' as http;
 import 'home_page.dart';
@@ -99,7 +100,7 @@ class _StockScreenState extends State<StockScreen> {
         break;
       case 1:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => TodosPage()));
+            context, MaterialPageRoute(builder: (context) => InsightsScreen()));
         break;
       case 2:
         Navigator.push(context,

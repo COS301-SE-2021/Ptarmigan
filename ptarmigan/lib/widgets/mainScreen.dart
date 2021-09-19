@@ -291,10 +291,7 @@ class _MainScreenState extends State<MainScreen> {
     // Amplify.DataStore.clear();
     return Scaffold(
       key: context.read<MenuController>().scaffoldKey,
-      drawer: SideMenu(
-        feeds: _feeds,
-        feedsSub: _feedsSub,
-      ),
+      drawer: SideMenu(feeds: _feeds, feedsSub: _feedsSub, manager: manager),
       body: SafeArea(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -307,6 +304,7 @@ class _MainScreenState extends State<MainScreen> {
                 child: SideMenu(
                   feeds: _feeds,
                   feedsSub: _feedsSub,
+                  manager: manager,
                 ),
               ),
             Expanded(
@@ -340,6 +338,7 @@ class _MainScreenState extends State<MainScreen> {
                 child: SideMenu(
                   feeds: _feeds,
                   feedsSub: _feedsSub,
+                  manager: manager,
                 ),
               ),
             Expanded(

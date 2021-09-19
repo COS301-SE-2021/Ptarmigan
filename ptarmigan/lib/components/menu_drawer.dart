@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ptarmigan/widgets/dashboard_screen.dart';
 import 'package:ptarmigan/widgets/feed_selector_screen.dart';
 import 'package:ptarmigan/widgets/home_page.dart';
 import 'package:ptarmigan/widgets/stock_screen.dart';
@@ -32,7 +33,7 @@ class MenuDrawer extends StatelessWidget {
             svgSrc: "assets/icons/menu_tran.svg",
             press: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => TodosPage()));
+                  MaterialPageRoute(builder: (context) => InsightsScreen()));
             },
           ),
           DrawerListTile(
