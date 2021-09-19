@@ -27,7 +27,7 @@ def lambda_handler(event, context):
         'body': json.dumps(prediction)
     }
 
-def get_inputs(companyName):
+def get_inputs(companyName,ticker):
     # get all the inputs
     #get the stocks for today + yesterday
     endDate = datetime.date.today()
@@ -37,8 +37,16 @@ def get_inputs(companyName):
     
     requestResults = yf.download(ticker, start=startDatestr, end=endDatestr)  
     
-    todayStock = 3000
-    yesterdayStock = 2988
+    if (endDate.weekday() == 6 or endDate.weekday() == 0): #if monday/friday get fridays stock do there should be no change
+        todayStock = (requestResults["Close"].iloc[-1])
+        yesterdayStock = (requestResults["Close"].iloc[-1])
+    elif (endDate.weekday() == 5): #if saturday get the change between friday open and close
+        todayStock = (requestResults["Close"].iloc[-1])
+        yesterdayStock = (requestResults["Open"].iloc[-1])
+    else: # if any other day get the last 2 days avalible 
+        todayStock = (requestResults["Close"].iloc[-1])
+        yesterdayStock = (requestResults["Close"].iloc[-2])
+        
     #assign todays price
     close = todayStock
     #get the %change from yesterday to today
