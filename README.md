@@ -55,6 +55,8 @@ GitHub Project Board Demo 4 -
 
 Scrum board Demo 4 - 
 
+Architectural requirements and design Demo 4- 
+
 Team members - 
 
 Alexander Schmid: Alexander excels in learning new technologies due to his work in the Computer Science department of the University of Pretoria. He is incredibly hard working and his leadership skills and experience promotes good team dynamics and cohesion.
