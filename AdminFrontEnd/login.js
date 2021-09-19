@@ -6,7 +6,7 @@ let userpoolid = "eu-west-1_7XDVA9p2r"
 var userPoolId = "eu-west-1_7XDVA9p2r";
 var clientId = '7k7pnkdkvtp2bu0lkigkiu9n5k';
 var region = 'eu-west-1';
-var identityPoolId = 'eu-west-1:11c96690-9a61-4201-be73-36024890dd50';
+var identityPoolId = 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902';
 //=============== AWS IDs ===============
 
 var cognitoUser;
@@ -39,16 +39,15 @@ function logIn() {
         cognitoUser.authenticateUser(authenticationDetails, {
             onSuccess: function (result) {
                 console.log(result);
+                console.log("This is where we are")
                 var adminLogger = result.idToken.payload.email;
                 sessionStorage.setItem("username", adminLogger);
                 window.location.href = "index.html";
                 return
-                switchToLoggedInView();
-
-
+                // switchToLoggedInView();
 
                 idToken = result.getIdToken().getJwtToken();
-                getCognitoIdentityCredentials();
+                // getCognitoIdentityCredentials();
 
 
             },
@@ -66,7 +65,7 @@ $(document).ready(function () {
 
     AWS.config.region = 'eu-west-1'; // Region
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-        IdentityPoolId: 'eu-west-1:11c96690-9a61-4201-be73-36024890dd50',
+        IdentityPoolId: 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902',
     });
     var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({apiVersion: '2016-04-18'});
 
@@ -84,17 +83,17 @@ $(document).ready(function () {
         Limit: '50',
 
     };
-    cognitoidentityserviceprovider.listUsersInGroup(paramsAdminUsers, function (err, data) {
-        if (err) console.log(err, err.stack); // an error occurred
-        else {
-            adminData = data;
-            adminUsers = adminData["Users"];
-            console.log(adminData)
-        }
-
-        console.log("Users in admin group returned");           // successful response
-
-    });
+    // cognitoidentityserviceprovider.listUsersInGroup(paramsAdminUsers, function (err, data) {
+    //     if (err) console.log(err, err.stack); // an error occurred
+    //     else {
+    //         adminData = data;
+    //         adminUsers = adminData["Users"];
+    //         console.log(adminData)
+    //     }
+    //
+    //     console.log("Users in admin group returned");           // successful response
+    //
+    // });
     $('#loginButton').click(function () {
         logIn()
         // username = $("#loginUsername").val();
