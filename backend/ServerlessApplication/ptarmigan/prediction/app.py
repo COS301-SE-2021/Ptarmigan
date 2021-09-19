@@ -29,8 +29,14 @@ def lambda_handler(event, context):
 
 def get_inputs(companyName):
     # get all the inputs
-    
     #get the stocks for today + yesterday
+    endDate = datetime.date.today()
+    startDate = endDate - datetime.timedelta(days=5)
+    endDatestr = endDate.strftime("%Y-%m-%d")
+    startDatestr = startDate.strftime("%Y-%m-%d")
+    
+    requestResults = yf.download(ticker, start=startDatestr, end=endDatestr)  
+    
     todayStock = 3000
     yesterdayStock = 2988
     #assign todays price
