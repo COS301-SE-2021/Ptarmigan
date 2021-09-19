@@ -5,11 +5,21 @@ AWS.config.credentials = new AWS.CognitoIdentityCredentials({IdentityPoolId: 'eu
 });
 var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({apiVersion: '2016-04-18'});
 
-let userpoolid = "eu-west-1_TWPQfb9SE"
+let userpoolid = "eu-west-1_7XDVA9p2r"
+
+console.log(sessionStorage.getItem("favoriteMovie"))
 
 function setUsers(numberOfUsers){
     $("#numberOfUsers").text(numberOfUsers)
 }
+
+//Adding username to the navbar
+
+function addingUsername(){
+    $("#username").html(sessionStorage.getItem("username"))
+}
+
+
 
 function addUserToTable(user,adminFlag){
     console.log(user)
@@ -66,6 +76,7 @@ function userTable(users,adminUsers){
 
 
 $(document).ready(function () {
+    addingUsername()
     //initalize credentials
     // userPool = 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902'
     // AWS.config.region = 'eu-west-1'; // Region
@@ -125,10 +136,10 @@ $(document).ready(function () {
                   console.log("Unable to change user status ")
               }
               else{
-                  console.log("USer Added as admin");
                     button.text('Yes')
                     button.removeClass("btn-danger")
                     button.addClass("btn-success");// successful response
+                    alert("User added as Admin. Database will need time to update.");
               }
             });
         }
