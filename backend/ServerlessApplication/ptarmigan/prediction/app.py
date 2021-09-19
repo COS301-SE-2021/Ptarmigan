@@ -21,7 +21,9 @@ def lambda_handler(event, context):
         'statusCode': 400,
         'body': json.dumps("Invalid inputs")
     }
-    dataArr = get_inputs(company)
+    
+    ticker = get_Ticker(company)
+    dataArr = get_inputs(company,ticker)
     #print(dataArr)
     prediction = get_Prediction(dataArr)
     return {
