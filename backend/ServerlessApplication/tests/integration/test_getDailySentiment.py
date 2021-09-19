@@ -8,7 +8,7 @@ baseUrl = "https://localhost:3000"
 
 def fixture_event():
     return {
-            "company": "Tesla",
+            "company": "Bitcoin",
             "beginDate": 1628899200
          }
 
