@@ -224,7 +224,105 @@
       <option name="project" value="LOCAL" />
       <updated>1627996490530</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="added proper login">
+      <created>1629892140338</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1629892140338</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Update">
+      <created>1630330974655</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1630330974655</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Update">
+      <created>1630331057792</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1630331057792</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Update">
+      <created>1630331214848</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1630331214848</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Update">
+      <created>1630331292535</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1630331292535</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Update">
+      <created>1630331540500</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1630331540500</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Update">
+      <created>1630331688302</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1630331688302</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Update">
+      <created>1630331751806</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1630331751806</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Update">
+      <created>1630331812563</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1630331812563</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Update">
+      <created>1630331862144</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1630331862144</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Update">
+      <created>1630332878007</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1630332878007</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Update">
+      <created>1630332952147</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1630332952147</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Update">
+      <created>1630335940938</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1630335940938</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Update">
+      <created>1630336367032</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1630336367032</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,7 +341,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Initial setup and inclution of the header link including bootstrap styles" />
     <MESSAGE value="Added boilerplate of BS" />
     <MESSAGE value="Added boilerplate of BS for Navbar" />
     <MESSAGE value="Made Adjustments to the Nav" />
@@ -267,6 +364,8 @@
     <MESSAGE value="Updated a remove on click function" />
     <MESSAGE value="Update class names" />
     <MESSAGE value="Changed names in the template" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed names in the template" />
+    <MESSAGE value="added proper login" />
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
   </component>
 </project>

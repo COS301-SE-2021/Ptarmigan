@@ -1,7 +1,7 @@
 {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "ptarmi9d59c80a",
+    "resourceNameTruncated": "ptarmic81c2684",
     "userPoolName": "Ptarmigan",
     "autoVerifiedAttributes": [
         "email"
@@ -25,13 +25,14 @@
     "requiredAttributes": [
         "email"
     ],
+    "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "Ptarmi9d59c80a_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "Ptarmic81c2684_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "9d59c80a",
+    "sharedId": "c81c2684",
     "resourceName": "Ptarmigan",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {

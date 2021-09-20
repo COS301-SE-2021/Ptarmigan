@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "579696122865",
+    "project_id": "ptarmiganmain",
+    "storage_bucket": "ptarmiganmain.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579696122865:android:c09e76441f2e9022ecc250",
+        "android_client_info": {
+          "package_name": "com.example.ptarmigan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "579696122865-ig9n2mkhb3gs605f6fe5k0qeuqekf4ic.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ptarmigan",
+            "certificate_hash": "a41f97a68b706cf3b95c3b9e463056cc04d9b423"
+          }
+        },
+        {
+          "client_id": "579696122865-86ftk5ekourgs9g24hmkhn8jkc41mf0h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvBYRqSzqjCzBa_pY2e_kgzBNTDkXccPk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "579696122865-86ftk5ekourgs9g24hmkhn8jkc41mf0h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

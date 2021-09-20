@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <title>Index page</title>
+</head>
+<body style="background-color:grey;">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"><i class="fas fa-feather-alt"></i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
+
+<!--Login page-->
+<div class="container container-small">
+<h1 class="text-center text-white pt-5 mb-4">Welcome to Ptarmigan</h1>
+
+<div id="media" class="rounded container bg-dark p-5 ">
+    <div id="login-row" class="row justify-content-center align-items-center">
+        <div id="login-column">
+                <div class="form-group text-white">
+
+                    <label><b>Username</b></label>
+                    <input id="loginUsername" type="text" placeholder="example@gmail.com" name="uname" class="ml-2" required>
+                </div>
+                <div class="form-group text-white ml-1">
+                    <label><b>Password</b></label>
+                    <input id="loginPassword" type="password" placeholder="********" name="psw" class="ml-2" required>
+                </div>
+                <div class="form-group">
+                    <button id="loginButton" type="submit" class="btn btn-primary float-right">Login</button>
+                </div>
+    </div>
+    </div>
+</div>
+<!--    <h3 class="text-center text-white pt-5 mb-4">The app that will help your stock grow.</h3>-->
+</div>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.968.0.min.js"></script>
+<script src="./script/aws-sdk-2.487.0.min.js"></script>
+<script src="./script/aws-cognito-sdk.min.js"></script>
+<script src="./script/amazon-cognito-identity.min.js"></script>
+<script src ="login.js"></script>
+
+<script>
+    function signInButton(){
+        var authenticationData = {
+            Username: document.getElementById("inputUsername").value,
+            Username: document.getElementById("inputUsername").value,
+        };
+
+        var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+
+        var poolData = {
+            UserPoolId : _config.cognito.userPoolId,
+            ClientId : _config.cognito.clientId,
+        };
+
+        var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+        var userData = {
+            Username : document.getElementById("inputUsername").value,
+            Pool : userPool
+        };
+
+        var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+
+        cognitoUser.authenticationUser(authenticationDetails);
+
+        // cognitoUser.authenticationUser(authenticationDetails, {
+        //     onSuccess: fnction(result){
+        //     var accessToken = result.getAccessToken().getJwtToken();
+        //     console.log(accessToken);
+        //     },
+        //     onFailure: function(err){
+        //             alert(err.message || JSON.stringify(err));
+        //     },
+        //     });
+    }
+
+</script>

@@ -41,12 +41,12 @@ void main() {
     verify(mockFeedChanger.changeFeed("")).called(1);
   });*/
 
-  test("Test to check Subscribe instantiates correctioon", () {
+/*  test("Test to check Subscribe instantiates correctioon", () {
     Subscriber sub = new Subscriber();
     print(sub.subscribe(0));
     int subscribed = 0;
     back.expect(sub.subscribe(subscribed), 1);
-  });
+  }); */
 
   /*back.testWidgets('Test that feeds list is correctly displaying',
       (back.WidgetTester tester) async {
@@ -151,18 +151,18 @@ void main() {
     back.expect(back.find.byType(Card), back.findsOneWidget);
   });
 
-  back.testWidgets("Test whether a todo item is dipslayed correctly",
+  /*back.testWidgets("Test whether a todo item is dipslayed correctly",
       (WidgetTester tester) async {
     Todo todoItem = new Todo(
-        id: "Test_todo_id",
-        name: 'Test_todo_name',
-        description: 'Test_todo_desc',
-        isComplete: false);
+      id: "Test_todo_id",
+      name: 'Test_todo_name',
+      description: 'Test_todo_desc',
+    );
 
     await tester.pumpWidget(MaterialApp(home: TodoItem(todo: todoItem)));
 
     back.expect(back.find.byType(Card), back.findsOneWidget);
-  });
+  });*/
 
   back.testWidgets("Test whether the add todo page functions properly",
       (WidgetTester tester) async {
