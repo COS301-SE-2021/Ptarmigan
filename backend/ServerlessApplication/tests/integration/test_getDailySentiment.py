@@ -13,7 +13,7 @@ def fixture_event():
          }
 
 class Test_DeleteBucketItem(unittest.TestCase):
-    def test_Delete_Bucket_return_success (self):
+    def test_get_sentiment_return_success (self):
         api_url = "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/senthisize/getDailySentiment"
         response = requests.post(api_url, json=fixture_event())
         response.json()
@@ -21,7 +21,7 @@ class Test_DeleteBucketItem(unittest.TestCase):
 
         assert response.status_code == 200
 
-    def test_Delete_Bucket_Return_invalid_Input(self):
+    def test_get_sentiment_invalid_Input(self):
         api_url = "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/senthisize/getDailySentiment"
         response = requests.post(api_url, json={})
         response.json()
