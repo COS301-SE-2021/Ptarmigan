@@ -14,7 +14,7 @@ class StockAndSentimentValues extends StatelessWidget {
   String currentSentiment = "50";
   String currentStock = "759";
   String tomorrowsSentiment = "0";
-  String prediction = "Unavailable (Crypto)";
+  String prediction = "Decrease";
 
   Color colorDetermine(int i) {
     Color a = Colors.green;

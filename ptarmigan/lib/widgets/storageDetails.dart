@@ -47,7 +47,7 @@ class StorageDetails extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
+              padding: EdgeInsets.fromLTRB(3, 0, 0, 10),
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: bgColor),
                   onPressed: () {
