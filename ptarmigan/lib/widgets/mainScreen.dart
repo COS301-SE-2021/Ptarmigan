@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:amplify_auth_cognito/method_channel_auth_cognito.dart';
+import 'package:ptarmigan/services/feed_file_manager.dart';
 import '../controllers/MenuController.dart';
 import 'responsive.dart';
 import 'dashboard_screen.dart';
@@ -21,8 +22,12 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
 
 class MainScreen extends StatefulWidget {
+  FeedFileManager manager; // <<------ File manager passed from Home screen
+
+  MainScreen(this.manager);
+
   @override
-  _MainScreenState createState() => _MainScreenState();
+  _MainScreenState createState() => _MainScreenState(manager);
 }
 
 class _MainScreenState extends State<MainScreen> {
@@ -32,6 +37,8 @@ class _MainScreenState extends State<MainScreen> {
   String currentFeedSelected = " ";
   bool _isLoading;
   bool isSignUpComplete;
+  FeedFileManager manager; // <<------ File manager passed from Home screen
+  Widget _body = Scaffold(body: Container(child: CircularProgressIndicator()));
 
   StreamSubscription _subscription;
   StreamSubscription _subscriptionFeed;
@@ -47,16 +54,110 @@ class _MainScreenState extends State<MainScreen> {
 //  final AmplifyAPI _apiPlugin = AmplifyAPI();
   //final AmplifyAuthCognito _authPlugin = AmplifyAuthCognito();
 
+  _MainScreenState(this.manager);
+
   @override
   void initState() {
     print("Initializing mainScreen.dart ----");
+    //print(manager.getNamesAndSubMap());
+
     _isLoading = true;
     _todos = [];
     _feeds = [];
     _feedsSub = [];
-
-    _initializeTemp();
+    //_initFeedsSub();
+    //_initFeeds();
+    _initFeedMap(); // <<------ Initialized feedsSub and feeds
+    //_initializeTemp();
     super.initState();
+  }
+
+  _initFeedsSub() async {
+    manager.getNamesAndSubMap().then((value) => {
+          setState(() {
+            _feedsSub = transformListToSubFeedList(value);
+          })
+        });
+  }
+
+  _initFeeds() async {
+    manager.getNamesAndSubMap().then((value) => {
+          setState(() {
+            _feeds = transformListToFeedList(value);
+          })
+        });
+  }
+
+  _initFeedMap() async {
+    //var feedMap = await manager.getNamesAndSubMap();
+    // print(feedMap.toString());
+
+    manager.getNamesAndSubMap().then((value) => {
+          // <<------ An await but the set state only takes place once a value is returned
+          setState(() {
+            _feeds = transformListToFeedList(value);
+            _feedsSub = transformListToSubFeedList(value);
+            _body =
+                _replaceBody(); // Replaces body after _feeds and _feedsSub updated
+          })
+        });
+  }
+
+  List<Feed> transformListToSubFeedList(Map feeds) {
+    //Takes feed map and returns List<feed> only of subscribed feeds
+    print("feeds = $feeds");
+    var tempNameList = feeds.keys.toList();
+    print("Tempnamelist = $tempNameList");
+    var tempSubList = feeds.values.toList();
+    print("tempSubList = $tempSubList");
+    List<Feed> tempFeedList = [];
+    for (var i = 0; i < tempNameList.length; i++) {
+      if (tempSubList[i] == "True") {
+        //Only adds subscribed feeds
+        Feed temp = Feed(
+            feedName: tempNameList[i],
+            subscribedTo: getFeedBoolAsInt(
+              tempSubList[i],
+            ));
+        tempFeedList.add(temp);
+      }
+    }
+    print("TRANSFORMSUBFEEDLIST RETURN = $tempFeedList");
+    if (tempFeedList.isEmpty)
+      return [new Feed(feedName: "Bitcoin", subscribedTo: 1)];
+    else
+      return tempFeedList;
+  }
+
+  //Map is <String, String> eg : {"Bitcoin" : "False"}
+  List<Feed> transformListToFeedList(Map feeds) {
+    // Takes feed map and returns List<feed>
+    print("feeds = $feeds");
+    var tempNameList = feeds.keys.toList();
+    print("Tempnamelist = $tempNameList");
+    var tempSubList = feeds.values.toList();
+    print("tempSubList = $tempSubList");
+    List<Feed> tempFeedList = [];
+    for (var i = 0; i < tempNameList.length; i++) {
+      //Only adds subscribed feeds
+      Feed temp = Feed(
+          feedName: tempNameList[i],
+          subscribedTo: getFeedBoolAsInt(
+            tempSubList[i],
+          ));
+      tempFeedList.add(temp);
+    }
+    print("TRANSFORMFEEDLIST RETURN = $tempFeedList");
+    if (tempFeedList.isEmpty)
+      return [new Feed(feedName: "Bitcoin", subscribedTo: 1)];
+    else
+      return tempFeedList;
+  }
+
+  int getFeedBoolAsInt(String value) {
+    if (value == "False")
+      return 0;
+    else if (value == "True") return 1;
   }
 
   @override
@@ -190,6 +291,37 @@ class _MainScreenState extends State<MainScreen> {
     // Amplify.DataStore.clear();
     return Scaffold(
       key: context.read<MenuController>().scaffoldKey,
+      drawer: SideMenu(feeds: _feeds, feedsSub: _feedsSub, manager: manager),
+      body: SafeArea(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // We want this side menu only for large screen
+            if (Responsive.isDesktop(context))
+              Expanded(
+                // default flex = 1
+                // and it takes 1/6 part of the screen
+                child: SideMenu(
+                  feeds: _feeds,
+                  feedsSub: _feedsSub,
+                  manager: manager,
+                ),
+              ),
+            Expanded(
+              // It takes 5/6 part of the screen
+              flex: 5,
+              child: InsightsScreen(),
+            ),
+          ],
+        ),
+      ),
+    );
+    ; // _body is a state, when the feedSub and feed are changed _replaceBody is called and the proper page displayed
+  }
+
+  Widget _replaceBody() {
+    return Scaffold(
+      key: context.read<MenuController>().scaffoldKey,
       drawer: SideMenu(
         feeds: _feeds,
         feedsSub: _feedsSub,
@@ -206,6 +338,7 @@ class _MainScreenState extends State<MainScreen> {
                 child: SideMenu(
                   feeds: _feeds,
                   feedsSub: _feedsSub,
+                  manager: manager,
                 ),
               ),
             Expanded(

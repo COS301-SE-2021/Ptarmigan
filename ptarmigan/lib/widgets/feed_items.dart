@@ -31,7 +31,7 @@ class FeedItems extends StatelessWidget {
     try {
       // to delete data from DataStore, we pass the model instance to
       // Amplify.DataStore.delete()
-      await Amplify.DataStore.delete(feed);
+      //await Amplify.DataStore.delete(feed);
     } catch (e) {
       print('An error occurred while deleting Insight: $e');
     }
@@ -55,7 +55,7 @@ class FeedItems extends StatelessWidget {
     try {
       // to write data to DataStore, we simply pass an instance of a model to
       // Amplify.DataStore.save()
-      await Amplify.DataStore.save(newTodo);
+      //  await Amplify.DataStore.save(newTodo);
       // after creating a new Todo, close the form
 
     } catch (e) {
@@ -116,13 +116,13 @@ class FeedItems extends StatelessWidget {
               DateTime.fromMillisecondsSinceEpoch(test1[i].beginDate * 1000)
                   .toIso8601String()
                   .substring(0, 10));
-          if (test1[i].intervalData < 0) {
+          if (double.parse(test1[i].intervalData) < 0) {
             len = len - 1;
           }
 
           Todo newTodo = Todo(
             name: feedName,
-            description: ((test1[i].intervalData) * 50 + 50)
+            description: (double.parse(test1[i].intervalData) * 50 + 50)
                     .toString()
                     .substring(0, len) +
                 "%",

@@ -25,6 +25,8 @@ import 'package:http/http.dart' as http;
 import 'package:ptarmigan/feedSentiment.dart';
 import '/models/SentimentHistoryItem.dart';
 import 'package:ptarmigan/widgets/add_feed_form.dart';
+import 'package:ptarmigan/widgets/feed_selector_screen.dart';
+import 'package:ptarmigan/services/feed_file_manager.dart';
 
 class SideMenu extends StatelessWidget {
   List<Todo> todos;
@@ -34,8 +36,9 @@ class SideMenu extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final String title;
   StreamSubscription _subscription;
+  final FeedFileManager manager;
 
-  SideMenu({this.todos, this.feeds, this.feedsSub, this.title});
+  SideMenu({this.todos, this.feeds, this.feedsSub, this.title, this.manager});
 
   List<DrawerListTile> changeFeedsTo(List<Feed> feedList) {
     List<DrawerListTile> object = [];
@@ -113,7 +116,7 @@ class SideMenu extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => AddFeedForm(feeds: feeds)));
+                            builder: (context) => FeedSelectorScreen(manager)));
                   },
                   icon: Icon(Icons.add),
                   label: Text("Add New  "),
@@ -282,16 +285,17 @@ class DrawerListTile extends StatelessWidget {
 
           int len = test1[i].intervalData.toString().indexOf(".") + 1;
           TemporalDate a = TemporalDate.fromString(
-              DateTime.fromMillisecondsSinceEpoch(test1[i].beginDate * 1000)
+              DateTime.fromMillisecondsSinceEpoch(
+                      (test1[i].beginDate as int) * 1000)
                   .toIso8601String()
                   .substring(0, 10));
-          if (test1[i].intervalData < 0) {
+          if ((test1[i].intervalData as int) < 0) {
             len = len - 1;
           }
 
           Todo newTodo = Todo(
             name: feedName,
-            description: ((test1[i].intervalData) * 50 + 50)
+            description: ((test1[i].intervalData as int) * 50 + 50)
                     .toString()
                     .substring(0, len) +
                 "%",
@@ -370,7 +374,7 @@ class DrawerListTile extends StatelessWidget {
         //   rocko();
         //    print("TIGGER3");
 
-        //PopulateDisplay(todos);
+        //  PopulateDisplay(todos);
         //   print("TIGGER4");
       },
     );

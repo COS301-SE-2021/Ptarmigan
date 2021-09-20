@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:ptarmigan/services/feed_changer.dart';
 import 'package:ptarmigan/services/list_changer.dart';
+import 'package:ptarmigan/widgets/entry_widget.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider.value(value: FeedChanger()),
           ChangeNotifierProvider.value(value: ListChanger())
         ],
-        child: MainScreen(),
+        child: EntryScreen(), //MainScreen(),
       ),
     );
   }
@@ -47,7 +48,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // amplify packages we will need to use
 import 'package:amplify_flutter/amplify.dart';
-import 'package:amplify_datastore/amplify_datastore.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -71,9 +71,6 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'services/list_changer.dart';
 
 final ValueNotifier feedID = ValueNotifier("");
-
-//final AmplifyDataStore _dataStorePlugin =
-// AmplifyDataStore(modelProvider: ModelProvider.instance);
 
 //final AmplifyAPI _apiPlugin = AmplifyAPI();
 //final AmplifyAuthCognito _authPlugin = AmplifyAuthCognito();
@@ -100,6 +97,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider.value(value: ListChanger())
         ],
         child: MaterialApp(
+            debugShowCheckedModeBanner: false,
             theme: ThemeData.dark().copyWith(
               scaffoldBackgroundColor: bgColor,
               textTheme:
@@ -109,9 +107,9 @@ class MyApp extends StatelessWidget {
             ),
             title: 'Amplified Todo',
             //home: TodosPage(),
-            //home: Login(),
+            home: Login(),
             //initialRoute: '/login',
-            initialRoute: pastFirstLaunch == false ? '/login' : '/',
+            //initialRoute: pastFirstLaunch == false ? '/login' : '/',
             // ignore: missing_return
             onGenerateRoute: (settings) {
               if (settings.name == '/confirm') {
@@ -123,7 +121,6 @@ class MyApp extends StatelessWidget {
                 );
               }
               if (settings.name == '/confirm-reset') {
-                print("Navigator push : /CONFIRM");
                 return PageRouteBuilder(
                   pageBuilder: (_, __, ___) =>
                       ConfirmResetScreen(data: settings.arguments as LoginData),
@@ -197,4 +194,4 @@ class MyWidget extends StatelessWidget {
 }
 
 
-//Feeds===============================================================
+//Feeds=============================================================== */

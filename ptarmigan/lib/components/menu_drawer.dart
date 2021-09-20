@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ptarmigan/services/feed_file_manager.dart';
+import 'package:ptarmigan/widgets/dashboard_screen.dart';
+import 'package:ptarmigan/widgets/feed_selector_screen.dart';
 import 'package:ptarmigan/widgets/home_page.dart';
+import 'package:ptarmigan/widgets/mainScreen.dart';
 import 'package:ptarmigan/widgets/stock_screen.dart';
 import 'package:ptarmigan/widgets/todos_page.dart';
+import 'package:ptarmigan/widgets/snapshot_inbox_screen.dart';
 
 class MenuDrawer extends StatelessWidget {
-  const MenuDrawer({
-    Key? key,
-  }) : super(key: key);
+  List feeds;
+  FeedFileManager fileManager;
+  MenuDrawer(this.feeds, this.fileManager);
 
   @override
   Widget build(BuildContext context) {
@@ -30,21 +35,36 @@ class MenuDrawer extends StatelessWidget {
             svgSrc: "assets/icons/menu_tran.svg",
             press: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => TodosPage()));
+                  MaterialPageRoute(builder: (context) => MainScreen(manager)));
             },
           ),
           DrawerListTile(
             title: "Stocks",
             svgSrc: "assets/icons/menu_task.svg",
             press: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => StockScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => StockScreen(feeds, fileManager)));
             },
           ),
           DrawerListTile(
-            title: "Settings",
+            title: "Feed selector",
             svgSrc: "assets/icons/menu_setting.svg",
-            press: () {},
+            press: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => FeedSelectorScreen(manager)));
+            },
+          ),
+          DrawerListTile(
+            title: "Snapshot Inbox",
+            svgSrc: "assets/icons/menu_task.svg",
+            press: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => TodoList()));
+            },
           ),
         ],
       ),

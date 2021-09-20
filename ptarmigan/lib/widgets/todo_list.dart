@@ -113,6 +113,18 @@ class TodosList extends StatelessWidget {
           height: 700,
           child: Stack(
             children: [
+              BottomNavigationBar(
+                items: const <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.home), label: "Home"),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.business), label: "Insights"),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.grade), label: "Stocks"),
+                ],
+                selectedItemColor: Colors.amber[800],
+                //  onTap: _OnItemTapped,
+              ),
               Column(
                 children: [
                   Container(

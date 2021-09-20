@@ -28,7 +28,8 @@ class AddFeedForm extends StatefulWidget {
 
 class _AddFeedFormState extends State<AddFeedForm> {
   _AddFeedFormState({this.feeds});
-  List<Feed> feeds;
+  List<Feed> feeds = [new Feed()];
+
   final _nameController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _tagsController = TextEditingController();
@@ -64,9 +65,9 @@ class _AddFeedFormState extends State<AddFeedForm> {
         title: Text('Add Feed'),
       ),
       body: Container(
-        padding: EdgeInsets.all(8.0),
-        child: FeedsListAdmin(feeds: feeds),
-      ),
+          padding: EdgeInsets.all(8.0),
+          child: ListView() //FeedsListAdmin(feeds: feeds),
+          ),
     );
   }
 }

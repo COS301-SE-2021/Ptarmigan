@@ -13,7 +13,9 @@ import 'package:ptarmigan/components/menu_drawer.dart';
 import 'package:ptarmigan/constants.dart';
 import 'package:ptarmigan/models/Feed.dart';
 import 'package:ptarmigan/models/Todo.dart';
+import 'package:ptarmigan/services/feed_file_manager.dart';
 import 'package:ptarmigan/services/feed_image_generator.dart';
+import 'package:ptarmigan/services/popular_tweet_generator.dart';
 import 'package:ptarmigan/settings/application_settings.dart';
 import 'package:ptarmigan/widgets/Settings_page.dart';
 import 'package:ptarmigan/widgets/dashboard_screen.dart';
@@ -25,10 +27,9 @@ import 'package:social_embed_webview/platforms/twitter.dart';
 import 'package:social_embed_webview/social_embed_webview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-var feedimage;
-var feedImageLink;
-
 FeedImageGenerator generator = FeedImageGenerator();
+PopularTweetGenerator tweetGenerator = PopularTweetGenerator();
+late FeedFileManager manager;
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -38,7 +39,9 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   late AuthUser _user;
   late bool _isLoading;
-
+  var feedimage;
+  var feedImageLink;
+  Widget _carousel = CircularProgressIndicator();
   /*late List<Todo> todos;
   late List<Feed> _feeds;
   late List<Feed> _feedsSub;
@@ -56,6 +59,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     print("Home page loaded.");
     _initFeedInterests();
+    //manager = new FeedFileManager(feedimage);
     print("-=-=-=-=-=-=-=-=-=-=-=-=-");
     _isLoading = true;
 
@@ -101,7 +105,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     Settings settings = Settings();
     return Scaffold(
         backgroundColor: bgColor,
-        drawer: MenuDrawer(),
+        drawer: MenuDrawer(feedimage, manager),
         appBar: AppBar(
           backgroundColor: bgColor,
           shadowColor: secondaryColor,
@@ -183,12 +187,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   "Click here for the tweet!",
                                   textAlign: TextAlign.center,
                                 ),
-                                onPressed: () {
+                                onPressed: () async {
+                                  var tweetID = await getTweetID();
+
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => TwitterScreen(
-                                              "1426541125498810368")));
+                                          builder: (context) =>
+                                              TwitterScreen(tweetID)));
                                 },
                                 style: ButtonStyle(
                                   shape:
@@ -255,7 +261,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 Container(
                     padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
                     color: secondaryColor,
-                    child: itemGenerator()),
+                    child: _carousel),
                 Text(
                   "About us :",
                   textAlign: TextAlign.center,
@@ -345,6 +351,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
         },
       );
     } else {
+      print("Feed image is null.");
+      print(feedimage.toString());
       return (Text("No feed images provided"));
     }
   }
@@ -356,16 +364,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
         //  MaterialPageRoute(builder: (context) => DashboardScreen()));
         break;
       case 1:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => MainScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => MainScreen(manager)));
         break;
       case 2:
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => StockScreen(
-                      feedList: feedimage,
-                    )));
+                builder: (context) => StockScreen(feedimage, manager)));
         break;
     }
   }
@@ -412,9 +418,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ))
       .toList();
 
-  Future<void> _initFeedInterests() async {
+  void _initFeedInterests() {
     print("FETCHING FEED IMAGES");
-    feedimage = await generator.fetchImages();
+    manager = new FeedFileManager();
+
+    generator.fetchImages().then((value) => {
+          print("BOOM... state change"),
+          setState(() {
+            feedimage =
+                value; //Making the api CALL anyways, might as well use the values returned here
+            //feedimage = value; //Straight from api
+            manager.setFeedList(value); //updating file to feed list
+            _carousel = itemGenerator();
+          })
+        });
+
     if (feedimage == null) feedimage = ["Apple"];
 
     // if (feedimage != null) {
@@ -433,6 +451,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   List getFeedImages() {
     return feedimage;
+  }
+
+  Future<String> getTweetID() async {
+    return await tweetGenerator.generateTwitterPageID(feedimage);
   }
 
   /* Future<void> _fetchTodos() async {

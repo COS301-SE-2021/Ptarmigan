@@ -6,10 +6,10 @@ const amplifyconfig = ''' {
             "awsAPIPlugin": {
                 "Ptarmigan": {
                     "endpointType": "GraphQL",
-                    "endpoint": "https://6mdpm2tiijbx5jxsfjcekazodm.appsync-api.eu-west-1.amazonaws.com/graphql",
+                    "endpoint": "https://dcjltnewsbfifer3pbpy7qv57u.appsync-api.eu-west-1.amazonaws.com/graphql",
                     "region": "eu-west-1",
                     "authorizationType": "API_KEY",
-                    "apiKey": "da2-j52s3vopxzaknljn2dhnqquoqm"
+                    "apiKey": "da2-owq24wpegrcobaz22rwhxrk3m4"
                 }
             }
         }
@@ -24,14 +24,14 @@ const amplifyconfig = ''' {
                 },
                 "AppSync": {
                     "Default": {
-                        "ApiUrl": "https://6mdpm2tiijbx5jxsfjcekazodm.appsync-api.eu-west-1.amazonaws.com/graphql",
+                        "ApiUrl": "https://dcjltnewsbfifer3pbpy7qv57u.appsync-api.eu-west-1.amazonaws.com/graphql",
                         "Region": "eu-west-1",
                         "AuthMode": "API_KEY",
-                        "ApiKey": "da2-j52s3vopxzaknljn2dhnqquoqm",
+                        "ApiKey": "da2-owq24wpegrcobaz22rwhxrk3m4",
                         "ClientDatabasePrefix": "Ptarmigan_API_KEY"
                     },
                     "Ptarmigan_AWS_IAM": {
-                        "ApiUrl": "https://6mdpm2tiijbx5jxsfjcekazodm.appsync-api.eu-west-1.amazonaws.com/graphql",
+                        "ApiUrl": "https://dcjltnewsbfifer3pbpy7qv57u.appsync-api.eu-west-1.amazonaws.com/graphql",
                         "Region": "eu-west-1",
                         "AuthMode": "AWS_IAM",
                         "ClientDatabasePrefix": "Ptarmigan_AWS_IAM"
@@ -40,15 +40,15 @@ const amplifyconfig = ''' {
                 "CredentialsProvider": {
                     "CognitoIdentity": {
                         "Default": {
-                            "PoolId": "eu-west-1:a82f369a-4f45-4f86-9cba-a196513fbe91",
+                            "PoolId": "eu-west-1:3f0c02a5-2f7f-4d49-80eb-8d2e3f3a13d3",
                             "Region": "eu-west-1"
                         }
                     }
                 },
                 "CognitoUserPool": {
                     "Default": {
-                        "PoolId": "eu-west-1_TWPQfb9SE",
-                        "AppClientId": "25a14qki0tb71kp3m7udp2hpt7",
+                        "PoolId": "eu-west-1_7XDVA9p2r",
+                        "AppClientId": "7k7pnkdkvtp2bu0lkigkiu9n5k",
                         "Region": "eu-west-1"
                     }
                 },

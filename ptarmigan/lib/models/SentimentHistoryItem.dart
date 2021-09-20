@@ -1,3 +1,5 @@
+import 'package:bezier_chart/bezier_chart.dart';
+
 class SentimentHistoryItem {
   String? icon, title, date, size;
 
@@ -5,3 +7,7 @@ class SentimentHistoryItem {
 }
 
 List demoRecentFiles = [];
+List<DataPoint<dynamic>> demoList = [];
+
+String currentSentiment = "";
+String currentStock = "";
