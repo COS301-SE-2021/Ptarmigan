@@ -286,16 +286,15 @@ def lambda_handler(event, context):
         'body': json.dumps("Success!")
     }
 
-if __name__ == '__main__':
-    oneItem("Tesla", "TSLA")
-#     body = {
-#         "content": "Tesla",
-#         "Ticker": "TSLA",
-#         "Associated1": "Coin"
-#     }
-#     # print(lambda_handler(body, ""))
-#     catchUp(30,"Tesla", "TSLA")
-#     currentTime = int(time.time())
+# if __name__ == '__main__':
+#     # oneItem("Tesla", "TSLA")
+# #     body = {
+# #         "content": "Tesla",
+# #         "Ticker": "TSLA",
+# #         "Associated1": "Coin"
+# #     }
+# #     # print(lambda_handler(body, ""))
+#     catchUp(10,"Amazon", "AMZN")
 #
 #     timeFromMidnight = currentTime % 86400
 #
