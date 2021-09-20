@@ -1,0 +1,6 @@
+{
+  "authSelections": "identityPoolAndUserPool",
+  "resourceName": "ptarmigan",
+  "serviceType": "imported",
+  "region": "eu-west-1"
+}

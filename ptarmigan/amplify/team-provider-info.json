@@ -1,34 +1,20 @@
 {
-  "staging": {
+  "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-ptarmigan-staging-92311-authRole",
-      "UnauthRoleArn": "arn:aws:iam::878292117449:role/amplify-ptarmigan-staging-92311-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::878292117449:role/amplify-ptarmigan-staging-92311-authRole",
-      "Region": "eu-west-2",
-      "DeploymentBucketName": "amplify-ptarmigan-staging-92311-deployment",
-      "UnauthRoleName": "amplify-ptarmigan-staging-92311-unauthRole",
-      "StackName": "amplify-ptarmigan-staging-92311",
-      "StackId": "arn:aws:cloudformation:eu-west-2:878292117449:stack/amplify-ptarmigan-staging-92311/26ad19b0-c384-11eb-bb6c-0ac1364244c2",
-      "AmplifyAppId": "d18omf0bna9cgn",
-      "AuthTriggerTemplateURL": ""
+      "AuthRoleName": "amplify-ptarmigan-dev-125008-authRole",
+      "UnauthRoleArn": "arn:aws:iam::878292117449:role/amplify-ptarmigan-dev-125008-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::878292117449:role/amplify-ptarmigan-dev-125008-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-ptarmigan-dev-125008-deployment",
+      "UnauthRoleName": "amplify-ptarmigan-dev-125008-unauthRole",
+      "StackName": "amplify-ptarmigan-dev-125008",
+      "StackId": "arn:aws:cloudformation:eu-west-1:878292117449:stack/amplify-ptarmigan-dev-125008/b7e4f2a0-1612-11ec-8286-0a9e75da83c5",
+      "AmplifyAppId": "d27gxkl5yx97k1"
     },
     "categories": {
       "auth": {
         "Ptarmigan": {}
       }
-    }
-  },
-  "ptarmigan": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-ptarmigan-ptarmigan-04603-authRole",
-      "UnauthRoleArn": "arn:aws:iam::878292117449:role/amplify-ptarmigan-ptarmigan-04603-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::878292117449:role/amplify-ptarmigan-ptarmigan-04603-authRole",
-      "Region": "us-west-2",
-      "DeploymentBucketName": "amplify-ptarmigan-ptarmigan-04603-deployment",
-      "UnauthRoleName": "amplify-ptarmigan-ptarmigan-04603-unauthRole",
-      "StackName": "amplify-ptarmigan-ptarmigan-04603",
-      "StackId": "arn:aws:cloudformation:us-west-2:878292117449:stack/amplify-ptarmigan-ptarmigan-04603/518884b0-c3f4-11eb-82f8-027e849bc751",
-      "AmplifyAppId": "d18omf0bna9cgn"
     }
   }
 }
