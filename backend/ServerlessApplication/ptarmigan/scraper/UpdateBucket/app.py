@@ -1,10 +1,12 @@
 import json
 import boto3
 
+
 class database:
     """This class will create a table if it exists, if not it will allow the user to add and remove from the db table"""
+
     def __init__(self, companyName):
-        print("Company: !!!!!!!!", companyName)
+        # print("Company: !!!!!!!!", companyName)
         self.tableName = companyName
         self.dynamodbClient = boto3.client('dynamodb')
         try:
@@ -35,12 +37,37 @@ class database:
                 },
                 TableName=self.tableName
             )
-            #print("Table Did not exist")
+            # print("Table Did not exist")
         except self.dynamodbClient.exceptions.ResourceInUseException:
-            print("The DB Already exists")
+            print("The Table Already exists")
+
+        try:
+            response = self.dynamodbClient.create_table(
+                AttributeDefinitions=[
+                    {
+                        'AttributeName': 'TimeStamp',
+                        'AttributeType': 'N',
+                    }
+                ],
+                KeySchema=[
+                    {
+                        'AttributeName': 'TimeStamp',
+                        'KeyType': 'HASH',
+                    }
+                ],
+                ProvisionedThroughput={
+                    'ReadCapacityUnits': 5,
+                    'WriteCapacityUnits': 5,
+                },
+                TableName=(self.tableName + "Daily")
+            )
+
+        except self.dynamodbClient.exceptions.ResourceInUseException:
+            print("The Table Already exists")
+
             # do something here as you require
 
-        #print("Something")
+        # print("Something")
 
 
 def getBucketList():
@@ -49,7 +76,7 @@ def getBucketList():
     bucketname = 'stepfunctestbucket'
     file_to_read = 'scrapeContent.json'
 
-    #try read file from bucket
+    # try read file from bucket
     try:
         fileobj = s3client.get_object(
             Bucket=bucketname,
@@ -63,6 +90,7 @@ def getBucketList():
 
     filedata = fileobj['Body'].read()
     return filedata
+
 
 def uploadBucketList(uploadByteStream):
     s3client = boto3.client('s3')
@@ -79,6 +107,7 @@ def uploadBucketList(uploadByteStream):
     except:
         return False
 
+
 def LambdaInvokeStocks():
     lambdaClient = boto3.client('lambda')
     response = lambdaClient.invoke(
@@ -86,12 +115,23 @@ def LambdaInvokeStocks():
         InvocationType='Event',
         LogType='None'
     )
+    return response
+
 
 def lambda_handler(event, context):
     # read context from passed json argument
+
     try:
-        update = json.loads(event['body'])
-        update = update['content']
+        if "body" in event:
+            updateContent = json.loads(event["body"])
+
+        else:
+            updateContent = event
+        # update = json.loads(event['body'])
+
+        update = updateContent['content']
+        Ticker = updateContent['Ticker']
+
     except:
         return {
             'statusCode': 400,
@@ -112,16 +152,29 @@ def lambda_handler(event, context):
     filecontents = (filedata.decode('utf-8'))
     filecontents = json.loads(filecontents)
 
-    #append content onto the dict
+    # append content onto the dict
     replaceContent = filecontents['scrape-detail']
-    #check if item exists - if it does return
+    # check if item exists - if it does return
     for i in replaceContent:
         if i['content'] == update:
             return {
                 'statusCode': 200,
                 'body': json.dumps('Item is already in the file')
             }
-    replaceLine = '{"content": "' + update + '"}'
+
+    if 'Associated3' in updateContent:
+        replaceLine = '{"content": "' + update + '", "Ticker": "' + Ticker + '","Associated1": "' + updateContent[
+            'Associated1'] + '", "Associated2": "' + updateContent['Associated2'] + '", "Associated3": "' + \
+                      updateContent['Associated3'] + '"}'
+    elif 'Associated2' in updateContent:
+        replaceLine = '{"content": "' + update + '", "Ticker": "' + Ticker + '", "Associated1": "' + updateContent[
+            'Associated1'] + '", "Associated2": "' + updateContent['Associated2'] + '"}'
+    elif 'Associated1' in updateContent:
+        replaceLine = '{"content": "' + update + '", "Ticker": "' + Ticker + '", "Associated1": "' + updateContent[
+            'Associated1'] + '"}'
+    else:
+        replaceLine = '{"content": "' + update + '", "Ticker": "' + Ticker + '"}'
+
     replaceLine = json.loads(replaceLine)
     replaceContent.append(replaceLine)
 
@@ -129,7 +182,7 @@ def lambda_handler(event, context):
 
     # #encode python dict to bytes for upload
     uploadByteStream = bytes(json.dumps(filecontents).encode('UTF-8'))
-
+    lambdaResponse = LambdaInvokeStocks()
     # try upload return error is failed
     flag = uploadBucketList(uploadByteStream)
     if flag:
@@ -137,7 +190,7 @@ def lambda_handler(event, context):
             'statusCode': 200,
             'body': json.dumps('Successfully Updated the Content to scrape.')
         }
-    else:                           # else return success json
+    else:  # else return success json
         return {
             'statusCode': 500,
             'body': json.dumps('Error updating Content file')

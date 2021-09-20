@@ -9,7 +9,8 @@
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PackageRequirementsSettings">
-    <option name="requirementsPath" value="" />
+    <option name="requirementsPath" value="$MODULE_DIR$/../../../../Work/2021/Semester 1/COS 301/Capstone/Git/Ptarmigan/backend/ServerlessApplication/ptarmigan/synthesize/requirements.txt" />
+    <option name="versionSpecifier" value="Strong equality (==x.y.z)" />
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="pytest" />
