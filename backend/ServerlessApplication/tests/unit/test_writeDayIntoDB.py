@@ -49,11 +49,11 @@ class TestGetDailySentiemnt(unittest.TestCase):
 
         assert app.calculateSentiment(input) == expected
 
-    def test_if_getStockPriceOnAGivenDay_stock(self):
-        expected = 759
-        actual = app.getStockPriceOnAGivenDay(1631836800, "TSLA")
+    # def test_if_getStockPriceOnAGivenDay_stock(self):
+    #     expected = 759
+    #     actual = app.getStockPriceOnAGivenDay(1631836800, "TSLA")
 
-        assert expected == actual
+    #     assert expected == actual
 
     @patch('ptarmigan.synthesize.writeDayIntoDB.app.writeIntoDb')
     @patch('ptarmigan.synthesize.writeDayIntoDB.app.getStockPriceOnAGivenDay')
