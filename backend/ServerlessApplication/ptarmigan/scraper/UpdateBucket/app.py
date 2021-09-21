@@ -111,7 +111,7 @@ def uploadBucketList(uploadByteStream):
 def LambdaInvokeStocks():
     lambdaClient = boto3.client('lambda')
     response = lambdaClient.invoke(
-        FunctionName='arn:aws:lambda:eu-west-1:878292117449:function:getStockPrice',
+        FunctionName='arn:aws:lambda:eu-west-1:878292117449:function:ptarmiganbackend-getStockPrice-0KzgLF0VWwDn',
         InvocationType='Event',
         LogType='None'
     )
