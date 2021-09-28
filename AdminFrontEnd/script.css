@@ -5,8 +5,9 @@
 .i-logo {
     display: inline-block;
     background: url('Images/logo.svg');
-    height: 1.2rem;
-    width: 1.2rem;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 40px;
     display: block;
     background-size: contain;
     /* Other styles here */
