@@ -15,7 +15,8 @@ var userPool;
 
 var poolData = {
     UserPoolId : userPoolId,
-    ClientId : clientId
+    ClientId : clientId,
+    GroupName : "Admin"
 };
 
 function logIn() {
@@ -29,18 +30,28 @@ function logIn() {
         };
         var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
         userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
-
+        console.log(userPool)
         var userData = {
             Username: $('#loginUsername').val(),
             Pool: userPool
         };
         cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
         // $("#loader").show();
+
         cognitoUser.authenticateUser(authenticationDetails, {
             onSuccess: function (result) {
                 console.log(result);
                 console.log("This is where we are")
                 var adminLogger = result.idToken.payload.email;
+
+                if (result.idToken.payload["cognito:groups"] == null){
+                    alert("You are not an admin, please try again later or contact an admin.")
+                    return;
+                }
+
+                // var group = result.idToken.payload["cognito:groups"][0]
+
+                // console.log(group)
                 sessionStorage.setItem("username", adminLogger);
                 window.location.href = "index.html";
                 return
@@ -69,19 +80,19 @@ $(document).ready(function () {
     });
     var cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider({apiVersion: '2016-04-18'});
 
-    var params = {
-        UserPoolId: userpoolid, /* required */ // actual pool eu-west-1_gM8mCo99w //Test pool eu-west-1_nn8eU3DXM
-        AttributesToGet: [],
-        Filter: '',
-        Limit: '50'
-        //PaginationToken: '1'
-    };
-
-    var paramsAdminUsers = {
-        GroupName: 'Admin', /* required */
-        UserPoolId: userpoolid, /* required */
-        Limit: '50'
-    };
+    // var params = {
+    //     UserPoolId: userpoolid, /* required */ // actual pool eu-west-1_gM8mCo99w //Test pool eu-west-1_nn8eU3DXM
+    //     AttributesToGet: [],
+    //     Filter: '',
+    //     Limit: '50'
+    //     //PaginationToken: '1'
+    // };
+    //
+    // var paramsAdminUsers = {
+    //     GroupName: 'Admin', /* required */
+    //     UserPoolId: userpoolid, /* required */
+    //     Limit: '50'
+    // };
     // cognitoidentityserviceprovider.listUsersInGroup(paramsAdminUsers, function (err, data) {
     //     if (err) console.log(err, err.stack); // an error occurred
     //     else {
