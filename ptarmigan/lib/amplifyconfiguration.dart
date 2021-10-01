@@ -22,40 +22,27 @@ const amplifyconfig = ''' {
                 "IdentityManager": {
                     "Default": {}
                 },
-                "AppSync": {
-                    "Default": {
-                        "ApiUrl": "https://dcjltnewsbfifer3pbpy7qv57u.appsync-api.eu-west-1.amazonaws.com/graphql",
-                        "Region": "eu-west-1",
-                        "AuthMode": "API_KEY",
-                        "ApiKey": "da2-owq24wpegrcobaz22rwhxrk3m4",
-                        "ClientDatabasePrefix": "Ptarmigan_API_KEY"
-                    },
-                    "Ptarmigan_AWS_IAM": {
-                        "ApiUrl": "https://dcjltnewsbfifer3pbpy7qv57u.appsync-api.eu-west-1.amazonaws.com/graphql",
-                        "Region": "eu-west-1",
-                        "AuthMode": "AWS_IAM",
-                        "ClientDatabasePrefix": "Ptarmigan_AWS_IAM"
-                    }
-                },
                 "CredentialsProvider": {
                     "CognitoIdentity": {
                         "Default": {
-                            "PoolId": "eu-west-1:3f0c02a5-2f7f-4d49-80eb-8d2e3f3a13d3",
+                            "PoolId": "eu-west-1:a0ec6457-92d9-47cb-95bc-d8dbb001d226",
                             "Region": "eu-west-1"
                         }
                     }
                 },
                 "CognitoUserPool": {
                     "Default": {
-                        "PoolId": "eu-west-1_7XDVA9p2r",
-                        "AppClientId": "7k7pnkdkvtp2bu0lkigkiu9n5k",
+                        "PoolId": "eu-west-1_gdXlfUmJL",
+                        "AppClientId": "3s5r52frlaqsa9rhvj3uia05ac",
                         "Region": "eu-west-1"
                     }
                 },
                 "Auth": {
                     "Default": {
                         "authenticationFlowType": "USER_SRP_AUTH",
-                        "loginMechanism": [],
+                        "loginMechanisms": [
+                            "EMAIL"
+                        ],
                         "signupAttributes": [
                             "EMAIL"
                         ],
@@ -71,6 +58,9 @@ const amplifyconfig = ''' {
                         "mfaConfiguration": "OFF",
                         "mfaTypes": [
                             "SMS"
+                        ],
+                        "verificationMechanisms": [
+                            "EMAIL"
                         ]
                     }
                 }

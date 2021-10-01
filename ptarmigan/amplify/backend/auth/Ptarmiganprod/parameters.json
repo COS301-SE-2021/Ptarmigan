@@ -1,8 +1,8 @@
 {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "ptarmic81c2684",
-    "userPoolName": "Ptarmigan",
+    "resourceNameTruncated": "ptarmi036e3314",
+    "userPoolName": "Ptarmiganprod",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -30,10 +30,10 @@
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "Ptarmic81c2684_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "Ptarmi036e3314_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "c81c2684",
-    "resourceName": "Ptarmigan",
+    "sharedId": "036e3314",
+    "resourceName": "Ptarmiganprod",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
