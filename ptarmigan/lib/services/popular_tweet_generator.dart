@@ -27,12 +27,13 @@ class PopularTweetGenerator {
     print("Calling Tweet generator.");
 
     var doubleBeginDate =
-        (DateTime.now().subtract(Duration(days: 3)).millisecondsSinceEpoch) /
+        (DateTime.now().subtract(Duration(days: 2)).millisecondsSinceEpoch) /
             1000;
     var doubleEndDate = (DateTime.now().millisecondsSinceEpoch) / 1000;
-
+    var doubleEndDateTomorrow =
+        (DateTime.now().add(Duration(days: 1)).millisecondsSinceEpoch) / 1000;
     int beginDate = doubleBeginDate.round();
-    int endDate = doubleEndDate.round();
+    int endDate = doubleEndDateTomorrow.round();
 
     print("BeginDate : " + beginDate.toString());
     print("EndDate : " + endDate.toString());
@@ -75,15 +76,21 @@ class PopularTweetGenerator {
     int highestWeight = -1;
     String highestID = "null";
     for (int i = 0; i < feedImages.length; i++) {
-      var temp = await fetchTweet(feedImages[i]);
-      var tempWeight = int.parse(temp.tweetWeight);
-      print("Stock : " + feedImages[i] + "  WEIGHT : " + tempWeight.toString());
-      weights.add(tempWeight);
-      IDs.add(temp.tweetID);
+      try {
+        var temp = await fetchTweet(feedImages[i]);
+        var tempWeight = int.parse(temp.tweetWeight);
+        print(
+            "Stock : " + feedImages[i] + "  WEIGHT : " + tempWeight.toString());
+        weights.add(tempWeight);
+        IDs.add(temp.tweetID);
 
-      if (highestWeight < tempWeight) {
-        highestWeight = tempWeight;
-        highestID = temp.tweetID;
+        if (highestWeight < tempWeight) {
+          highestWeight = tempWeight;
+          highestID = temp.tweetID;
+        }
+      } on Exception catch (e) {
+        var tempValue = feedImages[i];
+        print("Error with the API call of $tempValue");
       }
     }
 
