@@ -80,6 +80,9 @@ final ValueNotifier feedID = ValueNotifier("");
 bool pastFirstLaunch = false;
 
 void main() {
+  ErrorWidget.builder = (FlutterErrorDetails details) {
+    return CircularProgressIndicator();
+  };
   //_configureAmplify();
   runApp(MyApp());
 }

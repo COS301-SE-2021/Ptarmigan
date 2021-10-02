@@ -42,7 +42,7 @@ class SnapShot extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 20.0, fontWeight: FontWeight.w600)),
                     Padding(
-                      padding: EdgeInsets.fromLTRB(180, 1, 1, 1),
+                      padding: EdgeInsets.fromLTRB(135, 1, 10, 1),
                       child: Text(
                           (DateTime.fromMillisecondsSinceEpoch(int.parse(time))
                               .toString()
@@ -74,7 +74,7 @@ class SnapShot extends StatelessWidget {
                                     fontWeight: FontWeight.w500)))
                       ])),
                   Padding(
-                      padding: EdgeInsets.fromLTRB(280, 1, 1, 1),
+                      padding: EdgeInsets.fromLTRB(230, 1, 1, 1),
                       child: Container(
                           color: bgColor,
                           child: Row(
