@@ -10,11 +10,8 @@
       "StackName": "amplify-ptarmiganprod-staging-200015",
       "StackId": "arn:aws:cloudformation:eu-west-1:878292117449:stack/amplify-ptarmiganprod-staging-200015/3269d770-22f2-11ec-ba11-02dfecc1ccd9",
       "AmplifyAppId": "dl1mq2j79xyc3"
-    },
-    "categories": {
-      "auth": {
-        "Ptarmiganprod": {}
-      }
     }
+  
+  
   }
 }
