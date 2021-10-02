@@ -33,7 +33,7 @@ class _ExploreState extends State<Explore> {
         title: Text('Explore'),
         backgroundColor: bgColor,
       ),
-      body: _getSnapshots(),
+      // body: _getSnapshots(),
     );
   }
 
@@ -141,38 +141,15 @@ class _ExploreState extends State<Explore> {
     emailOfUser = a.username;
   }
 
+/*S
   Widget _getSnapshots() {
     _getUser();
     fetchNews("Tesla");
 
-    String email = emailOfUser;
-    print("RINGGER: " + email);
-    return StreamBuilder(
-        stream: Firestore.instance
-            .collection('snapshots')
-            .where('to', isEqualTo: email)
-            .orderBy('timestamp', descending: true)
-            .snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-              padding: const EdgeInsets.all(10.0),
-              itemBuilder: (BuildContext context, int index) => NewsArticles(
-                title:
-                    (snapshot.data!.documents[index]['timestamp']).toString(),
-                description: snapshot.data!.documents[index]['stocktitle'],
-                url: snapshot.data!.documents[index]['to'],
-                from: snapshot.data!.documents[index]['from'],
-                urlToImage: snapshot.data!.documents[index]['content'],
-                sentiment: snapshot.data!.documents[index]['sentiment'],
-                content: snapshot.data!.documents[index]['stock'],
-                id: snapshot.data!.documents[index].documentID,
-              ),
-              itemCount: snapshot.data!.documents.length,
-            );
-          } else {
-            return Container();
-          }
-        });
-  }
+    return ListView(
+
+      
+    )
+
+  } */
 }
