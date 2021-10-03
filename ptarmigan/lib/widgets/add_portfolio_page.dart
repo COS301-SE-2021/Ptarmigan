@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ptarmigan/models/PortfolioItem.dart';
 import 'package:ptarmigan/services/portfolio_file_manager.dart';
 import 'package:ptarmigan/services/stock_price_generator.dart';
+import 'package:ptarmigan/widgets/portfolio_page.dart';
 
 class AddPortfolioPage extends StatefulWidget {
   const AddPortfolioPage();
@@ -27,6 +28,13 @@ class _AddPortfolioPageState extends State<AddPortfolioPage> {
     return Form(
         key: _formKey,
         child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => PortfolioPage())),
+            ),
+          ),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

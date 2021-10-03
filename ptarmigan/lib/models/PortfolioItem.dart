@@ -15,12 +15,13 @@ class PortfolioItem {
 
   void setPortfolioFromString(String portitem) {
     List tempList = portitem.split(',');
-    timeStamp = int.parse(tempList[0]);
+    timeStamp = int.parse(tempList[0].toString().trim());
     amountOwned = tempList[1];
     currentStockValue = tempList[2];
   }
 
   String toStringWithName() {
+    print("toStringWithName called");
     return stockName +
         "," +
         timeStamp.toString() +
@@ -31,6 +32,7 @@ class PortfolioItem {
   }
 
   String toStringWithoutName() {
+    print("toStringWithoutName called");
     return timeStamp.toString() +
         "," +
         amountOwned.toString() +

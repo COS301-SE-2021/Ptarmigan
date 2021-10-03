@@ -69,14 +69,6 @@ class MenuDrawer extends StatelessWidget {
             },
           ),
           DrawerListTile(
-            title: "Add portfolio page",
-            svgSrc: "assets/icons/menu_task.svg",
-            press: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AddPortfolioPage()));
-            },
-          ),
-          DrawerListTile(
             title: "Portfolio page",
             svgSrc: "assets/icons/menu_task.svg",
             press: () {
