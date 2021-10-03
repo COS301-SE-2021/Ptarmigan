@@ -4,7 +4,7 @@ class PortfolioItem {
   var stockName;
   var amountOwned;
   var currentStockValue;
-  var timeStamp;
+  late int timeStamp;
 
   PortfolioItem() {
     stockName = "";
@@ -15,7 +15,7 @@ class PortfolioItem {
 
   void setPortfolioFromString(String portitem) {
     List tempList = portitem.split(',');
-    timeStamp = tempList[0];
+    timeStamp = int.parse(tempList[0]);
     amountOwned = tempList[1];
     currentStockValue = tempList[2];
   }
@@ -23,11 +23,11 @@ class PortfolioItem {
   String toStringWithName() {
     return stockName +
         "," +
-        timeStamp +
+        timeStamp.toString() +
         "," +
-        amountOwned +
+        amountOwned.toString() +
         "," +
-        currentStockValue;
+        currentStockValue.toString();
   }
 
   String toStringWithoutName() {
