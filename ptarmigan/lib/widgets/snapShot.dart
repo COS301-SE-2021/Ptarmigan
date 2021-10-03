@@ -51,13 +51,16 @@ class SnapShot extends StatelessWidget {
                     )
                   ]),
                   Row(children: [
-                    Text("Sentiment: " + sentiment,
+                    Text(
+                        "Sentiment Score:  " +
+                            (double.parse(sentiment) * 50 + 50).toString() +
+                            "%",
                         textAlign: TextAlign.start,
                         style: TextStyle(
                             fontSize: 16.0, fontWeight: FontWeight.w500))
                   ]),
                   Row(children: [
-                    Text("Stock Price: \$" + stockPrice,
+                    Text("Stock Price:  \$" + stockPrice,
                         textAlign: TextAlign.start,
                         style: TextStyle(
                             fontSize: 16.0, fontWeight: FontWeight.w500))
