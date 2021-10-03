@@ -61,7 +61,7 @@ class PortfolioFileManager {
       if (lines[i].toString().trim() == "@") {
         print("line init map = @");
         tempStockName = lines[i + 1];
-        i = i + 1;
+        i = i + 2;
         while (lines[i].toString().trim() != "=") {
           if (lines[i].toString().trim() == "=") print(lines[i]);
           tempPortfolioList.add(lines[i]);
@@ -69,6 +69,8 @@ class PortfolioFileManager {
         }
       }
       nameAndListMap[tempStockName] = tempPortfolioList;
+
+      print("-------NAME AND LIST MAP -------" + nameAndListMap.toString());
     }
   }
 
@@ -104,8 +106,11 @@ class PortfolioFileManager {
     if (nameAndListMap.containsKey(item.stockName)) {
       List? tempList = nameAndListMap[item.stockName];
 
-      String inputFormatted =
-          item.timeStamp.toString() + "," + item.amountOwned;
+      String inputFormatted = item.timeStamp.toString() +
+          "," +
+          item.amountOwned +
+          "," +
+          item.currentStockValue;
       tempList!.add(inputFormatted);
       print("TempList = " + tempList.toString());
       nameAndListMap[item.stockName] = tempList;
