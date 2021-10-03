@@ -32,9 +32,9 @@ function addCompanyTickerToDropdown(ticker, name, index){
 
 function loadTickerSymbols(){
     clearDropdown()
+    link = "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/stocks/getTicker"
     companySearch = $("#companyNameForTicker").val()
-    link = `https://api.polygon.io/v3/reference/tickers?search=${companySearch}&active=true&sort=ticker&order=asc&limit=10&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp`
-    $.get(link, data =>{
+    $.post(link,  JSON.stringify({"companyName" : companySearch}), data =>{
         console.log(data)
         for (i = 0; i < data.results.length; i++){
             console.log(data.results[i]["ticker"])
@@ -127,10 +127,10 @@ tableOut = new TableOut("companyTable");
 proxy = new Proxy( new Service("https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/", ""), tableOut)
 
 $(document).ready(function () {
-    // if (sessionStorage.getItem("username") === null){
-    //     alert("Nice Try, Please log in using the normal path you...")
-    // }
-    // else{
+    if (sessionStorage.getItem("username") === null){
+        alert("Nice Try, Please log in using the normal path you...")
+    }
+    else{
         proxy.printList()
 
         addingUsername()
@@ -139,6 +139,7 @@ $(document).ready(function () {
             let newCompany = tableOut.getCompanyFromPage()
             proxy.updateCompanies(newCompany)
             $("#companyTable").html("")
+            $("#companyNameForTicker").val("")
             proxy.printList()
         })
 
@@ -194,7 +195,7 @@ $(document).ready(function () {
             proxy.companyOutput.viewSingleCompany(company)
 
         });
-    // }
+    }
 //
 //     //Add button
 //     $('#addButton').on("click", function (){

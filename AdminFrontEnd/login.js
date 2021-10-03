@@ -1,10 +1,10 @@
 // import { CognitoIdentityClient, CreateIdentityPoolCommand } from "@aws-sdk/client-cognito-identity";
 var adminUsers
-let userpoolid = "eu-west-1_7XDVA9p2r"
+let userpoolid = "eu-west-1_gdXlfUmJL"
 
 //=============== AWS IDs ===============
-var userPoolId = "eu-west-1_7XDVA9p2r";
-var clientId = '2vmdk228m93vb6ksecad7vjqsa';
+var userPoolId = "eu-west-1_gdXlfUmJL";
+var clientId = '3s5r52frlaqsa9rhvj3uia05ac';
 var region = 'eu-west-1';
 var identityPoolId = 'eu-west-1:16273994-4cdf-42fd-b2f9-48c1728f6902';
 //=============== AWS IDs ===============
