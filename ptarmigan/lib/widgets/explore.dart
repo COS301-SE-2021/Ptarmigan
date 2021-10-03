@@ -272,7 +272,76 @@ class _ExploreState extends State<Explore> {
 
       final response2 = await http.get(
         Uri.parse(
-            'https://newsapi.org/v2/everything?q=disney&from=2021-09-27&to=2021-09-27&sortBy=popularity&apiKey=4c093685afb34168b82c1ad34638b093'),
+            'https://newsapi.org/v2/everything?q=Disney&from=2021-09-05&to=2021-09-28&sortBy=popularity&apiKey=4c093685afb34168b82c1ad34638b093'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+
+      if (response2.statusCode == 200) {
+        print(response2.body);
+        Map<String, dynamic> maps = jsonDecode(response2
+            .body /* .substring(response2.body.indexOf("["), response2.body.length - 1)*/);
+
+        print("NEWS");
+        print(maps);
+
+        List<dynamic> data = maps["articles"];
+
+        print(maps["articles"]);
+
+        print("BING");
+        print(data[0]["title"]);
+
+        titleIn.add(data[0]["title"]);
+        descriptionIn.add(data[0]["description"]);
+        urlIn.add(data[0]["url"]);
+        urlToImageIn.add(data[0]["urlToImage"]);
+        contentIn.add(data[0]["content"]);
+
+        print(data);
+        //  List<NewsArticles> test1 =
+        //     List<NewsArticles>.from(data.map((i) => NewsArticles.fromJson(i)));
+
+        print("Trasque");
+
+        print(titleIn);
+
+        // print(test1);
+
+        //  todosGraph[0] = new NewsEntity(title: data["title"], description: description, url: url, urlToImage: urlToImage, content: content))
+        /*  for (int i = 0; i < test1.length; i++) {
+          todosGraph[i] = new NewsEntity(
+              title: test1[i].title.toString(),
+              description: test1[i].description.toString(),
+              url: test1[i].url.toString(),
+              urlToImage: test1[i].urlToImage.toString(),
+              content: test1[i].content.toString());
+        } */
+      } else {
+        // If the server did not return a 201 CREATED response,
+        // then throw an exception.
+
+        print(response2.statusCode);
+        throw Exception('Failed to create post.');
+      }
+    } catch (e) {
+      print('An error occurred while querying Todos: $e');
+    }
+
+    //Five
+
+    try {
+      //  Amplify.DataStore.clear();
+      //  Delete();
+      //demoRecentFiles = [];
+      // String a =
+      //     '[{"BeginDate": 1623005418000, "EndDate": 1623610218000, "IntervalData": 0}, {"BeginDate": 1623610218000, "EndDate": 1624215018000, "IntervalData": 0}, {"BeginDate": 1624215018000, "EndDate": 1624819818000, "IntervalData": 0}, {"BeginDate": 1624819818000, "EndDate": 1625424618000, "IntervalData": 0}, {"BeginDate": 1625424618000, "EndDate": 1626029418000, "IntervalData": 0}, {"BeginDate": 1626029418000, "EndDate": 1626634218000, "IntervalData": 0}, {"BeginDate": 1626634218000, "EndDate": 1627239018000, "IntervalData": 0}, {"BeginDate": 1627239018000, "EndDate": 1627843818000, "IntervalData": 0}, {"BeginDate": 1627843818000, "EndDate": 1628448618000, "IntervalData": 0.06540074664700189}, {"BeginDate": 1628448618000, "EndDate": 1629053418000, "IntervalData": 0}]';
+      // final parsed = jsonDecode(a).cast<Map<String, dynamic>>();
+
+      final response2 = await http.get(
+        Uri.parse(
+            'https://newsapi.org/v2/everything?q=google&from=2021-09-05&to=2021-09-28&sortBy=popularity&apiKey=4c093685afb34168b82c1ad34638b093'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -600,7 +669,53 @@ class _ExploreState extends State<Explore> {
                               ),
                               style: ElevatedButton.styleFrom(
                                   primary: Colors.amber)))
-                    ]))
+                    ])),
+                Card(
+                    color: bgColor,
+                    child: Column(children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(2, 10, 220, 1),
+                        child: Text(
+                          "Google",
+                          style: TextStyle(fontSize: 26),
+                        ),
+                      ),
+                      Divider(
+                        height: 20,
+                        thickness: 3,
+                        indent: 5,
+                        endIndent: 150,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                        child: Text(titleIn[4],
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 14)),
+                      ),
+                      Divider(
+                        height: 20,
+                        thickness: 3,
+                        indent: 5,
+                        endIndent: 5,
+                      ),
+                      Container(
+                          padding: EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(90),
+                          ),
+                          child: Image.network(urlToImageIn[4])),
+                      Container(
+                          padding: EdgeInsets.fromLTRB(1, 1, 200, 1),
+                          child: ElevatedButton(
+                              onPressed: () => _launchURL(urlIn[4]),
+                              child: Text(
+                                "Visit",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 18),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.amber)))
+                    ])),
               ]),
             );
           } else {
