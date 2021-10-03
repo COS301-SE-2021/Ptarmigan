@@ -30,7 +30,7 @@ def lambda_handler(event, context):
 
     return {
         'statusCode': 200,
-        'body': json.dumps(getStockPrice("Tesla").json())
+        'body': json.dumps(getStockPrice(companyName).json())
     }
 
 # if __name__ == '__main__':
