@@ -9,16 +9,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-
-    <title>Admin_Twitter</title>
+    <link rel="shortcut icon" type="image/jpg" href="Images/logo.png"/>
+    <title>Users Page</title>
 </head>
 <body style="background-color:grey;">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#"><i class="fas fa-feather-alt"></i></a>
+    <a class="navbar-brand" href="#"><i class="i-logo"></i></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
@@ -26,27 +25,27 @@
                     Admin Pages
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item disabled" href="index.html">Landing Page</a>
-                    <a class="dropdown-item " href="userManagement.html">Scraper Management</a>
+                    <a class="dropdown-item disabled" href="index.html">Users Page</a>
+                    <a class="dropdown-item " href="userManagement.html">Company Page</a>
                 </div>
             </li>
         </ul>
         <p class="text-right text-wrap text-light" id="username">Temp</p>
-        <button id="logoutIndex" class="btn btn-primary my-2 my-sm-0 ml-5" type="submit">Logout</button>
+        <button id="logoutIndex" class="btn btn-warning my-2 my-sm-0 ml-5" type="submit">Logout</button>
     </div>
 </nav>
 
 
 <div class="container">
-    <div class="container m-2 bg-dark text-white rounded">
+<!--    <div class="container m-2 bg-dark text-white rounded">-->
     <!--   his is the give some statistcs to the admin user-->
-        <div class="row">
-            <div class="col"><h1>Number of users:</h1></div>
-            <div class="col">
-                <div class="h1 text-primary align-content-center" id="numberOfUsers">Loading...</div>
-            </div>
-        </div>
-    </div>
+<!--        <div class="row">-->
+<!--            <div class="col"><h1>Number of users:</h1></div>-->
+<!--            <div class="col">-->
+<!--                <div class="h1 text-warning align-content-center" id="numberOfUsers">Loading...</div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 <!--Here is where the flags will appear-->
 
 <!--    <h1 class="h1 display-3 text-light">Handle Flags <i class="fas fa-flag"></i> </h1>-->
@@ -100,11 +99,17 @@
 
 <!--    Second table-->
 
-    <h1 class="display-3 text-light">Users</h1>
+    <h1 class="display-3 font-weight-normal text-light d-flex justify-content-center">Users</h1>
     <div class="container m-2 bg-dark text-white rounded p-8">
         <div class="container pt-3 pb-2">
         <div class="col-sm p-2">
-            <div class="col"><h1>Users</h1></div>
+            <div class="row">
+                <div class="col-4 ml-3"><h2>Number of users:</h2></div>
+                    <div class="col-1">
+                        <div class="h2 text-warning align-content-center" id="numberOfUsers">Loading...</div>
+                    </div>
+                </div>
+
 <!--            <b class="text-light">Filters :</b>-->
 <!--                <button type="button" class="btn btn-dark mr-3">User Name</button>-->
 <!--                <button type="button" class="btn btn-dark mr-3">User ID</button>-->
@@ -114,6 +119,7 @@
                 <form class="form-inline my-2 my-lg-0 float-right">
                     <input class="form-control mr-sm-2" id="myInput" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+                    <br></br>
                 </form>
             </div>
 

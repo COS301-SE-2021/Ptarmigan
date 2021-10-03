@@ -236,6 +236,8 @@ def oneItem(companyName, ticker):
 
     # stock = getStockPrice(updatedTime, stockList, ticker)
     stockPrice = getStockPriceOnAGivenDay(updatedTime, ticker)
+    if stockPrice == "Error occured":
+        return False
     if stockPrice == "You've exceeded the maximum requests per minute, please wait or upgrade your subscription to continue. https://polygon.io/pricing":
         print("Exeeding max usage")
         time.sleep(60)
