@@ -160,7 +160,7 @@ class _AddPortfolioPageState extends State<AddPortfolioPage> {
                       PortfolioItem tempNewItem = new PortfolioItem();
                       tempNewItem.stockName = stockNameInputData;
                       tempNewItem.timeStamp =
-                          (DateTime.now().millisecondsSinceEpoch) / 1000;
+                          (DateTime.now().millisecondsSinceEpoch);
                       tempNewItem.amountOwned =
                           int.parse(stockAmountOwnedInputData);
                       tempNewItem.currentStockValue =
@@ -171,6 +171,11 @@ class _AddPortfolioPageState extends State<AddPortfolioPage> {
                   child: const Text('Submit'),
                 ),
               ),
+              ElevatedButton(
+                  onPressed: () {
+                    manager.resetFile();
+                  },
+                  child: Text("ResetFile"))
             ],
           ),
         ));
