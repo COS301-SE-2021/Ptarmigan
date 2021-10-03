@@ -3,25 +3,29 @@ import 'package:path_provider/path_provider.dart';
 import 'package:ptarmigan/models/PortfolioItem.dart';
 
 class PortfolioFileManager {
-  PortfolioFileManager();
+  PortfolioFileManager() {
+    initState();
+  }
   late File globalFile;
   late List listFromTextFile;
   late Map<String, List> nameAndListMap = Map();
 
-  _initState() {
-    _initFile();
+  initState() {
+    //_initFile();
+    initFile();
   }
 
-  _initFile() async {
-    print("Init file");
+  initFile() {
+    print("Init portfolio file");
+    bool tempReturn = false;
     _localFile.then((value) => {
           globalFile = value,
-          _initList(value)
+          initList()
         }); //Need this since _localFile has check to see if file exists
   }
 
-  _initList(File file) {
-    List lines = file.readAsLinesSync();
+  initList() {
+    List lines = globalFile.readAsLinesSync();
 
     for (int i = 0; i < lines.length; i++) {
       print("lines : " + lines[i]);
@@ -31,7 +35,7 @@ class PortfolioFileManager {
       //       tempListOfNamesAndStatus[1];
     }
     //  print(nameAndSubscription.toString());
-    _initMap(lines);
+    initMap(lines);
   }
 
   /*
@@ -49,14 +53,17 @@ class PortfolioFileManager {
     etc
   */
 
-  _initMap(List lines) {
+  initMap(List lines) {
+    print("_InitMap called" + lines.toString());
     for (int i = 0; i < lines.length; i++) {
       String tempStockName = "";
       List tempPortfolioList = [];
-      if (lines[i] == "@") {
+      if (lines[i].toString().trim() == "@") {
+        print("line init map = @");
         tempStockName = lines[i + 1];
         i = i + 1;
-        while (lines[i] != "=") {
+        while (lines[i].toString().trim() != "=") {
+          if (lines[i].toString().trim() == "=") print(lines[i]);
           tempPortfolioList.add(lines[i]);
           i = i + 1;
         }
@@ -70,18 +77,37 @@ class PortfolioFileManager {
   }
 
   void addNewPortfolio(PortfolioItem item) {
+    print("addNewPortfolio = " + item.toStringWithName());
     List tempList = [item.toStringWithoutName()];
     nameAndListMap[item.stockName] = tempList;
 
     updatePortfolioFileWithMap();
   }
 
+  void removePortfolio(String name) {
+    print("removePortfolio = " + name);
+
+    nameAndListMap.remove(name);
+
+    updatePortfolioFileWithMap();
+  }
+
+  void resetFile() async {
+    print("RESETTING FILE. REMOVE IF NOT TESTING");
+
+    final file = await _localFile;
+    nameAndListMap = new Map();
+    file.writeAsString("");
+  }
+
   void addIntoStockList(PortfolioItem item) {
     if (nameAndListMap.containsKey(item.stockName)) {
       List? tempList = nameAndListMap[item.stockName];
 
-      String inputFormatted = item.timeStamp + "," + item.amountOwned;
+      String inputFormatted =
+          item.timeStamp.toString() + "," + item.amountOwned;
       tempList!.add(inputFormatted);
+      print("TempList = " + tempList.toString());
       nameAndListMap[item.stockName] = tempList;
       updatePortfolioFileWithMap();
     } else {
@@ -94,20 +120,21 @@ class PortfolioFileManager {
     globalFile.writeAsStringSync("");
     String addToFileString = "";
     List keyList = nameAndListMap.keys.toList();
-
+    print("UpdatePortfolio keyList" + keyList.toString());
     for (int i = 0; i < keyList.length; i++) {
-      addToFileString = "@ \n";
+      addToFileString += "@\n";
       addToFileString += keyList[i] + "\n";
       List? tempPortfolioHistoryList = nameAndListMap[keyList[i]];
       for (int j = 0; j < tempPortfolioHistoryList!.length; j++) {
         addToFileString += tempPortfolioHistoryList[j] + "\n";
       }
-      addToFileString += "=";
+      addToFileString += "=\n";
     }
+    print("AddToFileString = " + addToFileString);
     globalFile.writeAsStringSync(addToFileString);
   }
 
-  Map getNameAndListMap() {
+  Future<Map> getNameAndListMap() async {
     return nameAndListMap;
   }
 
