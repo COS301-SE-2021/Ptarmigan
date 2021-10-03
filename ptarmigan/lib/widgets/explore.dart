@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:ptarmigan/widgets/newsEntity.dart';
 import 'fire_base_DB.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'snapShot.dart';
@@ -8,10 +9,19 @@ import '../constants.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:http/http.dart' as http;
 import '../models/NewsArticle.dart';
+import 'package:data_table_2/data_table_2.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(App());
 
 String emailOfUser = "";
+List<NewsEntity> todosGraph = [];
+
+String titleIn = "";
+String descriptionIn = "";
+String urlIn = "";
+String urlToImageIn = "";
+String contentIn = "";
 
 class App extends StatelessWidget {
   @override
@@ -33,7 +43,7 @@ class _ExploreState extends State<Explore> {
         title: Text('Explore'),
         backgroundColor: bgColor,
       ),
-      // body: _getSnapshots(),
+      body: _getSnapshots(),
     );
   }
 
@@ -41,7 +51,7 @@ class _ExploreState extends State<Explore> {
 
   //FetchNews
 
-  Future<void> fetchNews(var feedIdentifier) async {
+  Future<String> fetchNews(var feedIdentifier) async {
     try {
       print("NEWS NEWS NEWS NEWS");
       //  Amplify.DataStore.clear();
@@ -65,12 +75,40 @@ class _ExploreState extends State<Explore> {
             .body /* .substring(response2.body.indexOf("["), response2.body.length - 1)*/);
 
         print("NEWS");
-        print(maps[0]);
+        print(maps);
 
         List<dynamic> data = maps["articles"];
 
-        List<NewsArticles> test1 =
-            List<NewsArticles>.from(data.map((i) => NewsArticles.fromJson(i)));
+        print(maps["articles"]);
+
+        print("BING");
+        print(data[0]["title"]);
+
+        titleIn = data[0]["title"];
+        descriptionIn = data[0]["description"];
+        urlIn = data[0]["url"];
+        urlToImageIn = data[0]["urlToImage"];
+        contentIn = data[0]["content"];
+
+        print(data);
+        //  List<NewsArticles> test1 =
+        //     List<NewsArticles>.from(data.map((i) => NewsArticles.fromJson(i)));
+
+        print("Trasque");
+
+        print(titleIn);
+
+        // print(test1);
+
+        //  todosGraph[0] = new NewsEntity(title: data["title"], description: description, url: url, urlToImage: urlToImage, content: content))
+        /*  for (int i = 0; i < test1.length; i++) {
+          todosGraph[i] = new NewsEntity(
+              title: test1[i].title.toString(),
+              description: test1[i].description.toString(),
+              url: test1[i].url.toString(),
+              urlToImage: test1[i].urlToImage.toString(),
+              content: test1[i].content.toString());
+        } */
       } else {
         // If the server did not return a 201 CREATED response,
         // then throw an exception.
@@ -94,6 +132,7 @@ class _ExploreState extends State<Explore> {
     //convertToGraph(updatedTodos);
 
     //print("VACO: " + todos.elementAt(0).name);
+    return "Done";
   }
 
   void _handleSnapshotSubmission(
@@ -141,15 +180,94 @@ class _ExploreState extends State<Explore> {
     emailOfUser = a.username;
   }
 
-/*S
   Widget _getSnapshots() {
     _getUser();
-    fetchNews("Tesla");
+    //  fetchNews("Tesla");
 
-    return ListView(
-
-      
-    )
-
-  } */
+    return FutureBuilder(
+        future: fetchNews("Tesla"),
+        builder: (context, snapshot) {
+          if (snapshot.hasData == true) {
+            return Container(
+              padding: EdgeInsets.all(defaultPadding),
+              decoration: BoxDecoration(
+                color: secondaryColor,
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+              ),
+              child: ListView(children: [
+                Card(
+                    color: bgColor,
+                    child: Column(children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(2, 10, 220, 1),
+                        child: Text(
+                          "Tesla",
+                          style: TextStyle(fontSize: 26),
+                        ),
+                      ),
+                      Divider(
+                        height: 20,
+                        thickness: 3,
+                        indent: 5,
+                        endIndent: 150,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                        child: Text(titleIn,
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 14)),
+                      ),
+                      Divider(
+                        height: 20,
+                        thickness: 3,
+                        indent: 5,
+                        endIndent: 5,
+                      ),
+                      Container(
+                          padding: EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(90),
+                          ),
+                          child: Image.network(urlToImageIn)),
+                      Container(
+                          padding: EdgeInsets.fromLTRB(180, 1, 1, 1),
+                          child: ElevatedButton(
+                              onPressed: () => _launchURL(urlIn),
+                              child: Text(
+                                "Visit",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 18),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                  primary: Colors.amber)))
+                    ]))
+              ]),
+            );
+          } else {
+            return Container();
+          }
+        });
+  }
 }
+
+DataRow recentFileDataRow(NewsEntity fileInfo) {
+  return DataRow(
+    cells: [
+      DataCell(
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+              child: Text(fileInfo.title),
+            ),
+          ],
+        ),
+      ),
+      DataCell(Text(fileInfo.description)),
+      // DataCell(Text(fileInfo.size)),
+    ],
+  );
+}
+
+_launchURL(_url) async =>
+    await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';

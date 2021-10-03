@@ -115,18 +115,18 @@ class NewsArticles extends Model {
 
   NewsArticles.fromJson(Map<String, dynamic> json)
       : id = '1',
-        _title = json['title'],
-        _url = json['url'],
-        _urlToImage = json['urlToImage'],
-        _description = json['description'],
-        _content = json['content'];
+        _title = json['Title'],
+        _url = json['Url'],
+        _urlToImage = json['UrlToImage'],
+        _description = json['Description'],
+        _content = json['Content'];
 
   Map<String, dynamic> toJson() => {
-        'title': _title,
-        'url': _url,
-        'urlToImage': _urlToImage,
-        'description': _description,
-        'content': _content
+        'Title': _title,
+        'Url': _url,
+        'UrlToImage': _urlToImage,
+        'Description': _description,
+        'Content': _content
       };
 }
 
