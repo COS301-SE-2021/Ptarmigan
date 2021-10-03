@@ -41,6 +41,7 @@ class Service extends ServiceInterface{
         console.log('updating companies')
 
         this.removeCompanies(company)
+        console.log(company.companyJSON);
         return $.post(requestUrlAdd, JSON.stringify(company.companyJSON), function(result){
             console.log("Removed And Updated")
             console.log(result)

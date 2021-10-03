@@ -153,10 +153,10 @@ $(document).ready(function () {
         //     submitForm()
         // })
 
-        $("#companyNameInput").on('keyup', function () {
-            clearTimeout(typingTimer);
-            typingTimer = setTimeout(doneTyping, doneTypingInterval);
-        });
+        // $("#companyNameInput").on('keyup', function () {
+        //     clearTimeout(typingTimer);
+        //     typingTimer = setTimeout(doneTyping, doneTypingInterval);
+        // });
 
         $("#companyNameForTickerButton").click(some => {
             console.log("Something")
