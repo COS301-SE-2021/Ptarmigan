@@ -102,7 +102,8 @@ class _TodoListState extends State<TodoList> {
                   to: snapshot.data!.documents[index]['to'],
                   from: snapshot.data!.documents[index]['from'],
                   content: snapshot.data!.documents[index]['content'],
-                  sentiment: snapshot.data!.documents[index]['sentiment'],
+                  sentiment: snapshot.data!.documents[index]['sentiment']
+                      .substring(0, 3),
                   stockPrice: snapshot.data!.documents[index]['stock'],
                   id: snapshot.data!.documents[index].documentID,
                   update: _updateTask,

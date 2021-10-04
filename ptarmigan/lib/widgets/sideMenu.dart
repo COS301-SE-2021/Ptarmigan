@@ -6,6 +6,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ptarmigan/widgets/SentimentHistory.dart';
+import 'package:ptarmigan/widgets/dashboard_screen.dart';
+import 'package:ptarmigan/widgets/mainScreen.dart';
 import 'responsive.dart';
 import 'package:ptarmigan/widgets/feed_items.dart';
 import 'package:ptarmigan/models/ModelProvider.dart';
@@ -86,6 +88,7 @@ class SideMenu extends StatelessWidget {
       child: ListView(
         children: [
           DrawerHeader(
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
             child: Column(children: [
               Row(children: [
                 Text("Ptarmigan", style: TextStyle(fontSize: 30))
@@ -121,7 +124,30 @@ class SideMenu extends StatelessWidget {
                   icon: Icon(Icons.add),
                   label: Text("Add New  "),
                 ),
-              ])
+                Padding(
+                  padding: EdgeInsets.fromLTRB(8, 1, 1, 1),
+                  child: ElevatedButton.icon(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 1 * 1.5,
+                        vertical: 1 / (Responsive.isMobile(context) ? 2 : 1),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MainScreen(manager)));
+                    },
+                    icon: Icon(Icons.refresh),
+                    label: Text(""),
+                  ),
+                )
+              ]),
             ]),
           ),
           Column(children: changeFeedsTo(feedsSub)),

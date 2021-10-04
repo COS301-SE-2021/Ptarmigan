@@ -15,6 +15,7 @@ class StockAndSentimentValues extends StatelessWidget {
   String currentStock = "759";
   String tomorrowsSentiment = "0";
   String prediction = "Decrease";
+  String feedName = "Bitcoin";
 
   Color colorDetermine(int i) {
     Color a = Colors.green;
@@ -40,6 +41,7 @@ class StockAndSentimentValues extends StatelessWidget {
 
   Future<void> fetchNewStock(var feedIdentifier) async {
     try {
+      feedName = feedIdentifier;
       print("Alpha");
       await fetchPrediction(feedIdentifier);
       //  Amplify.DataStore.clear();

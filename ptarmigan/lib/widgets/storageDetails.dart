@@ -84,7 +84,7 @@ void _sendSnapShot(StockAndSentimentValues tes, String email, String comment,
   // print("PING: " + a.username);
 
   var task = <String, dynamic>{
-    'stocktitle': name,
+    'stocktitle': tes.feedName,
     'to': email,
     'from': a.username,
     'content': comment,
@@ -128,21 +128,27 @@ class _SnapShotWidget extends State<SnapShotForm> {
       backgroundColor: secondaryColor,
       title: const Text('Send Snapshot'),
       insetPadding: EdgeInsets.fromLTRB(1, 1, 1, 1),
-      content: new Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text("Recipients email address:"),
-          TextField(
-            controller: myController1,
-          ),
-          Padding(
-              child: Text("Comment:"),
-              padding: EdgeInsets.fromLTRB(10, 20, 10, 10)),
-          TextField(
-            controller: myController2,
-          ),
-        ],
+      content: new Container(
+        height: 170,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text("Recipients email address:"),
+            TextField(
+              controller: myController1,
+            ),
+            Padding(
+                child: Text("Comment:"),
+                padding: EdgeInsets.fromLTRB(10, 1, 10, 1)),
+            Padding(
+              padding: EdgeInsets.fromLTRB(1, 1, 1, 1),
+              child: TextField(
+                controller: myController2,
+              ),
+            ),
+          ],
+        ),
       ),
       actions: <Widget>[
         new ElevatedButton(
