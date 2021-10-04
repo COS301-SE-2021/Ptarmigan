@@ -2,7 +2,7 @@
   "providers": [
     "awscloudformation"
   ],
-  "projectName": "Ptarmigan",
+  "projectName": "Ptarmiganprod",
   "version": "3.1",
   "frontend": "flutter",
   "flutter": {

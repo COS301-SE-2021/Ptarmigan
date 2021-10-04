@@ -1,20 +1,17 @@
 {
-  "dev": {
+  "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-ptarmigan-dev-125008-authRole",
-      "UnauthRoleArn": "arn:aws:iam::878292117449:role/amplify-ptarmigan-dev-125008-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::878292117449:role/amplify-ptarmigan-dev-125008-authRole",
+      "AuthRoleName": "amplify-ptarmiganprod-staging-200015-authRole",
+      "UnauthRoleArn": "arn:aws:iam::878292117449:role/amplify-ptarmiganprod-staging-200015-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::878292117449:role/amplify-ptarmiganprod-staging-200015-authRole",
       "Region": "eu-west-1",
-      "DeploymentBucketName": "amplify-ptarmigan-dev-125008-deployment",
-      "UnauthRoleName": "amplify-ptarmigan-dev-125008-unauthRole",
-      "StackName": "amplify-ptarmigan-dev-125008",
-      "StackId": "arn:aws:cloudformation:eu-west-1:878292117449:stack/amplify-ptarmigan-dev-125008/b7e4f2a0-1612-11ec-8286-0a9e75da83c5",
-      "AmplifyAppId": "d27gxkl5yx97k1"
-    },
-    "categories": {
-      "auth": {
-        "Ptarmigan": {}
-      }
+      "DeploymentBucketName": "amplify-ptarmiganprod-staging-200015-deployment",
+      "UnauthRoleName": "amplify-ptarmiganprod-staging-200015-unauthRole",
+      "StackName": "amplify-ptarmiganprod-staging-200015",
+      "StackId": "arn:aws:cloudformation:eu-west-1:878292117449:stack/amplify-ptarmiganprod-staging-200015/3269d770-22f2-11ec-ba11-02dfecc1ccd9",
+      "AmplifyAppId": "dl1mq2j79xyc3"
     }
+  
+  
   }
 }
