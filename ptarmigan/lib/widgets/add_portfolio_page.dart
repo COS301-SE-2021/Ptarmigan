@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:ptarmigan/constants.dart';
 import 'package:ptarmigan/models/PortfolioItem.dart';
 import 'package:ptarmigan/services/portfolio_file_manager.dart';
 import 'package:ptarmigan/services/stock_price_generator.dart';
@@ -29,6 +30,7 @@ class _AddPortfolioPageState extends State<AddPortfolioPage> {
         key: _formKey,
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: bgColor,
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () => Navigator.push(context,
@@ -176,14 +178,17 @@ class _AddPortfolioPageState extends State<AddPortfolioPage> {
                       manager.addNewPortfolio(tempNewItem);
                     }
                   },
-                  child: const Text('Submit'),
+                  child: const Text(
+                    'Submit',
+                    style: TextStyle(fontSize: 25),
+                  ),
                 ),
               ),
-              ElevatedButton(
-                  onPressed: () {
-                    manager.resetFile();
-                  },
-                  child: Text("ResetFile"))
+              // ElevatedButton(              //For debugging purposes
+              // onPressed: () {
+              //   manager.resetFile();
+              // },
+              // child: Text("ResetFile"))
             ],
           ),
         ));

@@ -21,6 +21,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
       alignment: Alignment.center, child: CircularProgressIndicator());
   late PortfolioFileManager fileManager;
   late Map portMap;
+  late String stockAmountOwnedData;
 
   _PortfolioPageState() {
     fileManager = new PortfolioFileManager();
@@ -64,6 +65,8 @@ class _PortfolioPageState extends State<PortfolioPage> {
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
+              title: Text("Portfolio"),
+              backgroundColor: bgColor,
               leading: IconButton(
                 icon: Icon(Icons.arrow_back),
                 onPressed: () => Navigator.push(context,
@@ -90,6 +93,8 @@ class _PortfolioPageState extends State<PortfolioPage> {
                             )),
                         ElevatedButton(
                             onPressed: () {
+                              Navigator.pop(context);
+
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -160,6 +165,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
+              alignment: Alignment.center,
               padding: EdgeInsets.all(5),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.lightBlueAccent, width: 2),
@@ -168,6 +174,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
               child: Text(name, style: TextStyle(fontSize: 30)),
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
@@ -175,12 +182,34 @@ class _PortfolioPageState extends State<PortfolioPage> {
                   style: TextStyle(fontSize: 20),
                 ),
                 Container(
+                  alignment: Alignment.center,
                   margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
-                  height: 30,
+                  height: 25,
                   width: 100,
-                  child: Text(
-                    portfolioItem.amountOwned.toString(),
-                    style: TextStyle(fontSize: 20),
+                  child: TextFormField(
+                    textAlignVertical: TextAlignVertical.top,
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                    textAlign: TextAlign.center,
+                    controller: TextEditingController(
+                      text: portfolioItem.amountOwned,
+                    ),
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                      border: OutlineInputBorder(),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please enter some text";
+                      }
+                      return null;
+                    },
+                    onChanged: (text) {
+                      setState(() {
+                        stockAmountOwnedData = text;
+                      });
+                    },
                   ),
                 )
               ],
@@ -218,6 +247,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                 children: [
                   ElevatedButton(
                       onPressed: () {
+                        portfolioItem.amountOwned = stockAmountOwnedData;
                         update(portfolioItem);
                       },
                       child: Text("Update")),
