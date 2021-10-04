@@ -5,27 +5,19 @@ import '../constants.dart';
 typedef UpdateCallback = Function(String value, String id);
 typedef DeleteCallback = Function(String id);
 
-class SnapShot extends StatelessWidget {
-  SnapShot(
-      {required this.time,
-      required this.stockTitle,
-      required this.from,
-      required this.to,
-      required this.content,
-      required this.sentiment,
-      required this.stockPrice,
-      required this.id,
-      required this.update,
-      required this.delete});
+class NewsEntity extends StatelessWidget {
+  NewsEntity({
+    required this.title,
+    required this.description,
+    required this.url,
+    required this.urlToImage,
+    required this.content,
+  });
 
-  final String from, to, content, id, sentiment, stockPrice, stockTitle, time;
-  final UpdateCallback update;
-  final DeleteCallback delete;
-  TextEditingController updateText = TextEditingController();
+  final String title, description, content, url, urlToImage;
 
   @override
   Widget build(BuildContext context) {
-    updateText.text = this.content;
     return Padding(
       padding: const EdgeInsets.all(1.0),
       child: Card(
@@ -37,30 +29,27 @@ class SnapShot extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Row(children: [
-                    Text(stockTitle,
+                    Text(title,
                         textAlign: TextAlign.start,
                         style: TextStyle(
                             fontSize: 20.0, fontWeight: FontWeight.w600)),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(135, 1, 10, 1),
+                    /*     Padding(
+                      padding: EdgeInsets.fromLTRB(180, 1, 1, 1),
                       child: Text(
                           (DateTime.fromMillisecondsSinceEpoch(int.parse(time))
                               .toString()
                               .substring(0, 10)),
                           style: TextStyle(color: Colors.amber)),
-                    )
+                    ) */
                   ]),
                   Row(children: [
-                    Text(
-                        "Sentiment Score:  " +
-                            (double.parse(sentiment) * 50 + 50).toString() +
-                            "%",
+                    Text("Sentiment: " + description,
                         textAlign: TextAlign.start,
                         style: TextStyle(
                             fontSize: 16.0, fontWeight: FontWeight.w500))
                   ]),
                   Row(children: [
-                    Text("Stock Price:  \$" + stockPrice,
+                    Text("Stock Price: \$" + content,
                         textAlign: TextAlign.start,
                         style: TextStyle(
                             fontSize: 16.0, fontWeight: FontWeight.w500))
@@ -69,27 +58,19 @@ class SnapShot extends StatelessWidget {
                       padding: EdgeInsets.fromLTRB(2, 19, 2, 1),
                       child: Row(children: [
                         Expanded(
-                            child: Text("Comment: \n" + content,
+                            child: Text("Comment: \n" + url,
                                 overflow: TextOverflow.clip,
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.w500)))
                       ])),
-                  Padding(
-                      padding: EdgeInsets.fromLTRB(230, 1, 1, 1),
-                      child: Container(
-                          color: bgColor,
-                          child: Row(
-                            children: <Widget>[
-                              IconButton(
-                                  icon: Icon(Icons.delete,
-                                      color: Colors.redAccent, size: 20.0),
-                                  alignment: Alignment.center,
-                                  padding: EdgeInsets.all(0.0),
-                                  onPressed: () => this.delete(this.id))
-                            ],
-                          )))
+                  Row(children: [
+                    Text("Sentiment: " + urlToImage,
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                            fontSize: 16.0, fontWeight: FontWeight.w500))
+                  ]),
                 ],
               ))),
     );

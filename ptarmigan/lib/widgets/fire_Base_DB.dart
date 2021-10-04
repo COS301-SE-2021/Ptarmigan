@@ -27,6 +27,7 @@ class Database {
 
   static Future<bool> addSnapShot(Map<String, dynamic> snap) async {
     await _db.collection('snapshots').document().setData(snap).catchError((e) {
+      print("Noc");
       print(e);
     });
     return true;

@@ -10,6 +10,7 @@ import 'package:ptarmigan/widgets/portfolio_page.dart';
 import 'package:ptarmigan/widgets/stock_screen.dart';
 import 'package:ptarmigan/widgets/todos_page.dart';
 import 'package:ptarmigan/widgets/snapshot_inbox_screen.dart';
+import 'package:ptarmigan/widgets/explore.dart';
 
 class MenuDrawer extends StatelessWidget {
   List feeds;
@@ -30,6 +31,14 @@ class MenuDrawer extends StatelessWidget {
             press: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => DashboardScreen()));
+            },
+          ),
+          DrawerListTile(
+            title: "Explore",
+            svgSrc: "assets/icons/menu_tran.svg",
+            press: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Explore()));
             },
           ),
           DrawerListTile(
