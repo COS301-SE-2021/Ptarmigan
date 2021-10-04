@@ -20,11 +20,19 @@ class Proxy extends ServiceInterface {
 
     updateCompanies(company){
         this.service.updateCompanies(company)
+        this.companies = $.grep(this.companies, function(e){
+            return e.companyJSON.content != company.companyJSON.content;
+        });
+        this.companies.push(company)
         this.printList()
     };
     removeCompanies(company){
         let res = this.service.removeCompanies(company)
         // let res = true;
+
+        this.companies = $.grep(this.companies, function(e){
+            return e.companyJSON.content != company.companyJSON.content;
+        });
 
         console.log("Removing Comapny")
         if (res){

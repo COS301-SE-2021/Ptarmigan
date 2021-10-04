@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5c84a0cb-3919-4206-be28-1a11af42aa4e" name="Changes" comment="Changed names in the template">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_08_25_10_50_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_08_25_10_50_AM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_08_18_11_19_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_08_18_11_19_PM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    <list default="true" id="5c84a0cb-3919-4206-be28-1a11af42aa4e" name="Changes" comment="CORS error fix">
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/ServerlessApplication/ptarmigan/stocks/getTicker/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_08_25_10_50_AM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2021_08_25_10_50_AM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_08_18_11_19_PM_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_08_18_11_19_PM__Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Company/TableOut.js" beforeDir="false" afterPath="$PROJECT_DIR$/Company/TableOut.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proxy/Proxy.js" beforeDir="false" afterPath="$PROJECT_DIR$/Proxy/Proxy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userManagement.js" beforeDir="false" afterPath="$PROJECT_DIR$/userManagement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/ServerlessApplication/.aws-sam/build.toml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/ServerlessApplication/.aws-sam/build.toml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,13 +34,10 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="Admin-Front-End-Logo" />
+        <entry key="$PROJECT_DIR$/.." value="feature-frontEndAdmin" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/index.html" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1wAFU6MAHRToHkhRXW20Lk2T7II" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -47,7 +53,12 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../backend/ServerlessApplication" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Images" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Images" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -60,6 +71,11 @@
       <workItem from="1627893504282" duration="17590000" />
       <workItem from="1629331814259" duration="667000" />
       <workItem from="1629787073010" duration="129000" />
+      <workItem from="1632828868416" duration="6637000" />
+      <workItem from="1632894481500" duration="31000" />
+      <workItem from="1632938559139" duration="4454000" />
+      <workItem from="1633093410707" duration="257000" />
+      <workItem from="1633174927234" duration="11780000" />
     </task>
     <task id="LOCAL-00001" summary="Initial setup and inclution of the header link including bootstrap styles">
       <created>1627893727808</created>
@@ -327,7 +343,63 @@
       <option name="project" value="LOCAL" />
       <updated>1630336367032</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Created The branch and made a pointless commit just to make it show up for the my team mates">
+      <created>1632828926495</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1632828926495</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Added Logo">
+      <created>1632831740171</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1632831740171</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Added Logo">
+      <created>1632835366247</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1632835366247</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Added Logo">
+      <created>1632835473792</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1632835473792</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Added Logo">
+      <created>1632835961134</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1632835961134</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Fixed the login error">
+      <created>1632943220090</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1632943220090</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Added company">
+      <created>1633175692673</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1633175692673</updated>
+    </task>
+    <task id="LOCAL-00046" summary="CORS error fix">
+      <created>1633268424265</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1633268424265</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,12 +418,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added boilerplate of BS" />
-    <MESSAGE value="Added boilerplate of BS for Navbar" />
-    <MESSAGE value="Made Adjustments to the Nav" />
-    <MESSAGE value="Changed name of the navbar" />
-    <MESSAGE value="Imported FontAwesome" />
-    <MESSAGE value="Added icon" />
     <MESSAGE value="Made changes to the nav bar" />
     <MESSAGE value="Added numbser of users" />
     <MESSAGE value="Changed bgcolors" />
@@ -371,6 +437,12 @@
     <MESSAGE value="Changed names in the template" />
     <MESSAGE value="added proper login" />
     <MESSAGE value="Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+    <MESSAGE value="Created The branch and made a pointless commit just to make it show up for the my team mates" />
+    <MESSAGE value="Added Logo" />
+    <MESSAGE value="Fixed the login error" />
+    <MESSAGE value="Added company" />
+    <MESSAGE value="Fixed clear search bar" />
+    <MESSAGE value="CORS error fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="CORS error fix" />
   </component>
 </project>

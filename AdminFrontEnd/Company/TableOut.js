@@ -79,7 +79,11 @@ class TableOut extends Output{
     }
 
     getCompanyFromPage(){
-        let company = new Company(getFormDataFromPage())
+        let formData =  getFormDataFromPage();
+        if (formData == null){
+            return null
+        }
+        let company = new Company(formData)
         console.log("New Company")
         return company
     }

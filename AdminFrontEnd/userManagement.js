@@ -72,6 +72,12 @@ function getFormDataFromPage(){
     let companyName = $("#companyNameInput").val()
     let tickerSymbol = $("#tickerDropDown").val()
 
+    if (companyName == "" || tickerSymbol == "Choose..."){
+        alert("Please make sure to fill in the form properly")
+        return null
+    }
+
+
     let additionalParameters = []
     $(".parameterName").each(function (){
         additionalParameters.push($(this).text())
@@ -137,6 +143,9 @@ $(document).ready(function () {
 
         $("#submitFormButton").click(function(){
             let newCompany = tableOut.getCompanyFromPage()
+            if (newCompany == null){
+                return
+            }
             proxy.updateCompanies(newCompany)
             $("#companyTable").html("")
             $("#companyNameForTicker").val("")

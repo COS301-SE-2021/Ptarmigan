@@ -110,6 +110,7 @@ $(document).ready(function () {
             if($(this).text() == 'Yes') {
                 //get username
                 username = $(this).parent().parent().find(".Username").text()
+                console.log(username)
                 var params = {
                     GroupName: 'Admin', /* required */
                     UserPoolId: userpoolid, /* required */
@@ -129,12 +130,13 @@ $(document).ready(function () {
             }
             else {
                 username =$(this).parent().parent().find(".Username").text()
+                console.log(username)
                 var params = {
                     GroupName: 'Admin', /* required */
                     UserPoolId: userpoolid, /* required */
                     Username: username /* required */
                 };
-                cognitoidentityserviceprovider.adminRemoveUserFromGroup(params, function(err, data) {
+                cognitoidentityserviceprovider.adminAddUserToGroup(params, function(err, data) {
                     if (err) {
                         console.log(err, err.stack); // an error occurred
                         console.log("Unable to change user status ")
@@ -143,7 +145,7 @@ $(document).ready(function () {
                         button.text('Yes')
                         button.removeClass("btn-danger")
                         button.addClass("btn-success");// successful response
-                        alert("User added as Admin. Database will need time to update.");
+                        alert("User added as Admin.");
                     }
                 });
             }
