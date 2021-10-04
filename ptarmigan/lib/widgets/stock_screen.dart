@@ -17,6 +17,7 @@ StockPriceGenerator stockgenerator = StockPriceGenerator();
 class StockScreen extends StatefulWidget {
   var feedList;
   FeedFileManager fileManager;
+
   StockScreen(this.feedList, this.fileManager);
 
   @override
@@ -37,6 +38,7 @@ class _StockScreenState extends State<StockScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: true,
         drawer: MenuDrawer(feedList, manager),
         appBar: AppBar(
           backgroundColor: bgColor,
@@ -54,16 +56,16 @@ class _StockScreenState extends State<StockScreen> {
         ),
         body: Column(
           children: [
-            Padding(padding: EdgeInsets.fromLTRB(5, 10, 5, 10)),
+            Padding(padding: EdgeInsets.fromLTRB(5, 1, 5, 10)),
             Text(
               "Historical stock data",
               style: TextStyle(fontSize: 30),
             ),
             SingleChildScrollView(
-                scrollDirection: Axis.vertical,
+                scrollDirection: Axis.horizontal,
                 child: Container(
                   color: bgColor,
-                  height: 500,
+                  height: 445,
                   width: MediaQuery.of(context).size.width,
                   child: DataTable2(
                     columnSpacing: defaultPadding,
@@ -140,7 +142,8 @@ class _StockScreenState extends State<StockScreen> {
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+                padding: EdgeInsets.fromLTRB(1, 1, 1,
+                    1), //const EdgeInsets.symmetric(horizontal: defaultPadding),
                 child: Text(feedList[index]),
               ),
             ],

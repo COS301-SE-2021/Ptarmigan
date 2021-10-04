@@ -83,6 +83,7 @@ void main() {
   ErrorWidget.builder = (FlutterErrorDetails details) {
     return CircularProgressIndicator();
   };
+  FlutterError.onError = null;
   //_configureAmplify();
   runApp(MyApp());
 }

@@ -82,7 +82,7 @@ class _FeedSelectorScreenState extends State<FeedSelectorScreen> {
           scrollDirection: Axis.vertical,
           child: Container(
             color: bgColor,
-            height: 600,
+            height: 500,
             width: MediaQuery.of(context).size.width,
             child: DataTable2(
               columnSpacing: defaultPadding,
