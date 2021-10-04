@@ -42,9 +42,11 @@ class _FeedSelectorScreenState extends State<FeedSelectorScreen> {
   @override
   Widget build(BuildContext context) {
     if (feedListBoolFlag)
-      return Scaffold(
+      return SafeArea(
+          child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: _body,
-      );
+      ));
     else
       return CircularProgressIndicator();
   }
@@ -80,7 +82,7 @@ class _FeedSelectorScreenState extends State<FeedSelectorScreen> {
           scrollDirection: Axis.vertical,
           child: Container(
             color: bgColor,
-            height: 400,
+            height: 600,
             width: MediaQuery.of(context).size.width,
             child: DataTable2(
               columnSpacing: defaultPadding,
