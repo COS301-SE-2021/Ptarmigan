@@ -8,12 +8,13 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-
-    <title>User Management</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Company Page</title>
+    <link rel="shortcut icon" type="image/jpg" href="Images/logo.png"/>
 </head>
 <body style="background-color:grey;">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#"><i class="fas fa-feather-alt"></i></a>
+    <a class="navbar-brand" href="#"><i class="i-logo"></i></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -25,26 +26,33 @@
                     Admin Pages
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="index.html">Landing Page</a>
-                    <a class="dropdown-item disabled" href="userManagement.html">Scraper Management</a>
+                    <a class="dropdown-item" href="index.html">Users Page</a>
+                    <a class="dropdown-item disabled" href="userManagement.html">Company Page</a>
                 </div>
             </li>
         </ul>
         <p class="text-right text-wrap text-light" id="username">Temp</p>
-        <button id="logoutCompany" class="btn btn-primary my-2 my-sm-0 ml-5" type="submit">Logout</button>
+        <button id="logoutCompany" class="btn btn-warning my-2 my-sm-0 ml-5" type="submit">Logout</button>
     </div>
 </nav>
 <br>
 
 
 <div class="container ">
-    <h1 class="display-3 text-light">Company names</h1>
+    <h1 class="display-3 font-weight-normal text-light d-flex justify-content-center">Company names</h1>
     <div class="row bg-dark p-2 rounded">
         <div class="container text-light">
             <div>
                 <div class="form-group">
                     <label for="companyNameInput">Company Name</label>
                     <input type="text" class="form-control" id="companyNameInput" placeholder="Enter Company Name">
+                </div>
+                <div class="form-group">
+                    <label for="companyNameForTicker">Additional scrape parameters</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="companyNameForTicker" placeholder="Search For company ticker">
+                        <button class="btn btn-warning" id="companyNameForTickerButton">Search</button>
+                    </div>
                 </div>
                 <div class="form-row align-items-center">
                     <div class="col-auto my-1">
@@ -54,11 +62,12 @@
                         </select>
                     </div>
                 </div>
+                <br>
                 <div class="form-group">
                     <label for="additionalScrapeParameters">Additional scrape parameters</label>
                     <div class="input-group">
                     <input type="text" class="form-control" id="additionalScrapeParameters" placeholder="Enter Parameter">
-                    <button class="btn btn-primary" id="addParameterButton">Add</button>
+                    <button class="btn btn-warning" id="addParameterButton">Add</button>
                     </div>
                 </div>
                 <h3 class="display-5 text-light">Existing parameters</h3>
@@ -76,7 +85,7 @@
                         </tbody>
                     </table>
 
-                <button class="btn btn-primary" id="submitFormButton">Submit</button>
+                <button class="btn btn-warning" id="submitFormButton">Submit</button>
             </div>
         </div>
         <div class="col-sm ">
@@ -111,7 +120,7 @@
         <form class="form-inline my-0 my-lg-0 bg-dark">
             <h1 class="display-5 text-light mr-3">Update Twitter Scraper</h1>
             <div class="col-sm">
-            <button type="button" class="btn float-right btn-primary">Update</button>
+            <button type="button" class="btn float-right btn-warning">Update</button>
             </div>
 
         </form>

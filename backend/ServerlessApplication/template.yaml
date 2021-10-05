@@ -197,7 +197,22 @@ Resources:
           Properties:
             Path: /stocks/returnStockPriceList
             Method: post
-  
+
+  getTicker:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ptarmigan/stocks/getTicker
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Role: arn:aws:iam::878292117449:role/S3Lambda
+
+      Events:
+        HttpPost:
+          Type: Api # More info about API    db = database.database(tableName) Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /stocks/getTicker
+            Method: post
+
   prediction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:

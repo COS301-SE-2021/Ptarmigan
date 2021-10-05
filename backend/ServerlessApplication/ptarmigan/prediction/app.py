@@ -4,8 +4,9 @@ import datetime
 import time
 from boto3.dynamodb.conditions import Key
 import yfinance as yf
+import requests
 
-ENDPOINT_NAME = "sagemaker-scikit-learn-2021-09-19-13-07-12-463"
+ENDPOINT_NAME = "sagemaker-scikit-learn-2021-10-05-08-22-14-076"
 runtime = boto3.client('runtime.sagemaker')
 
 def lambda_handler(event, context):
@@ -39,20 +40,46 @@ def get_inputs(companyName,ticker):
     startDate = endDate - datetime.timedelta(days=5)
     endDatestr = endDate.strftime("%Y-%m-%d")
     startDatestr = startDate.strftime("%Y-%m-%d")
-    
-    requestResults = yf.download(ticker, start=startDatestr, end=endDatestr)  
-    
-    if (endDate.weekday() == 6 or endDate.weekday() == 0): #if monday/friday get fridays stock do there should be no change
-        todayStock = (requestResults["Close"].iloc[-1])
-        yesterdayStock = (requestResults["Close"].iloc[-1])
-    elif (endDate.weekday() == 5): #if saturday get the change between friday open and close
-        todayStock = (requestResults["Close"].iloc[-1])
-        yesterdayStock = (requestResults["Open"].iloc[-1])
-    else: # if any other day get the last 2 days avalible 
-        todayStock = (requestResults["Close"].iloc[-1])
-        yesterdayStock = (requestResults["Close"].iloc[-2])
 
-    #assign todays price
+    cryptoEndDate = endDate - datetime.timedelta(days=1)
+    cryptoStartDate = endDate - datetime.timedelta(days=2)
+    if (ticker[1] == ':'):
+            #get stock prices of crypto 
+            requestUrlCrypto = f"https://api.polygon.io/v1/open-close/{ticker}/{cryptoEndDate}?adjusted=true&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp"
+            requestReturnCrypto = requests.get(requestUrlCrypto)
+            requestResults = json.loads(requestReturnCrypto.text)
+            print("Results, ", requestResults)
+
+            if (requestResults["status"] != "OK"):
+                return "Error occured"
+            else: 
+                todayStock = requestResults["close"]
+            
+            requestUrlCrypto = f"https://api.polygon.io/v1/open-close/{ticker}/{cryptoStartDate}?adjusted=true&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp"
+            requestReturnCrypto = requests.get(requestUrlCrypto)
+            requestResults = json.loads(requestReturnCrypto.text)
+            print("Results, ", requestResults)
+
+            if (requestResults["status"] != "OK"):
+                return "Error occured"
+            else: 
+                yesterdayStock = requestResults["close"]
+ 
+    else:
+        
+        requestResults = yf.download(ticker, start=startDatestr, end=endDatestr)  
+        
+        if (endDate.weekday() == 6 or endDate.weekday() == 0): #if monday/friday get fridays stock do there should be no change
+            todayStock = (requestResults["Close"].iloc[-1])
+            yesterdayStock = (requestResults["Close"].iloc[-1])
+        elif (endDate.weekday() == 5): #if saturday get the change between friday open and close
+            todayStock = (requestResults["Close"].iloc[-1])
+            yesterdayStock = (requestResults["Open"].iloc[-1])
+        else: # if any other day get the last 2 days avalible 
+            todayStock = (requestResults["Close"].iloc[-1])
+            yesterdayStock = (requestResults["Close"].iloc[-2])
+
+        #assign todays price
     close = todayStock
     #get the %change from yesterday to today
     changePercent = ((todayStock-yesterdayStock)/yesterdayStock)*100 
@@ -62,8 +89,7 @@ def get_inputs(companyName,ticker):
     elif changePercent < -0.01:
         change =  "Decrease"
     else:
-        change =  "Neutral"
-        
+        change =  "Neutral"    
         
     #get sentiment of all tweets from today
     

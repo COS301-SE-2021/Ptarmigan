@@ -236,6 +236,8 @@ def oneItem(companyName, ticker):
 
     # stock = getStockPrice(updatedTime, stockList, ticker)
     stockPrice = getStockPriceOnAGivenDay(updatedTime, ticker)
+    if stockPrice == "Error occured":
+        return False
     if stockPrice == "You've exceeded the maximum requests per minute, please wait or upgrade your subscription to continue. https://polygon.io/pricing":
         print("Exeeding max usage")
         time.sleep(60)
@@ -286,16 +288,15 @@ def lambda_handler(event, context):
         'body': json.dumps("Success!")
     }
 
-if __name__ == '__main__':
-    oneItem("Tesla", "TSLA")
-#     body = {
-#         "content": "Tesla",
-#         "Ticker": "TSLA",
-#         "Associated1": "Coin"
-#     }
-#     # print(lambda_handler(body, ""))
-#     catchUp(30,"Tesla", "TSLA")
-#     currentTime = int(time.time())
+# if __name__ == '__main__':
+#     # oneItem("Tesla", "TSLA")
+# #     body = {
+# #         "content": "Tesla",
+# #         "Ticker": "TSLA",
+# #         "Associated1": "Coin"
+# #     }
+# #     # print(lambda_handler(body, ""))
+#     catchUp(10,"Amazon", "AMZN")
 #
 #     timeFromMidnight = currentTime % 86400
 #
