@@ -5,13 +5,14 @@ import datetime
 
 
 # helper function for handler
-def return_tweet_list(content, since, until):
+def return_tweet_list(content, since):
     tweets_list = []
     # Using TwitterSearchScraper to scrape data and append tweets to list
     # ["ar", "hi", "ko", "zh-TW", "ja", "zh", "de", "pt", "en", "it", "fr", "es"]
     for i, tweet in enumerate(snscrape.modules.twitter.TwitterSearchScraper(
-            content + " min_faves:10" + " lang:ar OR lang:hi OR lang:ko OR lang:zh OR lang:ja OR lang:de OR lang:pt OR lang:en OR lang:it OR lang:fr OR lang:es since_time:" + str(since) + " until_time:" + str(until)).get_items()):
-        if i >= 50:
+            #content + " min_faves:10" + " lang:ar OR lang:hi OR lang:ko OR lang:zh OR lang:ja OR lang:de OR lang:pt OR lang:en OR lang:it OR lang:fr OR lang:es since_time:" + str(since) + " until_time:" + str(until)).get_items()):
+            content + " min_faves:10" + " lang:ar OR lang:hi OR lang:ko OR lang:zh OR lang:ja OR lang:de OR lang:pt OR lang:en OR lang:it OR lang:fr OR lang:es since_time:" + str(since)).get_items()):
+        if i >= 100:
             break
         tweets_list.append([str(tweet.id), tweet.content, tweet.retweetCount,
                             tweet.likeCount, tweet.lang, tweet.date.timestamp()])
@@ -20,12 +21,13 @@ def return_tweet_list(content, since, until):
     return tweets_list
 
 
-def return_associated_list(content, since, until):
+def return_associated_list(content, since):
     tweets_list = []
     # Using TwitterSearchScraper to scrape data and append tweets to list
     # ["ar", "hi", "ko", "zh-TW", "ja", "zh", "de", "pt", "en", "it", "fr", "es"]
     for i, tweet in enumerate(snscrape.modules.twitter.TwitterSearchScraper(
-            content + " min_faves:10" + " lang:ar OR lang:hi OR lang:ko OR lang:zh OR lang:ja OR lang:de OR lang:pt OR lang:en OR lang:it OR lang:fr OR lang:es since_time:" + str(since) + " until_time:" + str(until)).get_items()):
+            #content + " min_faves:10" + " lang:ar OR lang:hi OR lang:ko OR lang:zh OR lang:ja OR lang:de OR lang:pt OR lang:en OR lang:it OR lang:fr OR lang:es since_time:" + str(since) + " until_time:" + str(until)).get_items()):
+            content + " min_faves:10" + " lang:ar OR lang:hi OR lang:ko OR lang:zh OR lang:ja OR lang:de OR lang:pt OR lang:en OR lang:it OR lang:fr OR lang:es since_time:" + str(since)).get_items()):
         if i >= 25:
             break
         tweets_list.append([str(tweet.id), tweet.content, tweet.retweetCount,
@@ -44,22 +46,42 @@ def scraper_handler(event, context):
             'statusCode': 400,
             'body': json.dumps("invalid input")
         }
-    scrape_until = scrapeTime
-    scrape_since = scrapeTime - 10800
+    #scrape_until = scrapeTime
+    #scrape_since = scrapeTime - 10800
+    scrape_since = scrapeTime - 3600
 
     # call helper function
-    tweets_list = return_tweet_list(content, scrape_since, scrape_until)
+    # tweets_list = return_tweet_list(content, scrape_since, scrape_until)
+    # eventContent = event['content']
+    # if 'Associated1' in eventContent:
+    #     AssList1 = return_associated_list(content, scrape_since, scrape_until)
+    #     tweets_list.extend(AssList1)
+    # if 'Associated2' in eventContent:
+    #     AssList2 = return_associated_list(content, scrape_since, scrape_until)
+    #     tweets_list.extend(AssList2)
+    # if 'Associated3' in eventContent:
+    #     AssList3 = return_associated_list(content, scrape_since, scrape_until)
+    #     tweets_list.extend(AssList3)
+        
+    tweets_list = return_tweet_list(content, scrape_since)
+    #print(tweets_list)
     eventContent = event['content']
     if 'Associated1' in eventContent:
-        AssList1 = return_associated_list(content, scrape_since, scrape_until)
+        ass1 = eventContent['Associated1']
+        AssList1 = return_associated_list(ass1, scrape_since)
+        #print(AssList1)
         tweets_list.extend(AssList1)
     if 'Associated2' in eventContent:
-        AssList2 = return_associated_list(content, scrape_since, scrape_until)
+        ass2 = eventContent['Associated2']
+        AssList2 = return_associated_list(ass2, scrape_since)
+        #print(AssList2)
         tweets_list.extend(AssList2)
     if 'Associated3' in eventContent:
-        AssList3 = return_associated_list(content, scrape_since, scrape_until)
+        ass3 = eventContent['Associated3']
+        AssList3 = return_associated_list(ass3, scrape_since)
         tweets_list.extend(AssList3)
-
+    
+    print(tweets_list)
     # create dataframe
     tweets_df = pd.DataFrame(tweets_list,
                              columns=['Tweet Id', 'Text', 'Retweets', 'Likes', 'lang', 'date'])

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ptarmigan/services/feed_file_manager.dart';
+import 'package:ptarmigan/widgets/add_portfolio_page.dart';
 import 'package:ptarmigan/widgets/dashboard_screen.dart';
 import 'package:ptarmigan/widgets/feed_selector_screen.dart';
 import 'package:ptarmigan/widgets/home_page.dart';
 import 'package:ptarmigan/widgets/mainScreen.dart';
+import 'package:ptarmigan/widgets/portfolio_page.dart';
 import 'package:ptarmigan/widgets/stock_screen.dart';
 import 'package:ptarmigan/widgets/todos_page.dart';
 import 'package:ptarmigan/widgets/snapshot_inbox_screen.dart';
+import 'package:ptarmigan/widgets/explore.dart';
 
 class MenuDrawer extends StatelessWidget {
   List feeds;
@@ -28,6 +31,14 @@ class MenuDrawer extends StatelessWidget {
             press: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => DashboardScreen()));
+            },
+          ),
+          DrawerListTile(
+            title: "Explore",
+            svgSrc: "assets/icons/menu_tran.svg",
+            press: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Explore()));
             },
           ),
           DrawerListTile(
@@ -64,6 +75,14 @@ class MenuDrawer extends StatelessWidget {
             press: () {
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => TodoList()));
+            },
+          ),
+          DrawerListTile(
+            title: "Portfolio page",
+            svgSrc: "assets/icons/menu_task.svg",
+            press: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => PortfolioPage()));
             },
           ),
         ],

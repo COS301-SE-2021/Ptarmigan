@@ -242,7 +242,7 @@ DataRow recentFileDataRow(SentimentHistoryItem fileInfo) {
               width: 30,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+              padding: const EdgeInsets.fromLTRB(2, 1, 1, 1),
               child: Text(fileInfo.title),
             ),
           ],

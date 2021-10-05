@@ -17,6 +17,8 @@ function addingUsername(){
     $("#username").html(sessionStorage.getItem("username"))
 }
 
+
+
 //add Company ticker to list of suggestions
 
 function addCompanyTickerToDropdown(ticker, name, index){
@@ -30,9 +32,9 @@ function addCompanyTickerToDropdown(ticker, name, index){
 
 function loadTickerSymbols(){
     clearDropdown()
-    companySearch = $("#companyNameInput").val()
-    link = `https://api.polygon.io/v3/reference/tickers?search=${companySearch}&active=true&sort=ticker&order=asc&limit=10&apiKey=4RTTEtcaiXt4pdaVkrjbfcQDygvKbiqp`
-    $.get(link, data =>{
+    link = "https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/stocks/getTicker"
+    companySearch = $("#companyNameForTicker").val()
+    $.post(link,  JSON.stringify({"companyName" : companySearch}), data =>{
         console.log(data)
         for (i = 0; i < data.results.length; i++){
             console.log(data.results[i]["ticker"])
@@ -125,65 +127,75 @@ tableOut = new TableOut("companyTable");
 proxy = new Proxy( new Service("https://cn9x0zd937.execute-api.eu-west-1.amazonaws.com/Prod/", ""), tableOut)
 
 $(document).ready(function () {
-
-    proxy.printList()
-
-    addingUsername()
-
-    $("#submitFormButton").click(function(){
-        let newCompany = tableOut.getCompanyFromPage()
-        proxy.updateCompanies(newCompany)
-        $("#companyTable").html("")
+    if (sessionStorage.getItem("username") === null){
+        alert("Nice Try, Please log in using the normal path you...")
+    }
+    else{
         proxy.printList()
-    })
+
+        addingUsername()
+
+        $("#submitFormButton").click(function(){
+            let newCompany = tableOut.getCompanyFromPage()
+            proxy.updateCompanies(newCompany)
+            $("#companyTable").html("")
+            $("#companyNameForTicker").val("")
+            proxy.printList()
+        })
 
 //     viewCompanyDetails("Bitcoin")
 //
-    $("#addParameterButton").click(function(){
-        addAdditionalParametersToList()
-    })
+        $("#addParameterButton").click(function(){
+            addAdditionalParametersToList()
+        })
 
-    // $("#submitFormButton").click(function(){
-    //     submitForm()
-    // })
+        // $("#submitFormButton").click(function(){
+        //     submitForm()
+        // })
 
-    $("#companyNameInput").on('keyup', function () {
-        clearTimeout(typingTimer);
-        typingTimer = setTimeout(doneTyping, doneTypingInterval);
-    });
+        // $("#companyNameInput").on('keyup', function () {
+        //     clearTimeout(typingTimer);
+        //     typingTimer = setTimeout(doneTyping, doneTypingInterval);
+        // });
+
+        $("#companyNameForTickerButton").click(some => {
+            console.log("Something")
+            loadTickerSymbols()
+        })
 
 //on keydown, clear the countdown
-    $("#companyNameInput").on('keydown', function () {
-        clearTimeout(typingTimer);
-    });
+//         $("#companyNameInput").on('keydown', function () {
+//             clearTimeout(typingTimer);
+//         });
 
 //user is "finished typing," do something
-    function doneTyping () {
-        console.log("Something")
-        loadTickerSymbols()
-    }
+//         function doneTyping () {
+//             console.log("Something")
+//             loadTickerSymbols()
+//         }
 
 //
 //     //Add event listener to the dynamically created events
-    $('#companyTable').on('click', '.removeOnClick', function() {
-        $(this).addClass("disabled")
-        companyName = $(this).parent().parent().find("td").text()
+        $('#companyTable').on('click', '.removeOnClick', function() {
+            $(this).addClass("disabled")
+            companyName = $(this).parent().parent().find("td").text()
 
-        company = proxy.getCompaniesByName(companyName)
-        console.log(company)
-        proxy.removeCompanies(company)
+            company = proxy.getCompaniesByName(companyName)
+            console.log(company)
+            proxy.removeCompanies(company)
 
-    });
+        });
 
-    $('#companyTable').on('click', '.viewClick', function() {
-        // $(this).addClass("disabled")
-        companyName = $(this).parent().parent().find("td").text()
+        $('#companyTable').on('click', '.viewClick', function() {
+            // $(this).addClass("disabled")
+            companyName = $(this).parent().parent().find("td").text()
 
-        company = proxy.getCompaniesByName(companyName)
-        console.log(company)
-        proxy.companyOutput.viewSingleCompany(company)
+            company = proxy.getCompaniesByName(companyName)
+            console.log(company)
+            proxy.companyOutput.viewSingleCompany(company)
 
-    });
+        });
+    }
 //
 //     //Add button
 //     $('#addButton').on("click", function (){

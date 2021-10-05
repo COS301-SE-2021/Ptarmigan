@@ -8,37 +8,37 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <title>Index page</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Login page</title>
+    <link rel="shortcut icon" type="image/jpg" href="Images/logo.png"/>
 </head>
 <body style="background-color:grey;">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#"><i class="fas fa-feather-alt"></i></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</nav>
-
 <!--Login page-->
+<br>
 <div class="container container-small">
-<h1 class="text-center text-white pt-5 mb-4">Welcome to Ptarmigan</h1>
+<h1 class="text-center text-white pt-5 mb-4"></h1>
 
-<div id="media" class="rounded container bg-dark p-5 ">
+<div id="media" class="rounded container bg-dark p-5 w-50">
     <div id="login-row" class="row justify-content-center align-items-center">
-        <div id="login-column">
-                <div class="form-group text-white">
-
+        <div id="login-column ">
+            <div class="container w-50 mb-5">
+                <img src="Images/logo.svg" alt="Logo" class="img-thumbnail" style="background-color: rgba(0,0,0,0); border:0; ">
+            </div>
+            <div class="form-group text-white d-flex justify-content-center">
                     <label><b>Username</b></label>
-                    <input id="loginUsername" type="text" placeholder="example@gmail.com" name="uname" class="ml-2" required>
-                </div>
-                <div class="form-group text-white ml-1">
-                    <label><b>Password</b></label>
-                    <input id="loginPassword" type="password" placeholder="********" name="psw" class="ml-2" required>
-                </div>
-                <div class="form-group">
-                    <button id="loginButton" type="submit" class="btn btn-primary float-right">Login</button>
-                </div>
-    </div>
+                    <input id="loginUsername" type="text" placeholder="example@gmail.com" name="uname" class="ml-2 w-50s" required>
+            </div>
+
+            <div class="form-group text-white d-flex justify-content-center">
+                <label><b>Password</b></label>
+
+                <input id="loginPassword" type="password" placeholder="********" name="psw" class="ml-2 w-50" required>
+            </div>
+            <div class="form-group d-flex justify-content-center">
+                <button id="loginButton" type="submit" class="btn btn-warning">Login</button>
+            </div>
+        </div>
     </div>
 </div>
 <!--    <h3 class="text-center text-white pt-5 mb-4">The app that will help your stock grow.</h3>-->

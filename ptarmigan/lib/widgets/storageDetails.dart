@@ -10,8 +10,10 @@ import 'graph.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'singletonGlobal.dart';
 
+final StockAndSentimentValues stockAndSent = StockAndSentimentValues();
+
 class StorageDetails extends StatelessWidget {
-  const StorageDetails({
+  StorageDetails({
     Key? key,
   }) : super(key: key);
 
@@ -47,7 +49,7 @@ class StorageDetails extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
+              padding: EdgeInsets.fromLTRB(3, 0, 0, 10),
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: bgColor),
                   onPressed: () {
@@ -67,27 +69,32 @@ class StorageDetails extends StatelessWidget {
           ]),
           SizedBox(),
           Graph(),
-          StockAndSentimentValues(),
+          //StockAndSentimentValues(),
+          stockAndSent,
         ],
       ),
     );
   }
 }
 
-void _sendSnapShot(String email, String comment, String name) async {
+void _sendSnapShot(StockAndSentimentValues tes, String email, String comment,
+    String name) async {
   AuthUser a = await AmplifyAuthCognito().getCurrentUser();
 
   // print("PING: " + a.username);
 
   var task = <String, dynamic>{
-    'stocktitle': name,
+    'stocktitle': tes.feedName,
     'to': email,
     'from': a.username,
     'content': comment,
-    'sentiment': StockAndSentimentValues().currentSentiment,
-    'stock': StockAndSentimentValues().currentStock,
+    'sentiment': tes
+        .currentSentiment, //(int.parse(tes.currentSentiment) * 50 + 50).toString() + '%',
+    'stock': tes.currentStock,
     'timestamp': DateTime.now().millisecondsSinceEpoch
   };
+
+  print("hag");
   Database.addSnapShot(task);
 }
 
@@ -121,21 +128,27 @@ class _SnapShotWidget extends State<SnapShotForm> {
       backgroundColor: secondaryColor,
       title: const Text('Send Snapshot'),
       insetPadding: EdgeInsets.fromLTRB(1, 1, 1, 1),
-      content: new Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text("Recipients email address:"),
-          TextField(
-            controller: myController1,
-          ),
-          Padding(
-              child: Text("Comment:"),
-              padding: EdgeInsets.fromLTRB(10, 20, 10, 10)),
-          TextField(
-            controller: myController2,
-          ),
-        ],
+      content: new Container(
+        height: 170,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text("Recipients email address:"),
+            TextField(
+              controller: myController1,
+            ),
+            Padding(
+                child: Text("Comment:"),
+                padding: EdgeInsets.fromLTRB(10, 1, 10, 1)),
+            Padding(
+              padding: EdgeInsets.fromLTRB(1, 1, 1, 1),
+              child: TextField(
+                controller: myController2,
+              ),
+            ),
+          ],
+        ),
       ),
       actions: <Widget>[
         new ElevatedButton(
@@ -152,7 +165,7 @@ class _SnapShotWidget extends State<SnapShotForm> {
           style: ElevatedButton.styleFrom(primary: bgColor),
           onPressed: () {
             Navigator.of(context).pop();
-            _sendSnapShot(myController1.text, myController2.text,
+            _sendSnapShot(stockAndSent, myController1.text, myController2.text,
                 Provider.of<FeedChanger>(context, listen: false).getFeedChoice);
           },
           child: const Text(
