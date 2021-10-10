@@ -64,6 +64,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
     List keysList = portfolioMap.keys.toList();
     return SafeArea(
         child: Scaffold(
+            resizeToAvoidBottomInset: false,
             appBar: AppBar(
               title: Text("Portfolio"),
               backgroundColor: bgColor,

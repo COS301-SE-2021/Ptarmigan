@@ -26,9 +26,11 @@ class _AddPortfolioPageState extends State<AddPortfolioPage> {
   TextEditingController stockPriceData = TextEditingController(text: "");
   @override
   Widget build(BuildContext context) {
-    return Form(
+    return 
+    Form(
         key: _formKey,
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: AppBar(
             backgroundColor: bgColor,
             leading: IconButton(

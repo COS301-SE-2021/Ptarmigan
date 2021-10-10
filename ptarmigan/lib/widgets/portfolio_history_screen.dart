@@ -22,6 +22,7 @@ class PortfolioHistoryScreen extends StatelessWidget {
     print("Beginning HistoryScreen build");
     print("HistoryList Length + " + historyList.length.toString());
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
