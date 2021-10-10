@@ -22,50 +22,53 @@ class PortfolioHistoryScreen extends StatelessWidget {
     print("Beginning HistoryScreen build");
     print("HistoryList Length + " + historyList.length.toString());
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => PortfolioPage())),
-        ),
-      ),
-      body: Column(
-        children: [
-          Padding(padding: EdgeInsets.fromLTRB(5, 10, 5, 10)),
-          Text(
-            portfolioName + " history",
-            style: TextStyle(fontSize: 30),
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => PortfolioPage())),
           ),
-          SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Container(
-                color: bgColor,
-                height: 500,
-                width: MediaQuery.of(context).size.width,
-                child: DataTable2(
-                  columnSpacing: defaultPadding,
-                  minWidth: 350,
-                  columns: [
-                    DataColumn(
-                      label: Text("Date"),
+        ),
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            children: [
+              Padding(padding: EdgeInsets.fromLTRB(5, 10, 5, 10)),
+              Text(
+                portfolioName + " history",
+                style: TextStyle(fontSize: 30),
+              ),
+              SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Container(
+                    color: bgColor,
+                    //height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    child: DataTable2(
+                      columnSpacing: defaultPadding,
+                      minWidth: 350,
+                      columns: [
+                        DataColumn(
+                          label: Text("Date"),
+                        ),
+                        DataColumn(
+                          label: Text("Amount"),
+                        ),
+                        DataColumn(
+                          label: Text("Value"),
+                        ),
+                      ],
+                      rows: List.generate(
+                        historyList.length,
+                        (index) => recentFileDataRow(index),
+                      ),
                     ),
-                    DataColumn(
-                      label: Text("Amount"),
-                    ),
-                    DataColumn(
-                      label: Text("Value"),
-                    ),
-                  ],
-                  rows: List.generate(
-                    historyList.length,
-                    (index) => recentFileDataRow(index),
-                  ),
-                ),
-              ))
-        ],
-      ),
-    );
+                  ))
+            ],
+          ),
+        ));
   }
 
   DataRow recentFileDataRow(int index) {

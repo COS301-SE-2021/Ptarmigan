@@ -37,7 +37,6 @@ class _StockScreenState extends State<StockScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
         drawer: MenuDrawer(feedList, manager),
         appBar: AppBar(
           backgroundColor: bgColor,
