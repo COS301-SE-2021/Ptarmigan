@@ -52,38 +52,40 @@ class _StockScreenState extends State<StockScreen> {
                 ))*/
           ],
         ),
-        body: Column(
-          children: [
-            Padding(padding: EdgeInsets.fromLTRB(5, 10, 5, 10)),
-            Text(
-              "Historical stock data",
-              style: TextStyle(fontSize: 30),
-            ),
-            SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Container(
-                  color: bgColor,
-                  height: 500,
-                  width: MediaQuery.of(context).size.width,
-                  child: DataTable2(
-                    columnSpacing: defaultPadding,
-                    minWidth: 400,
-                    columns: [
-                      DataColumn(
-                        label: Text("Stock name"),
+        body: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              children: [
+                Padding(padding: EdgeInsets.fromLTRB(5, 10, 5, 10)),
+                Text(
+                  "Historical stock data",
+                  style: TextStyle(fontSize: 30),
+                ),
+                SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Container(
+                      color: bgColor,
+                      width: MediaQuery.of(context).size.width,
+                      child: DataTable2(
+                        columnSpacing: defaultPadding,
+                        minWidth: 400,
+                        columns: [
+                          DataColumn(
+                            label: Text("Stock name"),
+                          ),
+                          DataColumn(
+                            label: Text("Worth"),
+                          ),
+                        ],
+                        rows: List.generate(
+                          feedList.length,
+                          (index) => recentFileDataRow(index),
+                        ),
                       ),
-                      DataColumn(
-                        label: Text("Worth"),
-                      ),
-                    ],
-                    rows: List.generate(
-                      feedList.length,
-                      (index) => recentFileDataRow(index),
-                    ),
-                  ),
-                ))
-          ],
-        ),
+                    ))
+              ],
+            )),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
