@@ -1,8 +1,8 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/COS301-SE-2021/Ptarmigan)  ![GitHub pull requests](https://img.shields.io/github/issues-pr/COS301-SE-2021/Ptarmigan?style=plastic)  ![GitHub watchers](https://img.shields.io/github/watchers/COS301-SE-2021/Ptarmigan?style=plastic)
 
-TeamName - One More Byte
+Team Name - One More Byte
 
-ProjectName - Ptarmigan
+Project Name - Ptarmigan
 
 Project Description -
 
