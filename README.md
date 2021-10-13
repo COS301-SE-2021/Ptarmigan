@@ -10,36 +10,16 @@ Ptarmigan will be a mobile app that will assist the user in making decisions on 
 
 Ptarmigan’s mobile app will receive this processed data. The app will send push notifications to users to inform users of important information or events. Along with this primary feature, the user will be able to view stock market insights over specified time frames.
 
-User’s will be able to subscribe to specific feeds to ensure that they only receive stock market information regarding industries that they are interested in. They will be able to make their own feeds using tags to determine what information those feeds should retrieve.
+User’s will be able to subscribe to specific feeds to ensure that they only receive stock market information regarding industries that they are interested in.
 
-The application may also inform users on new public stocks or companies that the user may wish to keep an eye on. It may also allow users to share custom information and snapshots with other users. This will be done by either sending a link to a specific feed to another user or by sending the contents from an insight post to another user.
+It also allow users to share custom information and snapshots with other users.
 
-Ptarmigan will use a design that scales automatically when there is a need to do so. There will also be a separate application created specifically for admins and moderators to use. They will be able to make adjustments to the weighting of tweets if it is determined that insight that was determined was incorrect. Inaccurate insights can be flagged by users for moderation by moderators.
+Ptarmigan will use a design that scales automatically when there is a need to do so. There will also be a separate application created specifically for admins and moderators to use.
 
-Demo Video - OneMoreByte-Demo1 - https://drive.google.com/file/d/19hfsr9zKiIVOqLxTjXKPKyh4SKOMua2o/view?usp=sharing
+The application also has a AI that is able to determine whether stock prices will go up or down depending on sentiment.
 
-Functional Requirements (SRS)(Demo1) - https://drive.google.com/file/d/19WwLKUhMdkfEV1m4KT02yPJpnR_LRpP3/view?usp=sharing
+----------------------------------------------------------------------------------------------------------------------------------
 
-Architectural Requirements (SRS)(Demo2) - https://drive.google.com/file/d/1WgmJn7oOvWL5iq4N2S4zspZ63Wo2MBzt/view?usp=sharing
-
-Demo2 Video - https://drive.google.com/file/d/1eR1-LJsdPGZUbrEi949NXnkD0zIGisOS/view?usp=sharing
-
-One More Byte SRS Demo 3 - https://drive.google.com/file/d/1c1fHkV6trKGZZDd4-B1Kwe7JFEk22juc/view?usp=sharing
-
-Demo3 Video - https://drive.google.com/file/d/1OAk5z31WqqdcJ9GPzWPrkGjKT7npVMGE/view?usp=sharing
-
-Coding Standard Demo3 - https://drive.google.com/file/d/1YJ83VbPnAKQfxMXDSZKFG8SauMy9DBBV/view?usp=sharing
-
-GitHub Project Board Demo3- 
-https://github.com/COS301-SE-2021/Ptarmigan/projects/1?add_cards_query=is%3Aopen
-https://github.com/orgs/COS301-SE-2021/teams/one-more-byte
-scrum board- https://github.com/COS301-SE-2021/Ptarmigan/projects/2
-
-User manual Demo3- https://drive.google.com/file/d/1nNGanfCFOQ8M5m454dCeIOAvOhfOpl2X/view?usp=sharing
-
-Technical installation manual Demo3- https://drive.google.com/file/d/1JnSTuwu2qICxz-pSDoEQpRu6KVRWWcLr/view?usp=sharing
-
-////////////Demo4////////////////////Demo4//////////////////////////////////Demo4/////////////////////////Demo4////////////////////////Demo4///////////////////////Demo4//////////Demo4//////////Demo4////////////////Demo4//////////////Demo4////////////Demo4///////////////Demo4//////////
 
 Presentation video Demo 4 - https://drive.google.com/file/d/1VjnjqER4NcjyrbbaRIOGm0TFGpj53NNL/view?usp=sharing
 
