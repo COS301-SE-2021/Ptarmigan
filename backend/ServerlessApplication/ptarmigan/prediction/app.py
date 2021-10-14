@@ -6,7 +6,7 @@ from boto3.dynamodb.conditions import Key
 import yfinance as yf
 import requests
 
-ENDPOINT_NAME = "sagemaker-scikit-learn-2021-10-05-08-22-14-076"
+ENDPOINT_NAME = "sagemaker-scikit-learn-2021-10-14-06-47-38-339"
 runtime = boto3.client('runtime.sagemaker')
 
 def lambda_handler(event, context):
